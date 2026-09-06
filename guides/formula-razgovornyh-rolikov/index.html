@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Формула вирусных разговорных роликов — maysoulme</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; --split: 60%; }
+
+@page { size: 1280px 720px; margin: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100%; height: 100vh;
+  display: flex; flex-direction: column;
+  page-break-after: always; position: relative;
+}
+.divider {
+  position: absolute; top: 0; bottom: 0;
+  left: var(--split); width: 1px; background: #e8e8e8;
+}
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px; border-bottom: 1px solid #f0f0f0;
+  background: #fff; z-index: 10; flex-shrink: 0; width: var(--split);
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: #888; letter-spacing: 0.5px; margin-right: 8px;
+}
+.slide__body {
+  flex: 1; display: flex; align-items: center;
+  width: var(--split); padding: 0 48px;
+}
+.slide__inner { width: 100%; max-width: 580px; }
+
+/* ===== БАЗОВЫЕ ===== */
+
+.hero { padding: 0; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 17px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 13px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; padding: 0 0 20px;
+}
+.section-heading em { font-style: italic; color: var(--accent); }
+
+.highlight {
+  background: #f5f5f5; padding: 18px 22px; margin: 20px 0;
+  font-size: 15px; line-height: 1.75; color: #444;
+}
+.highlight strong { color: var(--accent); }
+
+.sub-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; padding: 24px 0 10px;
+}
+
+.text { font-size: 16px; color: #444; line-height: 1.75; margin-bottom: 14px; }
+
+.guide-list { list-style: none; margin: 12px 0 20px; }
+.guide-list li {
+  font-size: 15px; line-height: 1.7; color: #444;
+  padding: 6px 0 6px 18px; position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: #1a1a1a; }
+
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: #444; padding: 28px 0 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* ===== СХЕМКА 1: ЦИТАТА ===== */
+
+.quote-slide__label {
+  font-size: 11px; font-weight: 600; color: #999;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px;
+}
+.quote-slide__mark {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 80px; color: var(--accent); line-height: 0.5;
+  margin-bottom: 16px; opacity: 0.3;
+}
+.quote-slide__text {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 24px; font-weight: 400; font-style: italic;
+  line-height: 1.5; color: #1a1a1a; max-width: 480px; margin-bottom: 28px;
+}
+.quote-slide__text em { color: var(--accent); }
+.quote-slide__divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 20px; }
+.quote-slide__source { font-size: 14px; color: #888; line-height: 1.6; }
+
+/* ===== СХЕМКА 2: ШАГИ ===== */
+
+.steps__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.steps__heading em { font-style: italic; color: var(--accent); }
+.steps__list { position: relative; padding-left: 32px; }
+.steps__list::before {
+  content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+  width: 1px; background: #e8e8e8;
+}
+.steps__item { position: relative; padding-bottom: 24px; }
+.steps__item:last-child { padding-bottom: 0; }
+.steps__dot {
+  position: absolute; left: -32px; top: 4px;
+  width: 15px; height: 15px; border: 2px solid var(--accent);
+  background: #fff; border-radius: 50%;
+}
+.steps__item--active .steps__dot { background: var(--accent); }
+.steps__item-title { font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 4px; }
+.steps__item-text { font-size: 14px; color: #666; line-height: 1.6; }
+
+/* ===== СХЕМКА 3: НУМЕРОВАННЫЙ СПИСОК ===== */
+
+.numlist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.numlist__heading em { font-style: italic; color: var(--accent); }
+.numlist__item {
+  display: flex; gap: 24px; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid #f0f0f0;
+}
+.numlist__item:last-child { border-bottom: none; }
+.numlist__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 36px; color: var(--accent); opacity: 0.25;
+  min-width: 48px; text-align: right; line-height: 1; flex-shrink: 0;
+}
+.numlist__text { font-size: 15px; color: #1a1a1a; line-height: 1.6; }
+.numlist__text strong { font-weight: 600; }
+.numlist__text span { color: #666; }
+
+/* ===== СХЕМКА 4: АКЦЕНТНАЯ ПОЛОСА ===== */
+
+.accent-bar__label {
+  font-size: 11px; font-weight: 600; color: #999;
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
+}
+.accent-bar__block { border-left: 3px solid var(--accent); padding-left: 28px; }
+.accent-bar__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 26px; font-weight: 700; line-height: 1.35; margin-bottom: 16px;
+}
+.accent-bar__title em { font-style: italic; color: var(--accent); }
+.accent-bar__text { font-size: 15px; color: #444; line-height: 1.75; margin-bottom: 20px; }
+.accent-bar__footer {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 15px; font-style: italic; color: #888;
+  padding-top: 16px; border-top: 1px solid #f0f0f0;
+}
+
+/* ===== СХЕМКА 5: ЧЕК-ЛИСТ ===== */
+
+.checklist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.checklist__heading em { font-style: italic; color: var(--accent); }
+.checklist__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.checklist__col-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; padding-bottom: 14px; margin-bottom: 10px;
+  border-bottom: 1px solid #e8e8e8;
+}
+.checklist__col-label--do { color: var(--accent); }
+.checklist__col-label--dont { color: #999; }
+.checklist__col:first-child { padding-right: 20px; border-right: 1px solid #f0f0f0; }
+.checklist__col:last-child { padding-left: 20px; }
+.checklist__item {
+  display: flex; gap: 10px; padding: 8px 0;
+  font-size: 14px; color: #444; line-height: 1.6; align-items: baseline;
+}
+.checklist__mark { flex-shrink: 0; font-size: 14px; font-weight: 700; width: 16px; }
+.checklist__mark--do { color: var(--accent); }
+.checklist__mark--dont { color: #ccc; }
+
+/* ===== СХЕМКА 6: МЕТРИКИ ===== */
+
+.metrics__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.metrics__heading em { font-style: italic; color: var(--accent); }
+.metrics__row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+.metrics__item {
+  text-align: center; padding: 24px 12px;
+  border-right: 1px solid #f0f0f0;
+}
+.metrics__item:last-child { border-right: none; }
+.metrics__number {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 48px; color: var(--accent); opacity: 0.25;
+  line-height: 1; margin-bottom: 8px;
+}
+.metrics__label {
+  font-size: 12px; color: #888; text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+.metrics__desc { font-size: 13px; color: #666; line-height: 1.5; }
+
+/* ===== СХЕМКА 8: ФОРМУЛА ===== */
+
+.formula__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.formula__heading em { font-style: italic; color: var(--accent); }
+.formula__row {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+}
+.formula__step {
+  flex: 1; background: #f5f5f5; padding: 18px 16px; text-align: center;
+}
+.formula__step-title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 15px; font-weight: 700; margin-bottom: 4px;
+}
+.formula__step-text { font-size: 12px; color: #666; line-height: 1.5; }
+.formula__arrow { color: var(--accent); font-size: 18px; flex-shrink: 0; opacity: 0.4; }
+.formula__result {
+  border: 1px solid var(--accent); padding: 18px 16px; text-align: center; flex: 1;
+}
+.formula__result .formula__step-title { color: var(--accent); }
+.formula__note { font-size: 14px; color: #888; font-style: italic; margin-top: 8px; }
+
+/* ===== АДАПТИВ ===== */
+
+@media print {
+  html, body { width: 1280px; }
+  .slide {
+    width: 1280px; height: 720px;
+    page-break-after: always;
+    page-break-inside: avoid;
+    break-after: page;
+  }
+  .slide:last-child { page-break-after: auto; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; width: 100%; }
+  .hero h1 { font-size: 26px; }
+  .section-heading { font-size: 22px; }
+  .slide__body { width: 100%; padding: 0 20px; }
+  .divider { display: none; }
+}
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Формула вирусных разговорных роликов">
+<meta property="og:description" content="Почему одни залетают на миллион, а другие уходят в никуда. Разбор структуры: хук в чувство, узнавание, инструктаж вместо информирования.">
+<meta property="og:url" content="https://maysoulme.ru/guides/formula-razgovornyh-rolikov/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<!-- СЛАЙД 1: Титульный -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="hero">
+      <div class="badge">УРОК</div>
+      <h1>Формула вирусных <em>разговорных роликов</em></h1>
+      <p class="hero__desc">Почему одни залетают на миллион, а другие уходят в никуда</p>
+      <p class="hero__meta">РАЗГОВОРНЫЕ REELS &middot; СЦЕНАРИИ &middot; ФОРМУЛА</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 2: Про ассистента — АКЦЕНТНАЯ ПОЛОСА -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="accent-bar__label">Важно понять</div>
+    <div class="accent-bar__block">
+      <div class="accent-bar__title">Сначала формула — <em>потом ассистент</em></div>
+      <p class="accent-bar__text">Под этим уроком — промт, который превращает Claude в твоего ассистента по разговорным Reels.</p>
+      <p class="accent-bar__text">Но ассистент работает ровно настолько хорошо, насколько хорошо ты его настроила.</p>
+      <div class="accent-bar__footer">Чтобы получать сильные ролики — сначала разберись, как всё устроено изнутри</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 3: Как собрать ассистента — НУМЕРОВАННЫЙ СПИСОК -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Проект в Claude + <em>3 файла</em></div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Мой промт</strong> <span>— формула, структура, триггеры. Прикреплён под уроком.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>30 транскрибаций</strong> <span>— удачные ролики в твоей нише. Через Буквицу.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Твоя база</strong> <span>— экспертные тезисы, инфо о тебе, призывы, ссылки.</span></div>
+    </div>
+    <div class="highlight"><strong>Результат:</strong> ассистент, который знает формулу, знает что залетает в нише, знает тебя.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 4: Разговорный vs текстовый — ЧЕК-ЛИСТ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="checklist__heading">Два разных <em>инструмента</em></div>
+    <div class="checklist__grid">
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--dont">Текстовый ролик</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Нейроописание с подложкой</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Холодная аудитория</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Быстрый набор подписчиков</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Набирает количество</div>
+      </div>
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--do">Разговорный ролик</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Голос, мимика, интонация</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Подписываются на тебя лично</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Дольше в производстве</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Количество &rarr; лояльность</div>
+      </div>
+    </div>
+    <div class="highlight"><strong>Важно:</strong> нужны оба формата.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 5: Базовый закон — ЦИТАТА -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="quote-slide__label">Базовый закон</div>
+    <div class="quote-slide__mark">&ldquo;</div>
+    <div class="quote-slide__text">Сяду и скажу, что придёт в голову — путь к тому, что ты <em>ничего не выложишь.</em></div>
+    <div class="quote-slide__divider"></div>
+    <p class="quote-slide__source">Сильные блогеры не импровизируют. Они читают по суфлёру, глядя в объектив.<br><br>Сценарий &rarr; суфлёр &rarr; первый-второй дубль &rarr; готово.<br>Это снимает 3 страха: «забуду текст», «буду мычать», «получится коряво».</p>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 6: Пять опор — НУМЕРОВАННЫЙ СПИСОК -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Анатомия <em>разговорного ролика</em></div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Хук</strong> <span>— 0–3 сек. Остановить палец.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>Завязка</strong> <span>— 3–8 сек. Узнавание: «это про меня».</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Тело</strong> <span>— 8–45 сек. Инструктаж, а не лекция.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">4</div>
+      <div class="numlist__text"><strong>Личная позиция</strong> <span>— за 5–10 сек до конца. Эмоциональный пик.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">5</div>
+      <div class="numlist__text"><strong>CTA</strong> <span>— последние 3–5 сек. Вшит в речь естественно.</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 7: Хук — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Хук — <em>остановить палец</em></h2>
+    <p class="text">Человек решает смотреть или листать в первые 3 секунды.</p>
+    <p class="text">Хук строится на боли аудитории, а не на твоей идее о том, что интересно.</p>
+    <div class="highlight"><strong>Важно:</strong> попала в боль — удержала. Не попала — листают дальше.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 8: Завязка — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Завязка — <em>узнавание</em></h2>
+    <p class="text">Сразу после хука зритель должен подумать: «так это же про меня» или «наконец кто-то это сказал».</p>
+    <p class="text">Называй ситуацию словами, которыми её проживает сама аудитория.</p>
+    <div class="highlight"><strong>Не терминами.</strong> Не официальным языком. А так, как люди думают про себя.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 9: Тело — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Главное правило: <em>инструктируй, а не информируй</em></h2>
+    <p class="text">Информирование: «чтобы поднять самооценку, нужно работать над собой» — вода, слышали тысячу раз.</p>
+    <p class="text">Инструктаж: «вечером бери заметки, пиши три колонки — мысль, которая расстроила; доказательство, что правда; доказательство, что неправда. 3 минуты в день — через 2 недели реагируешь иначе».</p>
+    <div class="highlight"><strong>Лайфхак:</strong> давай конкретику, которую обычно продают — бесплатно.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 10: Парадокс щедрости — ЦИТАТА -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="quote-slide__label">Парадокс щедрости</div>
+    <div class="quote-slide__mark">&ldquo;</div>
+    <div class="quote-slide__text">Если такое даёт бесплатно — что же на <em>платном?</em></div>
+    <div class="quote-slide__divider"></div>
+    <p class="quote-slide__source">Только 1–10 человек из 1000 сделают это сами.<br>Остальные купят — потому что видят, что ты не жадничаешь.</p>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 11: Опоры 4 и 5 — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Личная позиция <em>и CTA</em></h2>
+    <h3 class="sub-heading">Позиция (за 5–10 сек до конца)</h3>
+    <p class="text">Твоё неотфильтрованное мнение или цифра. Не «у некоторых получается», а «у меня вышло вот так». Это эмоциональный пик.</p>
+    <h3 class="sub-heading">CTA (последние 3–5 сек)</h3>
+    <ul class="guide-list">
+      <li><strong>Цель рост:</strong> «подпишись, чтобы не пропустить»</li>
+      <li><strong>Цель лид-магнит:</strong> «напиши слово в комментариях — пришлю»</li>
+    </ul>
+    <div class="highlight"><strong>Важно:</strong> CTA вшивается в речь естественно, а не приклеивается роботом.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 12: Хуки — что работает — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Хук — это 80% <em>успеха ролика</em></h2>
+    <ul class="guide-list">
+      <li><strong>«Почему никто не говорит, что…»</strong> — секрет</li>
+      <li><strong>«Не делай это, пока не узнаешь одну вещь»</strong> — страх ошибки</li>
+      <li><strong>Конкретная цифра</strong> — «как я сделала это за 60 дней»</li>
+      <li><strong>«Все думают так. На самом деле наоборот»</strong> — разрыв шаблона</li>
+      <li><strong>«Почему мне раньше никто не сказал…»</strong> — сожаление</li>
+      <li><strong>«Пока ты делаешь это, другие уже…»</strong> — зависть-мотиватор</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 13: Эмоциональная мишень — БАЗОВЫЙ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Перед хуком спроси: <em>в какое чувство я целюсь?</em></h2>
+    <ul class="guide-list">
+      <li><strong>Страх упустить</strong></li>
+      <li><strong>Стыд</strong> — «я делаю не так»</li>
+      <li><strong>Облегчение</strong> — «я не одна такая»</li>
+      <li><strong>Амбиция</strong> — «я тоже так хочу»</li>
+      <li><strong>Возмущение</strong> — «наконец кто-то это сказал»</li>
+    </ul>
+    <div class="highlight"><strong>Важно:</strong> хук, попавший в чувство, всегда сильнее хука, который просто сообщает тему.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 14: Боли и желания — ФОРМУЛА -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="formula__heading">Два слоя <em>боли</em></div>
+    <div class="formula__row">
+      <div class="formula__step">
+        <div class="formula__step-title">Озвученные боли</div>
+        <div class="formula__step-text">То, что говорят вслух. Поверхность. Легко найти.</div>
+      </div>
+      <div class="formula__arrow">+</div>
+      <div class="formula__step">
+        <div class="formula__step-title">Тайные желания</div>
+        <div class="formula__step-text">То, что не говорят. Самый мощный слой.</div>
+      </div>
+      <div class="formula__arrow">=</div>
+      <div class="formula__result">
+        <div class="formula__step-title">Подписка</div>
+        <div class="formula__step-text">Именно тайное желание жмёт на «подписаться»</div>
+      </div>
+    </div>
+    <p class="formula__note">Признание, лидерство, доказать ценность, независимость, свобода, короткий путь</p>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 15: Схема под нишу — ШАГИ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="steps__heading">Как это <em>собирается вместе</em></div>
+    <div class="steps__list">
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Берёшь озвученную боль</div>
+        <div class="steps__item-text">Посмотри вопросы в нише — что говорят вслух.</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Копаешь под ней тайное желание</div>
+        <div class="steps__item-text">Что на самом деле хотят? Признание, свобода, короткий путь.</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Целишься хуком в желание</div>
+        <div class="steps__item-text">Хук бьёт в тайное, а не в очевидное.</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Телом ролика закрываешь боль</div>
+        <div class="steps__item-text">Конкретный инструктаж, который решает озвученную проблему.</div>
+      </div>
+    </div>
+    <p class="footer-note">Вот почему <em>ролики залетают.</em></p>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 16: Живая речь — НУМЕРОВАННЫЙ СПИСОК -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Что отличает вирусный ролик <em>от лекции</em></div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Текучая речь</strong> <span>— никакого стаккато. Как будто рассказываешь подруге.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>Анафора и ритм</strong> <span>— «Это не про деньги. Это не про удачу. Это про то, что ты перестала ждать разрешения».</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Тонкий юмор</strong> <span>— ирония, гипербола с деталью, обманутое ожидание.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">4</div>
+      <div class="numlist__text"><strong>Сильное закрытие</strong> <span>— эмоциональный климакс, не «ну вот как-то так».</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 17: Триггеры — МЕТРИКИ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="metrics__heading">5 рычагов репоста, <em>сохранения, подписки</em></div>
+    <div class="metrics__row">
+      <div class="metrics__item">
+        <div class="metrics__number">1</div>
+        <div class="metrics__label">Узнавание</div>
+        <div class="metrics__desc">«Это про меня»</div>
+      </div>
+      <div class="metrics__item">
+        <div class="metrics__number">2</div>
+        <div class="metrics__label">Артикуляция</div>
+        <div class="metrics__desc">«Наконец кто-то это сказал»</div>
+      </div>
+      <div class="metrics__item">
+        <div class="metrics__number">3</div>
+        <div class="metrics__label">Аспирация</div>
+        <div class="metrics__desc">«Я тоже так хочу»</div>
+      </div>
+    </div>
+    <div class="metrics__row" style="margin-top: 0;">
+      <div class="metrics__item">
+        <div class="metrics__number">4</div>
+        <div class="metrics__label">Репост</div>
+        <div class="metrics__desc">«Я знаю таких людей»</div>
+      </div>
+      <div class="metrics__item">
+        <div class="metrics__number">5</div>
+        <div class="metrics__label">Ценность</div>
+        <div class="metrics__desc">«Надо сохранить»</div>
+      </div>
+      <div class="metrics__item" style="border-right: none;">
+        <div class="metrics__number" style="opacity: 0.5;">2+</div>
+        <div class="metrics__label">Минимум</div>
+        <div class="metrics__desc">Должны сработать в сильном ролике</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 18: Форматы съёмки — НУМЕРОВАННЫЙ СПИСОК -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Тренд 2026 — <em>простота и домашность</em></div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Говоришь и делаешь</strong> <span>— красишь губы, готовишь. На каждое действие — строка сценария. Движение = досмотр выше.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>Суфлёр в объектив</strong> <span>— самый простой. Выглядит как уверенный разговор.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Говорящая голова на фоне</strong> <span>— голова внизу, сверху фото/видео. CapCut &rarr; «Наложение» &rarr; «Убрать фон».</span></div>
+    </div>
+    <div class="highlight"><strong>Важно:</strong> достойный свет, одежда, фон — это условие, а не опция.</div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 19: Чек-лист перед съёмкой — ЧЕК-ЛИСТ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="checklist__heading">Пробегись <em>перед каждой записью</em></div>
+    <div class="checklist__grid">
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--do">Сценарий и хук</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Сценарий написан до съёмки</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Хук бьёт в конкретное чувство</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>В первые 3 сек слышна боль</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Тело инструктирует</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Минимум 2 триггера</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>CTA вшит в речь</div>
+      </div>
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--do">Голос и картинка</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Речь течёт — нет стаккато</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Есть ритм или анафора</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Юмор тонкий</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Закрытие — эмоц. пик</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Звучит как ты, не нейросеть</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Картинка достойная</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 20: Ошибки — ЧЕК-ЛИСТ -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="checklist__heading">10 ошибок, которые <em>убивают ролики</em></div>
+    <div class="checklist__grid">
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--dont">Убивает контент</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Фритолк без сценария</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Информирование вместо инструктажа</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Слабый хук</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Лекторский тон</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>CTA приклеен роботом</div>
+      </div>
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--dont">Убивает подачу</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Стаккато-речь</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Плоская шутка</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Затухающий финал</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Чужой голос</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Плохая картинка</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- СЛАЙД 21: Итоги — ЦИТАТА -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="quote-slide__label">Формула целиком</div>
+    <div class="quote-slide__mark">&ldquo;</div>
+    <div class="quote-slide__text">Сильный хук в чувство &rarr; узнавание &rarr; ритмичные тезисы &rarr; неотфильтрованная позиция &rarr; <em>тёплое закрытие.</em></div>
+    <div class="quote-slide__divider"></div>
+    <p class="quote-slide__source">И всё это — живой текучей речью, своим голосом, по суфлёру.<br><br>Под уроком — промт. Собираешь проект в Claude по схеме из начала — и ассистент пишет ролики за тебя.</p>
+  </div>
+</div>
+</div>
+
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

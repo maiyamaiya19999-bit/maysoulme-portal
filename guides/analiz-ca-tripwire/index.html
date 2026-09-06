@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анализ ЦА для трипваера — maysoulme</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: #888; letter-spacing: 0.5px;
+  margin-left: auto;
+}
+
+/* Container */
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero */
+.hero { padding: 60px 0 48px; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+/* Intro */
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 48px; }
+
+/* Section heading */
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-weight: 700; line-height: 1.3;
+  padding: 56px 0 24px; border-top: 1px solid #e8e8e8;
+}
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+
+/* Highlight block */
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+
+/* Sub heading */
+.sub-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; padding: 36px 0 16px; }
+
+/* Text */
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+
+/* List */
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li {
+  font-size: 16px; line-height: 1.75; color: #444;
+  padding: 8px 0 8px 20px; position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 16px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: #1a1a1a; }
+
+/* Headline list (нумерованный) */
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0; align-items: baseline;
+}
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 15px;
+  color: var(--accent); min-width: 28px; flex-shrink: 0;
+}
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+
+/* Prompt box */
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; }
+.prompt-box__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--accent); margin-bottom: 6px;
+}
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text { font-size: 15px; line-height: 1.8; color: #444; }
+
+/* Scenario / step card */
+.scenario-card { border: 1px solid #e8e8e8; padding: 32px; margin: 24px 0; background: #f9f9f9; }
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 14px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 8px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;
+}
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__ending {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: #1a1a1a;
+  padding-top: 16px; margin-top: 16px; border-top: 1px solid #e0e0e0;
+}
+.scenario-card__tip {
+  background: #f0f0f0; padding: 14px 18px; margin-top: 16px;
+  font-size: 14px; color: #555; line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 64px 24px;
+  border-top: 1px solid #e8e8e8; margin-top: 64px;
+  color: #999; font-size: 14px;
+}
+.footer .tiny {
+  font-size: 12.5px; color: #bbb; max-width: 52ch;
+  margin: 12px auto 0; line-height: 1.6; letter-spacing: 0;
+}
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-style: italic; color: #444;
+  text-align: center; padding: 48px 24px 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* Copy button */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 14px 28px; margin-top: 28px;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.copy-btn:hover { opacity: 0.85; }
+.copy-btn.copied { background: #1a1a1a; border-color: #1a1a1a; }
+.copy-btn__hint { display: block; font-size: 13px; color: #999; margin-top: 10px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .hero h1 { font-size: 28px; }
+  .section-heading { font-size: 24px; }
+  .scenario-card { padding: 20px; }
+  .prompt-box { padding: 24px; }
+}
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Анализ ЦА для трипваера">
+<meta property="og:description" content="Как понять, за что твоя аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.">
+<meta property="og:url" content="https://maysoulme.ru/guides/analiz-ca-tripwire/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">Промт · Трипваер · ЦА</div>
+    <h1>Анализ <em>ЦА</em> для трипваера</h1>
+    <p class="hero__desc">Готовый промт для Claude: ультра-глубокое исследование целевой аудитории в твоей нише — плюс идеи трипваеров как гипотезы для сверки с рынком.</p>
+    <p class="hero__meta">Маркетинг &middot; Глубокое исследование &middot; Трипваер</p>
+    <button class="copy-btn" id="copyAllBtn" onclick="copyAllText()">Скопировать весь промпт</button>
+    <span class="copy-btn__hint">Одна кнопка — весь текст в буфере. Вставь его в Claude и добавь свой материал.</span>
+  </div>
+
+  <p class="intro-bold">Как использовать.</p>
+  <p class="intro-text">Вставь свою нишу в первую строку промпта → скопируй всё, что ниже, целиком → запусти в Claude в режиме глубокого исследования (Research). Чем точнее ниша — тем живее и полезнее результат. ↓ Промт ниже — копируй от слова «Ты» и до конца.</p>
+
+  <p class="text">Ты — лучший в мире маркетолог-психоаналитик с 20-летним опытом в поведенческой экономике, нейромаркетинге и создании digital-продуктов. Проведи ультра-глубокое исследование целевой аудитории в указанной нише, опираясь на реальные источники: форумы, отзывы, комментарии, обсуждения, исследования. Твоя задача — расписать ЦА детально и подробно, глубже, чем она понимает себя сама.</p>
+  <div class="highlight"><strong>Контекст:</strong> я создаю цифровой трипваер-продукт (цена 1 000 – 5 000 ₽), который продаётся автоматически, без звонков и менеджеров. Значит, продукт должен попадать в такую точную боль, что человек покупает немедленно, без раздумий.</div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Ниша / направление</div>
+    <div class="prompt-box__subtitle">Первая строка промпта — впиши свою нишу</div>
+    <p class="prompt-box__text">[вставь сюда — например: «женский фитнес после 35 лет» или «Instagram-продвижение для экспертов»]</p>
+  </div>
+
+  <p class="text">Разбери по блокам ниже. Каждый блок — максимально подробно, с конкретными примерами, фразами из реальной жизни и внутренними монологами людей.</p>
+
+  <h2 class="section-heading"><span>01.</span> Портрет аудитории — <em>кто эти люди</em></h2>
+
+  <h3 class="sub-heading">Демография и психография</h3>
+  <ul class="guide-list">
+    <li><strong>Возраст, пол, семейное положение,</strong> доход, занятость.</li>
+    <li><strong>Образ жизни,</strong> ценности, мировоззрение.</li>
+    <li><strong>Как они проводят</strong> утро, вечер, выходные.</li>
+    <li><strong>Какие соцсети используют и зачем</strong> — потреблять, общаться, учиться.</li>
+    <li><strong>Что смотрят,</strong> читают, слушают.</li>
+  </ul>
+
+  <h3 class="sub-heading">Самоидентификация</h3>
+  <ul class="guide-list">
+    <li><strong>Кем они себя считают?</strong> Кем хотят казаться?</li>
+    <li><strong>Что для них значит</strong> «успешный человек в этой нише»?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>02.</span> Боли — <em>уровни глубины</em></h2>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 1</div>
+    <div class="scenario-card__title">Поверхностные — то, что человек осознаёт и готов называть</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Перечисли 10–15 конкретных болей.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Для каждой — как человек формулирует её своими словами.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Приведи реальные фразы из поиска, комментариев, чатов.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Как они описывают свою проблему друзьям — не экспертам?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 2</div>
+    <div class="scenario-card__title">Глубинные — то, что человек чувствует, но редко признаёт</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что реально мешает им спать ночью?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие мысли крутятся в голове в душе, в машине, перед сном?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что они скрывают даже от близких в этой теме?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Чего они стыдятся, но никогда не скажут вслух?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 3</div>
+    <div class="scenario-card__title">Теневые — то, что человек сам не осознаёт</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой страх стоит за каждой поверхностной болью?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие убеждения-ограничители держат их в этой проблеме?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что они хотят не решить, а почувствовать или получить через решение?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какая идентичность или выгода связана с сохранением проблемы?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что психоаналитик увидел бы за этой проблемой?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 4</div>
+    <div class="scenario-card__title">Ситуативные — конкретные моменты жизни</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Опиши 10 конкретных ситуаций из обычного дня, когда боль активируется.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Где находится человек? Что происходит вокруг? Что он чувствует в теле?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие триггеры в течение дня напоминают им о проблеме?</span></div>
+    <div class="scenario-card__tip"><strong>Пример:</strong> «Понедельник, 7 утра, она открывает Instagram и видит…» — что именно?</div>
+  </div>
+
+  <h2 class="section-heading"><span>03.</span> Желания — <em>уровни глубины</em></h2>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 1</div>
+    <div class="scenario-card__title">Декларируемые — что человек говорит, что хочет</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">10–15 конкретных желаний с формулировками самих людей.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">За каждым декларируемым желанием — что стоит на самом деле.</span></div>
+    <div class="scenario-card__tip"><strong>Пример:</strong> «хочу похудеть» → истинное: «хочу, чтобы муж смотрел на меня иначе».</div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 2</div>
+    <div class="scenario-card__title">Истинные — что человек реально хочет получить</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какое чувство или состояние они хотят испытать?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой образ себя они хотят видеть в зеркале?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">УРОВЕНЬ 3</div>
+    <div class="scenario-card__title">Запретные — то, о чём стыдно даже думать</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Чего они хотят, но никогда не скажут вслух — даже себе?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие фантазии связаны с решением этой проблемы?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Кому они хотят «доказать»? Перед кем хотят «победить»?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой социальный статус или признание связаны с результатом?</span></div>
+  </div>
+
+  <h2 class="section-heading"><span>04.</span> Барьеры и <em>возражения</em></h2>
+  <ul class="guide-list">
+    <li><strong>Почему они откладывают решение</strong> снова и снова?</li>
+    <li><strong>Какие убеждения блокируют действие?</strong> («это не для меня», «я уже пробовала», «дорого»)</li>
+    <li><strong>Что должно произойти,</strong> чтобы человек купил сейчас, а не «потом»?</li>
+    <li><strong>Какие прошлые неудачные попытки</strong> мешают им верить в новое решение?</li>
+    <li><strong>Что им нужно увидеть или почувствовать,</strong> чтобы довериться?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>05.</span> Конкурентный <em>ландшафт</em> и контекст</h2>
+  <ul class="guide-list">
+    <li><strong>Какие решения они уже пробовали?</strong> Почему не сработало?</li>
+    <li><strong>Что предлагают конкуренты</strong> — и чего им не хватает?</li>
+    <li><strong>Какой формат продукта</strong> они уже покупали в этой нише?</li>
+    <li><strong>Какое обещание в нише уже избито</strong> и вызывает скепсис?</li>
+    <li><strong>Что в этой нише никто не говорит вслух,</strong> но все думают?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>06.</span> Триггеры <em>немедленной покупки</em></h2>
+  <ul class="guide-list">
+    <li><strong>Какое событие становится точкой невозврата</strong> — «всё, хватит, я должна это изменить»?</li>
+    <li><strong>Что должно случиться,</strong> чтобы они заплатили 1 000 – 5 000 ₽ прямо сейчас, не думая?</li>
+    <li><strong>Какое обещание на лендинге</strong> заставит нажать «купить» импульсивно?</li>
+    <li><strong>Какой результат достижим за 24–72 часа после покупки,</strong> чтобы ценность ощущалась сразу?</li>
+    <li><strong>Что должно быть в названии продукта,</strong> чтобы человек сразу сказал: «Это про меня»?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>07.</span> Язык и <em>психографика</em></h2>
+  <ul class="guide-list">
+    <li><strong>Приведи 20 реальных фраз,</strong> которые они пишут в поиске Google / Яндекс.</li>
+    <li><strong>Приведи 15 фраз</strong> из комментариев в соцсетях по этой теме.</li>
+    <li><strong>Какие слова они никогда не используют</strong> — их избегать в текстах?</li>
+    <li><strong>Какие метафоры и образы</strong> им близки?</li>
+    <li><strong>Какой тон заходит лучше всего:</strong> строгий эксперт, подруга, наставник, провокатор?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>08.</span> Идеи трипваеров — <em>гипотезы для сверки</em></h2>
+  <div class="highlight"><strong>Важно:</strong> это не готовый план, а гипотезы. Предложи 5–7 идей-направлений, которые я затем сопоставлю с собственным анализом рынка инфопродуктов в нише. Не привязывайся к одной идее — дай спектр под разные сегменты боли.</div>
+  <ul class="guide-list">
+    <li><strong>По каждой идее:</strong> рабочее название, формат (чек-лист, мини-курс, шаблон, гайд, скрипт, таблица и т.д.), главное обещание одной фразой.</li>
+    <li><strong>На какую боль отвечает</strong> и в какой конкретный момент человек купит её импульсивно (опиши момент и человека).</li>
+    <li><strong>Честно — риски и слабые места</strong> каждой идеи: что именно мне стоит проверить на рынке.</li>
+    <li><strong>Отметь, какие 2–3 гипотезы</strong> кажутся самыми перспективными для автоматических продаж — и почему именно они.</li>
+    <li><strong>Цену не фиксируй как факт</strong> — дай вилку и логику; финальную цену я определю сама после сверки.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>09.</span> Как <em>выполнять</em></h2>
+  <ul class="guide-list">
+    <li><strong>Сначала — боль и язык аудитории.</strong> Продукт — потом.</li>
+    <li><strong>Опирайся на реальные данные</strong> — форумы, отзывы, комментарии, обсуждения, исследования. Находи живые примеры.</li>
+    <li><strong>Там, где речь о внутреннем монологе</strong> — пиши от первого лица целевой аудитории.</li>
+    <li><strong>Не обобщай — давай конкретику.</strong> Не «хотят похудеть», а «хотят влезть в джинсы, которые висят в шкафу 3 года».</li>
+    <li><strong>Будь честным маркетологом, а не вежливым ботом</strong> — называй вещи своими именами.</li>
+    <li><strong>Объём — максимально подробно, без сокращений.</strong> Структура — заголовки, списки, примеры в кавычках.</li>
+  </ul>
+  <div class="highlight"><strong>В конце — резюме:</strong> 3 главных инсайта об этой аудитории, без которых невозможно продавать ей автоматически.</div>
+
+  <p class="footer-note">Сначала — боль и язык аудитории. <em>Продукт — потом.</em></p>
+
+  <div class="footer">
+    © 2026 · maysoulme · Промт для анализа ЦА под трипваер
+    <div class="tiny">Запусти в Claude в режиме глубокого исследования (Research). Чем точнее ниша — тем живее и полезнее результат.</div>
+  </div>
+
+</div>
+
+<script>
+function copyAllText() {
+  var btn = document.getElementById('copyAllBtn');
+  var hint = document.querySelector('.copy-btn__hint');
+  var container = document.querySelector('.container');
+  btn.style.display = 'none';
+  hint.style.display = 'none';
+  var text = container.innerText.trim();
+  btn.style.display = '';
+  hint.style.display = '';
+
+  function done() {
+    btn.classList.add('copied');
+    btn.textContent = 'Скопировано ✓';
+    setTimeout(function () {
+      btn.classList.remove('copied');
+      btn.textContent = 'Скопировать весь промпт';
+    }, 2500);
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+</script>
+
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

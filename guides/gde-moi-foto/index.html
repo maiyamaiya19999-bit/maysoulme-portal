@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Пошаговый аудит фотографий и цифрового следа с ChatGPT: поиск открытых упоминаний, проверка результатов и запросы на удаление.">
+<title>Где в интернете есть мои фото — maysoulme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@400;500;600;700;800&amp;family=DM+Sans:ital@1&amp;display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: #1a1a1a; font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; z-index: 100; }
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; font-style: italic; color: #888; letter-spacing: 0.5px; }
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 60px 0 48px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); padding: 5px 16px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+.hero h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 48px; }
+.section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px; font-weight: 700; line-height: 1.3; padding: 56px 0 24px; border-top: 1px solid #e8e8e8; }
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+.sub-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; padding: 36px 0 16px; }
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li { font-size: 16px; line-height: 1.75; color: #444; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid #f0f0f0; }
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before { content: ''; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; background: var(--accent); }
+.guide-list li strong { color: #1a1a1a; }
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; align-items: baseline; }
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 15px; color: var(--accent); min-width: 28px; flex-shrink: 0; }
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+.scenario-card { border: 1px solid #e8e8e8; padding: 32px; margin: 24px 0; background: #f9f9f9; }
+.scenario-card__num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+.scenario-card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px; }
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__ending { font-family: 'Libre Baskerville', Georgia, serif; font-size: 17px; font-style: italic; color: #1a1a1a; padding-top: 16px; margin-top: 16px; border-top: 1px solid #e0e0e0; }
+.scenario-card__tip { background: #f0f0f0; padding: 14px 18px; margin-top: 16px; font-size: 14px; color: #555; line-height: 1.65; }
+.scenario-card__tip strong { color: var(--accent); }
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; }
+.prompt-box__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text { font-size: 15px; line-height: 1.8; color: #444; white-space: pre-line; }
+.copy-button { display: inline-block; margin-top: 22px; padding: 11px 18px; border: 1px solid var(--accent); background: #ffffff; color: var(--accent); font: 600 13px/1 'Inter', sans-serif; letter-spacing: .5px; cursor: pointer; }
+.copy-button--all { width: 100%; margin: 4px 0 32px; padding: 16px 20px; background: var(--accent); color: #ffffff; }
+.footer { text-align: center; padding: 64px 24px; border-top: 1px solid #e8e8e8; margin-top: 64px; color: #999; font-size: 14px; }
+.footer .tiny { font-size: 12.5px; color: #999; max-width: 58ch; margin: 12px auto 0; line-height: 1.6; letter-spacing: 0; }
+.footer a { color: #666; }
+.footer-note { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-style: italic; color: #444; text-align: center; padding: 48px 24px 0; }
+.footer-note em { color: var(--accent); }
+@media (max-width: 768px) { .nav { padding: 16px 20px; } .hero { padding: 44px 0 36px; } .hero h1 { font-size: 28px; } .section-heading { font-size: 24px; } .scenario-card { padding: 20px; } .prompt-box { padding: 24px; } .copy-button { width: 100%; padding: 14px 16px; } }
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Где в интернете есть мои фото">
+<meta property="og:description" content="Аудит цифрового следа: находим свои фотографии и данные, которые давно пора убрать.">
+<meta property="og:url" content="https://maysoulme.ru/guides/gde-moi-foto/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+<nav class="nav">
+  <a class="nav__logo" href="#top" aria-label="Наверх"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<main class="container" id="top">
+  <div class="hero">
+    <div class="badge">Гайд</div>
+    <h1>Где в интернете есть <em>твои фото</em></h1>
+    <p class="hero__desc">Пошаговый аудит цифрового следа с ChatGPT: от поисковых зацепок до готовых запросов на удаление.</p>
+    <p class="hero__meta">CHATGPT &middot; ПРИВАТНОСТЬ &middot; 20 МИНУТ</p>
+  </div>
+  <p class="intro-bold">Одно селфи не открывает ChatGPT доступ ко всему интернету — но правильно собранный поиск может показать гораздо больше, чем обычный запрос по имени.</p>
+  <p class="intro-text">Ниже — рабочая система из пяти промптов. Она помогает описать публичные визуальные признаки, собрать варианты поиска по имени и никам, проверить найденные страницы и подготовить обращения на удаление. Все промпты можно скопировать одной кнопкой.</p>
+
+  <h2 class="section-heading"><span>01.</span> Что реально <em>можно найти</em></h2>
+  <p class="text">ChatGPT умеет анализировать загруженные изображения и искать информацию в открытом интернете, если веб-поиск доступен в твоём аккаунте. Но это не сервис распознавания лиц и не полный индекс всех сайтов.</p>
+  <div class="highlight"><strong>Главное правило:</strong> проводи аудит только для себя или человека, который явно согласился. Не проси определять личность по лицу, искать адрес, документы, контакты или другие чувствительные данные.</div>
+  <ul class="guide-list">
+    <li><strong>Что получится.</strong> Найти публичные профили, публикации, интервью, афиши, старые страницы, репосты и упоминания по имени, никам и контексту.</li>
+    <li><strong>Что не гарантируется.</strong> «Все фотографии», закрытые аккаунты, удалённые страницы, содержимое без индексации и совпадения только по лицу.</li>
+    <li><strong>Что проверять вручную.</strong> Действительно ли на странице ты, откуда взят снимок и есть ли у сайта право его публиковать.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>02.</span> Подготовь <em>поисковые зацепки</em></h2>
+  <p class="text">Возьми чёткое селфи без документов, адресов и посторонних людей. Отдельно подготовь имя, прежние фамилии, ники, названия проектов, города и площадки, где ты когда-либо публиковалась.</p>
+  <ol class="headline-list">
+    <li><span class="headline-num">01.</span><span class="headline-text">Открой новый чат и включи веб-поиск, если он доступен.</span></li>
+    <li><span class="headline-num">02.</span><span class="headline-text">Загрузи селфи и отправь первый промпт.</span></li>
+    <li><span class="headline-num">03.</span><span class="headline-text">Добавь текстом известные тебе имена, ники и проекты.</span></li>
+    <li><span class="headline-num">04.</span><span class="headline-text">Выполняй промпты по порядку в одном чате.</span></li>
+  </ol>
+
+  <h2 class="section-heading"><span>03.</span> Пять готовых <em>промптов</em></h2>
+  <button class="copy-button copy-button--all" type="button" data-copy-all>Скопировать все промпты</button>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт 1. Визуальная карта</div>
+    <div class="prompt-box__subtitle">Загрузи селфи перед отправкой</div>
+    <p class="prompt-box__text" data-prompt>Проанализируй загруженное мной селфи только как визуальный материал для моего личного аудита цифрового следа. Не пытайся устанавливать мою личность, не делай выводов о возрасте, происхождении, здоровье, характере или других чувствительных признаках.
+
+Опиши нейтральные, видимые и несекретные детали, которые могут помочь мне вручную сравнивать фотографии: причёску и цвет волос, форму и цвет оправы, заметные аксессуары, одежду, фон, освещение, ракурс и другие особенности именно этого кадра. Отдельно укажи, какие признаки могут легко меняться и потому ненадёжны. Оформи ответ как короткий чек-лист для ручной проверки.</p>
+    <button class="copy-button" type="button" data-copy>Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт 2. Карта цифрового следа</div>
+    <div class="prompt-box__subtitle">Замени данные в квадратных скобках</div>
+    <p class="prompt-box__text" data-prompt>Помоги мне найти публичные страницы в интернете, где могут быть опубликованы мои фотографии. Это аудит только моего собственного цифрового следа. Не используй распознавание лица и не пытайся устанавливать личность по изображению.
+
+Мои известные данные для поиска:
+— имя и фамилия: [вставь]
+— прежние фамилии или варианты написания: [вставь]
+— ники и старые ники: [вставь]
+— проекты, компании, учебные заведения, мероприятия: [вставь]
+— города и примерные годы: [вставь]
+— мои официальные сайты и соцсети: [вставь]
+
+Используй веб-поиск по открытым источникам. Проверь разные написания имени, точные фразы в кавычках, связки «имя + проект», «ник + фото», страницы авторов, интервью, афиши, архивные публикации и репосты. Не включай базы персональных данных и сомнительные агрегаторы.
+
+Верни таблицу: ссылка на страницу, заголовок, почему она может относиться ко мне, какой поисковый запрос сработал, дата публикации, уровень уверенности. Не утверждай, что на фото именно я: помечай каждый результат как «нужна ручная проверка».</p>
+    <button class="copy-button" type="button" data-copy>Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт 3. Расширенный поиск</div>
+    <div class="prompt-box__subtitle">Находит дубли, старые ники и забытые публикации</div>
+    <p class="prompt-box__text" data-prompt>Продолжи мой аудит цифрового следа и найди дополнительные публичные страницы, которых ещё нет в предыдущей таблице.
+
+Составь и выполни новые поисковые запросы с операторами site:, inurl:, intitle:, кавычками и исключениями. Проверь отдельно изображения и страницы на сайтах СМИ, мероприятий, образовательных проектов, каталогов авторов и социальных платформ. Ищи варианты транслитерации, опечатки, старые ники и сочетания с названиями моих проектов.
+
+Не используй распознавание лица, не ищи закрытые или утёкшие данные. Для каждого нового результата дай прямую ссылку на страницу-источник, а не только на картинку, и пометь: «вероятное совпадение», «слабая связь» или «не удалось проверить». В конце выдай список точных запросов, которые я могу вручную вставить в Google, Яндекс и поиск по картинкам.</p>
+    <button class="copy-button" type="button" data-copy>Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт 4. Проверка результатов</div>
+    <div class="prompt-box__subtitle">Отделяет реальные находки от совпадений</div>
+    <p class="prompt-box__text" data-prompt>Помоги мне проверить список найденных страниц. Я буду присылать ссылки и отмечать, где на фотографии действительно я.
+
+Для каждой страницы зафиксируй: URL, владелец сайта или аккаунта, что именно опубликовано, источник фотографии, дата, есть ли подпись или указание авторства, есть ли форма жалобы или контакты редакции, доступна ли страница сейчас. Не делай вывод о личности человека на фото самостоятельно — опирайся только на моё подтверждение.
+
+В конце раздели результаты на четыре группы: оставить; попросить указать авторство; попросить заменить фото; запросить удаление. Объясни приоритет каждого действия простыми словами, без категоричных юридических выводов.</p>
+    <button class="copy-button" type="button" data-copy>Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт 5. Запросы на удаление</div>
+    <div class="prompt-box__subtitle">Отдельное обращение для каждого сайта</div>
+    <p class="prompt-box__text" data-prompt>На основе подтверждённого мной списка страниц подготовь для каждого сайта отдельное вежливое обращение с просьбой удалить мою фотографию или заменить её — в зависимости от моего решения.
+
+В каждом письме укажи: тему, приветствие, точный URL страницы, краткое описание фотографии, мою просьбу, желаемый срок ответа и просьбу подтвердить выполненное действие. Не выдумывай законы, номера статей, права или обстоятельства, которых я не сообщала. Если для юридически точной формулировки важна страна, сначала обозначь, какую юрисдикцию нужно уточнить.
+
+Сделай две версии каждого обращения: короткую для формы обратной связи и полную для email. Оставь поля [ИМЯ], [КОНТАКТ], [ССЫЛКА], [ДАТА] там, где мне нужно вставить данные. После писем составь таблицу контроля: сайт, контакт, дата отправки, срок ответа, статус, следующий шаг.</p>
+    <button class="copy-button" type="button" data-copy>Скопировать промпт</button>
+  </div>
+
+  <h2 class="section-heading"><span>04.</span> Как проверить <em>глубже</em></h2>
+  <div class="scenario-card">
+    <div class="scenario-card__num">РУЧНАЯ ПРОВЕРКА</div>
+    <div class="scenario-card__title">Добавь обратный поиск по изображению</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-label">Загрузи исходник.</span><span class="scenario-card__point-text"> Используй собственную фотографию в Google Lens, Яндекс Картинках или другом сервисе обратного поиска, условиям которого ты доверяешь.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-label">Проверь варианты.</span><span class="scenario-card__point-text"> Отдельно попробуй полный кадр, кадрирование и старые публичные фотографии — результаты могут отличаться.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-label">Открывай источник.</span><span class="scenario-card__point-text"> Сохраняй URL страницы, дату и скриншот, а не только ссылку на файл изображения.</span></div>
+    <div class="scenario-card__tip"><strong>Совет:</strong> не загружай паспорт, фото детей, интимные снимки или изображения других людей без их согласия.</div>
+  </div>
+
+  <h2 class="section-heading"><span>05.</span> Если фото нужно <em>удалить</em></h2>
+  <ul class="guide-list">
+    <li><strong>Сначала сохрани доказательства.</strong> Сделай скриншот, запиши URL и дату доступа.</li>
+    <li><strong>Обратись к владельцу страницы.</strong> Начни с редакции, автора публикации или поддержки платформы.</li>
+    <li><strong>Попроси конкретное действие.</strong> Удалить фото, заменить файл, убрать имя из подписи или закрыть индексацию.</li>
+    <li><strong>Проверь результат.</strong> Удаление со страницы не всегда означает мгновенное исчезновение из поисковой выдачи и кэша.</li>
+    <li><strong>Не выдавай шаблон за юридическую консультацию.</strong> Для спорных случаев и требований по закону уточни страну и обратись к профильному специалисту.</li>
+  </ul>
+  <div class="highlight"><strong>Сохрани этот гайд:</strong> повторяй аудит раз в три–шесть месяцев и после крупных публичных выступлений, интервью или запусков.</div>
+
+  <p class="footer-note">Твой цифровой след должен работать <em>на тебя.</em></p>
+  <footer class="footer">
+    © 2026 · maysoulme · Все права защищены
+    <div class="tiny">ChatGPT может ошибаться и не видит весь интернет. Визуальные возможности нельзя использовать для установления личности человека. Подробнее: <a href="https://help.openai.com/en/articles/8400551-image-inputs-for-chatgpt-faq" target="_blank" rel="noopener">справка об изображениях</a> и <a href="https://openai.com/policies/service-terms/" target="_blank" rel="noopener">условия OpenAI</a>.</div>
+  </footer>
+</main>
+<script>
+const defaultLabel = 'Скопировать промпт';
+async function copyText(text, button) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch (error) {
+    const area = document.createElement('textarea');
+    area.value = text;
+    area.style.position = 'fixed';
+    area.style.opacity = '0';
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand('copy');
+    area.remove();
+  }
+  const original = button.dataset.copyAll !== undefined ? 'Скопировать все промпты' : defaultLabel;
+  button.textContent = 'Скопировано';
+  window.setTimeout(() => { button.textContent = original; }, 1800);
+}
+document.querySelectorAll('[data-copy]').forEach((button) => {
+  button.addEventListener('click', () => {
+    const prompt = button.closest('.prompt-box').querySelector('[data-prompt]').innerText.trim();
+    copyText(prompt, button);
+  });
+});
+document.querySelector('[data-copy-all]').addEventListener('click', (event) => {
+  const prompts = [...document.querySelectorAll('[data-prompt]')]
+    .map((prompt, index) => `ПРОМПТ ${index + 1}\n\n${prompt.innerText.trim()}`)
+    .join('\n\n——————————\n\n');
+  copyText(prompts, event.currentTarget);
+});
+</script>
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

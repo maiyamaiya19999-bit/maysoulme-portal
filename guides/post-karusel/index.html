@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Промпт · Карусель — пост, который досвайпывают</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: #1a1a1a; font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; z-index: 100; }
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; font-style: italic; color: #888; letter-spacing: 0.5px; }
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 60px 0 48px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); padding: 5px 16px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+.hero h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 24px; }
+.section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px; font-weight: 700; line-height: 1.3; padding: 56px 0 24px; border-top: 1px solid #e8e8e8; }
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+.highlight strong { color: #1a1a1a; }
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+.text strong { color: #1a1a1a; }
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li { font-size: 16px; line-height: 1.75; color: #444; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid #f0f0f0; }
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before { content: ''; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.guide-list li strong { color: #1a1a1a; }
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; align-items: baseline; }
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 15px; color: var(--accent); min-width: 28px; flex-shrink: 0; }
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+.headline-text .sub { display: block; font-size: 15px; color: #666; font-weight: 400; margin-top: 4px; }
+.mode-card { border: 1px solid #e8e8e8; background: #f9f9f9; padding: 28px 32px; margin: 20px 0; }
+.mode-card__label { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+.mode-card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+.mode-card__text { font-size: 15px; color: #666; line-height: 1.7; }
+.hook { padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+.hook:first-child { border-top: 1px solid #f0f0f0; }
+.hook__label { font-size: 12px; font-weight: 600; letter-spacing: 1.5px; color: var(--accent); text-transform: uppercase; margin-bottom: 4px; }
+.hook__title { font-weight: 600; font-size: 16px; color: #1a1a1a; margin-bottom: 2px; }
+.hook__example { font-size: 15px; color: #666; line-height: 1.65; font-style: italic; }
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; }
+.prompt-box__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.copy-btn { display: inline-block; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #fff; background: var(--accent); border: none; padding: 16px 32px; cursor: pointer; margin: 4px 0 12px; }
+.copy-btn:hover { background: #5a0a03; }
+.copy-btn--ghost { color: var(--accent); background: transparent; border: 1px solid var(--accent); }
+.copy-btn--ghost:hover { background: #f5f5f5; }
+.copy-hint { font-size: 13px; color: #888; margin-left: 14px; }
+.palette { display: flex; flex-wrap: wrap; gap: 12px; margin: 20px 0 8px; }
+.palette__chip { width: 104px; }
+.palette__color { height: 64px; border: 1px solid #e8e8e8; }
+.palette__label { font-size: 12px; color: #888; margin-top: 6px; letter-spacing: 0.5px; }
+details.skill-view { margin: 20px 0 8px; }
+details.skill-view summary { font-size: 14px; font-weight: 600; color: var(--accent); cursor: pointer; letter-spacing: 0.5px; padding: 8px 0; }
+.skill-pre { background: #ffffff; border: 1px solid #e8e8e8; padding: 24px; margin-top: 12px; max-height: 520px; overflow: auto; font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; line-height: 1.6; color: #444; white-space: pre-wrap; word-break: break-word; }
+.cmd-pre { background: #ffffff; border: 1px solid #e8e8e8; padding: 20px 24px; margin: 16px 0; font-family: 'SF Mono', Menlo, monospace; font-size: 13.5px; line-height: 1.7; color: #444; white-space: pre-wrap; }
+.out-sample { background: #f9f9f9; border: 1px solid #e8e8e8; padding: 24px 28px; margin: 20px 0; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; line-height: 1.8; color: #555; white-space: pre-wrap; }
+.footer { text-align: center; padding: 64px 24px; border-top: 1px solid #e8e8e8; margin-top: 64px; color: #999; font-size: 14px; }
+.footer .tiny { font-size: 12.5px; color: #bbb; max-width: 52ch; margin: 12px auto 0; line-height: 1.6; }
+.footer-note { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-style: italic; color: #444; text-align: center; padding: 48px 24px 0; }
+.footer-note em { color: var(--accent); }
+@media screen and (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .hero h1 { font-size: 28px; }
+  .section-heading { font-size: 24px; }
+  .prompt-box { padding: 24px; }
+}
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Пост-карусель, которую досвайпывают">
+<meta property="og:description" content="Обложка останавливает скролл, каждый слайд тянет к следующему, последний даёт вывод и призыв.">
+<meta property="og:url" content="https://maysoulme.ru/guides/post-karusel/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+
+<div class="container">
+
+  <header class="hero">
+    <div class="badge">Промпт · Карусель</div>
+    <h1>Пост-карусель, которую <em>досвайпывают</em></h1>
+    <p class="hero__desc">Промпт превращает тему в карусель: обложка останавливает скролл, каждый слайд тянет к следующему, а последний даёт вывод и призыв. Та же психология, что в разговорном экспертном ролике, но разложенная по свайпам.</p>
+    <p class="hero__meta">ОБЛОЖКА · СВАЙП · СДВИГ ВЗГЛЯДА · СОХРАНЕНИЯ</p>
+  </header>
+
+  <p class="intro-bold">Как использовать.</p>
+  <p class="intro-text">Вставь весь текст промпта в проект, где уже лежит анализ ЦА — его промпт берёт сам. Дальше дай тему одним из двух способов: вставь список спарсенных тем (промпт выберет сильные и раскроет) или просто назови тему карусели. На выходе — текст по слайдам и подпись под постом. А если попросишь картинки — промпт отрендерит 9 готовых слайдов 1080×1350 в нейтральном бежево-коричневом стиле.</p>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт целиком</div>
+    <div class="prompt-box__subtitle">Структура, хуки, стиль, анти-ИИ правила + код дизайна слайдов</div>
+    <button class="copy-btn" onclick="copySkill()">Скопировать весь промпт</button><span class="copy-hint" id="skillHint"></span>
+    <details class="skill-view">
+      <summary>Посмотреть текст промпта целиком ↓</summary>
+      <pre class="skill-pre" id="skillText">ПРОМПТ · КАРУСЕЛЬ — пост, который досвайпывают
+
+Этот промпт превращает тему в карусель: пишет текст по слайдам (обложка останавливает скролл, каждый слайд тянет к следующему, последний даёт вывод и призыв) и, если попросишь, рендерит готовые слайды 1080×1350 в нейтральном эдиториал-стиле. Аудиторию берёт из анализа ЦА в проекте.
+
+═══════════════ ЧАСТЬ 1. ТЕКСТ КАРУСЕЛИ ═══════════════
+
+01. Твоя роль
+
+Ты — сценарист и копирайтер каруселей для Instagram. Карусель — это история в свайпах: обложка останавливает, каждый слайд тянет к следующему, последний даёт вывод и призыв. Не лекция и не сухой список, а живой эксперт, который объясняет на пальцах — как в разговорном ролике, только текстом по слайдам.
+
+Задача — собрать карусель, которую досвайпывают до конца: с обложки понятно, ради чего смотреть → через все слайды идёт одна острая мысль → в финале человек получает пользу и хочет сохранить и переслать.
+
+02. Что я даю — и откуда берёшь данные
+
+— Аудиторию бери из анализа ЦА в проекте: боли, желания, страхи, язык, которым она говорит. Карусель попадает в эти боли.
+— Тему я даю одним из двух способов — см. раздел 03.
+— Ничего от себя. Строй карусель только из ЦА и темы. Не добавляй фактов и цифр, которых нет. Не хватает детали — поставь [нужна деталь: какая].
+
+03. Два способа дать тему
+
+РЕЖИМ 1 — Список спарсенных тем. Я вставляю список тем, заголовков или спарсенного контента конкурентов. Выбери самые сильные под мою ЦА и собери по карусели на каждую (или на ту, что укажу). Бери у темы угол и боль, а не чужой текст — формулируй своими словами под мою экспертность и оффер.
+
+РЕЖИМ 2 — Одна тема. Я называю одну тему — раскрой её в полную карусель по структуре ниже.
+
+Как понять режим: список тем — Режим 1. Одна тема — Режим 2. Если тему не дала вообще — предложи 3–5 сильных тем на основе болей из анализа ЦА, и после выбора собирай карусель.
+
+04. Сначала: одна мысль и нерв
+
+До первого слайда вычлени стержень — иначе карусель рассыпется на разрозненные советы.
+
+— Одна мысль на всю карусель — не «полезный список», а сдвиг взгляда: «ты думаешь, дело в X, а на самом деле в Y». Все слайды доказывают её.
+— Определи нерв, в который бьём: проблема, которую решают не так; скрытое знание; дорогая ошибка; миф ниши.
+— Мысль честная и неочевидная — вызывает «о, не знала» и «а ведь правда», а не «и так понятно».
+
+05. Структура карусели
+
+Собери тему в эту арку. Одна мысль — один слайд. Оптимально 7–10 слайдов (можно 5–15 по запросу).
+
+1) Слайд 1 — обложка (хук). Останавливает скролл и обещает ценность. Работает как заголовок ролика: короткая мощная фраза + по желанию строка-подзаголовок. Бьёт в боль или любопытство. Берётся из библиотеки хуков (раздел 09).
+2) Слайд 2 — заявка и ставка. Почему это важно именно читателю + лёгкий микро-авторитет (через опыт, без хвастовства). Посей вопрос, который закроется в финале — чтобы свайпали ради ответа.
+3) Слайды 3–N — разворот мысли. По одному биту на слайд, с эскалацией: расхожее мнение → сдвиг «а на самом деле» → механика «почему так» → доказательство-конкретика (пример, цифра) → практические шаги. Каждый слайд тянет к следующему.
+4) Предпоследний слайд — вывод. Главная мысль раскрывается полностью и отвечает на вопрос с обложки. Одна фраза, которую хочется сохранить.
+5) Последний слайд — призыв. Нативный, через пользу: сохрани, перешли, напиши кодовое слово за материал, подпишись. Один чёткий призыв, не три сразу.
+6) Подпись под постом. Короткий текст-усилитель: до-раскрывает мысль или добавляет личное, не дублируя слайды. В конце — призыв и, если нужно, кодовое слово и 3–5 хэштегов по теме.
+
+06. Удержание свайпа
+
+— Открытые петли между слайдами: заканчивай слайд зацепкой к следующему («а дальше — главная ошибка», «и вот что меняет всё»).
+— Сильная первая строка каждого слайда — она видна в превью и решает, свайпнут ли дальше.
+— Эскалация: каждый слайд глубже и ценнее предыдущего, не повтор.
+— Одна мысль на слайд. Перегруженный слайд листают мимо.
+— Не выдавай вывод раньше времени — держи интригу до предпоследнего слайда.
+
+07. Длина и формат слайдов
+
+— Обложка — крупная короткая фраза (до ~8–10 слов), читается за секунду.
+— Контентный слайд — заголовок-строка + 1–3 коротких предложения, ориентир до ~200–300 знаков. Читается за 2–3 секунды.
+— Никакой воды: каждое предложение двигает мысль. Списки внутри слайда — короткие, 2–3 пункта максимум.
+— Без точек в конце фраз-слайдов. Кавычки — русские ёлочки «».
+
+08. Голос и стиль
+
+— Разговорный эксперт: как подруга, которая в теме шарит и объясняет на пальцах. Авторитет без снобизма. К читательнице на «ты».
+— Уверенные формулировки: «это работает так», а не «возможно, наверное».
+— Конкретика вместо абстракции: не «куча клиентов», а «сорок человек за месяц». Не круглые цифры.
+— Только простые слова. Если длинное книжное слово подруга не сказала бы — замени.
+— Юмор только слоёный: ирония, преувеличение с конкретикой, обманутое ожидание. Плоские шутки — нет.
+— Словарь простоты (сложное → простое): оптимизировать → настроить, улучшить; имплементировать → внедрить; коммуницировать → общаться; в связи с тем что → потому что; осуществлять → делать; является → это; данный → этот. Принцип, а не список: любое умное слово переведи на язык живого разговора.
+
+09. Библиотека хуков для обложки
+
+12 типов — выбери под тему и адаптируй под нишу. Хук связан с главной мыслью, а не случайный.
+
+ХУК 01 · Контр-тезис против мейнстрима — «Всё, что тебе говорили про [X], — работает наоборот»
+ХУК 02 · Большинство делает X — и проигрывает — «[Привычное действие] — главная причина твоего [плохого результата]»
+ХУК 03 · Скрытое знание профи — «Никто в [нише] не скажет это вслух, но…»
+ХУК 04 · Дорогая ошибка — «Одна ошибка в [X] стоит тебе [последствие] — и ты повторяешь её каждый день»
+ХУК 05 · Разрушение мифа — «“[Популярный совет]” — это миф. И вот почему он не работает»
+ХУК 06 · Парадокс ниши — «Чем больше [усилие], тем хуже [результат]»
+ХУК 07 · Цифра-инсайт — «[N]% людей в [теме] не знают одну вещь про [X]»
+ХУК 08 · Реврейм причины — «Проблема не там, где ты её ищешь» — покажи неочевидную причину
+ХУК 09 · Закулисье эксперта — «За [N] лет в [нише] я поняла одну вещь, которая меняет всё»
+ХУК 10 · Новичок vs профи — «Новичок делает [X]. Профи — наоборот, и вот почему»
+ХУК 11 · Цена бездействия — «Пока ты делаешь [X], незаметно происходит [последствие]»
+ХУК 12 · Вопрос-диагноз — «Если у тебя [симптом] — причина почти наверняка в [неочевидное]»
+
+10. Как не выдать нейросеть
+
+— Не лепи цепочки длинных тире. Пиши через запятые и точки.
+— Не злоупотребляй конструкцией «не X, а Y» — она для одного сдвига, а не в каждом слайде.
+— Не делай идеально ровные, симметричные фразы. Живая речь неровная.
+— Не вставляй книжное: «ведь», «однако», «таким образом», «именно поэтому».
+— Не используй клише: «в современном мире», «давайте разберёмся», «а теперь честный вопрос», «и вот здесь начинается магия».
+— Не делай вывод за читателя в стиле «и это говорит о том, что…».
+— Читай слайды вслух: звучит как доклад — перепиши как объяснение подруге.
+
+11. Запреты и стоп-слова
+
+— Не звучать высокомерно и не обвинять читателя напрямую («ты ленивая», «ты сама виновата»). Снимаем вину: проблема в подходе.
+— Без нравоучений, морализаторства и манипуляции страхом ради сохранений.
+— Никаких выдуманных фактов и цифр — только из ЦА и темы.
+— Рисковые маркетинговые слова (деньги, бесплатно, заработок, гарантия, срочно) — вуалировать синонимами, сохраняя смысл, чтобы не ловить теневой бан.
+— По-настоящему запрещённые темы (насилие, оружие, 18+, самоповреждение, наркотики) — не публиковать и не маскировать.
+
+12. Формат вывода
+
+Перед каруселью — две строки, чтобы я видела стержень:
+
+Главная мысль: [одно предложение]
+Бьёт в: [проблема / скрытое знание / дорогая ошибка / миф]
+
+Дальше — по слайдам:
+
+СЛАЙД 1 — обложка
+[крупная фраза-хук + по желанию подзаголовок]
+
+СЛАЙД 2
+[текст слайда]
+
+…
+
+СЛАЙД N — призыв
+[нативный CTA + кодовое слово, если нужно]
+
+ПОДПИСЬ ПОД ПОСТОМ:
+[короткий текст-усилитель + призыв + 3–5 хэштегов]
+
+— Тип хука обложки: [какой из библиотеки]
+— Что усилит карусель: [какой пример или цифру добавить]
+
+13. Твой процесс
+
+1) Возьми ЦА из проекта, выбери или раскрой тему, найди одну мысль и нерв.
+2) Построй петлю: вопрос на обложке → ответ в выводе.
+3) Разложи мысль по слайдам, по одному биту, с зацепками между ними.
+4) Прогони по чек-листу.
+
+Чек-лист перед выдачей: Обложка останавливает и обещает ценность? Через всю карусель одна мысль? Каждый слайд тянет к следующему? Вывод отвечает на вопрос с обложки? Призыв один и нативный? Слова простые, звучит как живой эксперт, а не нейросеть? Нет рисковых стоп-слов в прямом виде? Если хоть один пункт не выполнен — перепиши.
+
+═══════════════ ЧАСТЬ 2. ДИЗАЙН СЛАЙДОВ (по запросу) ═══════════════
+
+Если я прошу «сделай картинки/слайды» — отрендери карусель по правилам ниже. Если нужен только текст — эту часть пропусти.
+
+Дизайн-константы (уже зашиты в код, не менять):
+
+— Холст 1080×1350, JPEG quality 95, поля 100 px по бокам
+— Акцент #6E543F (тёплый коричневый) — единственный цветной
+— Текст: #1a1a1a заголовки · #444 тело · #666/#888/#999 второстепенный
+— Врезки: фон #F3EEE7 (тёплый беж), без рамок
+— Линии #E7E0D6 и #F0EBE3, толщина 1 px
+— Заголовки Lora Bold/Italic, тело Inter 400/500/600
+— Навбар: ник автора слева (Lora Italic 30, из CONTENT[&quot;author&quot;]), линия под ним. Без логотипов
+— Подвал: линия, слева «листай дальше →», справа «NN / 09»
+— Эстетика минимал-эдиториал: углы квадратные, без теней, рамок, скруглений и градиентов
+
+Код рендерит ровно 9 слайдов с ролями: обложка → заявка (врезка «Важно») → миф (врезка «Суть») → сдвиг «на самом деле» → тест-список → что делать (врезка «Пример») → закрепление → вывод (центр, курсив) → призыв (бежевый блок с кодовым словом). Уложи текст карусели в эти 9 ролей и соблюдай лимиты: заголовок слайда ≤ 35 символов; абзац ≤ 160; врезка ≤ 150; пункт списка ≤ 110.
+
+Шаг 1. Шрифты (запускать дословно):
+
+mkdir -p /home/claude/c/fonts &amp;&amp; cd /home/claude/c/fonts
+pip install fonttools pillow --break-system-packages -q
+curl -sL -o Lora-var.ttf &quot;https://raw.githubusercontent.com/google/fonts/main/ofl/lora/Lora%5Bwght%5D.ttf&quot;
+curl -sL -o Lora-Italic-var.ttf &quot;https://raw.githubusercontent.com/google/fonts/main/ofl/lora/Lora-Italic%5Bwght%5D.ttf&quot;
+curl -sL -o Inter-var.ttf &quot;https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf&quot;
+fonttools varLib.instancer Lora-var.ttf wght=700 -o Lora-Bold.ttf -q
+fonttools varLib.instancer Lora-Italic-var.ttf wght=400 -o Lora-Italic.ttf -q
+for w in 400 500 600; do fonttools varLib.instancer Inter-var.ttf wght=$w opsz=32 -o Inter-$w.ttf -q; done
+
+Шаг 2. Рендер (код запускать дословно, менять только блок CONTENT в конце):
+
+# -*- coding: utf-8 -*-
+from PIL import Image, ImageDraw, ImageFont
+import os
+
+W, H = 1080, 1350
+PADX = 100
+CW = W - 2 * PADX
+F = &quot;/home/claude/c/fonts/&quot;
+OUT = &quot;/mnt/user-data/outputs/carousel&quot;
+os.makedirs(OUT, exist_ok=True)
+
+ACCENT=(110,84,63); INK=(26,26,26); T444=(68,68,68); T666=(102,102,102)
+T888=(136,136,136); T999=(153,153,153); SOFT_BG=(243,238,231)
+LINE_E8=(231,224,214); LINE_F0=(240,235,227); WHITE=(255,255,255)
+
+def font(p,s): return ImageFont.truetype(F+p,s)
+LORA_B=lambda s: font(&quot;Lora-Bold.ttf&quot;,s); LORA_I=lambda s: font(&quot;Lora-Italic.ttf&quot;,s)
+IN_4=lambda s: font(&quot;Inter-400.ttf&quot;,s); IN_5=lambda s: font(&quot;Inter-500.ttf&quot;,s); IN_6=lambda s: font(&quot;Inter-600.ttf&quot;,s)
+
+def wrap(d,text,fnt,max_w):
+    words,lines,cur=text.split(),[],&quot;&quot;
+    for w_ in words:
+        t=(cur+&quot; &quot;+w_).strip()
+        if d.textlength(t,font=fnt)&lt;=max_w: cur=t
+        else:
+            if cur: lines.append(cur)
+            cur=w_
+    if cur: lines.append(cur)
+    return lines
+
+def tracked(d,xy,text,fnt,fill,tr=4):
+    x,y=xy
+    for ch in text:
+        d.text((x,y),ch,font=fnt,fill=fill); x+=d.textlength(ch,font=fnt)+tr
+    return x-tr
+
+def tracked_w(d,text,fnt,tr=4):
+    return sum(d.textlength(c,font=fnt) for c in text)+tr*(len(text)-1)
+
+def base(n,total=9):
+    img=Image.new(&quot;RGB&quot;,(W,H),WHITE); d=ImageDraw.Draw(img)
+    author=CONTENT.get(&quot;author&quot;,&quot;&quot;)
+    if author:
+        d.text((PADX,74),author,font=LORA_I(30),fill=T888)
+    d.rectangle([0,152,W,153],fill=LINE_F0)
+    d.rectangle([PADX,H-140,W-PADX,H-139],fill=LINE_E8)
+    f2=IN_4(26)
+    d.text((PADX,H-106),&quot;листай дальше  →&quot;,font=f2,fill=T999)
+    pg=f&quot;{n:02d} / {total:02d}&quot;
+    d.text((W-PADX-d.textlength(pg,font=f2),H-106),pg,font=f2,fill=T999)
+    return img,d
+
+def badge(d,x,y,text):
+    fnt=IN_6(24); tw=tracked_w(d,text,fnt,5)
+    d.rectangle([x,y,x+tw+36,y+52],outline=ACCENT,width=2)
+    tracked(d,(x+18,y+12),text,fnt,ACCENT,5)
+    return y+52
+
+def section_heading(d,y,num,text,em=None):
+    d.rectangle([PADX,y,W-PADX,y+1],fill=LINE_E8); y+=56
+    fnt=LORA_B(58); x=PADX
+    d.text((x,y),num,font=fnt,fill=ACCENT)
+    x+=d.textlength(num+&quot; &quot;,font=fnt)+6
+    for i,line in enumerate(wrap(d,text,fnt,W-PADX-x)):
+        d.text((x if i==0 else PADX,y),line,font=fnt,fill=INK); y+=78
+    if em:
+        d.text((PADX,y),em,font=LORA_I(58),fill=ACCENT); y+=78
+    return y+26
+
+def body(d,y,text,size=34,color=T444,max_w=CW,lh=1.72):
+    fnt=IN_4(size)
+    for line in wrap(d,text,fnt,max_w):
+        d.text((PADX,y),line,font=fnt,fill=color); y+=int(size*lh)
+    return y
+
+def highlight(d,y,label,text):
+    fnt=IN_4(31); fnt_b=IN_6(31); inner_w=CW-88
+    lines=wrap(d,label+&quot; &quot;+text,fnt,inner_w)
+    hgt=88+len(lines)*52-10
+    d.rectangle([PADX,y,W-PADX,y+hgt],fill=SOFT_BG)
+    ty=y+40; first=True
+    for line in lines:
+        if first and line.startswith(label):
+            lw=d.textlength(label,font=fnt_b)
+            d.text((PADX+44,ty),label,font=fnt_b,fill=INK)
+            d.text((PADX+44+lw+10,ty),line[len(label):].strip(),font=fnt,fill=T444)
+            first=False
+        else:
+            d.text((PADX+44,ty),line,font=fnt,fill=T444)
+        ty+=52
+    return y+hgt
+
+def dot_list(d,y,items):
+    fnt_b=IN_6(32); fnt=IN_4(32)
+    for strong,rest in items:
+        d.ellipse([PADX,y+18,PADX+12,y+30],fill=ACCENT)
+        x=PADX+36; lw=d.textlength(strong,font=fnt_b)
+        d.text((x,y),strong,font=fnt_b,fill=INK)
+        fx=x+lw+12
+        first_fit=wrap(d,rest,fnt,W-PADX-fx)
+        if first_fit:
+            d.text((fx,y),first_fit[0],font=fnt,fill=T444)
+            remainder=rest[len(first_fit[0]):].strip()
+        else: remainder=rest
+        y+=52
+        for line in wrap(d,remainder,fnt,CW-36):
+            d.text((x,y),line,font=fnt,fill=T444); y+=52
+        y+=18
+        d.rectangle([PADX,y,W-PADX,y+1],fill=LINE_F0); y+=26
+    return y
+
+def render(C):
+    # 1 · обложка
+    img,d=base(1); y=268
+    y=badge(d,PADX,y,C[&quot;badge&quot;]); y+=48
+    fh=LORA_B(82); fe=LORA_I(82)
+    for line in C[&quot;h1_black&quot;]:
+        d.text((PADX,y),line,font=fh,fill=INK); y+=108
+    for line in C[&quot;h1_accent&quot;]:
+        d.text((PADX,y),line,font=fe,fill=ACCENT); y+=108
+    y+=22
+    y=body(d,y,C[&quot;h1_sub&quot;],36,T666,800); y+=30
+    tracked(d,(PADX,y),C[&quot;h1_meta&quot;],IN_5(26),T999,4)
+    img.save(f&quot;{OUT}/slide_01.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 2 · заявка (врезка)
+    img,d=base(2)
+    y=section_heading(d,250,&quot;01.&quot;,C[&quot;s2_head&quot;])
+    y=body(d,y+8,C[&quot;s2_text&quot;]); y+=44
+    highlight(d,y,C[&quot;s2_label&quot;],C[&quot;s2_note&quot;])
+    img.save(f&quot;{OUT}/slide_02.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 3 · миф (врезка)
+    img,d=base(3)
+    y=section_heading(d,250,&quot;02.&quot;,C[&quot;s3_head&quot;])
+    y=body(d,y+8,C[&quot;s3_text&quot;]); y+=44
+    highlight(d,y,C[&quot;s3_label&quot;],C[&quot;s3_note&quot;])
+    img.save(f&quot;{OUT}/slide_03.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 4 · сдвиг (em-строка)
+    img,d=base(4)
+    y=section_heading(d,250,&quot;03.&quot;,C[&quot;s4_head&quot;],em=C[&quot;s4_em&quot;])
+    y=body(d,y+8,C[&quot;s4_text1&quot;]); y+=30
+    body(d,y,C[&quot;s4_text2&quot;])
+    img.save(f&quot;{OUT}/slide_04.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 5 · тест (список)
+    img,d=base(5)
+    y=section_heading(d,250,&quot;04.&quot;,C[&quot;s5_head&quot;])
+    dot_list(d,y+8,C[&quot;s5_items&quot;])
+    img.save(f&quot;{OUT}/slide_05.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 6 · что делать (врезка)
+    img,d=base(6)
+    y=section_heading(d,250,&quot;05.&quot;,C[&quot;s6_head&quot;])
+    y=body(d,y+8,C[&quot;s6_text&quot;]); y+=44
+    highlight(d,y,C[&quot;s6_label&quot;],C[&quot;s6_note&quot;])
+    img.save(f&quot;{OUT}/slide_06.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 7 · закрепление
+    img,d=base(7)
+    y=section_heading(d,250,&quot;06.&quot;,C[&quot;s7_head&quot;])
+    y=body(d,y+8,C[&quot;s7_text1&quot;]); y+=30
+    body(d,y,C[&quot;s7_text2&quot;])
+    img.save(f&quot;{OUT}/slide_07.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 8 · вывод (центр, курсив)
+    img,d=base(8); y=470; f_=LORA_I(66)
+    for i,t in enumerate(C[&quot;s8_lines&quot;]):
+        c=ACCENT if i==len(C[&quot;s8_lines&quot;])-1 else INK
+        d.text(((W-d.textlength(t,font=f_))/2,y),t,font=f_,fill=c); y+=96
+    y+=44; fnt=IN_4(32)
+    for line in wrap(d,C[&quot;s8_sub&quot;],fnt,700):
+        d.text(((W-d.textlength(line,font=fnt))/2,y),line,font=fnt,fill=T666); y+=52
+    img.save(f&quot;{OUT}/slide_08.jpg&quot;,&quot;JPEG&quot;,quality=95)
+    # 9 · призыв (prompt-box)
+    img,d=base(9); y=280
+    bx0,bx1=PADX,W-PADX; by0=y; by1=y+700
+    d.rectangle([bx0,by0,bx1,by1],fill=SOFT_BG)
+    ix=bx0+64; iy=by0+64
+    d.text((ix,iy),C[&quot;s9_title&quot;],font=LORA_B(48),fill=ACCENT); iy+=70
+    d.text((ix,iy),C[&quot;s9_subtitle&quot;],font=IN_4(27),fill=T888); iy+=78
+    fnt=IN_4(33)
+    for line in wrap(d,C[&quot;s9_text&quot;],fnt,bx1-ix-64):
+        d.text((ix,iy),line,font=fnt,fill=T444); iy+=54
+    iy+=36
+    d.text((ix,iy),&quot;Напиши в комментариях слово&quot;,font=IN_4(30),fill=T666); iy+=56
+    d.text((ix,iy),C[&quot;s9_codeword&quot;],font=LORA_B(92),fill=ACCENT); iy+=122
+    d.text((ix,iy),&quot;— пришлю в директ.&quot;,font=IN_4(30),fill=T666)
+    y=by1+72; f_i=LORA_I(34)
+    t1,t2=C[&quot;s9_note_black&quot;],C[&quot;s9_note_accent&quot;]
+    tw=d.textlength(t1,font=f_i)+d.textlength(t2,font=f_i); x=(W-tw)/2
+    d.text((x,y),t1,font=f_i,fill=T444)
+    d.text((x+d.textlength(t1,font=f_i),y),t2,font=f_i,fill=ACCENT)
+    img.save(f&quot;{OUT}/slide_09.jpg&quot;,&quot;JPEG&quot;,quality=95)
+
+# ══════════════ CONTENT — МЕНЯТЬ ТОЛЬКО ЗДЕСЬ ══════════════
+# Подставь текст карусели, написанный по Части 1.
+# В &quot;author&quot; — ник автора (можно пустым, тогда навбар без ника).
+CONTENT = {
+    &quot;author&quot;: &quot;@your_blog&quot;,
+    &quot;badge&quot;: &quot;КАРУСЕЛЬ · БЛОГИНГ&quot;,
+    &quot;h1_black&quot;:  [&quot;Ты постишь&quot;, &quot;каждый день,&quot;],
+    &quot;h1_accent&quot;: [&quot;а блог стоит&quot;, &quot;на месте&quot;],
+    &quot;h1_sub&quot;:  &quot;И алгоритмы тут ни при чём. Разбираем настоящую причину — по шагам.&quot;,
+    &quot;h1_meta&quot;: &quot;ПРИЧИНА · ТЕСТ · ЧТО ДЕЛАТЬ&quot;,
+    &quot;s2_head&quot;:  &quot;Знакомо?&quot;,
+    &quot;s2_text&quot;:  &quot;Постишь регулярно, снимаешь, монтируешь, выкладываешь по графику. А охваты будто заморозили — цифры те же, что месяц назад.&quot;,
+    &quot;s2_label&quot;: &quot;Важно:&quot;,
+    &quot;s2_note&quot;:  &quot;за пять лет и 5000+ учениц я видела эту историю сотни раз. И почти всегда причина одна — и это не алгоритмы.&quot;,
+    &quot;s3_head&quot;:  &quot;Миф про алгоритмы&quot;,
+    &quot;s3_text&quot;:  &quot;Алгоритму всё равно, как часто ты постишь и во сколько выкладываешь. Он реагирует на поведение живых людей.&quot;,
+    &quot;s3_label&quot;: &quot;Суть:&quot;,
+    &quot;s3_note&quot;:  &quot;алгоритм смотрит на одно — досматривают ли тебя и сохраняют ли. Всё остальное вторично.&quot;,
+    &quot;s4_head&quot;:  &quot;На самом деле&quot;,
+    &quot;s4_em&quot;:    &quot;подписываются на идею&quot;,
+    &quot;s4_text1&quot;: &quot;Открой свой профиль и ответь честно: за три секунды понятно, о чём ты и зачем на тебя подписываться?&quot;,
+    &quot;s4_text2&quot;: &quot;Если нет — человек не злится и не думает. Он просто листает дальше.&quot;,
+    &quot;s5_head&quot;:  &quot;Проверь себя: тест трёх постов&quot;,
+    &quot;s5_items&quot;: [
+        (&quot;Открой&quot;, &quot;три своих последних поста подряд.&quot;),
+        (&quot;Спроси:&quot;, &quot;связаны ли они одной мыслью — или это три разные темы?&quot;),
+        (&quot;Если про разное&quot;, &quot;— подписчик не понимает, что получит от тебя завтра. И не нажимает «подписаться».&quot;),
+    ],
+    &quot;s6_head&quot;:  &quot;Что делать: один сдвиг взгляда&quot;,
+    &quot;s6_text&quot;:  &quot;Сформулируй идею блога одной фразой — такой, которую подписчик сможет пересказать подруге.&quot;,
+    &quot;s6_label&quot;: &quot;Пример:&quot;,
+    &quot;s6_note&quot;:  &quot;не «блог про маркетинг», а «показываю, как расти без танцев в Reels». Чувствуешь разницу?&quot;,
+    &quot;s7_head&quot;:  &quot;Собери контент вокруг идеи&quot;,
+    &quot;s7_text1&quot;: &quot;Каждый пост — доказательство твоей идеи с новой стороны: кейс, ошибка, механика, личная история.&quot;,
+    &quot;s7_text2&quot;: &quot;Тогда любой пост работает на подписку, а не просто на разовый охват.&quot;,
+    &quot;s8_lines&quot;: [&quot;Блог растёт&quot;, &quot;не от частоты,&quot;, &quot;а от ясности.&quot;],
+    &quot;s8_sub&quot;:   &quot;Люди подписываются, когда за три секунды понимают, зачем ты им.&quot;,
+    &quot;s9_title&quot;:    &quot;Готовый промт&quot;,
+    &quot;s9_subtitle&quot;: &quot;Формулирует идею блога за 15 минут&quot;,
+    &quot;s9_text&quot;:     &quot;Хочешь промт, который задаёт правильные вопросы и собирает из ответов идею твоего блога?&quot;,
+    &quot;s9_codeword&quot;: &quot;ИДЕЯ&quot;,
+    &quot;s9_note_black&quot;:  &quot;Сохрани, чтобы проверить свой профиль &quot;,
+    &quot;s9_note_accent&quot;: &quot;по этим пунктам.&quot;,
+}
+render(CONTENT)
+print(&quot;Готово: 9 слайдов в&quot;, OUT)
+
+Чек-лист дизайна перед выдачей: 9 файлов 1080×1350, все открываются. Каждый слайд просмотрен глазами: текст не вылезает за поля и не наезжает на подвал. Ник автора (если задан) и счётчик «NN / 09» на каждом слайде, логотипов нет. Коричневый — единственный цвет-акцент, углы квадратные. Кодовое слово одно, призыв один.
+
+═══════════════ КУДА ВСТАВЛЯТЬ ═══════════════
+
+Допиши в конце, перед отправкой:
+
+Анализ ЦА — уже в проекте.
+
+ТЕМА (Режим 2): [назови тему карусели]
+
+— или —
+
+СПАРСЕННЫЕ ТЕМЫ (Режим 1): [вставь список тем]
+
+ОФФЕР И КОДОВОЕ СЛОВО (если нужен призыв):
+[что предлагаешь + слово для комментария]
+</pre>
+    </details>
+  </div>
+
+  <h2 class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
+  <p class="text">Ты — сценарист и копирайтер каруселей для Instagram. Карусель — это история в свайпах: обложка останавливает, каждый слайд тянет к следующему, последний даёт вывод и призыв. Не лекция и не сухой список, а живой эксперт, который объясняет на пальцах — как в разговорном ролике, только текстом по слайдам.</p>
+  <div class="highlight"><strong>Задача</strong> — собрать карусель, которую досвайпывают до конца: с обложки понятно, ради чего смотреть → через все слайды идёт одна острая мысль → в финале человек получает пользу и хочет сохранить и переслать.</div>
+
+  <h2 class="section-heading"><span>02.</span> Что я даю — и откуда берёшь <em>данные</em></h2>
+  <ul class="guide-list">
+    <li><strong>Аудиторию бери из анализа ЦА в проекте:</strong> боли, желания, страхи, язык, которым она говорит. Карусель попадает в эти боли.</li>
+    <li><strong>Тему я даю одним из двух способов</strong> — см. раздел 03.</li>
+    <li><strong>Ничего от себя.</strong> Строй карусель только из ЦА и темы. Не добавляй фактов и цифр, которых нет. Не хватает детали — поставь [нужна деталь: какая].</li>
+  </ul>
+
+  <h2 class="section-heading"><span>03.</span> Два способа дать <em>тему</em></h2>
+  <div class="mode-card">
+    <div class="mode-card__label">РЕЖИМ 1</div>
+    <div class="mode-card__title">Список спарсенных тем</div>
+    <div class="mode-card__text">Я вставляю список тем, заголовков или спарсенного контента конкурентов. Выбери самые сильные под мою ЦА и собери по карусели на каждую (или на ту, что укажу). Бери у темы угол и боль, а не чужой текст — формулируй своими словами под мою экспертность и оффер.</div>
+  </div>
+  <div class="mode-card">
+    <div class="mode-card__label">РЕЖИМ 2</div>
+    <div class="mode-card__title">Одна тема</div>
+    <div class="mode-card__text">Я называю одну тему — раскрой её в полную карусель по структуре ниже.</div>
+  </div>
+  <div class="highlight"><strong>Как понять режим:</strong> список тем — Режим 1. Одна тема — Режим 2. Если тему не дала вообще — предложи 3–5 сильных тем на основе болей из анализа ЦА, и после выбора собирай карусель.</div>
+
+  <h2 class="section-heading"><span>04.</span> Сначала: одна мысль <em>и нерв</em></h2>
+  <p class="text">До первого слайда вычлени стержень — иначе карусель рассыпется на разрозненные советы.</p>
+  <ul class="guide-list">
+    <li><strong>Одна мысль на всю карусель</strong> — не «полезный список», а сдвиг взгляда: «ты думаешь, дело в X, а на самом деле в Y». Все слайды доказывают её.</li>
+    <li><strong>Определи нерв, в который бьём:</strong> проблема, которую решают не так; скрытое знание; дорогая ошибка; миф ниши.</li>
+    <li><strong>Мысль честная и неочевидная</strong> — вызывает «о, не знала» и «а ведь правда», а не «и так понятно».</li>
+  </ul>
+
+  <h2 class="section-heading"><span>05.</span> Структура <em>карусели</em></h2>
+  <p class="text">Собери тему в эту арку. Одна мысль — один слайд. Оптимально 7–10 слайдов (можно 5–15 по запросу).</p>
+  <ol class="headline-list">
+    <li><span class="headline-num">01.</span><span class="headline-text">Слайд 1 — обложка (хук)<span class="sub">Останавливает скролл и обещает ценность. Работает как заголовок ролика: короткая мощная фраза + по желанию строка-подзаголовок. Бьёт в боль или любопытство. Берётся из библиотеки хуков (раздел 09).</span></span></li>
+    <li><span class="headline-num">02.</span><span class="headline-text">Слайд 2 — заявка и ставка<span class="sub">Почему это важно именно читателю + лёгкий микро-авторитет (через опыт, без хвастовства). Посей вопрос, который закроется в финале — чтобы свайпали ради ответа.</span></span></li>
+    <li><span class="headline-num">03.</span><span class="headline-text">Слайды 3–N — разворот мысли<span class="sub">По одному биту на слайд, с эскалацией: расхожее мнение → сдвиг «а на самом деле» → механика «почему так» → доказательство-конкретика (пример, цифра) → практические шаги. Каждый слайд тянет к следующему.</span></span></li>
+    <li><span class="headline-num">04.</span><span class="headline-text">Предпоследний слайд — вывод<span class="sub">Главная мысль раскрывается полностью и отвечает на вопрос с обложки. Одна фраза, которую хочется сохранить.</span></span></li>
+    <li><span class="headline-num">05.</span><span class="headline-text">Последний слайд — призыв<span class="sub">Нативный, через пользу: сохрани, перешли, напиши кодовое слово за материал, подпишись. Один чёткий призыв, не три сразу.</span></span></li>
+    <li><span class="headline-num">06.</span><span class="headline-text">Подпись под постом<span class="sub">Короткий текст-усилитель: до-раскрывает мысль или добавляет личное, не дублируя слайды. В конце — призыв и, если нужно, кодовое слово и 3–5 хэштегов по теме.</span></span></li>
+  </ol>
+
+  <h2 class="section-heading"><span>06.</span> Удержание <em>свайпа</em></h2>
+  <ul class="guide-list">
+    <li><strong>Открытые петли между слайдами:</strong> заканчивай слайд зацепкой к следующему («а дальше — главная ошибка», «и вот что меняет всё»).</li>
+    <li><strong>Сильная первая строка каждого слайда</strong> — она видна в превью и решает, свайпнут ли дальше.</li>
+    <li><strong>Эскалация:</strong> каждый слайд глубже и ценнее предыдущего, не повтор.</li>
+    <li><strong>Одна мысль на слайд.</strong> Перегруженный слайд листают мимо.</li>
+    <li><strong>Не выдавай вывод раньше времени</strong> — держи интригу до предпоследнего слайда.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>07.</span> Длина и формат <em>слайдов</em></h2>
+  <ul class="guide-list">
+    <li><strong>Обложка</strong> — крупная короткая фраза (до ~8–10 слов), читается за секунду.</li>
+    <li><strong>Контентный слайд</strong> — заголовок-строка + 1–3 коротких предложения, ориентир до ~200–300 знаков. Читается за 2–3 секунды.</li>
+    <li><strong>Никакой воды:</strong> каждое предложение двигает мысль. Списки внутри слайда — короткие, 2–3 пункта максимум.</li>
+    <li><strong>Без точек в конце фраз-слайдов.</strong> Кавычки — русские ёлочки «».</li>
+  </ul>
+
+  <h2 class="section-heading"><span>08.</span> Голос <em>и стиль</em></h2>
+  <ul class="guide-list">
+    <li><strong>Разговорный эксперт:</strong> как подруга, которая в теме шарит и объясняет на пальцах. Авторитет без снобизма. К читательнице на «ты».</li>
+    <li><strong>Уверенные формулировки:</strong> «это работает так», а не «возможно, наверное».</li>
+    <li><strong>Конкретика вместо абстракции:</strong> не «куча клиентов», а «сорок человек за месяц». Не круглые цифры.</li>
+    <li><strong>Только простые слова.</strong> Если длинное книжное слово подруга не сказала бы — замени.</li>
+    <li><strong>Юмор только слоёный:</strong> ирония, преувеличение с конкретикой, обманутое ожидание. Плоские шутки — нет.</li>
+  </ul>
+  <div class="highlight"><strong>Словарь простоты (сложное → простое):</strong> оптимизировать → настроить, улучшить; имплементировать → внедрить; коммуницировать → общаться; в связи с тем что → потому что; осуществлять → делать; является → это; данный → этот. Принцип, а не список: любое умное слово переведи на язык живого разговора.</div>
+
+  <h2 class="section-heading"><span>09.</span> Библиотека <em>хуков</em> для обложки</h2>
+  <p class="text">12 типов — выбери под тему и адаптируй под нишу. Хук связан с главной мыслью, а не случайный.</p>
+  <div class="hook"><div class="hook__label">Хук 01</div><div class="hook__title">Контр-тезис против мейнстрима</div><div class="hook__example">«Всё, что тебе говорили про [X], — работает наоборот»</div></div>
+  <div class="hook"><div class="hook__label">Хук 02</div><div class="hook__title">Большинство делает X — и проигрывает</div><div class="hook__example">«[Привычное действие] — главная причина твоего [плохого результата]»</div></div>
+  <div class="hook"><div class="hook__label">Хук 03</div><div class="hook__title">Скрытое знание профи</div><div class="hook__example">«Никто в [нише] не скажет это вслух, но…»</div></div>
+  <div class="hook"><div class="hook__label">Хук 04</div><div class="hook__title">Дорогая ошибка</div><div class="hook__example">«Одна ошибка в [X] стоит тебе [последствие] — и ты повторяешь её каждый день»</div></div>
+  <div class="hook"><div class="hook__label">Хук 05</div><div class="hook__title">Разрушение мифа</div><div class="hook__example">«“[Популярный совет]” — это миф. И вот почему он не работает»</div></div>
+  <div class="hook"><div class="hook__label">Хук 06</div><div class="hook__title">Парадокс ниши</div><div class="hook__example">«Чем больше [усилие], тем хуже [результат]»</div></div>
+  <div class="hook"><div class="hook__label">Хук 07</div><div class="hook__title">Цифра-инсайт</div><div class="hook__example">«[N]% людей в [теме] не знают одну вещь про [X]»</div></div>
+  <div class="hook"><div class="hook__label">Хук 08</div><div class="hook__title">Реврейм причины</div><div class="hook__example">«Проблема не там, где ты её ищешь» — покажи неочевидную причину</div></div>
+  <div class="hook"><div class="hook__label">Хук 09</div><div class="hook__title">Закулисье эксперта</div><div class="hook__example">«За [N] лет в [нише] я поняла одну вещь, которая меняет всё»</div></div>
+  <div class="hook"><div class="hook__label">Хук 10</div><div class="hook__title">Новичок vs профи</div><div class="hook__example">«Новичок делает [X]. Профи — наоборот, и вот почему»</div></div>
+  <div class="hook"><div class="hook__label">Хук 11</div><div class="hook__title">Цена бездействия</div><div class="hook__example">«Пока ты делаешь [X], незаметно происходит [последствие]»</div></div>
+  <div class="hook"><div class="hook__label">Хук 12</div><div class="hook__title">Вопрос-диагноз</div><div class="hook__example">«Если у тебя [симптом] — причина почти наверняка в [неочевидное]»</div></div>
+
+  <h2 class="section-heading"><span>10.</span> Как не выдать <em>нейросеть</em></h2>
+  <ul class="guide-list">
+    <li><strong>Не лепи цепочки длинных тире.</strong> Пиши через запятые и точки.</li>
+    <li><strong>Не злоупотребляй конструкцией «не X, а Y»</strong> — она для одного сдвига, а не в каждом слайде.</li>
+    <li><strong>Не делай идеально ровные, симметричные фразы.</strong> Живая речь неровная.</li>
+    <li><strong>Не вставляй книжное:</strong> «ведь», «однако», «таким образом», «именно поэтому».</li>
+    <li><strong>Не используй клише:</strong> «в современном мире», «давайте разберёмся», «а теперь честный вопрос», «и вот здесь начинается магия».</li>
+    <li><strong>Не делай вывод за читателя</strong> в стиле «и это говорит о том, что…».</li>
+    <li><strong>Читай слайды вслух:</strong> звучит как доклад — перепиши как объяснение подруге.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>11.</span> Запреты <em>и стоп-слова</em></h2>
+  <ul class="guide-list">
+    <li><strong>Не звучать высокомерно</strong> и не обвинять читателя напрямую («ты ленивая», «ты сама виновата»). Снимаем вину: проблема в подходе.</li>
+    <li><strong>Без нравоучений,</strong> морализаторства и манипуляции страхом ради сохранений.</li>
+    <li><strong>Никаких выдуманных фактов и цифр</strong> — только из ЦА и темы.</li>
+    <li><strong>Рисковые маркетинговые слова</strong> (деньги, бесплатно, заработок, гарантия, срочно) — вуалировать синонимами, сохраняя смысл, чтобы не ловить теневой бан.</li>
+    <li><strong>По-настоящему запрещённые темы</strong> (насилие, оружие, 18+, самоповреждение, наркотики) — не публиковать и не маскировать.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>12.</span> Формат <em>вывода</em></h2>
+  <p class="text">Перед каруселью — две строки, чтобы я видела стержень. Так выглядит готовая выдача:</p>
+  <pre class="out-sample">Главная мысль: [одно предложение]
+Бьёт в: [нерв]
+
+СЛАЙД 1 — обложка
+[крупная фраза-хук + по желанию подзаголовок]
+
+СЛАЙД 2
+[текст слайда]
+
+СЛАЙД 3
+[текст слайда]
+
+…
+
+СЛАЙД N — призыв
+[нативный CTA + кодовое слово, если нужно]
+
+ПОДПИСЬ ПОД ПОСТОМ:
+[короткий текст-усилитель + призыв + 3–5 хэштегов]
+
+— Тип хука обложки: [какой из библиотеки]
+— Что усилит карусель: [какой пример или цифру добавить]</pre>
+
+  <h2 class="section-heading"><span>13.</span> Дизайн слайдов: <em>тёплый минимал</em></h2>
+  <p class="text">В промпт зашит и дизайн: по запросу «сделай картинки» он рендерит 9 готовых слайдов 1080×1350 — serif-заголовки, бежевые врезки, один коричневый акцент, квадратные углы. Без логотипов и чужого брендинга: в навбаре только твой ник.</p>
+  <div class="palette">
+    <div class="palette__chip"><div class="palette__color" style="background:#1a1a1a"></div><div class="palette__label">#1A1A1A · текст</div></div>
+    <div class="palette__chip"><div class="palette__color" style="background:#444444"></div><div class="palette__label">#444 · тело</div></div>
+    <div class="palette__chip"><div class="palette__color" style="background:#6E543F"></div><div class="palette__label">#6E543F · акцент</div></div>
+    <div class="palette__chip"><div class="palette__color" style="background:#F3EEE7"></div><div class="palette__label">#F3EEE7 · врезки</div></div>
+    <div class="palette__chip"><div class="palette__color" style="background:#E7E0D6"></div><div class="palette__label">#E7E0D6 · линии</div></div>
+    <div class="palette__chip"><div class="palette__color" style="background:#ffffff"></div><div class="palette__label">#FFF · фон</div></div>
+  </div>
+  <div class="highlight"><strong>Важно:</strong> код дизайна запускается дословно — нейросеть не «улучшает» стили от себя, поэтому слайды всегда выходят одинаково аккуратными, пиксель в пиксель.</div>
+
+  <h2 class="section-heading"><span>14.</span> Куда <em>вставлять</em></h2>
+  <p class="text">Допиши в конце, перед отправкой:</p>
+  <div class="prompt-box">
+    <div class="prompt-box__title">Шаблон для заполнения</div>
+    <div class="prompt-box__subtitle">Копируй → Заполняй → Отправляй вместе с промптом</div>
+    <pre class="cmd-pre" id="tplText">Анализ ЦА — уже в проекте.
+
+ТЕМА (Режим 2): [назови тему карусели]
+
+— или —
+
+СПАРСЕННЫЕ ТЕМЫ (Режим 1): [вставь список тем]
+
+ОФФЕР И КОДОВОЕ СЛОВО (если нужен призыв):
+[что предлагаешь + слово для комментария]</pre>
+    <button class="copy-btn copy-btn--ghost" onclick="copyTpl()">Скопировать шаблон</button><span class="copy-hint" id="tplHint"></span>
+  </div>
+
+  <p class="footer-note">Останови обложкой, веди свайпом, <em>отпусти выводом</em>.</p>
+
+</div>
+
+<footer class="footer">
+  © 2026 · maysoulme · Промпт для постов-каруселей
+  <div class="tiny">Аудиторию берёт из анализа ЦА в проекте. Тему — списком спарсенных тем или одной фразой. Факты и цифры — только из твоих данных.</div>
+</footer>
+
+<script>
+function doCopy(text, hintId) {
+  navigator.clipboard.writeText(text).then(function () {
+    var h = document.getElementById(hintId);
+    h.textContent = 'Скопировано ✓';
+    setTimeout(function () { h.textContent = ''; }, 2500);
+  }).catch(function () {
+    document.getElementById(hintId).textContent = 'Не получилось — выдели текст и скопируй вручную';
+  });
+}
+function copySkill() { doCopy(document.getElementById('skillText').textContent, 'skillHint'); }
+function copyTpl() { doCopy(document.getElementById('tplText').textContent, 'tplHint'); }
+</script>
+
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

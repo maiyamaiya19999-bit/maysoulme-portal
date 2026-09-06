@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Промпт правды: как отучить ChatGPT, Claude и Gemini уверенно выдумывать. Готовый промпт + 4 техники проверки.">
+  <title>Промпт правды: как отучить ИИ выдумывать — maysoulme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: #888; letter-spacing: 0.5px;
+  margin-left: auto;
+}
+
+/* Container */
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero */
+.hero { padding: 60px 0 48px; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+/* Intro */
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 48px; }
+
+/* Section heading */
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-weight: 700; line-height: 1.3;
+  padding: 56px 0 24px; border-top: 1px solid #e8e8e8;
+}
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+
+/* Highlight block */
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+
+/* Sub heading */
+.sub-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; padding: 36px 0 16px; }
+
+/* Text */
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+
+/* List */
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li {
+  font-size: 16px; line-height: 1.75; color: #444;
+  padding: 8px 0 8px 20px; position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 16px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: #1a1a1a; }
+
+/* Headline list (нумерованный) */
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0; align-items: baseline;
+}
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 15px;
+  color: var(--accent); min-width: 28px; flex-shrink: 0;
+}
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+
+/* Prompt box */
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; position: relative; }
+.copy-btn {
+  display: inline-block; font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent); background: #fff; border: 1px solid var(--accent);
+  padding: 8px 20px; margin-top: 20px; cursor: pointer; border-radius: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.copy-btn:hover { background: var(--accent); color: #fff; }
+.copy-btn.copied { background: var(--accent); color: #fff; }
+.prompt-box__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--accent); margin-bottom: 6px;
+}
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text { font-size: 15px; line-height: 1.8; color: #444; }
+
+/* Scenario / step card */
+.scenario-card { border: 1px solid #e8e8e8; padding: 32px; margin: 24px 0; background: #f9f9f9; }
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 14px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 8px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;
+}
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__ending {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: #1a1a1a;
+  padding-top: 16px; margin-top: 16px; border-top: 1px solid #e0e0e0;
+}
+.scenario-card__tip {
+  background: #f0f0f0; padding: 14px 18px; margin-top: 16px;
+  font-size: 14px; color: #555; line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 64px 24px;
+  border-top: 1px solid #e8e8e8; margin-top: 64px;
+  color: #999; font-size: 14px;
+}
+.footer .tiny {
+  font-size: 12.5px; color: #bbb; max-width: 52ch;
+  margin: 12px auto 0; line-height: 1.6; letter-spacing: 0;
+}
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-style: italic; color: #444;
+  text-align: center; padding: 48px 24px 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .hero h1 { font-size: 28px; }
+  .section-heading { font-size: 24px; }
+  .scenario-card { padding: 20px; }
+  .prompt-box { padding: 24px; }
+}
+  </style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Промпт правды">
+<meta property="og:description" content="Как отучить ИИ выдумывать и заставить его признаваться, когда он не знает ответа.">
+<meta property="og:url" content="https://maysoulme.ru/guides/promt-pravdy/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">Гайд</div>
+    <h1>Промпт правды: как отучить ИИ <em>уверенно выдумывать</em></h1>
+    <p class="hero__desc">Готовый промпт, который заставляет ChatGPT, Claude и Gemini признаваться «я не уверен» вместо того, чтобы сочинять. Плюс четыре техники проверки, когда цена ошибки высокая.</p>
+    <p class="hero__meta">ChatGPT &middot; Claude &middot; Gemini &middot; 5 минут на настройку</p>
+  </div>
+
+  <p class="intro-bold">ИИ не врёт специально. Он натренирован звучать полезно — а не быть правым.</p>
+  <p class="intro-text">Когда модель не знает ответа, она не молчит. Она генерирует то, что <em>похоже</em> на ответ: уверенный тон, гладкие формулировки, правдоподобные цифры. Так рождаются несуществующая статистика, выдуманные цитаты и ссылки на статьи, которых никто не писал. Это называется галлюцинациями — и если ты берёшь цифры из ИИ в свои посты, воронки или работу с клиентами, это самая дорогая ошибка из всех возможных. Ниже — промпт, который делает эти ошибки видимыми, и техники проверки на случаи, когда «скорее всего верно» — недостаточно.</p>
+
+  <h2 class="section-heading"><span>01.</span> Почему ИИ <em>выдумывает</em></h2>
+  <p class="text">Языковая модель не «знает» факты — она предсказывает, какое слово вероятнее всего идёт следующим. Поэтому для неё нет разницы между «я помню это из надёжного источника» и «это звучит правдоподобно». Уверенность в тоне ответа ничего не говорит о том, правда это или нет.</p>
+  <ul class="guide-list">
+    <li><strong>Цифры и статистика.</strong> Модель легко «вспоминает» исследование с точными процентами, которого не существует.</li>
+    <li><strong>Цитаты.</strong> Приписывает известным людям слова, которых они не говорили — но звучит это очень в их духе.</li>
+    <li><strong>Ссылки.</strong> Генерирует URL и названия статей, которые выглядят настоящими, но ведут в никуда.</li>
+  </ul>
+  <div class="highlight"><strong>Важно:</strong> галлюцинации — не баг, который скоро починят. Это свойство того, как устроены языковые модели. Значит, защита — на твоей стороне.</div>
+
+  <h2 class="section-heading"><span>02.</span> Сам <em>промпт правды</em></h2>
+  <p class="text">Три правила, которые меняют поведение модели в момент неуверенности: вместо «сгенерировать что-то похожее на ответ» — признаться, оценить себя и показать источники.</p>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Промпт правды</div>
+    <div class="prompt-box__subtitle">Копируй → Вставляй → Используй</div>
+    <p class="prompt-box__text" id="prompt-main">С этого момента отвечай по трём правилам.<br><br>
+    Правило 1. Если ты не уверен в ответе — прямо скажи «я не уверен» и объясни почему. Никогда не угадывай и не выдавай предположение за факт.<br><br>
+    Правило 2. После каждого ответа оцени свою уверенность по шкале от 1 до 10. Всё, что ниже 7 — отдельно пометь и объясни, что именно под сомнением.<br><br>
+    Правило 3. Для любых цифр, статистики, цитат и утверждений о людях указывай проверяемый источник. Если источника нет — так и пиши: «подтвердить источником не могу».</p>
+    <button class="copy-btn" data-copy="prompt-main">Скопировать промпт</button>
+  </div>
+
+  <h2 class="section-heading"><span>03.</span> Куда вставить, чтобы работал <em>всегда</em></h2>
+  <p class="text">Можно вставлять промпт в начало каждого чата вручную. А можно настроить один раз — и он будет срабатывать в каждой новой сессии автоматически. Настройка занимает минуту.</p>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">ШАГ 01</div>
+    <div class="scenario-card__title">ChatGPT</div>
+    <div class="scenario-card__point">
+      <span class="scenario-card__point-label">Путь.</span>
+      <span class="scenario-card__point-text"> Настройки → Персонализация → Пользовательские инструкции (Custom Instructions). Вставь промпт в поле «Как ChatGPT должен отвечать».</span>
+    </div>
+    <div class="scenario-card__tip"><strong>Совет:</strong> в кастомных GPT промпт вставляется в поле Instructions — тогда правила будут работать для всех, кто пользуется твоим GPT.</div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">ШАГ 02</div>
+    <div class="scenario-card__title">Claude</div>
+    <div class="scenario-card__point">
+      <span class="scenario-card__point-label">Путь.</span>
+      <span class="scenario-card__point-text"> Создай проект (Projects) и вставь промпт в инструкции проекта. Все чаты внутри проекта будут следовать правилам автоматически.</span>
+    </div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">ШАГ 03</div>
+    <div class="scenario-card__title">Gemini</div>
+    <div class="scenario-card__point">
+      <span class="scenario-card__point-label">Путь.</span>
+      <span class="scenario-card__point-text"> Создай своего gem и вставь промпт в его инструкции — или добавь в сохранённую информацию (Saved Info).</span>
+    </div>
+    <div class="scenario-card__ending">Одна минута настройки — и правила работают в каждом чате без напоминаний.</div>
+  </div>
+
+  <h2 class="section-heading"><span>04.</span> Четыре техники проверки, когда <em>цена ошибки высокая</em></h2>
+  <p class="text">Промпт правды — это первый фильтр. Когда ответ пойдёт в пост на большую аудиторию, в работу с клиентом или в важное решение, прогони его через одну-две техники ниже.</p>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Техника 1. Обратный промптинг</div>
+    <div class="prompt-box__subtitle">Показывает, какие пробелы модель заполнила сама</div>
+    <p class="prompt-box__text" id="prompt-t1">Перечисли все допущения, на которые ты опирался в этом ответе. Отдельно выдели те, которые ты не можешь подтвердить.</p>
+    <button class="copy-btn" data-copy="prompt-t1">Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Техника 2. Спор с самим собой</div>
+    <div class="prompt-box__subtitle">Модель ищет ошибки в собственном ответе</div>
+    <p class="prompt-box__text" id="prompt-t2">Теперь поспорь со своим ответом. Где он может быть неверным? Перечисли возможные ошибки и риски, если я буду опираться на этот ответ.</p>
+    <button class="copy-btn" data-copy="prompt-t2">Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Техника 3. Таблица утверждений</div>
+    <div class="prompt-box__subtitle">Слабые места становятся видимыми</div>
+    <p class="prompt-box__text" id="prompt-t3">Разложи свой ответ в таблицу с колонками: утверждение → доказательство → уверенность (1–10) → риск, если это неправда.</p>
+    <button class="copy-btn" data-copy="prompt-t3">Скопировать промпт</button>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-box__title">Техника 4. Привязка к источнику</div>
+    <div class="prompt-box__subtitle">Ответ из конкретного материала, а не из общих представлений</div>
+    <p class="prompt-box__text" id="prompt-t4">Отвечай строго согласно [вставь источник: статья, книга, документ]. Если в этом источнике нет ответа — так и скажи, не дополняй из других знаний.</p>
+    <button class="copy-btn" data-copy="prompt-t4">Скопировать промпт</button>
+  </div>
+
+  <h2 class="section-heading"><span>05.</span> Три железных <em>правила</em></h2>
+  <ul class="guide-list">
+    <li><strong>Ни одна цифра из ИИ не уходит в работу без проверки.</strong> Ни в пост, ни в презентацию, ни клиенту.</li>
+    <li><strong>Ссылки и цитаты от ИИ — предположения, а не подтверждения.</strong> Открой и проверь, что источник существует и говорит именно это.</li>
+    <li><strong>Важное утверждение проверяет человек.</strong> Прежде чем оно попадёт к аудитории — глазами, а не «на доверии».</li>
+  </ul>
+
+  <div class="highlight"><strong>Честно про ограничения:</strong> промпт правды делает ошибки заметнее и реже, но не убирает их полностью. Модель всё ещё может неточно оценить собственную уверенность. Это ремень безопасности, а не автопилот.</div>
+
+</div>
+
+<p class="footer-note">Уверенный тон — не то же самое, <em>что правда.</em></p>
+<div class="footer">
+  © 2026 · maysoulme · Все права защищены
+  <div class="tiny">Гайд подготовлен по мотивам «The Truth Prompt» Маверика Малтина (mavgpt.ai), переведён и адаптирован для русскоязычных нейросетей и форматов.</div>
+</div>
+
+<script>
+document.querySelectorAll('.copy-btn').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    var el = document.getElementById(btn.getAttribute('data-copy'));
+    var text = el.innerText.replace(/\n{3,}/g, '\n\n').trim();
+    function done() {
+      var old = btn.textContent;
+      btn.textContent = 'Скопировано ✓';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = old; btn.classList.remove('copied'); }, 2000);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done);
+    } else {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      done();
+    }
+  });
+});
+</script>
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

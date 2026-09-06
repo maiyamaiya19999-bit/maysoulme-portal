@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Распаковка личности для блога — maysoulme</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: #888; letter-spacing: 0.5px;
+  margin-left: auto;
+}
+
+/* Container */
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero */
+.hero { padding: 60px 0 48px; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+/* Intro */
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 48px; }
+
+/* Section heading */
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-weight: 700; line-height: 1.3;
+  padding: 56px 0 24px; border-top: 1px solid #e8e8e8;
+}
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+
+/* Highlight block */
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+
+/* Sub heading */
+.sub-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; padding: 36px 0 16px; }
+
+/* Text */
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+
+/* List */
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li {
+  font-size: 16px; line-height: 1.75; color: #444;
+  padding: 8px 0 8px 20px; position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 16px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: #1a1a1a; }
+
+/* Headline list (нумерованный) */
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0; align-items: baseline;
+}
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 15px;
+  color: var(--accent); min-width: 28px; flex-shrink: 0;
+}
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+
+/* Prompt box */
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; }
+.prompt-box__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--accent); margin-bottom: 6px;
+}
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text { font-size: 15px; line-height: 1.8; color: #444; }
+
+/* Scenario / step card */
+.scenario-card { border: 1px solid #e8e8e8; padding: 32px; margin: 24px 0; background: #f9f9f9; }
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 14px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 8px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;
+}
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__ending {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: #1a1a1a;
+  padding-top: 16px; margin-top: 16px; border-top: 1px solid #e0e0e0;
+}
+.scenario-card__tip {
+  background: #f0f0f0; padding: 14px 18px; margin-top: 16px;
+  font-size: 14px; color: #555; line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 64px 24px;
+  border-top: 1px solid #e8e8e8; margin-top: 64px;
+  color: #999; font-size: 14px;
+}
+.footer .tiny {
+  font-size: 12.5px; color: #bbb; max-width: 52ch;
+  margin: 12px auto 0; line-height: 1.6; letter-spacing: 0;
+}
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-style: italic; color: #444;
+  text-align: center; padding: 48px 24px 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* Copy button */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 14px 28px; margin-top: 28px;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.copy-btn:hover { opacity: 0.85; }
+.copy-btn.copied { background: #1a1a1a; border-color: #1a1a1a; }
+.copy-btn__hint { display: block; font-size: 13px; color: #999; margin-top: 10px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .hero h1 { font-size: 28px; }
+  .section-heading { font-size: 24px; }
+  .scenario-card { padding: 20px; }
+  .prompt-box { padding: 24px; }
+}
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Распаковка личности для блога">
+<meta property="og:description" content="Вопросы, которые вытаскивают из тебя смыслы, истории и голос — всё, чтобы вести блог и научить ассистентов говорить как ты.">
+<meta property="og:url" content="https://maysoulme.ru/guides/raspakovka-lichnosti/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">Распаковка</div>
+    <h1>Распаковка <em>личности</em> для блога</h1>
+    <p class="hero__desc">Вопросы, которые вытаскивают из тебя смыслы, истории и голос — всё, что нужно, чтобы вести блог и научить ИИ-ассистентов говорить от твоего лица.</p>
+    <p class="hero__meta">Личность &middot; Контент &middot; ИИ-ассистенты</p>
+    <button class="copy-btn" id="copyAllBtn" onclick="copyAllText()">Скопировать весь промпт</button>
+    <span class="copy-btn__hint">Одна кнопка — весь текст в буфере. Вставь его в Claude и добавь свой материал.</span>
+  </div>
+
+  <p class="intro-bold">Как использовать.</p>
+  <p class="intro-text">Чем честнее и подробнее ответы — тем точнее тебя поймут и люди, и нейросети. Отвечай так, будто рассказываешь близкому человеку: с историями, деталями, цифрами, именами и эмоциями. Сухое «я коуч» не работает — нужна атмосфера, контекст и то, что чувствовалось внутри. Документ состоит из трёх частей: глубокая распаковка (один раз), дозаполнение по сферам жизни и дозаполнение самой распаковки (регулярно — раз в 2 недели или раз в месяц).</p>
+
+  <div class="highlight"><strong>Часть I · Глубокая распаковка.</strong> Проходится один раз, вдумчиво. Это фундамент: то, на чём будет стоять весь твой блог и понимание тебя ассистентами.</div>
+
+  <h2 class="section-heading"><span>01.</span> Профилирование и <em>фокус</em></h2>
+  <p class="text">С этого начинается всё — эти ответы задают оптику для остальных блоков.</p>
+  <ul class="guide-list">
+    <li><strong>На какой платформе и в каком формате ты ведёшь блог сейчас?</strong> (Reels, сторис, Telegram, длинные посты, видео)</li>
+    <li><strong>Какая у тебя аудитория?</strong> Возраст, пол, чем живут, на каком языке говорят, в какой точке находятся.</li>
+    <li><strong>Какого результата ты хочешь от блога в ближайшие 3–6 месяцев?</strong> (узнаваемость, доверие, подписчики, продажи, конкретные суммы)</li>
+    <li><strong>О чём этот блог по сути</strong> — про тебя, про нишу, про трансформацию аудитории? Что человек должен почувствовать после твоего контента?</li>
+    <li><strong>Какие темы ты НЕ готова выносить публично ни при каких условиях?</strong> Где проходит твоя граница?</li>
+    <li><strong>Чьи блоги и распаковки тебя зацепили?</strong> Что именно в них сработало на тебе — и что бы ты точно не стала повторять?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>02.</span> Кто ты: <em>идентичность</em> и суть</h2>
+  <ul class="guide-list">
+    <li><strong>Имя или псевдоним, под которым тебя знают.</strong> Как тебе комфортно, чтобы к тебе обращались?</li>
+    <li><strong>Закончи фразу «Я — …»</strong> так, чтобы за 5 секунд стало понятно, кто ты и зачем ты.</li>
+    <li><strong>Если бы тебя представляли на большой сцене или в подкасте</strong> — что должны сказать, чтобы зал захотел слушать именно тебя?</li>
+    <li><strong>Какую роль ты играешь для своей аудитории:</strong> проводник, пример, бунтарь, старшая подруга, эксперт-практик? Почему именно эту?</li>
+    <li><strong>Если убрать профессию и регалии</strong> — кто ты как человек, в одном абзаце?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>03.</span> Путь: было <em>&rarr; стало</em></h2>
+  <p class="text">Контраст «было / стало» — топливо сильного контента. Рассказывай сценами, а не тезисами.</p>
+  <ul class="guide-list">
+    <li><strong>Откуда ты пришла?</strong> С какой точки стартовала — географически, финансово, по состоянию?</li>
+    <li><strong>Какие 2–3 события сделали тебя той, кто ты есть сейчас?</strong> Опиши каждое как сцену: где, когда, кто рядом, что чувствовала.</li>
+    <li><strong>Был ли момент «дна» или сильного удара, который всё развернул?</strong> Что именно произошло и каким был твой первый шаг из него?</li>
+    <li><strong>Какой ты была 5 лет назад и какая ты сейчас</strong> — по мышлению, деньгам, внешности, окружению, ощущению себя?</li>
+    <li><strong>От какой версии себя ты отказалась?</strong> Что в старом «я» было ложным или чужим?</li>
+    <li><strong>Какую цену ты заплатила за изменения</strong> — что или кого потеряла? И что получила взамен? По возможности — цифры и факты.</li>
+    <li><strong>Какой навык или какое решение изменили твою жизнь сильнее всего?</strong></li>
+  </ul>
+  <div class="highlight"><strong>Копай глубже по каждому ответу:</strong> что стало триггером перемен; кто в тебя не верил и что говорил; сколько времени заняла трансформация; какие ошибки ты совершала по пути.</div>
+
+  <h2 class="section-heading"><span>04.</span> Крючки, конфликты, <em>драма</em></h2>
+  <p class="text">Ищем то, что невозможно пролистать: предательство, несправедливость, борьбу с системой, защиту близких.</p>
+  <ul class="guide-list">
+    <li><strong>Самое радикальное решение за последние 5 лет</strong> — и что было на кону, когда ты его принимала?</li>
+    <li><strong>Против чего или кого тебе пришлось пойти?</strong> (семья, среда, ожидания, стереотипы, система)</li>
+    <li><strong>История, когда ты сильнее всего разочаровалась в людях.</strong> Конкретно: кто, что произошло, чем закончилось.</li>
+    <li><strong>Какое твоё мнение вызывает споры и несогласие?</strong> Почему ты всё равно в это веришь?</li>
+    <li><strong>Что ты делала, когда было совсем плохо?</strong> (долги, выгорание, потеря, крах)</li>
+    <li><strong>Какая несправедливость по отношению к тебе или близким до сих пор тебя злит?</strong></li>
+  </ul>
+  <div class="highlight"><strong>Копай глубже:</strong> кто был против и что говорил; как это ударило по отношениям с близкими; какой был самый страшный момент; жалеешь ли ты об этом сейчас.</div>
+
+  <h2 class="section-heading"><span>05.</span> Дело, продукты и <em>метод</em></h2>
+  <ul class="guide-list">
+    <li><strong>Опиши, чем ты занимаешься,</strong> так, чтобы поняла даже подруга вне твоей ниши.</li>
+    <li><strong>Какие у тебя продукты и услуги?</strong> Для каждого: суть, для кого, какой результат обещаешь, сколько стоит.</li>
+    <li><strong>В чём уникальность твоего метода и подхода?</strong> Что ты делаешь иначе, чем все в нише?</li>
+    <li><strong>Какие результаты получают твои люди?</strong> Назови 2–3 кейса: точка А, что делали, точка Б, цифры.</li>
+    <li><strong>Что в своей работе ты считаешь «несправедливым преимуществом»</strong> — тем, что почти невозможно скопировать?</li>
+    <li><strong>Образование, обучения, опыт, регалии</strong> — что реально стоит за твоей экспертностью?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>06.</span> Аудитория и её <em>боли</em></h2>
+  <ul class="guide-list">
+    <li><strong>Кто твой человек?</strong> Опиши конкретного представителя: возраст, как живёт, как проходит его день, что в голове.</li>
+    <li><strong>С какой болью или запросом он к тебе приходит?</strong> Какими словами он сам описывает свою проблему в директе?</li>
+    <li><strong>Чего он хочет на самом деле — за поверхностным запросом?</strong> (статус, спокойствие, любовь, свобода, признание)</li>
+    <li><strong>Чего он боится, чего стыдится, о чём не говорит вслух?</strong></li>
+    <li><strong>Что он уже пробовал</strong> — и почему это не сработало?</li>
+    <li><strong>Почему он выбирает именно тебя, а не сотню похожих?</strong> Что он чувствует рядом с тобой?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>07.</span> Уязвимости и <em>откровения</em></h2>
+  <p class="text">То, что делает тебя живой и близкой. Откровения, в которых читатель узнаёт себя.</p>
+  <ul class="guide-list">
+    <li><strong>Какую правду о себе знают только самые близкие?</strong></li>
+    <li><strong>Чего ты боишься больше всего</strong> — и откуда этот страх?</li>
+    <li><strong>В каком своём лицемерии ты честно себе признаёшься?</strong> (говорю одно — делаю другое)</li>
+    <li><strong>Когда ты в последний раз плакала и почему?</strong></li>
+    <li><strong>Какую ошибку ты повторяешь снова и снова,</strong> хотя всё про неё понимаешь?</li>
+    <li><strong>Кого ты потеряла из-за своих решений?</strong> С кем из прошлого хотела бы поговорить и что бы сказала?</li>
+    <li><strong>От чего ты готова отказаться ради своей цели</strong> — а от чего не откажешься никогда?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>08.</span> Голос и <em>манера речи</em></h2>
+  <p class="text">Это сердце контент-ассистентов. Именно отсюда нейросеть берёт, как звучать как ты — а не как очередная нейросеть. Чем точнее ответишь, тем меньше потом будешь переписывать тексты.</p>
+  <ul class="guide-list">
+    <li><strong>Как ты говоришь со своей аудиторией?</strong> На «ты» или на «вы»? Мягко, дерзко, иронично, прямо, тепло?</li>
+    <li><strong>Какие слова, выражения, словечки — твои фирменные?</strong> А какие слова ты НИКОГДА не используешь, потому что это не ты?</li>
+    <li><strong>Напиши 3–5 фраз ровно так, как ты бы написала их в блоге</strong> — своим живым языком.</li>
+    <li><strong>Как ты шутишь?</strong> Над чем можно смеяться, а что для тебя не предмет шуток?</li>
+    <li><strong>Сколько в твоих текстах эмодзи, сленга, заглавных букв, многоточий, длинных и коротких фраз?</strong> Где твоя мера?</li>
+    <li><strong>На кого ты точно НЕ хочешь быть похожей по подаче?</strong> Что в чужой манере тебя отталкивает?</li>
+    <li><strong>Какие темы ты подаёшь жёстко и без компромиссов,</strong> а какие — бережно и мягко?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>09.</span> Контент-ДНК: темы и <em>форматы</em></h2>
+  <ul class="guide-list">
+    <li><strong>О чём ты можешь говорить бесконечно?</strong> Назови 3–5 своих «вечных» тем — это твои контент-столпы.</li>
+    <li><strong>Какие смыслы и идеи ты хочешь, чтобы закрепились именно за тобой?</strong></li>
+    <li><strong>Чего аудитория ждёт именно от тебя?</strong> За чем к тебе возвращаются?</li>
+    <li><strong>Какие форматы тебе в кайф, а какие нет?</strong> (говорящая голова, текст, сторителлинг, разборы, лайфстайл, закулисье)</li>
+    <li><strong>Какие темы в нише тебе уже надоели</strong> и о чём ты хочешь сказать по-своему или поспорить?</li>
+    <li><strong>Что в своей жизни и работе ты пока НЕ показываешь, но могла бы</strong> — и это было бы сильно?</li>
+    <li><strong>Какие 3 поста или Reels о тебе человек должен увидеть,</strong> чтобы понять про тебя всё?</li>
+  </ul>
+
+  <h2 class="section-heading"><span>10.</span> Убеждения, ценности, <em>миссия</em></h2>
+  <ul class="guide-list">
+    <li><strong>Какое твоё убеждение большинство считает неправильным</strong> — и почему ты не меняешь позицию?</li>
+    <li><strong>Какие ценности ты несёшь как человек и как эксперт?</strong> Во что веришь по-настоящему?</li>
+    <li><strong>Кем ты точно никогда не станешь?</strong> Что в этом для тебя неприемлемо?</li>
+    <li><strong>Какую цель ты себе ставишь, которая другим кажется нереальной?</strong></li>
+    <li><strong>Что ты будешь делать, когда добьёшься всего,</strong> о чём мечтаешь сейчас?</li>
+    <li><strong>Если бы ты могла оставить миру три ключевые идеи</strong> — какими бы они были?</li>
+    <li><strong>Ради чего ты на самом деле всё это делаешь?</strong> Твоё настоящее «зачем» — глубже денег.</li>
+  </ul>
+
+  <h2 class="section-heading"><span>11.</span> Детали и <em>«живой человек»</em></h2>
+  <ul class="guide-list">
+    <li><strong>3 факта о себе,</strong> которые удивят даже близких друзей.</li>
+    <li><strong>Самый безумный поступок в твоей жизни</strong> — и его последствия.</li>
+    <li><strong>Странная привычка или ритуал,</strong> который другие не понимают.</li>
+    <li><strong>Чем ты увлекалась в детстве</strong> — и как это влияет на тебя сейчас?</li>
+    <li><strong>Что ты собираешь, изучаешь или любишь просто так,</strong> без всякой пользы?</li>
+    <li><strong>Любимые фразы, цитаты и принципы,</strong> которые тебя отражают.</li>
+    <li><strong>3–5 фактов о тебе вне работы,</strong> которые делают тебя тобой.</li>
+  </ul>
+  <div class="highlight"><strong>Всегда уточняй конкретику:</strong> точные цифры (доходы, потери, достижения); географию (где это было); сроки и возраст (когда, сколько длилось); имена и роли (кто был рядом, кто против).</div>
+
+  <h2 class="section-heading"><span>12.</span> Дозаполнение <em>по сферам</em></h2>
+  <div class="highlight"><strong>Часть II · Раз в 2 недели или раз в месяц.</strong> Это свежая картина твоей жизни — чтобы у ассистентов всегда была актуальная информация и новые поводы для контента. По каждой сфере коротко: что произошло, что почувствовала, что из этого можно показать аудитории.</div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 01</div>
+    <div class="scenario-card__title">Дело и проекты</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что ты запускала, делала, меняла за этот период?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие победы, провалы и инсайты случились в работе?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что нового появилось в продуктах, услугах, командах?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 02</div>
+    <div class="scenario-card__title">Деньги и результаты</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что произошло с доходом? Крупные покупки, вложения, финансовые решения?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Новые цифры и кейсы — твои и твоих учеников.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой финансовый урок ты вынесла за этот период?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 03</div>
+    <div class="scenario-card__title">Обучение и рост</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что ты изучала, у кого училась, какой навык прокачала?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что нового поняла про себя, нишу или мир?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какая идея или мысль изменила твой взгляд?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 04</div>
+    <div class="scenario-card__title">Тело и состояние</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что происходило с телом, здоровьем, спортом, практиками?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Как менялись твоя энергия и самочувствие?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что поменялось в отношениях с собственным телом?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 05</div>
+    <div class="scenario-card__title">Отношения и окружение</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что нового с партнёром, семьёй, друзьями, командой?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Кто появился в твоей жизни, а кто ушёл?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой разговор или человек зацепил тебя за этот период?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 06</div>
+    <div class="scenario-card__title">Внутреннее и эмоции</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что ты проживала эмоционально? Какие состояния были сильными?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие страхи, радости или сложности всплывали — и что помогло?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что ты поняла про себя через эти эмоции?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 07</div>
+    <div class="scenario-card__title">События и путешествия</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Где ты была, что произошло яркого?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие встречи, места и впечатления запомнились?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что из этого просится в контент?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">СФЕРА 08</div>
+    <div class="scenario-card__title">Вход: что тебя питает</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие книги, фильмы, музыка повлияли на тебя за этот период?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие разговоры, мысли или идеи зацепили и остались с тобой?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что ты теперь думаешь иначе благодаря этому?</span></div>
+  </div>
+
+  <h2 class="section-heading"><span>13.</span> Дозаполнение <em>распаковки</em></h2>
+  <div class="highlight"><strong>Часть III · Раз в 2 недели или раз в месяц.</strong> Здесь ты добавляешь новый «контентный материал», чтобы распаковка не устаревала: свежие истории, сдвиги в позиционировании, новое в деле и в голосе.</div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 01</div>
+    <div class="scenario-card__title">Новые истории и инсайты</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какая история за этот период просится в контент?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой инсайт изменил твой взгляд на себя или на дело?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Был ли новый конфликт, спор или драма, которые тебя задели?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 02</div>
+    <div class="scenario-card__title">Сдвиги в позиционировании</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Изменилось ли то, как ты себя описываешь и представляешь?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Появилась новая роль, тема или убеждение?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">От чего в старом позиционировании ты отказалась?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 03</div>
+    <div class="scenario-card__title">Новое в деле и продуктах</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Новые продукты, форматы работы, методики, кейсы, цифры.</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что сработало, а что — нет, и почему?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какое «несправедливое преимущество» ты у себя обнаружила?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 04</div>
+    <div class="scenario-card__title">Контент и аудитория</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какой контент зашёл лучше всего за этот период — и почему, как тебе кажется?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что спрашивает и пишет аудитория? Какие новые боли всплыли?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какая тема неожиданно вызвала отклик?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 05</div>
+    <div class="scenario-card__title">Голос и фишки</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Появились новые словечки, шутки, форматы подачи?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что изменилось в твоей манере говорить с аудиторией?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Какие фразы стали твоими новыми «фирменными»?</span></div>
+  </div>
+
+  <div class="scenario-card">
+    <div class="scenario-card__num">БЛОК 06</div>
+    <div class="scenario-card__title">Цели и состояние</div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что сейчас для тебя по-настоящему важно?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Что изменилось в твоих целях и в твоём «зачем»?</span></div>
+    <div class="scenario-card__point"><span class="scenario-card__point-text">Куда ты хочешь двигаться дальше?</span></div>
+  </div>
+
+  <p class="footer-note">Чем живее ответы — <em>тем сильнее твой блог.</em></p>
+
+  <div class="footer">
+    © 2026 · maysoulme · Распаковка личности
+    <div class="tiny">Документ для личного использования и обучения ИИ-ассистентов по контенту.</div>
+  </div>
+
+</div>
+
+<script>
+function copyAllText() {
+  var btn = document.getElementById('copyAllBtn');
+  var hint = document.querySelector('.copy-btn__hint');
+  var container = document.querySelector('.container');
+  btn.style.display = 'none';
+  hint.style.display = 'none';
+  var text = container.innerText.trim();
+  btn.style.display = '';
+  hint.style.display = '';
+
+  function done() {
+    btn.classList.add('copied');
+    btn.textContent = 'Скопировано ✓';
+    setTimeout(function () {
+      btn.classList.remove('copied');
+      btn.textContent = 'Скопировать весь промпт';
+    }, 2500);
+  }
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(function () { fallbackCopy(text, done); });
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+
+function fallbackCopy(text, done) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+</script>
+
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Английский за 16 часов · maysoulme</title>
+
+<!-- PWA / iPhone -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Английский">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
+
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+  padding-top: calc(16px + env(safe-area-inset-top));
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__flag { font-size: 22px; line-height: 1; margin-left: auto; }
+
+/* Container */
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+/* Hero */
+.hero { padding: 60px 0 48px; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+/* Highlight block */
+.highlight { background: #f5f5f5; padding: 20px 24px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; }
+
+/* Text */
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+
+/* Lesson list — по мотивам headline-list */
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li {
+  display: flex; gap: 16px; padding: 0;
+  border-bottom: 1px solid #f0f0f0; align-items: center;
+}
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.lesson-link {
+  display: flex; gap: 16px; align-items: center;
+  flex: 1; padding: 18px 0; text-decoration: none;
+}
+.lesson-play {
+  width: 38px; height: 38px; flex-shrink: 0;
+  background: #e60000; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+.lesson-play::before {
+  content: ''; display: block;
+  width: 0; height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 11px solid #fff;
+  margin-left: 3px;
+}
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+.lesson-sub { display: block; font-size: 13px; color: #999; font-weight: 400; letter-spacing: 0.5px; }
+.lesson-check {
+  width: 22px; height: 22px; flex-shrink: 0;
+  border: 1px solid #ccc; background: #fff;
+  cursor: pointer; padding: 0; margin-left: 8px;
+  appearance: none; -webkit-appearance: none;
+}
+.lesson-check:checked { background: var(--accent); border-color: var(--accent); }
+li.done .headline-text { color: #999; }
+
+/* Progress */
+.progress-label { font-size: 14px; color: #888; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.progress-track { height: 4px; background: #f0f0f0; margin-bottom: 40px; }
+.progress-fill { height: 4px; background: var(--accent); width: 0; transition: width 0.3s; }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 64px 24px;
+  border-top: 1px solid #e8e8e8; margin-top: 64px;
+  color: #999; font-size: 14px;
+}
+.footer .tiny {
+  font-size: 12.5px; color: #bbb; max-width: 52ch;
+  margin: 12px auto 0; line-height: 1.6; letter-spacing: 0;
+}
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-style: italic; color: #444;
+  text-align: center; padding: 48px 24px 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav { padding: 16px 20px; padding-top: calc(16px + env(safe-area-inset-top)); }
+  .hero { padding: 40px 0 32px; }
+  .hero h1 { font-size: 28px; }
+}
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Английский за 16 часов">
+<meta property="og:description" content="Система, по которой язык подтягивается за счёт нейросети, а не за счёт репетитора.">
+<meta property="og:url" content="https://maysoulme.ru/guides/anglijskij-za-16-chasov/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__flag">🇺🇸</span>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="badge">Курс</div>
+    <h1>Английский <em>за 16 часов</em></h1>
+    <p class="hero__desc">«Полиглот» с Дмитрием Петровым — легендарный курс английского с "0". Смотри уроки по порядку и отмечай пройденное.</p>
+    <p class="hero__meta">15 уроков &middot; С "0" &middot; YouTube</p>
+  </div>
+
+  <div class="progress-label">Пройдено: <span id="progress-count">0</span> из 15</div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+
+  <ol class="headline-list" id="lessons">
+    <li data-id="1"><a class="lesson-link" href="https://youtu.be/Yxdcr0Sj824" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 1<span class="lesson-sub">Базовая схема глагола</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 1 пройден"></li>
+    <li data-id="2"><a class="lesson-link" href="https://youtu.be/4RSayi1rIr4" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 2<span class="lesson-sub">Закрепление схемы времён</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 2 пройден"></li>
+    <li data-id="3"><a class="lesson-link" href="https://youtu.be/MoKADXfm0cQ" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 3<span class="lesson-sub">Вопросы и ответы</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 3 пройден"></li>
+    <li data-id="4"><a class="lesson-link" href="https://youtu.be/rAbpl6y0oTo" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 4<span class="lesson-sub">Практика и автоматизация</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 4 пройден"></li>
+    <li data-id="5"><a class="lesson-link" href="https://youtu.be/PSHZFPLJCXE" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 5<span class="lesson-sub">Разговорные конструкции</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 5 пройден"></li>
+    <li data-id="6"><a class="lesson-link" href="https://youtu.be/M4wapX2Kx9E" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 6<span class="lesson-sub">Рассказ о себе</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 6 пройден"></li>
+    <li data-id="7"><a class="lesson-link" href="https://youtu.be/unRYPSpydoA" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 7<span class="lesson-sub">Предлоги и выражения</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 7 пройден"></li>
+    <li data-id="8"><a class="lesson-link" href="https://youtu.be/8tP82fXVXO0" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 8<span class="lesson-sub">Развитие речи</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 8 пройден"></li>
+    <li data-id="9"><a class="lesson-link" href="https://youtu.be/UrPTnA6Z91g" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 9<span class="lesson-sub">Новые конструкции</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 9 пройден"></li>
+    <li data-id="10"><a class="lesson-link" href="https://youtu.be/6vmP8cx0C7M" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 10<span class="lesson-sub">Диалоги и практика</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 10 пройден"></li>
+    <li data-id="11"><a class="lesson-link" href="https://youtu.be/BKxhTuQUb_4" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 11<span class="lesson-sub">Расширение словаря</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 11 пройден"></li>
+    <li data-id="12"><a class="lesson-link" href="https://youtu.be/qFecIeOFzHQ" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 12<span class="lesson-sub">Свободная речь</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 12 пройден"></li>
+    <li data-id="13"><a class="lesson-link" href="https://youtu.be/CK7l8vSm5zI" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 13<span class="lesson-sub">Сложные конструкции</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 13 пройден"></li>
+    <li data-id="14"><a class="lesson-link" href="https://youtu.be/8sKTCw44xN0" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 14<span class="lesson-sub">Обобщение материала</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 14 пройден"></li>
+    <li data-id="15"><a class="lesson-link" href="https://youtu.be/g99ScHmA5rs" target="_blank" rel="noopener"><span class="lesson-play"></span><span class="headline-text">Урок 15<span class="lesson-sub">Финальный урок</span></span></a><input type="checkbox" class="lesson-check" aria-label="Урок 15 пройден"></li>
+  </ol>
+
+  <div class="highlight"><strong>Как заниматься:</strong> один урок в день, по порядку. После просмотра отметь урок галочкой — прогресс сохраняется на телефоне.</div>
+
+</div>
+
+<p class="footer-note">Язык учится не за 16 часов — <em>а за 15 нажатий play.</em></p>
+<div class="footer">
+  © 2026 · Все права защищены
+  <div class="tiny">Видео принадлежат их авторам и открываются на YouTube.</div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'english16-done';
+  var done = {};
+  try { done = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+
+  var items = document.querySelectorAll('#lessons li');
+  var countEl = document.getElementById('progress-count');
+  var fillEl = document.getElementById('progress-fill');
+
+  function render() {
+    var n = 0;
+    items.forEach(function (li) {
+      var id = li.dataset.id;
+      var checked = !!done[id];
+      li.classList.toggle('done', checked);
+      li.querySelector('.lesson-check').checked = checked;
+      if (checked) n++;
+    });
+    countEl.textContent = n;
+    fillEl.style.width = (n / items.length * 100) + '%';
+  }
+
+  items.forEach(function (li) {
+    li.querySelector('.lesson-check').addEventListener('change', function () {
+      done[li.dataset.id] = this.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {}
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
+
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>

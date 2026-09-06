@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Подробная инструкция: доступ, регистрация, номер для Claude, установка и оплата Claude и ChatGPT из России.">
+  <title>Как установить Claude и ChatGPT в России — maysoulme</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #ffffff; color: #1a1a1a; font-size: 17px; line-height: 1.75; -webkit-font-smoothing: antialiased; }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 16px 48px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; z-index: 100; }
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 400; font-style: italic; color: #888; letter-spacing: 0.5px; margin-left: auto; }
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 60px 0 42px; position: relative; border-bottom: 1px solid #ececec; }
+.hero::after { content: "MS"; position: absolute; right: 0; bottom: 18px; font-family: 'Libre Baskerville', Georgia, serif; font-size: 72px; font-style: italic; color: #f4f1f1; z-index: -1; }
+.badge { display: inline-block; font-size: 11px; font-weight: 600; color: var(--accent); border: 1px solid var(--accent); padding: 5px 16px; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
+.hero h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 38px; font-weight: 700; line-height: 1.25; margin-bottom: 16px; }
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+.hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 30px; }
+.hero-stat { border: 1px solid #e8e8e8; background: #fafafa; padding: 14px 16px; min-height: 94px; }
+.hero-stat__mark { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-style: italic; color: var(--accent); margin-bottom: 6px; }
+.hero-stat__text { font-size: 13px; line-height: 1.55; color: #555; }
+.intro-bold { font-size: 18px; font-weight: 700; line-height: 1.65; color: #1a1a1a; padding: 40px 0 16px; }
+.intro-text { font-size: 17px; color: #444; line-height: 1.75; padding-bottom: 48px; }
+.section-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px; font-weight: 700; line-height: 1.3; padding: 56px 0 24px; border-top: 1px solid #e8e8e8; }
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+.highlight { background: #f5f5f5; padding: 20px 24px 20px 28px; margin: 24px 0; font-size: 16px; line-height: 1.75; color: #444; border-left: 2px solid var(--accent); }
+.sub-heading { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; padding: 36px 0 16px; }
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li { font-size: 16px; line-height: 1.75; color: #444; padding: 8px 0 8px 20px; position: relative; border-bottom: 1px solid #f0f0f0; }
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before { content: ''; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+.guide-list li strong { color: #1a1a1a; }
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid #f0f0f0; align-items: baseline; }
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 15px; color: var(--accent); min-width: 28px; flex-shrink: 0; }
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+.route-map { border: 1px solid #e8e8e8; background: linear-gradient(180deg, #fff 0%, #f8f8f8 100%); padding: 28px; margin: 24px 0 48px; position: relative; }
+.route-map::before { content: ""; position: absolute; top: 48px; bottom: 48px; left: 44px; width: 1px; background: #dedede; }
+.route-map__item { display: grid; grid-template-columns: 72px 1fr; gap: 18px; padding: 14px 0; position: relative; }
+.route-map__label { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); font-size: 15px; }
+.route-map__label::before { content: ""; display: inline-block; width: 9px; height: 9px; background: var(--accent); border: 5px solid #f8f8f8; outline: 1px solid #d9d9d9; margin-right: 10px; vertical-align: middle; }
+.route-map__text { font-size: 16px; line-height: 1.65; color: #333; }
+.schema-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 26px 0 32px; }
+.schema-card { border: 1px solid #e6e6e6; background: #fff; padding: 20px; min-height: 150px; position: relative; }
+.schema-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--accent); }
+.schema-card__index { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-style: italic; color: var(--accent); margin-bottom: 12px; }
+.schema-card__title { font-weight: 700; font-size: 15px; color: #1a1a1a; line-height: 1.35; margin-bottom: 8px; }
+.schema-card__text { font-size: 13.5px; line-height: 1.6; color: #666; }
+.equation { display: grid; grid-template-columns: 1fr 32px 1fr 32px 1fr; align-items: stretch; gap: 10px; margin: 24px 0 32px; }
+.equation__item { border: 1px solid #e6e6e6; background: #fafafa; padding: 18px 14px; text-align: center; }
+.equation__mark { font-family: 'Libre Baskerville', Georgia, serif; color: var(--accent); font-style: italic; font-size: 19px; margin-bottom: 4px; }
+.equation__text { font-size: 13.5px; line-height: 1.45; color: #444; }
+.equation__plus { font-family: 'Libre Baskerville', Georgia, serif; font-size: 24px; color: #aaa; display: flex; align-items: center; justify-content: center; }
+.prompt-box { background: #f5f5f5; padding: 36px; margin: 32px 0; }
+.prompt-box__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text { font-size: 15px; line-height: 1.8; color: #444; }
+.scenario-card { border: 1px solid #e3e3e3; padding: 32px; margin: 24px 0; background: #f9f9f9; box-shadow: 0 18px 40px rgba(113, 12, 4, 0.045); position: relative; }
+.scenario-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0.75; }
+.scenario-card__num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--accent); letter-spacing: 1px; margin-bottom: 8px; }
+.scenario-card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px; }
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__ending { font-family: 'Libre Baskerville', Georgia, serif; font-size: 17px; font-style: italic; color: #1a1a1a; padding-top: 16px; margin-top: 16px; border-top: 1px solid #e0e0e0; }
+.scenario-card__tip { background: #f0f0f0; padding: 14px 18px; margin-top: 16px; font-size: 14px; color: #555; line-height: 1.65; }
+.scenario-card__tip strong { color: var(--accent); }
+.footer { text-align: center; padding: 64px 24px; border-top: 1px solid #e8e8e8; margin-top: 64px; color: #999; font-size: 14px; }
+.footer .tiny { font-size: 12.5px; color: #bbb; max-width: 52ch; margin: 12px auto 0; line-height: 1.6; letter-spacing: 0; }
+.footer-note { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18px; font-style: italic; color: #444; text-align: center; padding: 48px 24px 0; }
+.footer-note em { color: var(--accent); }
+@media (max-width: 768px) { .nav { padding: 16px 20px; } .hero h1 { font-size: 28px; } .hero-stats, .schema-grid, .equation { grid-template-columns: 1fr; } .equation__plus { min-height: 18px; } .section-heading { font-size: 24px; } .scenario-card { padding: 20px; } .prompt-box { padding: 24px; } .route-map { padding: 22px; } .route-map::before { display: none; } .route-map__item { grid-template-columns: 1fr; gap: 4px; } }
+  </style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как установить Claude и ChatGPT в России">
+<meta property="og:description" content="Понятный маршрут: подготовка, регистрация, номер для Claude, установка приложений, карта, пополнение и первая безопасная оплата.">
+<meta property="og:url" content="https://maysoulme.ru/guides/claude-i-chatgpt-v-rossii/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+  <nav class="nav">
+    <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+    <span class="nav__logo-name">maysoulme</span>
+  </nav>
+  <div class="container">
+    <div class="hero">
+      <div class="badge">Подробный гайд</div>
+      <h1>Как установить <em>Claude и ChatGPT</em> в России</h1>
+      <p class="hero__desc">Понятный маршрут: подготовка, регистрация, номер для Claude, установка приложений, выбор карты, пополнение и первая безопасная оплата.</p>
+      <p class="hero__meta">Claude &middot; ChatGPT &middot; обновлено в сентябре 2026</p>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="hero-stat__mark">01</div><div class="hero-stat__text">Сначала доступ, email и рабочий аккаунт.</div></div>
+        <div class="hero-stat"><div class="hero-stat__mark">02</div><div class="hero-stat__text">Потом номер для Claude и проверка Free.</div></div>
+        <div class="hero-stat"><div class="hero-stat__mark">03</div><div class="hero-stat__text">Только в конце карта, баланс и подписка.</div></div>
+      </div>
+    </div>
+
+    <p class="intro-bold">Главная логика такая: сначала делаешь рабочий аккаунт и проверяешь бесплатный доступ. Только после этого выпускаешь карту и оплачиваешь первый месяц.</p>
+    <p class="intro-text">Так ты не тратишь деньги на карту, если сервис ещё не открылся или не прошёл регистрацию. Россия не входит в официальные списки поддерживаемых стран Claude и ChatGPT, поэтому маршрут ниже построен на минимизации ошибок: одна страна, чистый профиль браузера, свой email, понятный номер, карта с понятными условиями и первая месячная оплата вместо годовой.</p>
+
+    <div class="route-map">
+      <div class="route-map__item"><div class="route-map__label">Сначала</div><div class="route-map__text">VPN, отдельный профиль браузера, свой email и номер только для Claude.</div></div>
+      <div class="route-map__item"><div class="route-map__label">Потом</div><div class="route-map__text">Регистрация Claude и ChatGPT, проверка бесплатных чатов и установка официальных приложений.</div></div>
+      <div class="route-map__item"><div class="route-map__label">Дальше</div><div class="route-map__text">Выбор карты, выпуск, пополнение именно баланса карты, первая месячная оплата и проверка продления.</div></div>
+    </div>
+
+    <div class="scenario-card">
+      <div class="scenario-card__num">САМОЕ ВАЖНОЕ</div>
+      <div class="scenario-card__title">Claude и ChatGPT требуют разные вещи</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Claude.</span><span class="scenario-card__point-text"> Для нового аккаунта нужен мобильный номер поддерживаемой страны. Код приходит по SMS. VoIP, стационарные и app-based номера Anthropic официально не поддерживает.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">ChatGPT.</span><span class="scenario-card__point-text"> Для обычной регистрации и работы в ChatGPT номер телефона сейчас не нужен. Телефонная проверка относится к отдельной платформе разработчика и первому API-ключу.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Оплата.</span><span class="scenario-card__point-text"> Российская карта не подойдёт. Нужна карта из поддерживаемой платёжной страны, где проходят международные онлайн-платежи, 3DS и, желательно, повторные списания.</span></div>
+      <div class="scenario-card__tip"><strong>Правильная стратегия:</strong> не покупай номер для ChatGPT, не выпускай карту до проверки бесплатного доступа и не начинай с годовой подписки.</div>
+    </div>
+
+    <h2 class="section-heading"><span>01.</span> Выбери одну <em>страну</em></h2>
+    <p class="text">Страна нужна, чтобы не было противоречий между VPN, номером, картой и billing address. Лучше выбрать одну поддерживаемую локацию и использовать её во всех действиях.</p>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Открой официальный список стран Claude и проверь, что выбранная страна поддерживается.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Открой официальный список стран ChatGPT и проверь ту же страну.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Проверь, можно ли получить номер этой страны для Claude.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Проверь, может ли выбранный карточный сервис выпустить карту с понятным billing address.</span></li>
+    </ol>
+    <ul class="guide-list">
+      <li><strong><a href="https://support.claude.com/en/articles/8461763-where-can-i-access-claude" target="_blank" rel="noopener noreferrer">Страны Claude</a>.</strong> Список Anthropic может меняться, поэтому сверяй его перед регистрацией.</li>
+      <li><strong><a href="https://help.openai.com/en/articles/7947663-chatgpt-supported-countries" target="_blank" rel="noopener noreferrer">Страны ChatGPT</a>.</strong> Сверяй актуальный список OpenAI перед входом и оплатой.</li>
+      <li><strong><a href="https://support.claude.com/en/articles/8287232-verify-your-phone-number" target="_blank" rel="noopener noreferrer">Номер для Claude</a>.</strong> Нужен мобильный номер, который принимает обычные SMS.</li>
+    </ul>
+    <div class="highlight"><strong>Не меняй страну во время регистрации или оплаты.</strong> Если VPN оборвался, закрой вкладку, восстанови соединение и только потом продолжай. Резкая смена локации выглядит подозрительно для платёжных и антифрод-систем.</div>
+
+    <h2 class="section-heading"><span>02.</span> Подготовь VPN, браузер и <em>email</em></h2>
+    <div class="scenario-card">
+      <div class="scenario-card__num">ЧИСТЫЙ СТАРТ</div>
+      <div class="scenario-card__title">Что подготовить до первого входа</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">VPN.</span><span class="scenario-card__point-text"> Используй стабильный VPN с выбранной поддерживаемой страной. Бесплатные публичные VPN чаще попадают в блокировки.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Браузер.</span><span class="scenario-card__point-text"> Создай отдельный профиль Chrome или отдельный браузер только для Claude и ChatGPT. Так cookie, язык, входы и история не смешиваются с обычным профилем.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Email.</span><span class="scenario-card__point-text"> Используй свой Gmail, Outlook или Proton Mail. Не покупай готовые аккаунты: продавец может восстановить доступ, а ты потеряешь аккаунт и подписку.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Защита.</span><span class="scenario-card__point-text"> Поставь уникальный пароль, включи 2FA и сохрани резервные коды до регистрации в AI-сервисах.</span></div>
+      <div class="scenario-card__tip"><strong>Порядок каждый раз:</strong> сначала VPN, потом отдельный профиль браузера, потом официальный сайт.</div>
+    </div>
+    <div class="highlight"><strong>Не передавай никому:</strong> пароль от почты, SMS-код, код 3DS, CVV, полный номер карты и резервные коды. Поддержка сервиса не должна просить эти данные в личных сообщениях.</div>
+
+    <h2 class="section-heading"><span>03.</span> Подготовь номер <em>для Claude</em></h2>
+    <p class="text">Номер нужен только для Claude. Лучший вариант - номер, к которому у тебя останется доступ после регистрации. Одноразовый номер может пройти сейчас, но не поможет, если позже понадобится повторное подтверждение.</p>
+    <h3 class="sub-heading">Приоритет вариантов</h3>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Своя физическая SIM поддерживаемой страны, которая принимает международные SMS.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">eSIM только если она даёт реальный мобильный номер и входящие SMS. Многие туристические eSIM дают только интернет.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Одноразовый номер как запасной вариант без гарантии, потому что Claude может определить его как виртуальный.</span></li>
+    </ol>
+    <h3 class="sub-heading">Одноразовый номер</h3>
+    <ul class="guide-list">
+      <li><strong><a href="https://smsfast.pro/?ref=953924" target="_blank" rel="noopener noreferrer">SMSFAST</a>.</strong> Хороший сервис для SMS-активаций. Перед оплатой проверь наличие Claude, страну номера и правила возврата.</li>
+      <li><strong><a href="https://onlinesim.io/" target="_blank" rel="noopener noreferrer">onlinesim.io</a>.</strong> Пополнение от $5; цена номера для Claude может меняться, поэтому смотри актуальную стоимость в кабинете.</li>
+      <li><strong><a href="https://grizzlysms.com/" target="_blank" rel="noopener noreferrer">grizzlysms.com</a>.</strong> Можно пополнять рублями через СБП. Перед покупкой проверь, есть ли Claude в списке сервисов.</li>
+    </ul>
+    <div class="scenario-card">
+      <div class="scenario-card__num">КАК НЕ СЖЕЧЬ ПОПЫТКУ</div>
+      <div class="scenario-card__title">Если используешь SMS-сервис</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">1.</span><span class="scenario-card__point-text"> Сначала дойди на claude.ai до экрана ввода телефона.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">2.</span><span class="scenario-card__point-text"> В SMS-сервисе выбери Claude, страну из поддерживаемого списка и только потом арендуй номер.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">3.</span><span class="scenario-card__point-text"> Введи номер в международном формате, не дублируя код страны.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">4.</span><span class="scenario-card__point-text"> Запроси код один раз и подожди. Если кода нет больше пяти минут, используй Try again и проверь номер.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">5.</span><span class="scenario-card__point-text"> Если Claude пишет, что номер неподдерживаемый или VoIP, не мучай тот же номер повторными запросами.</span></div>
+      <div class="scenario-card__tip"><strong>Важно:</strong> успешный SMS-код не делает номер идеальным. Это просто позволяет завершить регистрацию, если Claude его принял.</div>
+    </div>
+
+    <h2 class="section-heading"><span>04.</span> Зарегистрируй <em>Claude</em></h2>
+    <div class="scenario-card">
+      <div class="scenario-card__num">CLAUDE · РЕГИСТРАЦИЯ</div>
+      <div class="scenario-card__title">Порядок действий</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">1.</span><span class="scenario-card__point-text"> Включи VPN выбранной страны и открой отдельный профиль браузера.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">2.</span><span class="scenario-card__point-text"> Вручную открой <a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">claude.ai</a> и проверь адрес в строке браузера.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">3.</span><span class="scenario-card__point-text"> Выбери Continue with Google или регистрацию по email. Используй только свой email.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">4.</span><span class="scenario-card__point-text"> Подтверди письмо и введи мобильный номер поддерживаемой страны.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">5.</span><span class="scenario-card__point-text"> Введи шестизначный SMS-код и заверши создание аккаунта.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">6.</span><span class="scenario-card__point-text"> Создай новый чат и отправь короткий тестовый запрос.</span></div>
+      <div class="scenario-card__ending">Платить можно только после того, как бесплатный Claude открылся и ответил.</div>
+    </div>
+
+    <h2 class="section-heading"><span>05.</span> Зарегистрируй <em>ChatGPT</em></h2>
+    <div class="highlight"><strong>Номер не покупаем.</strong> Для обычного ChatGPT телефон сейчас не нужен. Если видишь запрос номера, проверь, что ты на chatgpt.com, а не на platform.openai.com для API.</div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">CHATGPT · РЕГИСТРАЦИЯ</div>
+      <div class="scenario-card__title">Порядок действий</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">1.</span><span class="scenario-card__point-text"> Включи VPN той же поддерживаемой страны и открой рабочий профиль браузера.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">2.</span><span class="scenario-card__point-text"> Открой <a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">chatgpt.com</a> и нажми Sign up.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">3.</span><span class="scenario-card__point-text"> Войди через Google, Apple, Microsoft или email - выбирай вариант, который показывает официальный сайт.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">4.</span><span class="scenario-card__point-text"> Подтверди email и заполни данные аккаунта, если сервис попросит.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">5.</span><span class="scenario-card__point-text"> Создай новый чат и отправь тестовый запрос.</span></div>
+      <div class="scenario-card__ending">Если бесплатный ChatGPT отвечает, регистрация завершена.</div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">CHATGPT · ВАЖНЫЕ ОТЛИЧИЯ</div>
+      <div class="scenario-card__title">Что не перепутать после регистрации</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">ChatGPT и API.</span><span class="scenario-card__point-text"> Обычный чат на chatgpt.com и кабинет разработчика на platform.openai.com - разные продукты. Для чата номер не нужен, а для первого API-ключа OpenAI может запросить телефон.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">ChatGPT Plus.</span><span class="scenario-card__point-text"> Это подписка для обычного ChatGPT. Она не пополняет API-баланс и не оплачивает использование API.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Команды и Business.</span><span class="scenario-card__point-text"> Если ты покупаешь личный тариф, не выбирай Business/Team случайно: там другая логика управления, местами, счетами и доступом.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Мобильная подписка.</span><span class="scenario-card__point-text"> Если покупаешь через iPhone или Android, подписка привязывается и к ChatGPT-аккаунту, и к Apple ID или Google Play, через который была покупка.</span></div>
+      <div class="scenario-card__tip"><strong>Проверка перед оплатой:</strong> зайди именно в тот ChatGPT-аккаунт, где хочешь Plus, и только потом открывай экран подписки.</div>
+    </div>
+
+    <h2 class="section-heading"><span>06.</span> Установи <em>приложения</em></h2>
+    <p class="text">Приложения ставь после проверки входа в браузере. Так ты точно знаешь, что проблема не в установщике и не в магазине приложений.</p>
+    <ul class="guide-list">
+      <li><strong>Claude.</strong> Скачивай только с <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer">claude.ai/download</a> или из App Store/Google Play с разработчиком Anthropic.</li>
+      <li><strong>ChatGPT.</strong> Начинай с <a href="https://openai.com/chatgpt/download/" target="_blank" rel="noopener noreferrer">официальной страницы загрузки OpenAI</a> или магазина приложений с разработчиком OpenAI.</li>
+      <li><strong>Браузерный ярлык.</strong> Если приложение недоступно в магазине, используй веб-версию: на iPhone открой сайт в Safari и нажми «Поделиться» -> «На экран Домой», на Android - меню Chrome -> «Добавить на главный экран».</li>
+      <li><strong>Неофициальные APK и установщики.</strong> Не ставь. В них легко потерять аккаунт, переписку и платёжные данные.</li>
+    </ul>
+    <div class="highlight"><strong>После установки:</strong> входи в тот же аккаунт, который уже работает в браузере. Новый аккаунт в приложении создавать не нужно.</div>
+
+    <h2 class="section-heading"><span>07.</span> Проверь бесплатный <em>доступ</em></h2>
+    <p class="text">Это короткий, но важный этап. Он показывает, что аккаунт создан, страна не конфликтует, сайт открывается, вход сохраняется и можно переходить к оплате.</p>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Открой Claude, отправь тестовый запрос и дождись ответа.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Открой ChatGPT, отправь тестовый запрос и дождись ответа.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Закрой браузер, открой снова с тем же VPN и проверь, что вход сохранился.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Поработай 1-2 дня в бесплатной версии, если не горит покупка тарифа прямо сейчас.</span></li>
+    </ol>
+    <div class="highlight"><strong>Карта нужна только после этого.</strong> Если бесплатный доступ не работает, платная подписка проблему не исправит.</div>
+
+    <h2 class="section-heading"><span>08.</span> Выбери стратегию <em>оплаты</em></h2>
+    <p class="text">Сильная стратегия не в том, чтобы найти одну «вечную» карту, а в том, чтобы выбрать способ под свою ситуацию и проверить его до выпуска. Самый стабильный вариант - своя иностранная карта. Если её нет, можно использовать виртуальную карту, но только с понятными условиями.</p>
+    <div class="schema-grid">
+      <div class="schema-card">
+        <div class="schema-card__index">I</div>
+        <div class="schema-card__title">Есть иностранная карта</div>
+        <div class="schema-card__text">Проверяешь 3DS, billing address и лимиты. Это самый чистый путь.</div>
+      </div>
+      <div class="schema-card">
+        <div class="schema-card__index">II</div>
+        <div class="schema-card__title">Нужна виртуальная карта</div>
+        <div class="schema-card__text">Сначала спрашиваешь поддержку про Claude/ChatGPT, потом выпускаешь карту.</div>
+      </div>
+      <div class="schema-card">
+        <div class="schema-card__index">III</div>
+        <div class="schema-card__title">Пополнение через крипту</div>
+        <div class="schema-card__text">Подходит, только если ты уверенно проверяешь сеть, адрес и комиссии.</div>
+      </div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">СТРАТЕГИЯ 01</div>
+      <div class="scenario-card__title">Есть своя иностранная карта</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Когда выбирать.</span><span class="scenario-card__point-text"> У тебя есть карта банка из поддерживаемой страны, включены онлайн-платежи, есть 3DS и понятный billing address.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Почему это лучше.</span><span class="scenario-card__point-text"> Меньше посредников, проще возвраты, понятнее продление подписки.</span></div>
+      <div class="scenario-card__ending">Это самый спокойный долгосрочный вариант для нескольких подписок.</div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">СТРАТЕГИЯ 02</div>
+      <div class="scenario-card__title">Нужна виртуальная карта с пополнением из России</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Когда выбирать.</span><span class="scenario-card__point-text"> Иностранной карты нет, но нужно оплатить Claude или ChatGPT картой, которую сервис примет как зарубежную.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Главная проверка.</span><span class="scenario-card__point-text"> До выпуска спроси поддержку: проходит ли сегодня именно Claude или именно ChatGPT, какая страна карты, какой billing address, есть ли 3DS и повторные списания.</span></div>
+      <div class="scenario-card__tip"><strong>Важно:</strong> BIN карт и правила AI-сервисов меняются. Слова «работало у кого-то» недостаточно - нужна проверка в день выпуска.</div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">СТРАТЕГИЯ 03</div>
+      <div class="scenario-card__title">Есть криптовалюта и опыт переводов</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Когда выбирать.</span><span class="scenario-card__point-text"> Ты умеешь переводить USDT, понимаешь сети TRC20/ERC20/BEP20 и можешь проверить адрес и сеть перед отправкой.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Риск.</span><span class="scenario-card__point-text"> Если отправить в неправильной сети или на неправильный адрес, деньги чаще всего нельзя вернуть.</span></div>
+      <div class="scenario-card__ending">Для новичка удобнее способ с пополнением рублями через СБП, если выбранный сервис его поддерживает.</div>
+    </div>
+
+    <h2 class="section-heading"><span>09.</span> Выпусти карту и <em>пополни баланс</em></h2>
+    <p class="text">Перед оплатой важно разделить три суммы: цена выпуска карты, баланс карты и комиссии. Деньги за выпуск - это не деньги на карте. Чтобы оплатить подписку, на самой карте должен быть отдельный баланс.</p>
+    <div class="equation" aria-label="Формула бюджета карты">
+      <div class="equation__item"><div class="equation__mark">выпуск</div><div class="equation__text">плата за создание карты</div></div>
+      <div class="equation__plus">+</div>
+      <div class="equation__item"><div class="equation__mark">баланс</div><div class="equation__text">деньги именно на карте</div></div>
+      <div class="equation__plus">+</div>
+      <div class="equation__item"><div class="equation__mark">запас</div><div class="equation__text">налоги, комиссия, конвертация</div></div>
+    </div>
+    <h3 class="sub-heading">Рабочие сервисы в 2026</h3>
+    <ul class="guide-list">
+      <li><strong><a href="https://platipomiru.com/?code=PGQ6XMU6" target="_blank" rel="noopener noreferrer">Плати по миру</a>.</strong> Вариант с рублёвым пополнением через СБП и виртуальными USD/EUR-картами. По опубликованным условиям карты «Для подписок» выпуск стоит 2990 ₽, минимальное пополнение $5, подтверждение 3DS проходит в приложении. При этом автоплатежи в условиях указаны как неподдерживаемые, поэтому для подписок заранее уточни у поддержки, пройдёт ли первый платёж и как будет работать продление.</li>
+      <li><strong><a href="https://t.me/zarub_robot?start=ref_rfH4TJ" target="_blank" rel="noopener noreferrer">Zarub</a>.</strong> Виртуальные карты с пополнением рублями через СБП или USDT. Актуальные тарифы показывают выпуск виртуальной карты от $19, первое пополнение от $10 и отдельные комиссии за пополнение/операции. Поддержку Claude или ChatGPT уточняй перед выпуском.</li>
+      <li><strong><a href="https://pyyplbot.com/?refid=263176577" target="_blank" rel="noopener noreferrer">Pyypl Bot</a>.</strong> Виртуальные карты. Стоимость выпуска, способы пополнения и оплату Claude/ChatGPT проверяй прямо в боте перед выпуском.</li>
+      <li><strong><a href="https://t.me/WantToPayBot?start=w17851188--MYP1Q" target="_blank" rel="noopener noreferrer">WantToPayBot</a>.</strong> Виртуальные карты для зарубежных оплат. Условия зависят от тарифа, поэтому до оплаты проверь цену выпуска, обязательный первый баланс, комиссию, 3DS и возможность повторных списаний.</li>
+    </ul>
+    <div class="scenario-card">
+      <div class="scenario-card__num">ПЕРЕД ВЫПУСКОМ</div>
+      <div class="scenario-card__title">Задай поддержке семь вопросов</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">1.</span><span class="scenario-card__point-text"> Проходит ли сегодня оплата Claude, ChatGPT или обоих сервисов?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">2.</span><span class="scenario-card__point-text"> Какая страна выпуска карты и поддерживается ли она AI-сервисом?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">3.</span><span class="scenario-card__point-text"> Какой billing address нужно вводить и совпадает ли он с данными карты?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">4.</span><span class="scenario-card__point-text"> Есть ли 3DS и где подтверждать платёж: в приложении, боте или личном кабинете?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">5.</span><span class="scenario-card__point-text"> Поддерживает ли карта повторные списания для ежемесячного продления?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">6.</span><span class="scenario-card__point-text"> Сколько отдельно стоят выпуск, пополнение, конвертация, успешная операция, отклонённая операция и обслуживание?</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">7.</span><span class="scenario-card__point-text"> Что будет с деньгами, если платёж отклонят или ты закроешь карту?</span></div>
+      <div class="scenario-card__tip"><strong>Формула бюджета:</strong> выпуск карты отдельно + цена подписки + возможный налог + комиссия сервиса + запас 2-5 долларов. Не держи на карте крупную сумму.</div>
+    </div>
+    <h3 class="sub-heading">Как пополнять без путаницы</h3>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Сначала оплати выпуск карты. После выпуска проверь номер, срок, CVC, страну и billing address.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Потом пополни именно баланс карты, а не просто внутренний кошелёк сервиса.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Если пополняешь через СБП, смотри итоговую сумму в рублях и сколько долларов зачислится после курса и комиссии.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Если пополняешь криптой, сеть отправки и сеть получения должны совпадать. Проверь адрес два раза.</span></li>
+      <li><span class="headline-num">05.</span><span class="headline-text">Дождись, пока деньги появятся на карте, и только потом иди оплачивать Claude или ChatGPT.</span></li>
+    </ol>
+    <div class="highlight"><strong>Не ориентируйся на старые цены из чужих скриншотов.</strong> Перед выпуском смотри текущие условия внутри сервиса: тарифы, комиссии и доступность оплаты Claude/ChatGPT могут меняться.</div>
+
+    <h2 class="section-heading"><span>10.</span> Оплати первый <em>месяц</em></h2>
+    <div class="highlight"><strong>Начинай с месячного тарифа.</strong> Годовую подписку имеет смысл покупать только после того, как прошёл первый платёж, тариф активировался и ты понимаешь, как будет работать продление.</div>
+    <h3 class="sub-heading">Claude</h3>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Войди на claude.ai в аккаунт, который уже отвечает в бесплатной версии.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Открой Settings -> Billing -> Upgrade plan.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Выбери месячный тариф и проверь сумму, валюту и период оплаты.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Введи данные карты и billing address, который дал эмитент карты или карточный сервис.</span></li>
+      <li><span class="headline-num">05.</span><span class="headline-text">Если появляется 3DS, подтверди платёж в приложении или боте карты.</span></li>
+      <li><span class="headline-num">06.</span><span class="headline-text">После оплаты открой Billing и проверь активный тариф, дату следующего списания и чек.</span></li>
+    </ol>
+    <h3 class="sub-heading">ChatGPT</h3>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Войди на chatgpt.com в аккаунт, который уже отвечает в бесплатной версии.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Открой меню профиля -> Upgrade plan и выбери нужный тариф.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Проверь итоговую сумму, валюту, налоги и период подписки.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Введи карту из поддерживаемой страны и соответствующий billing address.</span></li>
+      <li><span class="headline-num">05.</span><span class="headline-text">Подтверди платёж и проверь, что тариф появился в настройках аккаунта.</span></li>
+    </ol>
+    <div class="scenario-card">
+      <div class="scenario-card__num">CHATGPT · ОПЛАТА</div>
+      <div class="scenario-card__title">Три рабочих маршрута</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Через сайт.</span><span class="scenario-card__point-text"> Самый прямой способ: chatgpt.com -> Upgrade plan -> карта поддерживаемой страны -> подтверждение платежа -> проверка тарифа в настройках.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Через App Store или Google Play.</span><span class="scenario-card__point-text"> Подходит, если у тебя уже настроена оплата в магазине приложений. Управление подпиской, отмена и возвраты будут идти через Apple или Google, а не только через сайт ChatGPT.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Через посредника.</span><span class="scenario-card__point-text"> Это проще для новичка, если ты платишь рублями, но риск выше: выбирай сервис с отзывами, понятными условиями, гарантией и без запроса пароля от почты.</span></div>
+      <div class="scenario-card__tip"><strong>Не делай двойную подписку:</strong> если оплатил через сайт, не покупай второй раз через приложение. Сначала проверь, где именно активна подписка.</div>
+    </div>
+    <ul class="guide-list">
+      <li><strong>Если Plus не появился.</strong> Проверь, что ты вошёл в тот же ChatGPT-аккаунт, где покупал тариф, и что покупка не привязалась к другому Apple ID или Google Play.</li>
+      <li><strong>Если подписка куплена в приложении.</strong> Отмена делается через Apple Subscriptions или Google Play Subscriptions. Удаление приложения подписку не отменяет.</li>
+      <li><strong>Если нужна API-оплата.</strong> Это отдельный кабинет platform.openai.com, отдельный биллинг и отдельные лимиты. ChatGPT Plus не является API-балансом.</li>
+    </ul>
+    <div class="scenario-card">
+      <div class="scenario-card__num">ПОСЛЕ ПЛАТЕЖА</div>
+      <div class="scenario-card__title">Что проверить сразу</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Статус.</span><span class="scenario-card__point-text"> Тариф должен отображаться внутри того же аккаунта, где ты платил.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Чек.</span><span class="scenario-card__point-text"> Сохрани email-чек или страницу подтверждения без публикации личных данных.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Продление.</span><span class="scenario-card__point-text"> Проверь дату следующего списания и убедись, что на карте можно оставить нужный баланс к этой дате.</span></div>
+      <div class="scenario-card__tip"><strong>Если деньги списались, а тариф не появился:</strong> не плати второй раз. Проверь аккаунт, подожди обновления статуса, сохрани чек и обратись в поддержку.</div>
+    </div>
+
+    <h2 class="section-heading"><span>11.</span> Настрой <em>продление</em></h2>
+    <p class="text">Подписка - это не разовый файл, а регулярное списание. Поэтому после первого платежа нужно понять, как карта поведёт себя через месяц.</p>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Уточни, поддерживает ли карта автосписания. Если нет, заранее готовься обновить карту или оплатить вручную.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">За 2-3 дня до даты продления проверь баланс карты с учётом комиссии, налога и конвертации.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Не пополняй на большую сумму: держи только подписку и небольшой запас.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Если сервис карты берёт комиссию за отклонённую операцию, не допускай пустой карты на дату списания.</span></li>
+      <li><span class="headline-num">05.</span><span class="headline-text">Если продление не нужно, отмени подписку в настройках Claude или ChatGPT до даты следующего списания.</span></li>
+    </ol>
+    <div class="highlight"><strong>Отдельно про App Store и Google Play:</strong> если подписка куплена внутри мобильного приложения, управление оплатой может быть в Apple ID или Google Play, а не в настройках сайта.</div>
+
+    <h2 class="section-heading"><span>12.</span> Реши типовые <em>ошибки</em></h2>
+    <div class="scenario-card">
+      <div class="scenario-card__num">САЙТ НЕ ОТКРЫВАЕТСЯ</div>
+      <div class="scenario-card__title">Проверь доступ по порядку</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Адрес.</span><span class="scenario-card__point-text"> Используй только claude.ai и chatgpt.com.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">VPN.</span><span class="scenario-card__point-text"> Проверь, что включена выбранная поддерживаемая страна, а не случайная локация.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Профиль.</span><span class="scenario-card__point-text"> Открой отдельный профиль браузера или один раз проверь вход в инкогнито.</span></div>
+      <div class="scenario-card__tip"><strong>Не перебирай страны хаотично:</strong> сначала стабилизируй соединение, потом повтори вход.</div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">КАРТА НЕ ПРОШЛА</div>
+      <div class="scenario-card__title">Проверь главные причины</div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Баланс.</span><span class="scenario-card__point-text"> На карте хватает не только на тариф, но и на налог, комиссию, конвертацию и возможную проверочную операцию.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Адрес.</span><span class="scenario-card__point-text"> Billing address совпадает с адресом, связанным с картой, а не придуман случайно.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">3DS.</span><span class="scenario-card__point-text"> Подтверждение не ждёт в приложении карты или Telegram-боте.</span></div>
+      <div class="scenario-card__point"><span class="scenario-card__point-label">Повторы.</span><span class="scenario-card__point-text"> Не делай много попыток подряд. Сначала узнай у эмитента причину отклонения.</span></div>
+    </div>
+    <ul class="guide-list">
+      <li><strong>Письмо не приходит.</strong> Проверь «Спам», правильность адреса и запроси письмо повторно один раз.</li>
+      <li><strong>Claude отклонил номер.</strong> Проверь страну, тип номера и формат. Если номер определён как VoIP, нужен другой номер.</li>
+      <li><strong>ChatGPT просит номер.</strong> Проверь, что ты не создаёшь API-ключ на platform.openai.com.</li>
+      <li><strong>Приложения нет в магазине.</strong> Используй официальную веб-версию и ярлык на главном экране.</li>
+      <li><strong>Аккаунт заблокирован.</strong> Не создавай серию новых аккаунтов. Обратись в официальную поддержку и приложи скриншот без секретных данных.</li>
+    </ul>
+
+    <h2 class="section-heading"><span>13.</span> Настрой сервисы <em>под себя</em></h2>
+    <h3 class="sub-heading">Claude</h3>
+    <ul class="guide-list">
+      <li><strong>Settings.</strong> Проверь безопасность, активные сессии, тариф и дату продления.</li>
+      <li><strong>Personal Style.</strong> Задай тон общения, формат ответов и правила, которые важны для твоей работы.</li>
+      <li><strong>Projects.</strong> Создай отдельное пространство для контента, добавь описание продукта, аудиторию, примеры текстов и правила бренда.</li>
+      <li><strong>Artifacts.</strong> Большие тексты, таблицы и код открывай в отдельной панели, чтобы править их аккуратно.</li>
+    </ul>
+    <h3 class="sub-heading">ChatGPT</h3>
+    <ul class="guide-list">
+      <li><strong>Settings.</strong> Проверь безопасность, персонализацию, тариф и Data Controls.</li>
+      <li><strong>Custom Instructions.</strong> Добавь информацию о себе, аудитории и требования к ответам.</li>
+      <li><strong>Projects.</strong> Раздели разные продукты, клиенты или направления по отдельным проектам.</li>
+      <li><strong>Memory.</strong> Проверь, что сервис запомнил, и удали лишнее.</li>
+    </ul>
+    <div class="prompt-box">
+      <div class="prompt-box__title">Базовая инструкция</div>
+      <div class="prompt-box__subtitle">Подходит для Claude и ChatGPT</div>
+      <p class="prompt-box__text">Я веду экспертный блог. Мне нужны короткие, живые тексты без канцелярита. Пиши простым языком. Не используй фразы «в современном мире» и «важно отметить». Сначала давай структуру, потом текст. Если данных недостаточно, задай 2-3 уточняющих вопроса. Не выдумывай факты и отмечай, что требует проверки.</p>
+    </div>
+
+    <h2 class="section-heading"><span>14.</span> Финальный <em>чек-лист</em></h2>
+    <ol class="headline-list">
+      <li><span class="headline-num">01.</span><span class="headline-text">Ты понимаешь официальный статус доступа и риск блокировки из неподдерживаемой страны.</span></li>
+      <li><span class="headline-num">02.</span><span class="headline-text">Выбрана одна поддерживаемая страна, стабильный VPN и отдельный профиль браузера.</span></li>
+      <li><span class="headline-num">03.</span><span class="headline-text">Email принадлежит тебе, защищён 2FA и доступен для восстановления.</span></li>
+      <li><span class="headline-num">04.</span><span class="headline-text">Для Claude подготовлен мобильный номер поддерживаемой страны.</span></li>
+      <li><span class="headline-num">05.</span><span class="headline-text">Для обычной регистрации ChatGPT номер не покупался.</span></li>
+      <li><span class="headline-num">06.</span><span class="headline-text">Claude и ChatGPT отвечают в бесплатной версии.</span></li>
+      <li><span class="headline-num">07.</span><span class="headline-text">Приложения скачаны только с официальных страниц или создан безопасный веб-ярлык.</span></li>
+      <li><span class="headline-num">08.</span><span class="headline-text">Перед выпуском карты проверены страна, billing address, 3DS, комиссии и повторные списания.</span></li>
+      <li><span class="headline-num">09.</span><span class="headline-text">Для ChatGPT понятно, где куплена подписка: на сайте, в App Store, Google Play или через посредника.</span></li>
+      <li><span class="headline-num">10.</span><span class="headline-text">ChatGPT Plus не перепутан с API-биллингом на platform.openai.com.</span></li>
+      <li><span class="headline-num">11.</span><span class="headline-text">Выпуск карты и баланс карты не перепутаны между собой.</span></li>
+      <li><span class="headline-num">12.</span><span class="headline-text">Первая оплата сделана за месяц, а тариф, чек и дата продления проверены.</span></li>
+      <li><span class="headline-num">13.</span><span class="headline-text">На карте не хранится крупная сумма, а к дате продления есть нужный баланс.</span></li>
+      <li><span class="headline-num">14.</span><span class="headline-text">В чаты не отправляются пароли, API-ключи, CVV, полные реквизиты карт и конфиденциальные документы без анонимизации.</span></li>
+    </ol>
+
+    <p class="footer-note">Готово — аккаунты работают, приложения установлены, а оплата <em>собрана по стратегии.</em></p>
+    <div class="footer">
+      © 2026 · maysoulme · Все права защищены
+      <div class="tiny">Правила Claude и ChatGPT, требования к номеру, платёжные условия и комиссии сервисов могут измениться. Перед регистрацией, выпуском карты и оплатой сверяй официальные правила и актуальные условия выбранного сервиса.</div>
+    </div>
+  </div>
+
+<footer class="portal-footer">
+  <a class="portal-footer__back" href="../../">← Все гайды maysoulme</a>
+  <p class="portal-footer__line">Гайд из бесплатной библиотеки <a href="../../">maysoulme</a>. Больше — в <a href="https://t.me/maysoulme">телеграм-канале</a>.</p>
+  <a class="portal-footer__cta" href="../../#intensiv">Интенсив «ИИ-стратегия на миллион» →</a>
+</footer>
+<style>
+  .portal-footer { max-width: 720px; margin: 64px auto 0; padding: 32px 22px 56px; border-top: 1px solid #e8e8e8;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 15px; color: #666; text-align: center; }
+  .portal-footer a { color: #710C04; }
+  .portal-footer__back { display: inline-block; font-weight: 600; margin-bottom: 14px; text-decoration: none; }
+  .portal-footer__back:hover { text-decoration: underline; }
+  .portal-footer__line { margin: 0 0 22px; line-height: 1.6; }
+  .portal-footer__cta { display: inline-block; background: #710C04; color: #fff !important; text-decoration: none;
+    padding: 13px 26px; font-weight: 600; font-size: 15px; }
+</style>
+</body>
+</html>
