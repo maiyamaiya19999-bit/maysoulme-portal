@@ -80,6 +80,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .index { display: flex; align-items: center; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line); font-size: 13.5px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
   .index::-webkit-scrollbar { display: none; }
+  @media (max-width: 620px) { .index { gap: 22px; padding-right: 40px;
+    -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); } }
   .index__label { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
   .index a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .index a:hover { color: var(--accent); }
