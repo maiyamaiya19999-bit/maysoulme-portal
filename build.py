@@ -158,32 +158,42 @@ def build_index(data):
     total = sum(len(c["guides"]) for c in data["categories"])
     nav = "\n".join(f'      <a href="#{c["id"]}">{html.escape(c["title"])}</a>'
                     for c in data["categories"])
+    chips = "\n".join(
+        f'    <a href="#{c["id"]}">{html.escape(c["title"])} <b style="font-weight:600;color:#b3aca3">{len(c["guides"])}</b></a>'
+        for c in data["categories"])
     n = 0
     sections = []
     for c in data["categories"]:
-        rows = []
-        for g in c["guides"]:
+        cards = []
+        cells = len(c["guides"]) + 1          # первая карточка занимает две клетки
+        rem = cells % 3
+        last_span = (4 - rem) if rem else 0   # добираем последнюю до ровного ряда
+        for i, g in enumerate(c["guides"]):
             n += 1
-            rows.append(f"""        <a class="row" href="guides/{g['slug']}/">
-          <span class="row__n">{n:02d}</span>
-          <span class="row__body">
-            <span class="row__tag">{html.escape(g['tag'])}</span>
-            <span class="row__title">{html.escape(g['title'])}</span>
-            <span class="row__desc">{html.escape(g['desc'])}</span>
-          </span>
-          <span class="row__arrow">→</span>
+            lead = " card--lead" if i == 0 else ""
+            if last_span and i == len(c["guides"]) - 1:
+                lead += f" card--w{last_span}"
+            cards.append(f"""        <a class="card{lead}" href="guides/{g['slug']}/">
+          <span class="card__n">{n:02d}</span>
+          <span class="card__tag">{html.escape(g['tag'])}</span>
+          <span class="card__title">{html.escape(g['title'])}</span>
+          <span class="card__desc">{html.escape(g['desc'])}</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>""")
+        word = "материал" if len(c["guides"]) == 1 else ("материала" if len(c["guides"]) < 5 else "материалов")
         sections.append(f"""    <section class="cat" id="{c['id']}">
       <div class="cat__head">
         <h2 class="cat__title">{html.escape(c['title'])}</h2>
         <p class="cat__lead">{html.escape(c['lead'])}</p>
+        <span class="cat__count">{len(c['guides'])} {word}</span>
       </div>
-      <div class="rows">
-{chr(10).join(rows)}
+      <div class="cards">
+{chr(10).join(cards)}
       </div>
     </section>""")
     return (TEMPLATE.replace("%%TOTAL%%", str(total))
                     .replace("%%NAV%%", nav)
+                    .replace("%%CHIPS%%", chips)
                     .replace("%%SECTIONS%%", "\n\n".join(sections))
                     .replace("%%TG%%", TG)
                     .replace("%%INTENSIV%%", INTENSIV)
@@ -206,105 +216,144 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
 <style>
-  :root { --accent: #710C04; --gold: #c9a07a; --ink: #1a1a1a; --line: #e6e4e1; --mute: #8a8a8a; }
+  :root { --accent: #710C04; --gold: #c9a07a; --ink: #1a1a1a; --line: #e6e4e1;
+          --mute: #8a8a8a; --cream: #f7f5f2; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: var(--ink);
     font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  .wrap { max-width: 940px; margin: 0 auto; padding: 0 30px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
   /* навбар */
-  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.94);
-    backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
-  .nav__in { max-width: 940px; margin: 0 auto; padding: 15px 30px; display: flex; align-items: center; gap: 12px; }
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.93);
+    backdrop-filter: saturate(160%) blur(12px); border-bottom: 1px solid var(--line); }
+  .nav__in { max-width: 1080px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 12px; }
   .nav__logo img { height: 26px; display: block; }
   .nav__name { font-family: 'DM Sans', sans-serif; font-style: italic; color: var(--mute); font-size: 14.5px; }
-  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 14px; }
+  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 24px; font-size: 14px; }
   .nav__links a { text-decoration: none; color: #5a5a5a; transition: color .15s; }
   .nav__links a:hover { color: var(--accent); }
-  .nav__cta { border: 1px solid var(--accent); color: var(--accent) !important; padding: 8px 17px;
-    font-weight: 600; letter-spacing: .02em; transition: background .18s, color .18s; }
-  .nav__cta:hover { background: var(--accent); color: #fff !important; }
-  @media (max-width: 780px) { .nav__links a:not(.nav__cta) { display: none; } }
+  .nav__cta { background: var(--accent); color: #fff !important; padding: 10px 20px; font-weight: 600;
+    letter-spacing: .01em; transition: opacity .18s; }
+  .nav__cta:hover { opacity: .88; }
+  @media (max-width: 900px) { .nav__links a:not(.nav__cta) { display: none; } }
+  @media (max-width: 420px) { .nav__cta { padding: 9px 14px; font-size: 13px; } }
 
   /* герой */
-  .hero { padding: 112px 0 88px; max-width: 700px; }
+  .hero { display: grid; grid-template-columns: 1.35fr .65fr; gap: 56px; align-items: center;
+    padding: 84px 0 54px; }
   .hero__label { font-size: 10.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
-    color: var(--accent); display: block; margin-bottom: 30px; }
-  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(36px, 6.2vw, 58px);
-    font-weight: 400; line-height: 1.18; letter-spacing: -.01em; margin-bottom: 26px; }
+    color: var(--accent); display: block; margin-bottom: 26px; }
+  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(34px, 5.2vw, 54px);
+    font-weight: 400; line-height: 1.18; letter-spacing: -.01em; margin-bottom: 24px; }
   h1 em { font-style: italic; color: var(--accent); }
-  .hero__lead { color: #4a4a4a; font-size: 19px; line-height: 1.72; max-width: 580px; }
-  .hero__meta { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line);
-    display: flex; gap: 40px; flex-wrap: wrap; color: var(--mute); font-size: 13.5px;
-    letter-spacing: .04em; }
+  .hero__lead { color: #4a4a4a; font-size: 18.5px; line-height: 1.72; max-width: 560px; }
+  .hero__card { background: var(--cream); padding: 40px 34px; text-align: center; }
+  .hero__mono { height: 46px; margin-bottom: 26px; opacity: .9; }
+  .hero__stat { padding: 14px 0; border-top: 1px solid #e3ded7; }
+  .hero__stat:first-of-type { border-top: none; }
+  .hero__stat b { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px;
+    font-weight: 400; color: var(--accent); line-height: 1.25; }
+  .hero__stat span { font-size: 12.5px; color: #7d7669; letter-spacing: .06em; text-transform: uppercase; }
+  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0 52px; }
+    .hero__card { display: flex; align-items: center; justify-content: space-around; gap: 20px;
+      padding: 26px 24px; text-align: left; }
+    .hero__mono { display: none; } .hero__stat { border-top: none; padding: 0; } }
+
+  /* чипсы-навигация */
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 8px; }
+  .chips a { border: 1px solid var(--line); padding: 9px 18px; font-size: 13.5px; color: #5a5a5a;
+    text-decoration: none; transition: all .18s; white-space: nowrap; }
+  .chips a:hover { border-color: var(--accent); color: var(--accent); background: #fdfaf9; }
 
   /* разделы */
-  .cat { padding: 18px 0 62px; scroll-margin-top: 72px; }
-  .cat__head { margin-bottom: 8px; }
-  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px; font-weight: 400;
-    letter-spacing: -.005em; }
-  .cat__lead { color: var(--mute); font-size: 15.5px; margin-top: 8px; }
+  .cat { padding: 62px 0 12px; scroll-margin-top: 74px; }
+  .cat__head { display: flex; align-items: baseline; gap: 18px; padding-bottom: 22px;
+    border-bottom: 1px solid var(--line); margin-bottom: 30px; flex-wrap: wrap; }
+  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 28px; font-weight: 400; }
+  .cat__lead { color: var(--mute); font-size: 15px; }
+  .cat__count { margin-left: auto; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+    color: #b3aca3; }
 
-  /* строки-гайды */
-  .rows { margin-top: 26px; border-top: 1px solid var(--line); }
-  .row { display: flex; align-items: flex-start; gap: 26px; padding: 26px 14px 26px 0;
-    border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .22s, background .22s; }
-  .row:hover { background: #faf9f8; padding-left: 14px; padding-right: 0; }
-  .row__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 15px;
-    color: var(--accent); padding-top: 3px; min-width: 26px; opacity: .8; }
-  .row__body { flex: 1; }
-  .row__tag { display: block; font-size: 10px; font-weight: 600; letter-spacing: .2em;
-    text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
-  .row__title { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px;
-    line-height: 1.36; margin-bottom: 8px; transition: color .18s; }
-  .row:hover .row__title { color: var(--accent); }
-  .row__desc { display: block; font-size: 15.5px; line-height: 1.66; color: #6a6a6a; max-width: 620px; }
-  .row__arrow { color: var(--line); font-size: 19px; padding-top: 24px; transition: color .18s, transform .22s; }
-  .row:hover .row__arrow { color: var(--accent); transform: translateX(4px); }
-  @media (max-width: 560px) {
-    .row { gap: 16px; padding: 22px 0; }
-    .row__arrow { display: none; }
-    .row__title { font-size: 18px; }
-  }
+  /* карточки */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
+  .card { position: relative; display: flex; flex-direction: column; background: #fff;
+    border: 1px solid var(--line); padding: 26px 24px 22px; text-decoration: none;
+    transition: border-color .2s, box-shadow .25s, transform .25s; }
+  .card:hover { border-color: var(--accent); box-shadow: 0 14px 36px rgba(26,20,18,.09);
+    transform: translateY(-4px); }
+  .card__n { position: absolute; top: 22px; right: 22px; font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; font-size: 14px; color: #ccc5bb; transition: color .2s; }
+  .card:hover .card__n { color: var(--accent); }
+  .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 14px; }
+  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 19px; font-weight: 400;
+    line-height: 1.38; margin-bottom: 11px; }
+  .card__desc { font-size: 14.5px; line-height: 1.65; color: #6a6a6a; flex: 1; }
+  .card__go { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0ede9; font-size: 13.5px;
+    font-weight: 600; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+  .card__go i { font-style: normal; transition: transform .22s; }
+  .card:hover .card__go i { transform: translateX(5px); }
+
+  /* карточка-акцент — первая в разделе */
+  .card--lead { grid-column: span 2; background: var(--cream); border-color: #e6ded3; }
+  @media (max-width: 620px) { .card--lead { grid-column: span 1; } }
+  .card--lead .card__title { font-size: 25px; line-height: 1.3; }
+  .card--lead .card__desc { font-size: 15.5px; max-width: 92%; }
+  .card--lead .card__go { border-top-color: #e6ded3; }
+  .card--w2 { grid-column: span 2; }
+  .card--w3 { grid-column: span 3; }
+  .card--w2 .card__desc, .card--w3 .card__desc { max-width: 640px; }
+  @media (max-width: 900px) { .card--w3 { grid-column: span 2; } }
+  @media (max-width: 620px) { .card--w2, .card--w3 { grid-column: span 1; } }
+
+  /* полоса-цитата */
+  .quote { margin: 78px 0 0; padding: 54px 0; border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); text-align: center; }
+  .quote p { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 24px;
+    line-height: 1.55; max-width: 720px; margin: 0 auto; }
+  .quote p em { font-style: italic; color: var(--accent); }
+  .quote span { display: block; margin-top: 18px; font-size: 12.5px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--mute); }
 
   /* интенсив */
-  .intensiv { background: #121212; color: #fff; margin-top: 40px; padding: 104px 0 96px; scroll-margin-top: 60px; }
-  .intensiv__in { max-width: 940px; margin: 0 auto; padding: 0 30px; }
+  .intensiv { background: var(--ink); color: #fff; margin-top: 82px; padding: 76px 0; scroll-margin-top: 60px; }
+  .intensiv__in { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: grid;
+    grid-template-columns: 1.15fr .85fr; gap: 54px; align-items: start; }
+  @media (max-width: 880px) { .intensiv__in { grid-template-columns: 1fr; gap: 34px; } }
   .intensiv__label { display: inline-block; border: 1px solid var(--gold); color: var(--gold); font-size: 10.5px;
-    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 26px; }
-  .intensiv h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(32px, 5.4vw, 50px);
-    font-weight: 400; line-height: 1.2; margin-bottom: 22px; }
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
+  .intensiv h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 4.4vw, 40px);
+    font-weight: 400; line-height: 1.24; margin-bottom: 18px; }
   .intensiv h2 em { font-style: italic; color: var(--gold); }
-  .intensiv__lead { color: #bdbdbd; font-size: 18px; line-height: 1.72; max-width: 600px; }
-  .intensiv__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; margin-top: 56px;
-    border-top: 1px solid #2a2a2a; }
-  @media (max-width: 820px) { .intensiv__grid { grid-template-columns: 1fr; gap: 0; } }
-  .intensiv__item { padding: 22px 0; border-bottom: 1px solid #2a2a2a; }
-  .intensiv__item b { display: block; font-size: 15.5px; font-weight: 600; margin-bottom: 5px; }
-  .intensiv__item span { font-size: 14.5px; color: #9c9c9c; line-height: 1.6; }
-  .intensiv__proof { display: flex; gap: 46px; flex-wrap: wrap; margin: 52px 0 44px; }
-  .intensiv__stat b { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px;
-    font-weight: 400; color: var(--gold); line-height: 1.2; }
-  .intensiv__stat span { font-size: 13.5px; color: #9c9c9c; letter-spacing: .03em; }
-  .intensiv__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
-    padding: 17px 38px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
-  .intensiv__cta:hover { opacity: .86; }
-  .intensiv__note { font-size: 13.5px; color: #7d7d7d; margin-top: 16px; }
+  .intensiv p { color: #c4c4c4; font-size: 17px; line-height: 1.72; }
+  .intensiv__stats { display: flex; gap: 34px; flex-wrap: wrap; margin: 30px 0 6px; }
+  .intensiv__stats div b { display: block; font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 26px; font-weight: 400; color: var(--gold); }
+  .intensiv__stats div span { font-size: 12.5px; color: #9c9c9c; letter-spacing: .04em; }
+  .intensiv__list { list-style: none; margin: 6px 0 0; }
+  .intensiv__list li { padding: 13px 0; border-bottom: 1px solid #333; font-size: 15.5px; color: #e0e0e0; }
+  .intensiv__list li::before { content: "—"; color: var(--gold); margin-right: 10px; }
+  .intensiv__cta { display: inline-block; background: #fff; color: var(--ink) !important; text-decoration: none;
+    padding: 16px 34px; font-weight: 700; font-size: 16px; margin-top: 30px; transition: opacity .18s; }
+  .intensiv__cta:hover { opacity: .87; }
+  .intensiv__note { font-size: 13.5px; color: #8f8f8f; margin-top: 14px; }
 
   /* телеграм */
-  .tg { padding: 90px 0; border-bottom: 1px solid var(--line); }
-  .tg__in { max-width: 940px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center;
-    justify-content: space-between; gap: 32px; flex-wrap: wrap; }
-  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px; font-weight: 400; margin-bottom: 8px; }
-  .tg p { color: var(--mute); font-size: 16px; max-width: 460px; }
-  .tg a { display: inline-block; border: 1px solid var(--ink); padding: 15px 32px; font-weight: 600;
-    font-size: 15.5px; text-decoration: none; transition: background .18s, color .18s; white-space: nowrap; }
-  .tg a:hover { background: var(--ink); color: #fff; }
+  .tg { background: var(--cream); padding: 74px 0; }
+  .tg__in { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center;
+    justify-content: space-between; gap: 30px; flex-wrap: wrap; }
+  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 26px; font-weight: 400; margin-bottom: 8px; }
+  .tg p { color: #6f6a63; font-size: 16px; max-width: 470px; }
+  .tg a { display: inline-block; background: var(--accent); color: #fff !important; padding: 15px 32px;
+    font-weight: 600; font-size: 15.5px; text-decoration: none; transition: opacity .18s; white-space: nowrap; }
+  .tg a:hover { opacity: .88; }
 
   /* подвал */
-  .foot { padding: 34px 0 60px; font-size: 13.5px; color: var(--mute); display: flex; gap: 20px;
+  .foot { padding: 32px 0 58px; font-size: 13.5px; color: var(--mute); display: flex; gap: 20px;
     flex-wrap: wrap; justify-content: space-between; }
   .foot a { color: var(--mute); }
 </style>
@@ -317,49 +366,59 @@ TEMPLATE = """<!DOCTYPE html>
     <span class="nav__name">maysoulme</span>
     <div class="nav__links">
 %%NAV%%
-      <a class="nav__cta" href="#intensiv">Интенсив</a>
+      <a class="nav__cta" href="#intensiv">Вступить на интенсив</a>
     </div>
   </div>
 </nav>
 
 <div class="wrap">
   <header class="hero">
-    <span class="hero__label">Библиотека maysoulme</span>
-    <h1>Гайды и промпты для блога <em>с нейросетями</em></h1>
-    <p class="hero__lead">Собрано то, чем пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Забирай и применяй.</p>
-    <div class="hero__meta">
-      <span>%%TOTAL%% материалов</span>
-      <span>Бесплатно, без регистрации</span>
-      <span>Библиотека пополняется</span>
+    <div>
+      <span class="hero__label">Библиотека maysoulme</span>
+      <h1>Гайды и промпты для блога <em>с нейросетями</em></h1>
+      <p class="hero__lead">Собрано то, чем пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Забирай и применяй.</p>
     </div>
+    <aside class="hero__card">
+      <img class="hero__mono" src="logo-ms.png" alt="">
+      <div class="hero__stat"><b>%%TOTAL%%</b><span>материалов</span></div>
+      <div class="hero__stat"><b>0 ₽</b><span>без регистрации</span></div>
+      <div class="hero__stat"><b>4</b><span>раздела</span></div>
+    </aside>
   </header>
 
+  <div class="chips">
+%%CHIPS%%
+  </div>
+
 %%SECTIONS%%
+
+  <section class="quote">
+    <p>Разница не в удаче и не в количестве роликов. Разница в том, <em>кому ты говоришь, что именно и куда ведёшь человека дальше</em>.</p>
+    <span>600 000 просмотров и 8 подписчиков · против · 19 000 просмотров и 30 000 ₽</span>
+  </section>
 </div>
 
 <section class="intensiv" id="intensiv">
   <div class="intensiv__in">
-    <span class="intensiv__label">Платный интенсив</span>
-    <h2>ИИ-стратегия <em>на миллион</em></h2>
-    <p class="intensiv__lead">Гайды выше — это отдельные детали. На интенсиве из них собирается система: блог растёт не от удачного ролика, а от того, что стоит за ним.</p>
-
-    <div class="intensiv__proof">
-      <div class="intensiv__stat"><b>+10 000</b><span>в Telegram</span></div>
-      <div class="intensiv__stat"><b>+22 000</b><span>в Instagram</span></div>
-      <div class="intensiv__stat"><b>19 000</b><span>просмотров → 240 подписчиков и 30 000 ₽</span></div>
+    <div>
+      <span class="intensiv__label">Платный интенсив</span>
+      <h2>ИИ-стратегия <em>на миллион</em></h2>
+      <p>Гайды выше — это отдельные детали. На интенсиве мы собираем из них систему: стратегия, контент, свои ИИ-ассистенты и парсер идей, который приносит темы, пока ты завтракаешь.</p>
+      <div class="intensiv__stats">
+        <div><b>+10 000</b><span>в Telegram</span></div>
+        <div><b>+22 000</b><span>в Instagram</span></div>
+      </div>
+      <a class="intensiv__cta" href="%%INTENSIV%%">Смотреть программу и цены →</a>
+      <p class="intensiv__note">Вечный доступ · чат поддержки · есть формат VIP с личным сопровождением</p>
     </div>
-
-    <div class="intensiv__grid">
-      <div class="intensiv__item"><b>Стратегия и позиционирование</b><span>За что тебе платят и чем ты отличаешься от сотни похожих экспертов</span></div>
-      <div class="intensiv__item"><b>Текстовые и разговорные ролики</b><span>Два формата: один набирает холодную аудиторию, другой превращает её в свою</span></div>
-      <div class="intensiv__item"><b>ИИ-агент с памятью канала</b><span>Помнит все твои посты и предлагает продолжение начатых тем</span></div>
-      <div class="intensiv__item"><b>Парсер идей</b><span>Собирает залетающие ролики ниши, пока ты завтракаешь</span></div>
-      <div class="intensiv__item"><b>Готовые ассистенты и шаблоны</b><span>Сценарист, редактор, распаковка, прогревы — забираешь и пользуешься</span></div>
-      <div class="intensiv__item"><b>Без единого программиста</b><span>Всё собрано в Claude Code — задачи объясняются обычными словами</span></div>
-    </div>
-
-    <p style="margin-top:48px"><a class="intensiv__cta" href="%%INTENSIV%%">Смотреть программу и цены →</a></p>
-    <p class="intensiv__note">Вечный доступ · чат поддержки · формат VIP с личным сопровождением</p>
+    <ul class="intensiv__list">
+      <li>Стратегия блога и позиционирование</li>
+      <li>Текстовые и разговорные reels</li>
+      <li>ИИ-агент с памятью твоего канала</li>
+      <li>Парсер залетающих идей ниши</li>
+      <li>Готовые ассистенты и шаблоны</li>
+      <li>Собрано без единого программиста</li>
+    </ul>
   </div>
 </section>
 
