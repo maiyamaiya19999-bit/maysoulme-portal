@@ -321,7 +321,7 @@ def resolve(src: str):
 # ---------------------------------------------------------------- главная
 
 def build_index(data):
-    short = {"reels": "Reels", "content": "Контент", "start": "ИИ с нуля", "claude": "Claude", "life": "Для жизни"}
+    short = {"reels": "Reels", "content": "Контент", "start": "ИИ с «0»", "claude": "Claude", "life": "Для жизни"}
     nav = "\n".join(f'      <a href="#{c["id"]}">{short.get(c["id"], strip_tags(c["title"]))}</a>'
                     for c in data["categories"])
     index = "\n".join(
@@ -455,7 +455,16 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .index { display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line); font-size: 13px; }
   .index::-webkit-scrollbar { display: none; }
-  @media (max-width: 620px) { .index { flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; scrollbar-width: none; gap: 22px; padding-right: 40px;
+  .index-wrap { position: relative; }
+  .index__more { display: none; }
+  @media (max-width: 620px) {
+    .index__more { display: flex; align-items: center; justify-content: center; position: absolute; right: 0; top: 0; bottom: 0;
+      width: 44px; color: var(--accent); font-size: 18px; pointer-events: none;
+      background: linear-gradient(90deg, transparent, var(--bg) 45%); animation: ms-nudge 1.6s ease-in-out infinite; }
+    .index-wrap.at-end .index__more { display: none; }
+    @keyframes ms-nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+  }
+  @media (max-width: 620px) { .index { flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; scrollbar-width: none; gap: 22px; padding-right: 48px;
     -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); } }
   .index__label { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
   .index a { text-decoration: none; color: var(--muted); transition: color .15s; }
@@ -619,10 +628,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </figure>
   </header>
 
+  <div class="index-wrap">
   <nav class="index" aria-label="Разделы">
     <span class="index__label">Разделы</span>
 %%INDEX%%
   </nav>
+  <span class="index__more" aria-hidden="true">→</span>
+  </div>
 
   <section class="route">
     <div class="route__head">
@@ -712,6 +724,9 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   }
   msIcon();
   document.documentElement.classList.add('js');
+  (function(){ var w = document.querySelector('.index-wrap'), n = w && w.querySelector('.index'); if (!n) return;
+    function chk(){ w.classList.toggle('at-end', n.scrollLeft + n.clientWidth >= n.scrollWidth - 6); }
+    n.addEventListener('scroll', chk, {passive: true}); window.addEventListener('resize', chk); chk(); })();
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
     document.querySelectorAll('.card, .cat__head, .route, .quote, .pull').forEach(function(el, i){ el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el); });
