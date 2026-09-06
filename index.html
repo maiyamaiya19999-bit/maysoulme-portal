@@ -77,15 +77,15 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   }
 
   /* ---------- оглавление ---------- */
-  .index { display: flex; align-items: center; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line); font-size: 13.5px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  .index { display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); font-size: 13px; }
   .index::-webkit-scrollbar { display: none; }
-  @media (max-width: 620px) { .index { gap: 22px; padding-right: 40px;
+  @media (max-width: 620px) { .index { flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; scrollbar-width: none; gap: 22px; padding-right: 40px;
     -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); } }
   .index__label { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
   .index a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .index a:hover { color: var(--accent); }
-  .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 8px; }
+  .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 7px; }
 
   /* ---------- маршрут ---------- */
   .route { margin-top: 64px; padding: 44px 44px 40px; background: var(--cream); }
@@ -201,6 +201,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <a href="#reels">Reels</a>
       <a href="#content">Контент</a>
       <a href="#start">ИИ с нуля</a>
+      <a href="#claude">Claude</a>
       <a href="#life">Для жизни</a>
       <a class="nav__cta" href="#intensiv">Вступить на интенсив</a>
       <button class="theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
@@ -225,7 +226,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <a href="#reels"><i>01</i>Reels и разговорные ролики</a>
     <a href="#content"><i>02</i>Контент, тексты и смыслы</a>
     <a href="#start"><i>03</i>ИИ с нуля</a>
-    <a href="#life"><i>04</i>ИИ для жизни</a>
+    <a href="#claude"><i>04</i>Claude и свои ассистенты</a>
+    <a href="#life"><i>05</i>ИИ для жизни</a>
   </nav>
 
   <section class="route">
@@ -234,10 +236,10 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <p class="route__lead">Не нужно читать всё подряд. Три шага по порядку — и у вас уже есть доступ, свой голос и первый ролик.</p>
     </div>
     <div class="route__steps">
-      <a class="step" href="guides/claude-i-chatgpt-v-rossii/">
+      <a class="step" href="guides/claude-s-nulya/">
         <span class="step__n">01</span>
-        <span class="step__title">Поставить Claude</span>
-        <span class="step__desc">Полчаса — и доступ есть, без бана и нервов</span>
+        <span class="step__title">Подключить Claude как у меня</span>
+        <span class="step__desc">Аккаунт, подписка, Claude Code и первые правила общения</span>
       </a>
       <a class="step" href="guides/raspakovka-lichnosti/">
         <span class="step__n">02</span>
@@ -279,10 +281,16 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
           <span class="card__desc">Сорок готовых каркасов под разные ниши. Берёте, подставляете свою тему, снимаете.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
-        <a class="card card--w2" href="guides/lichnaya-istoriya/">
+        <a class="card" href="guides/lichnaya-istoriya/">
           <span class="card__top"><span class="card__tag">Промпт · 4 мин</span><span class="card__n">04</span></span>
           <span class="card__title">Хаотичный голос → <i>личная история</i></span>
           <span class="card__desc">Наговариваете поток мыслей — на выходе история под суфлёр, которую не стыдно рассказать.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card" href="guides/claude-montazher/">
+          <span class="card__top"><span class="card__tag">Скилл · 12 мин</span><span class="card__n">05</span></span>
+          <span class="card__title">Claude-<b>монтажёр</b>: монтирует reels за вас</span>
+          <span class="card__desc">Кидаете сырое видео — получаете смонтированный ролик: паузы вырезаны, речь ускорена, субтитры стоят. Скилл и все файлы внутри.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
       </div>
@@ -298,33 +306,39 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/post-karusel/">
-          <span class="card__top"><span class="card__tag">Промпт · 27 мин</span><span class="card__n">05</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 27 мин</span><span class="card__n">06</span></span>
           <span class="card__title">Пост-карусель, которую <i>досвайпывают</i></span>
           <span class="card__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний закрывает мысль.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/promt-humanizator/">
-          <span class="card__top"><span class="card__tag">Промпт · 10 мин</span><span class="card__n">06</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 10 мин</span><span class="card__n">07</span></span>
           <span class="card__title">Промт-<b>хуманизатор</b></span>
           <span class="card__desc">Как из гладкого текста нейросети сделать живую речь, которую не стыдно опубликовать от своего имени.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/raspakovka-lichnosti/">
-          <span class="card__top"><span class="card__tag">Гайд · 10 мин</span><span class="card__n">07</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 10 мин</span><span class="card__n">08</span></span>
           <span class="card__title"><i>Распаковка</i> личности для блога</span>
           <span class="card__desc">Вопросы, которые вытаскивают из вас смыслы и истории. После них и блог вести легче, и ассистенты говорят вашими словами.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/analiz-ca-tripwire/">
-          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">08</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">09</span></span>
           <span class="card__title">Анализ ЦА для <b>трипваера</b></span>
           <span class="card__desc">Как понять, за что ваша аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/promt-pravdy/">
-          <span class="card__top"><span class="card__tag">Промпт · 4 мин</span><span class="card__n">09</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 4 мин</span><span class="card__n">10</span></span>
           <span class="card__title">Промпт <i>правды</i></span>
           <span class="card__desc">Как отучить нейросеть выдумывать и научить признаваться, когда она чего-то не знает.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card card--w3" href="guides/prodayushchij-material/">
+          <span class="card__top"><span class="card__tag">Гайд · 3 мин</span><span class="card__n">11</span></span>
+          <span class="card__title">Как создать <i>продающий</i> материал</span>
+          <span class="card__desc">Принципы, которые работают в любом формате — от лид-магнита до лендинга.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
       </div>
@@ -339,32 +353,26 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
         </div>
       </div>
       <div class="cards">
-        <a class="card card--lead" href="guides/claude-i-chatgpt-v-rossii/">
-          <span class="card__top"><span class="card__tag">Гайд · 17 мин</span><span class="card__n">10</span></span>
+        <a class="card card--lead" href="guides/claude-s-nulya/">
+          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">12</span></span>
+          <span class="card__title">Claude <i>с нуля</i>: подключаем всё как у меня</span>
+          <span class="card__desc">Аккаунт, подписка, Claude Code на компьютере, первые правила общения — по шагам, ничего не пропуская.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card" href="guides/claude-i-chatgpt-v-rossii/">
+          <span class="card__top"><span class="card__tag">Гайд · 17 мин</span><span class="card__n">13</span></span>
           <span class="card__title">Как установить <b>Claude</b> и ChatGPT в России</span>
           <span class="card__desc">Понятный маршрут: регистрация, номер, приложения, карта и первая безопасная оплата.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/podgotovka-akkaunta/">
-          <span class="card__top"><span class="card__tag">Гайд · 8 мин</span><span class="card__n">11</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 8 мин</span><span class="card__n">14</span></span>
           <span class="card__title">Как <i>технически</i> подготовить аккаунт</span>
           <span class="card__desc">Пошагово и с картинками: что настроить до регистрации, чтобы аккаунт не улетел в бан.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
-        <a class="card" href="guides/luchshie-skilly-claude/">
-          <span class="card__top"><span class="card__tag">Подборка · 7 мин</span><span class="card__n">12</span></span>
-          <span class="card__title">Лучшие <b>скиллы</b> для Claude в 2026</span>
-          <span class="card__desc">Что такое скиллы, какие ставить первыми и сколько часов они реально экономят.</span>
-          <span class="card__go">Открыть <i>&rarr;</i></span>
-        </a>
-        <a class="card" href="guides/svoj-skill-dlya-codex/">
-          <span class="card__top"><span class="card__tag">Гайд · 3 мин</span><span class="card__n">13</span></span>
-          <span class="card__title">Как собрать <i>свой первый</i> скилл</span>
-          <span class="card__desc">Делаем скилл под вашу задачу обычными словами, без единой строчки кода.</span>
-          <span class="card__go">Открыть <i>&rarr;</i></span>
-        </a>
-        <a class="card" href="guides/kimi-dlya-bloginga/">
-          <span class="card__top"><span class="card__tag">Гайд · 11 мин</span><span class="card__n">14</span></span>
+        <a class="card card--w2" href="guides/kimi-dlya-bloginga/">
+          <span class="card__top"><span class="card__tag">Гайд · 11 мин</span><span class="card__n">15</span></span>
           <span class="card__title"><b>Kimi</b> для блогинга: система из 7 шагов</span>
           <span class="card__desc">Бесплатная альтернатива, если пока не до оплат: вся система работы с контентом на ней.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -372,9 +380,45 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
     </section>
 
-    <section class="cat" id="life">
+    <section class="cat" id="claude">
       <div class="cat__head">
         <span class="cat__num">04</span>
+        <div class="cat__text">
+          <h2 class="cat__title">Claude и <i>свои ассистенты</i></h2>
+          <p class="cat__lead">Чтобы нейросеть знала ваш блог и работала за вас.</p>
+        </div>
+      </div>
+      <div class="cards">
+        <a class="card card--lead" href="guides/claude-dlya-kontenta/">
+          <span class="card__top"><span class="card__tag">Гайд · 5 мин</span><span class="card__n">16</span></span>
+          <span class="card__title">Claude <i>для контента</i>: регистрация, настройки, проекты</span>
+          <span class="card__desc">Без айтишной магии: как начать работать в Claude, где обычно спотыкаются и как собрать себе ИИ-помощника под блог.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card" href="guides/baza-znanij-assistenta/">
+          <span class="card__top"><span class="card__tag">Гайд · 4 мин</span><span class="card__n">17</span></span>
+          <span class="card__title">Как собрать <b>базу знаний</b> для ассистента</span>
+          <span class="card__desc">Четыре файла, с которыми Claude пишет как вы, а не как шаблонная нейросеть.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card" href="guides/luchshie-skilly-claude/">
+          <span class="card__top"><span class="card__tag">Подборка · 7 мин</span><span class="card__n">18</span></span>
+          <span class="card__title">Лучшие <b>скиллы</b> для Claude в 2026</span>
+          <span class="card__desc">Что такое скиллы, какие ставить первыми и сколько часов они реально экономят.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+        <a class="card card--w2" href="guides/svoj-skill-dlya-codex/">
+          <span class="card__top"><span class="card__tag">Гайд · 3 мин</span><span class="card__n">19</span></span>
+          <span class="card__title">Как собрать <i>свой первый</i> скилл</span>
+          <span class="card__desc">Делаем скилл под вашу задачу обычными словами, без единой строчки кода.</span>
+          <span class="card__go">Открыть <i>&rarr;</i></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="cat" id="life">
+      <div class="cat__head">
+        <span class="cat__num">05</span>
         <div class="cat__text">
           <h2 class="cat__title">ИИ <i>для жизни</i></h2>
           <p class="cat__lead">Не про блог — про всё остальное.</p>
@@ -382,13 +426,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/gde-moi-foto/">
-          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">15</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">20</span></span>
           <span class="card__title">Где в интернете есть <i>мои фото</i></span>
           <span class="card__desc">Находим ваши фотографии и данные, которые давно пора убрать из сети.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/genealogicheskoe-drevo/">
-          <span class="card__top"><span class="card__tag">Гайд · 4 мин</span><span class="card__n">16</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 4 мин</span><span class="card__n">21</span></span>
           <span class="card__title"><i>Генеалогическое древо</i> с ChatGPT</span>
           <span class="card__desc">Как собрать историю семьи по обрывкам документов и рассказов родственников.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>

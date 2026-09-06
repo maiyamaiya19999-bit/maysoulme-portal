@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude-монтажёр — скилл для монтажа reels | maysoulme</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; font-size:17px; color:var(--g-fg); background:var(--g-bg); line-height:1.65; }
+  .wrap { max-width:820px; margin:0 auto; padding:0 24px; }
+  nav { display:flex; justify-content:space-between; align-items:center; padding:20px 24px; border-bottom:1px solid var(--g-line); max-width:820px; margin:0 auto; }
+  nav img { height:38px; }
+  nav .nick { font-family:'DM Sans',sans-serif; font-style:italic; color:var(--g-faint); font-size:16px; }
+  h1 { font-family:'Libre Baskerville',serif; font-size:38px; line-height:1.25; margin:56px 0 18px; }
+  h1 em { color:var(--g-accent); }
+  h2 { font-family:'Libre Baskerville',serif; font-size:26px; margin:64px 0 16px; }
+  h3 { font-family:'Inter',sans-serif; font-size:18px; font-weight:700; margin:28px 0 8px; }
+  p { margin:0 0 14px; }
+  .lead { font-size:19px; color:var(--g-muted); }
+  .num { font-family:'Libre Baskerville',serif; font-style:italic; color:var(--g-accent); font-size:22px; margin-right:10px; }
+  .gray { background:var(--g-surface); padding:22px 24px; margin:20px 0; }
+  .card { background:var(--g-surface); border:1px solid var(--g-line); padding:20px 22px; margin:14px 0; }
+  table { width:100%; border-collapse:collapse; margin:18px 0; font-size:16px; }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--g-line); vertical-align:top; }
+  th { font-weight:600; background:var(--g-surface); }
+  code, .mono { font-family:ui-monospace,Menlo,monospace; font-size:14.5px; background:var(--g-surface); padding:1px 6px; }
+  .btn { display:inline-block; background:var(--g-accent); color:var(--g-bg); padding:14px 26px; font-weight:600; text-decoration:none; font-size:16px; border:none; cursor:pointer; margin:6px 10px 6px 0; }
+  .btn:hover { background:#8d1508; }
+  .btn-ghost { display:inline-block; background:var(--g-bg); color:var(--g-accent); border:2px solid var(--g-accent); padding:12px 24px; font-weight:600; text-decoration:none; font-size:16px; cursor:pointer; margin:6px 10px 6px 0; }
+  .btn-ghost:hover { background:var(--g-surface); }
+  ul, ol { margin:0 0 16px 22px; }
+  li { margin-bottom:8px; }
+  .tip { border:1px solid var(--g-accent); padding:18px 22px; margin:20px 0; }
+  .tip b { color:var(--g-accent); }
+  .files a { display:block; padding:12px 0; border-bottom:1px solid var(--g-line); text-decoration:none; color:var(--g-fg); font-weight:500; }
+  .files a span { color:var(--g-accent); font-weight:600; }
+  .files a small { color:var(--g-faint); font-weight:400; }
+  .prompt { background:var(--g-fg); color:var(--g-line); padding:20px 22px; font-family:ui-monospace,Menlo,monospace; font-size:14px; white-space:pre-wrap; margin:14px 0; }
+  .prompt .h { color:#c9a07a; }
+  footer { margin:80px 0 40px; padding-top:24px; border-top:1px solid var(--g-line); color:var(--g-faint); font-size:15px; }
+  .copied { background:#2e7d32 !important; }
+  @media (max-width:600px){ h1{font-size:29px} h2{font-size:22px} th,td{font-size:14px; padding:8px} }
+</style>
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
+<style id="ms-theme-vars">
+  :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
+          --g-line:#e6e4e1; --g-muted:#555555; --g-faint:#8f8a84; }
+  [data-theme="dark"] { --g-bg:#100f0e; --g-surface:#191715; --g-fg:#ece7e1; --g-accent:#d8ac83;
+          --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
+  html, body { background: var(--g-bg); color: var(--g-fg); }
+  [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude-монтажёр: монтирует reels за вас">
+<meta property="og:description" content="Кидаете сырое видео — получаете смонтированный ролик: паузы вырезаны, речь ускорена, субтитры стоят. Скилл и все файлы внутри.">
+<meta property="og:url" content="https://maysoulme.ru/guides/claude-montazher/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+<div class="ms-progress"><i></i></div>
+<div class="ms-bar">
+  <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">12 мин чтения</span>
+  <span class="ms-bar__name">maysoulme</span>
+  <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
+</div>
+
+
+<nav><img src="../../logo-ms.png" alt="MS"><span class="nick">maysoulme</span></nav>
+<div class="wrap">
+
+<img src="hero.jpg" alt="" style="width:100%;display:block;margin:36px 0 0">
+
+<h1><em>Claude</em>-монтажёр: монтирует твои <em>reels</em> за тебя</h1>
+<p class="lead">Готовый скилл, который превращает Claude в личного видеомонтажёра. Кидаешь сырое видео — получаешь смонтированный ролик: паузы вырезаны, речь ускорена, субтитры слово-в-слово, заголовки, вставки со звуками, музыка. Всё в едином минималистичном стиле.</p>
+
+<div class="gray">
+<b>Что скилл делает сам:</b>
+<ul style="margin-top:10px; margin-bottom:0">
+<li>вырезает все паузы и ускоряет речь в 1.3× (тон голоса не меняется)</li>
+<li>ставит хук-заголовок в начале и призыв с кодовым словом — с рукописным акцентом</li>
+<li>субтитры, которые появляются слово за словом точно под речь</li>
+<li>вставляет твои скрины и мемы на нужных фразах — с звуком появления</li>
+<li>полноэкранные перебивки видео, плавные приближения по смыслу речи</li>
+<li>музыка фоном, фирменные полоски сверху и градиент снизу</li>
+</ul>
+</div>
+
+<div class="tip"><b>Впервые видишь Claude?</b> Сначала пройди мой <a href="../claude-s-nulya/">гайд для новичков «Claude с нуля»</a> — там по шагам: регистрация, подписка, установка и первый запуск. Потом возвращайся сюда за скиллом.</div>
+
+<div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Установи Claude</a></li><li><a href="#s-2">Скачай и подключи скилл</a></li><li><a href="#s-3">Создай папки и разложи файлы</a></li><li><a href="#s-4">Скачай файлы шаблона</a></li><li><a href="#s-5">Как давать задание (ТЗ)</a></li><li><a href="#s-6">Что дальше</a></li></ol></div>
+<h2 id="s-1"><span class="num">01.</span>Установи Claude</h2>
+<p>Нужен <b>Claude Code</b> (приложение для компьютера, Mac или Windows) с подпиской. Скачать: <a href="https://claude.com/claude-code" style="color:var(--g-accent)">claude.com/claude-code</a>. Если Claude у тебя уже стоит — пропускай этот шаг.</p>
+
+<h2 id="s-2"><span class="num">02.</span>Скачай и подключи скилл</h2>
+<p>Скилл — это один текстовый файл-инструкция для Claude. Два способа получить:</p>
+<p>
+<a class="btn" href="files/SKILL.md" download>Скачать файл скилла</a>
+<button class="btn-ghost" id="copyBtn" onclick="copySkill()">Скопировать текст скилла</button>
+</p>
+<p>Дальше просто скажи Claude: <span class="mono">«создай мне скилл для монтажа reels, вот файл»</span> — и приложи файл (или вставь скопированный текст). Claude сам положит его куда нужно. Всё, скилл подключён.</p>
+
+<h2 id="s-3"><span class="num">03.</span>Создай папки и разложи файлы</h2>
+<p>Попроси Claude: <span class="mono">«создай папки для монтажа по скиллу»</span> — он сделает на рабочем столе папку <code>reels</code> с подпапками. Вот что куда класть:</p>
+<table>
+<tr><th>Папка</th><th>Что туда класть</th></tr>
+<tr><td><code>input</code></td><td>Сырое видео, которое надо смонтировать</td></tr>
+<tr><td><code>inserts</code></td><td>Скрины и картинки <b>только для этого ролика</b></td></tr>
+<tr><td><code>context_assets</code></td><td>Картинки и видео, которые можно использовать <b>во всех роликах</b> (Claude сам выберет подходящие по смыслу). Называй файлы понятно: «скрин статистики.jpg», «мем кот.jpg»</td></tr>
+<tr><td><code>library</code></td><td>Файлы шаблона: полоски и градиент (скачай ниже)</td></tr>
+<tr><td><code>stickers</code></td><td>Иконка, которая будет стоять у субтитров (PNG без фона)</td></tr>
+<tr><td><code>music</code></td><td>Фоновая музыка (mp3)</td></tr>
+<tr><td><code>sfx</code></td><td>Короткие звуки для появления вставок (свуш, поп)</td></tr>
+<tr><td><code>fonts</code></td><td>Шрифты: для заголовков, для субтитров и рукописный (скачай ниже)</td></tr>
+<tr><td><code>output</code></td><td>Сюда Claude положит готовый ролик — отсюда забираешь</td></tr>
+</table>
+
+<h2 id="s-4"><span class="num">04.</span>Скачай файлы шаблона</h2>
+<p>Это мои готовые файлы — с ними ролики будут выглядеть как у меня. Скачай и разложи по папкам:</p>
+<div class="files">
+<a href="files/poloski.png" download><span>полоски.png</span> — лента с линиями и «2X» сверху <small>→ в папку library</small></a>
+<a href="files/gradient-niz.png" download><span>градиент.png</span> — мягкое затемнение снизу <small>→ в папку library</small></a>
+<a href="files/flashing-lights.mp3" download><span>flashing lights.mp3</span> — фоновая музыка <small>→ в папку music</small></a>
+<a href="files/Heading-Now-Extrabold.ttf" download><span>Heading Now Extrabold.ttf</span> — шрифт заголовков <small>→ в папку fonts</small></a>
+<a href="files/HelveticaNeue-Roman.otf" download><span>HelveticaNeue-Roman.otf</span> — шрифт субтитров <small>→ в папку fonts</small></a>
+<a href="files/denistina_en.ttf" download><span>denistina_en.ttf</span> — рукописный шрифт <small>→ в папку fonts</small></a>
+</div>
+<div class="tip">
+<b>Можно своё.</b> Шрифты можно заменить на любые свои — просто положи свои файлы в папку fonts и скажи Claude, какой для чего. Музыку и звуки — тоже свои, в music и sfx.
+</div>
+<div class="tip">
+<b>Как сделать стикер без фона.</b> Скинь любую картинку в ChatGPT и напиши: «удали фон, отдай PNG с прозрачным фоном». Получившийся файл клади в stickers или context_assets — Claude обведёт его аккуратным тонким контуром автоматически.
+</div>
+
+<h2 id="s-5"><span class="num">05.</span>Как давать задание (ТЗ)</h2>
+<p>Открой Claude, попроси смонтировать и напиши простое ТЗ. Волшебной формы нет — пиши по-человечески. Главное указать три вещи: <b>хук</b> (заголовок в начале), <b>кодовое слово</b> (если в ролике есть призыв) и <b>какие вставки где показать</b>.</p>
+<div class="prompt"><span class="h"># Пример ТЗ (скопируй и поменяй под себя):</span>
+
+Смонтируй ролик из input по скиллу.
+
+ХУК: МНЕ ТЕПЕРЬ МОНТАЖ ДЕЛАЕТ claude
+КОДОВОЕ СЛОВО: монтаж
+МУЗЫКА: flashing lights
+
+Вставки:
+— когда говорю «специальный скилл» — покажи скрин с файлами
+— когда говорю «как оно должно выглядеть» — скрин «настройки»
+— на фразе «клод будет монтировать все ролики» — фуллскрин
+  видео «демо монтажа»
+— на «колхозный монтаж» — мем с котом</div>
+<div class="gray">
+<b>Правила, чтобы результат был точным:</b>
+<ul style="margin-top:10px;margin-bottom:0">
+<li>В хуке последнее слово автоматически станет рукописным — ставь в конец то слово, которое хочешь выделить.</li>
+<li>Вставки описывай словами («скрин со статистикой») — Claude сам откроет картинки и поймёт, какая есть какая.</li>
+<li>Файлы можно не переименовывать, но с понятными именами надёжнее.</li>
+<li>Если что-то не нравится в результате — просто напиши правку словами: «субтитры чуть больше», «музыку потише». Claude переделает и запомнит на будущее.</li>
+</ul>
+</div>
+
+<h2 id="s-6"><span class="num">06.</span>Что дальше</h2>
+<p>Claude смонтирует ролик и положит его в папку <code>output</code>. Первый ролик может занять несколько минут и потребовать пару правок — это нормально: так ты настраиваешь шаблон под себя. Дальше каждый новый ролик будет собираться по накатанной: закинула видео → написала ТЗ → забрала готовое.</p>
+
+<footer>
+<p>Скилл и гайд — <span style="font-family:'DM Sans',sans-serif;font-style:italic">maysoulme</span>. Вопросы — в директ.</p>
+</footer>
+</div>
+
+<textarea id="skillText" style="display:none">---
+name: reels-montage
+description: Claude-монтажёр разговорных reels в минималистичном стиле maysoulme — резка пауз, ускорение 1.3×, субтитры word-by-word, хук и CTA с рукописным словом, вставки со звуком, музыка, фирменные полоски и градиент. Используй, когда просят «смонтируй ролик» или дают ТЗ на монтаж.
+---
+
+# Claude-монтажёр reels (универсальный скилл maysoulme)
+
+Ты — профессиональный монтажёр вертикальных разговорных reels 1080×1920. Из сырого видео делаешь готовый к выкладке ролик строго по шаблону ниже. Шаблон ФИКСИРОВАННЫЙ: от ролика к ролику меняются только исходник, тексты, вставки и музыка. Дизайн не переизобретать.
+
+## 0. Первый запуск (один раз)
+
+1. Проверь инструменты: `ffmpeg` (с libass и drawtext) и распознавание речи (whisper.cpp или аналог). Если их нет — установи сам любым доступным на этой машине способом (brew / статические сборки / whisper.cpp с моделью small). Не проси пользователя делать это руками, если можешь сам.
+2. Создай рабочие папки (см. раздел 1) на Рабочем столе в папке `reels/`, если их нет.
+3. Попроси пользователя положить файлы шаблона (полоски, градиент, шрифты, музыку) по папкам — см. инструкцию для пользователя.
+
+## 1. Папки
+
+```
+reels/
+├── input/           СЮДА пользователь кладёт сырое видео (одно или несколько)
+├── inserts/         вставки ТОЛЬКО для текущего ролика (скрины, фото, видео)
+├── context_assets/  ПОСТОЯННЫЕ вставки на все ролики (скрины, стикеры, демо-видео) — НИКОГДА не удалять
+├── library/         файлы шаблона: полоски (strip), градиент (gradient), мемы — НИКОГДА не удалять
+├── stickers/        иконка-стикер у субтитров (PNG без фона)
+├── music/           фоновая музыка (mp3)
+├── sfx/             звуки появления вставок (mp3/wav)
+├── fonts/           шрифты: заголовочный (condensed), субтитровый (sans), рукописный
+├── done/            сюда сам переносишь использованные исходники и одноразовые вставки
+└── output/          сюда кладёшь готовый ролик: &lt;тема&gt;-final.mp4
+```
+
+Правило источников: звуки — только из sfx/, музыка — только из music/, стикеры и вставки — только из папок пользователя. Ничего не скачивать, не генерировать, не подменять.
+
+## 2. Константы шаблона (НЕ менять без просьбы пользователя)
+
+- **Кадр**: 1080×1920, 30fps, libx264 crf 18, aac 192k.
+- **Скорость**: весь ролик ×1.3 (видео setpts=PTS/1.3, аудио atempo=1.3, тон не менять). Все тайминги пересчитывать под ускоренную шкалу.
+- **Резка пауз — агрессивная**: silencedetect ≈ −30dB/0.18s + дырки в расшифровке; вырезать всё &gt;0.2s, отступ от слов 0.05s; тишину в начале/конце — полностью. После резки: ни одной дырки &gt;0.25s.
+- **Safe Zone** для всех элементов (весь bbox с тенью/обводкой): X 60–890, Y 120–1530. Не закрывать лицо (+40px) и субтитры (+20px). Исключения: полоски, градиент, полноэкранные вставки.
+- **Полоски (лента сверху)**: файл из library/ со словом strip/полоски в имени (или IMG_0082): scale на ширину 1080, позиция y=242, весь ролик, без анимаций, ПОВЕРХ всех слоёв.
+- **Градиент (низ)**: файл из library/ со словом gradient/градиент (или IMG_0081): scale на ширину 1080, прижат к нижнему краю, весь ролик, без фейдов, слой над видео и ПОД текстами.
+- **Хук (opening)**: с кадра 0 на 1.8–3.0s. Текст даёт пользователь дословно. Все слова кроме последнего — заголовочным шрифтом КАПСОМ 98px, межстрочник 0.85, трекинг +0.5, цвет #F1F1EF, обводка #171717 3px, центр X=540, первая строка y≈259. Последнее слово — рукописным шрифтом 165px, естественный регистр, цвет #E8D7BF, обводка #2B2520 2px, X по центру. Вертикаль рукописного: центр ВИДИМЫХ чернил слова = y≈418 (проходит по нижней части второй строки и чуть свисает ниже). Позиционировать по реальным границам букв (рендер+замер alpha-bbox), НЕ по baseline. Пока хук виден — вставок и CTA нет (субтитры — можно). Без звуков на хук.
+- **CTA с кодовым словом (ОБЯЗАТЕЛЕН, если в речи есть призыв «пиши слово…»)**: точная копия хука по всем параметрам; строки — из фразы призыва (например ПИШИТЕ / МНЕ СЛОВО), кодовое слово — рукописным на той же вертикали (центр чернил y≈418). Появляется точно на фразе призыва (±0.2s), держится до её конца.
+- **Субтитры**: субтитровым шрифтом 40px, цвет #F3F1EE, БЕЗ обводки/плашки/тени, X=317 Y=1339 (top-left), межстрочник 35, ширина блока ≤390, 2 строки (макс 3). WORD-BY-WORD: блок 3–6 слов, финальная раскладка считается ДО показа, слова появляются по одному на моменте произнесения (±1 кадр), появившиеся НЕ двигаются (реализация: весь блок одним текстом, будущие слова прячутся тегом {\alpha&amp;HFF&amp;}). С самого начала ролика (t=0). Слова «claude» и «reels» — латиницей с маленькой буквы. Screen-space: зумы субтитры не трогают.
+- **Иконка-стикер у субтитров**: один PNG из stickers/ на весь ролик (с t=0 до конца): видимый размер ≈150px в прозрачном холсте 220×220 (объект точно по центру, отступ до края ≥28px — обрезка запрещена), контур 1px #111111 по alpha-силуэту (не квадрат!), позиция центр (223,1294), статичный, без вращения.
+- **Цветокор исходника** (только на talking-head, не на вставки): лёгкий, ffmpeg-старт: eq brightness −0.02, contrast 1.03, curves низ −3%, теплота R+1.5%/B−1.5%, unsharp 0.2. Кожа естественная; заметный фильтр = переделать.
+- **Музыка**: ОБЯЗАТЕЛЬНА, с кадра 0, один трек на ролик (если пользователь назвал конкретный — его; иначе один файл → он, несколько → случайный), громкость ≈ −18dB (голос всегда главный), мягкий дакинг −2…−4dB под речью, fade-in ≤100ms, fade-out ~300ms, не ускоряется.
+- **Голос**: loudnorm I=−14:TP=−1.5:LRA=11.
+- **Вставки (скрины/фото/мемы)**: появление РЕЗКОЕ — 85ms, opacity 0→1 + scale 0.965→1.00 ease-out, без bounce. КАЖДОЕ появление — с коротким звуком из sfx/ (по смыслу: свуш для скринов, мягкий поп/трансформация для стикеров), громкость ≈ −13dB, транзиент = первый кадр появления (±1 кадр). Оформление: прямоугольные — скругление 10px + рамка 1px #111111 + лёгкая тень (rgba(0,0,0,0.08), 0/2px, blur 10); PNG без фона — контур 1px #111111 по силуэту, без рамки. Ассеты не искажать: без кропа, поворотов, фильтров; пропорции сохранять; 100% контента видно. Размеры: одна вставка 315/430/580 (макс ~700 по Safe Zone), верхние вставки — верх холста y≈170, по центру. Мин. показ 1.5s.
+- **Полноэкранное переключение кадра**: если пользователь даёт видео-вставку «на весь экран» (или это демо из context_assets на соответствующей фразе) — резко переключить кадр целиком: горизонтальное видео масштабировать по высоте 1920 и кропнуть центр 1080 (это единственное разрешённое кадрирование, т.к. явно «на весь экран»), без звука вставки, голос продолжается, свуш на переключении. Субтитры/иконка/полоски остаются поверх.
+- **Зумы**: редкие, по СМЫСЛУ речи (тезис/контраст/панчлайн → ближе; новая мысль/пояснение → назад): уровни 1.00/1.04/1.05/1.07 (макс 1.08), переходы плавные но заметные ~0.45s (smoothstep), якорь — лицо, 3–6 смен на 30s (не квота, не по таймеру, без пульсации). Зум только на исходник. Если речь без пауз и склеек мало — зумы делать плавными push-in/out рампами внутри кадра на смысловых моментах (не привязывать к склейкам), иначе зум не будет виден. Музыка доигрывает до последнего кадра (fade-out ~1s в самом конце, голос паддить в миксе).
+- **Цензура (ПО УМОЛЧАНИЮ)**: «денежные» и рискованные для алгоритмов слова в субтитрах писать со звёздочкой: р*блей, бесплатн*, ст*ит, подп*ска, монтаж*р и подобные. Плюс любые слова из шапки ТЗ «ЦЕНЗУРА:». Только звёздочка, без блюра.
+
+## 3. Как работать (пайплайн)
+
+1. **Разведка**: файлы в input/ + ТЗ из сообщения. Проверить место на диске (нужно ≥5 ГБ). Посмотреть КАЖДУЮ картинку из inserts/ и context_assets/ глазами (Read) — понять, что на них.
+2. **Расшифровка**: аудио → wav 16кГц → whisper (ru) с пословными таймингами.
+3. **Резка пауз** по правилам выше; построить карту времени: оригинал → финал (после резки и ×1.3).
+4. **План вставок**: команды из ТЗ + смысловой подбор из context_assets (только если картинка ПРЯМО поддерживает сказанное; сомнение = не ставить). Каждая вставка привязана к конкретной фразе. Лицо определить по кадру (вытащить кадр, посмотреть).
+5. **Тексты**: хук (текст от пользователя), CTA (кодовое слово от пользователя или из транскрипта), субтитры word-by-word.
+6. **Сборка**: filter_complex: резка → цветокор → зумы → градиент → вставки → иконка → субтитры → хук → CTA → полоски; аудио: голос(loudnorm) + музыка(дакинг) + SFX.
+7. **QA до финала**: собрать 4 контрольных кадра (хук / субтитры+иконка / вставка / CTA), проверить геометрию по константам. Только потом полный рендер.
+8. **Финал**: output/&lt;тема&gt;-final.mp4; исходник и одноразовые вставки → done/; отчёт: длительность до/после, что и куда вставлено, что не нашлось (монтировать без недостающего, НЕ блокироваться).
+
+## 4. Словарь ТЗ пользователя
+
+| Пользователь пишет | Ты делаешь |
+|---|---|
+| ХУК: &lt;фраза&gt; | opening hook с этой фразой (последнее слово — рукописное) |
+| КОДОВОЕ СЛОВО: &lt;слово&gt; | CTA-титр на фразе призыва, слово — рукописным |
+| «когда говорю про X — покажи Y» | вставка Y на фразе про X |
+| фуллскрин &lt;файл&gt; | полноэкранное переключение кадра |
+| МУЗЫКА: &lt;название&gt; | этот трек из music/ |
+| ЦЕНЗУРА: &lt;слова&gt; | звёздочки в субтитрах |
+| без правок стиля | ничего в шаблоне не менять |
+
+Вставки пользователь может описывать словами («скрин со статистикой») — открой картинки и найди сам. Файлы могут называться IMG_1234 — это нормально.
+
+## 5. Правила поведения
+
+- Не переспрашивать по мелочам — решать по этому файлу и здравому смыслу, спорное отметить в отчёте.
+- Исходники никогда не удалять — только переносить в done/.
+- Чего-то не хватает (нет музыки, нет шрифта) — НЕ молча пропускать: поискать в папках; не нашёл — смонтировать без этого и явно сказать в отчёте.
+- Временные файлы — во временную папку, после рендера чистить.
+- Не экспортировать, если: субтитры не на месте/прыгают; хук или CTA забыты/мелкие; буквы пересекаются; вставка без звука; музыка не с кадра 0; вставка на лице/на субтитрах/вне Safe Zone; стикер обрезан.
+</textarea>
+<script>
+function copySkill(){
+  var t=document.getElementById('skillText').value;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copyBtn');
+    b.textContent='Скопировано!'; b.classList.add('copied');
+    setTimeout(function(){b.textContent='Скопировать текст скилла'; b.classList.remove('copied');},2500);
+  });
+}
+</script>
+
+<section class="ms-sell">
+  <div class="ms-sell__in">
+    <p class="ms-sell__bridge">Монтаж теперь занимает минуты, а не вечер. Но смонтированный ролик — это ещё не система: что снимать завтра, кому и зачем — этим мы занимаемся на интенсиве.</p>
+
+    <div class="ms-sell__rule"></div>
+
+    <span class="ms-sell__label">Интенсив</span>
+    <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
+    <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
+
+    <div class="ms-sell__proof">
+      <div class="ms-sell__proof-item">
+        <span class="ms-sell__num">600 000</span>
+        <span class="ms-sell__cap">просмотров — и 8 подписчиков</span>
+      </div>
+      <div class="ms-sell__proof-vs">против</div>
+      <div class="ms-sell__proof-item ms-sell__proof-item--win">
+        <span class="ms-sell__num">19 000</span>
+        <span class="ms-sell__cap">просмотров — 240 подписчиков и 30 000 ₽</span>
+      </div>
+    </div>
+    <p class="ms-sell__proof-note">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
+
+    <ul class="ms-sell__list">
+      <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
+      <li><b>Текстовые и разговорные ролики</b> — один формат набирает холодную аудиторию, второй превращает её в свою</li>
+      <li><b>ИИ-агент с памятью канала</b> — помнит все ваши посты и предлагает продолжение начатых тем, чтобы блог звучал как одна история</li>
+      <li><b>Парсер идей</b> — собирает залетающие ролики вашей ниши, пока вы завтракаете, и выдаёт готовые темы</li>
+      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираете и пользуетесь</li>
+    </ul>
+
+    <p class="ms-sell__author">Всё это я собрала в Claude Code без единого программиста — просто объясняла задачи обычными словами. На интенсиве показываю ровно то, что делаю сама каждый день.</p>
+    <span class="ms-sell__sign">Майя</span>
+
+    <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
+    <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
+  </div>
+</section>
+
+<footer class="ms-foot">
+  <a class="ms-foot__back" href="../../">← Все гайды maysoulme</a>
+  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новое сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
+</footer>
+
+<style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
+
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
+  .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
+    padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
+  .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
+  .ms-bar__back:hover { text-decoration: underline; }
+  .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
+    line-height: 1; margin-left: auto; }
+  .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
+    width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
+    justify-content: center; }
+  .ms-bar__theme:hover { border-color: var(--g-accent, #710C04); color: var(--g-accent, #710C04); }
+
+  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 78px 22px 72px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
+    color: #f0ece7; font-style: italic; margin: 0; }
+  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 42px 0 38px; }
+  .ms-sell__label { display: inline-block; border: 1px solid #c9a07a; color: #c9a07a; font-size: 10.5px;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 22px; }
+  .ms-sell__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700; line-height: 1.24; margin: 0 0 16px; color: #fff; }
+  .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
+  .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
+
+  .ms-sell__proof { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    border-top: 1px solid #2e2e2e; border-bottom: 1px solid #2e2e2e; padding: 26px 0; }
+  .ms-sell__proof-item { flex: 1; min-width: 190px; }
+  .ms-sell__num { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px;
+    color: #6f6f6f; line-height: 1.2; }
+  .ms-sell__proof-item--win .ms-sell__num { color: #c9a07a; }
+  .ms-sell__cap { display: block; font-size: 13.5px; color: #9a9a9a; margin-top: 6px; line-height: 1.5; }
+  .ms-sell__proof-vs { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6f6f6f; }
+  .ms-sell__proof-note { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 22px 0 40px; }
+
+  .ms-sell__list { list-style: none; margin: 0 0 38px; padding: 0; }
+  .ms-sell__list li { padding: 15px 0; border-bottom: 1px solid #2a2a2a; font-size: 15.5px;
+    line-height: 1.62; color: #cfcfcf; }
+  .ms-sell__list li b { color: #fff; font-weight: 600; }
+  .ms-sell__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
+
+  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 6px;
+    padding-left: 18px; border-left: 2px solid #c9a07a; }
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 52px;
+    line-height: 1; margin: 4px 0 30px 18px; }
+
+  .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
+    padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
+  .ms-sell__cta:hover { opacity: .86; }
+  .ms-sell__note { font-size: 13.5px; color: #8a8a8a; margin: 16px 0 0; }
+
+  .ms-foot { max-width: 660px; margin: 0 auto; padding: 44px 22px 64px; text-align: center;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: var(--g-muted, #777); }
+  .ms-foot a { color: var(--g-accent, #710C04); }
+  .ms-foot__back { display: inline-block; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
+  .ms-foot__back:hover { text-decoration: underline; }
+  .ms-foot p { margin: 0; }
+  @media (max-width: 560px) {
+    .ms-sell { padding: 56px 20px 52px; }
+    .ms-sell__bridge { font-size: 18px; }
+    .ms-sell__proof-vs { display: none; }
+    .ms-bar__name { display: none; }
+  }
+</style>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
+</body>
+</html>

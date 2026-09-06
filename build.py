@@ -20,6 +20,7 @@ HOME = Path.home()
 SOURCE_ROOTS = {
     "assets": HOME / "Desktop/клод/maysoulme-assets",
     "repos":  HOME / "Desktop/клод/архив/portal-sources",
+    "desk":   HOME / "Desktop/клод",
 }
 
 SITE = "https://maysoulme.ru"
@@ -92,7 +93,7 @@ SELL = """
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -101,7 +102,8 @@ SELL = """
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
@@ -269,8 +271,8 @@ def add_toc(s: str) -> str:
         out.append(s[pos:m.start()]); out.append(new_tag); pos = m.end()
     out.append(s[pos:])
     s = "".join(out)
-    toc = ('<nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol>'
-           + "".join(items) + '</ol></nav>\n')
+    toc = ('<div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol>'
+           + "".join(items) + '</ol></div>\n')
     first = re.search(r'<h2', s)
     return s[:first.start()] + toc + s[first.start():]
 
@@ -288,11 +290,13 @@ SLIDES_TO_ARTICLE = """<style id="ms-slides">
 
 def process_guide(src_html: str, g: dict) -> str:
     s = src_html
-    if "slide__body" in s and "--split" in s and "ms-slides" not in s:
+    if ('class="slide"' in s or "slide__body" in s) and "ms-slides" not in s:
         s = s.replace("</head>", SLIDES_TO_ARTICLE + "</head>", 1)
     s = s.replace("https://maiyamaiya19999-bit.github.io/maysoulme-assets/logo-ms.png", "../../logo-ms.png")
-    s = re.sub(r'(<img[^>]+src=")(?:\./)?logo-ms\.(png|svg)(")', r'\1../../logo-ms.png\3', s)
+    s = re.sub(r'(<img[^>]+src=")(?:\./)?logo(?:-ms)?\.(png|svg)(")', r'\1../../logo-ms.png\3', s)
     s = re.sub(r'(<a[^>]*class="[^"]*nav__logo[^"]*"[^>]*href=")#(")', r'\1../../\2', s)
+    s = s.replace('href="start.html"', 'href="../claude-s-nulya/"').replace('href="index.html"', 'href="../claude-montazher/"')
+    s = s.replace('href="team.html"', 'href="https://maiyamaiya19999-bit.github.io/claude-montage-skill/team.html"')
     s = s.replace("&family=DM+Sans:ital@1", "").replace("family=DM+Sans:ital@1&", "")
     if "ms-theme-vars" not in s:
         s = themeify(s)
@@ -315,6 +319,17 @@ def process_guide(src_html: str, g: dict) -> str:
     s = s.replace("</body>", block + "</body>", 1) if "</body>" in s else s + block
     return s
 
+def copy_assets(src: Path, dest_dir: Path, page: str):
+    """Картинки и файлы для скачивания, лежащие рядом с исходником, едут вместе с гайдом."""
+    import shutil
+    for ref in set(re.findall(r'(?:src|href)="([^"#?:]+)"', page)):
+        if ref.startswith(("../", "/")) or ref.endswith((".html", "/")):
+            continue
+        f = src.parent / ref
+        if f.is_file():
+            (dest_dir / ref).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(f, dest_dir / ref)
+
 def resolve(src: str):
     root, rest = src.split("/", 1)
     p = SOURCE_ROOTS.get(root)
@@ -323,7 +338,7 @@ def resolve(src: str):
 # ---------------------------------------------------------------- главная
 
 def build_index(data):
-    short = {"reels": "Reels", "content": "Контент", "start": "ИИ с нуля", "life": "Для жизни"}
+    short = {"reels": "Reels", "content": "Контент", "start": "ИИ с нуля", "claude": "Claude", "life": "Для жизни"}
     nav = "\n".join(f'      <a href="#{c["id"]}">{short.get(c["id"], strip_tags(c["title"]))}</a>'
                     for c in data["categories"])
     index = "\n".join(
@@ -445,15 +460,15 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   }
 
   /* ---------- оглавление ---------- */
-  .index { display: flex; align-items: center; gap: 30px; padding: 18px 0; border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line); font-size: 13.5px; overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
+  .index { display: flex; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line); font-size: 13px; }
   .index::-webkit-scrollbar { display: none; }
-  @media (max-width: 620px) { .index { gap: 22px; padding-right: 40px;
+  @media (max-width: 620px) { .index { flex-wrap: nowrap; white-space: nowrap; overflow-x: auto; scrollbar-width: none; gap: 22px; padding-right: 40px;
     -webkit-mask-image: linear-gradient(90deg, #000 84%, transparent); mask-image: linear-gradient(90deg, #000 84%, transparent); } }
   .index__label { font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--faint); }
   .index a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .index a:hover { color: var(--accent); }
-  .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 8px; }
+  .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 7px; }
 
   /* ---------- маршрут ---------- */
   .route { margin-top: 64px; padding: 44px 44px 40px; background: var(--cream); }
@@ -596,10 +611,10 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <p class="route__lead">Не нужно читать всё подряд. Три шага по порядку — и у вас уже есть доступ, свой голос и первый ролик.</p>
     </div>
     <div class="route__steps">
-      <a class="step" href="guides/claude-i-chatgpt-v-rossii/">
+      <a class="step" href="guides/claude-s-nulya/">
         <span class="step__n">01</span>
-        <span class="step__title">Поставить Claude</span>
-        <span class="step__desc">Полчаса — и доступ есть, без бана и нервов</span>
+        <span class="step__title">Подключить Claude как у меня</span>
+        <span class="step__desc">Аккаунт, подписка, Claude Code и первые правила общения</span>
       </a>
       <a class="step" href="guides/raspakovka-lichnosti/">
         <span class="step__n">02</span>
@@ -695,8 +710,9 @@ def main():
             src = resolve(g["src"])
             if src and src.exists():
                 dest_dir.mkdir(parents=True, exist_ok=True)
-                dest.write_text(process_guide(src.read_text(encoding="utf-8", errors="ignore"), g),
-                                encoding="utf-8")
+                page = process_guide(src.read_text(encoding="utf-8", errors="ignore"), g)
+                dest.write_text(page, encoding="utf-8")
+                copy_assets(src, dest_dir, page)
                 copied += 1
             elif dest.exists():
                 g["minutes"] = reading_minutes(dest.read_text(encoding="utf-8", errors="ignore"))

@@ -78,7 +78,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </section>
 
   <section>
-    <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Собери исходные данные</a></li><li><a href="#s-2">Исследуй корни рода</a></li><li><a href="#s-3">Найди возможные связи</a></li><li><a href="#s-4">Построй визуальное древо</a></li><li><a href="#s-5">Как получить точнее результат</a></li></ol></nav>
+    <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Собери исходные данные</a></li><li><a href="#s-2">Исследуй корни рода</a></li><li><a href="#s-3">Найди возможные связи</a></li><li><a href="#s-4">Построй визуальное древо</a></li><li><a href="#s-5">Как получить точнее результат</a></li></ol></div>
 <h2 id="s-1" class="section-title"><span>01.</span> Собери <em>исходные данные</em></h2>
     <p class="section-lead">Первый запрос превратит ChatGPT в интервьюера и поможет ничего не упустить.</p>
     <article class="prompt-card">
@@ -214,7 +214,7 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -223,7 +223,8 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

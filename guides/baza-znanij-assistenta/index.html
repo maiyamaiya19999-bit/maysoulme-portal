@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Формула вирусных разговорных роликов — maysoulme</title>
+<title>Как собрать базу знаний для ассистента — maysoulme</title>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root { --accent: var(--g-accent); --split: 60%; }
 
-@page { size: 1280px 720px; margin: 0; }
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -21,33 +24,57 @@ body {
 }
 
 .slide {
-  width: 100%; height: 100vh;
-  display: flex; flex-direction: column;
-  page-break-after: always; position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  position: relative;
 }
+
 .divider {
-  position: absolute; top: 0; bottom: 0;
-  left: var(--split); width: 1px; background: var(--g-line);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split);
+  width: 1px;
+  background: var(--g-line);
 }
+
 .nav {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 48px; border-bottom: 1px solid var(--g-line);
-  background: var(--g-bg); z-index: 10; flex-shrink: 0; width: var(--split);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid var(--g-line);
+  background: var(--g-bg);
+  z-index: 10;
+  flex-shrink: 0;
+  width: var(--split);
 }
 .nav__logo { text-decoration: none; display: flex; align-items: center; }
 .nav__logo img { height: 30px; width: auto; }
 .nav__logo-name {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px; font-weight: 400; font-style: italic;
-  color: var(--g-faint); letter-spacing: 0.5px; margin-right: 8px;
+  color: var(--g-faint); letter-spacing: 0.5px;
+  margin-right: 8px;
 }
-.slide__body {
-  flex: 1; display: flex; align-items: center;
-  width: var(--split); padding: 0 48px;
-}
-.slide__inner { width: 100%; max-width: 580px; }
 
-/* ===== БАЗОВЫЕ ===== */
+.slide__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: var(--split);
+  padding: 0 48px;
+}
+
+.slide__inner {
+  width: 100%;
+  max-width: 580px;
+}
+
+/* ===== БАЗОВЫЕ ЭЛЕМЕНТЫ ===== */
 
 .hero { padding: 0; }
 .badge {
@@ -66,14 +93,12 @@ body {
 
 .section-heading {
   font-family: 'Libre Baskerville', Georgia, serif;
-  font-size: 28px; font-weight: 700; line-height: 1.3; padding: 0 0 20px;
+  font-size: 28px; font-weight: 700; line-height: 1.3;
+  padding: 0 0 20px;
 }
 .section-heading em { font-style: italic; color: var(--accent); }
 
-.highlight {
-  background: var(--g-surface); padding: 18px 22px; margin: 20px 0;
-  font-size: 15px; line-height: 1.75; color: var(--g-muted);
-}
+.highlight { background: var(--g-surface); padding: 18px 22px; margin: 20px 0; font-size: 15px; line-height: 1.75; color: var(--g-muted); }
 .highlight strong { color: var(--accent); }
 
 .sub-heading {
@@ -96,13 +121,33 @@ body {
 }
 .guide-list li strong { color: var(--g-fg); }
 
+.scenario-card { border: 1px solid var(--g-line); padding: 24px; margin: 18px 0; background: var(--g-surface); }
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 13px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 6px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;
+}
+.scenario-card__point { margin-bottom: 12px; }
+.scenario-card__point-label { font-weight: 600; font-size: 15px; color: var(--g-fg); }
+.scenario-card__point-text { font-size: 14px; color: var(--g-muted); line-height: 1.7; }
+.scenario-card__tip {
+  background: var(--g-line); padding: 12px 16px; margin-top: 14px;
+  font-size: 13px; color: var(--g-muted); line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
 .footer-note {
   font-family: 'Libre Baskerville', Georgia, serif;
-  font-size: 17px; font-style: italic; color: var(--g-muted); padding: 28px 0 0;
+  font-size: 17px; font-style: italic; color: var(--g-muted);
+  padding: 28px 0 0;
 }
 .footer-note em { color: var(--accent); }
 
-/* ===== СХЕМКА 1: ЦИТАТА ===== */
+/* ===== СХЕМКА 1: ЦИТАТА-АКЦЕНТ ===== */
 
 .quote-slide__label {
   font-size: 11px; font-weight: 600; color: var(--g-faint);
@@ -122,7 +167,7 @@ body {
 .quote-slide__divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 20px; }
 .quote-slide__source { font-size: 14px; color: var(--g-faint); line-height: 1.6; }
 
-/* ===== СХЕМКА 2: ШАГИ ===== */
+/* ===== СХЕМКА 2: ШАГИ С ЛИНИЕЙ ===== */
 
 .steps__heading {
   font-family: 'Libre Baskerville', Georgia, serif;
@@ -167,7 +212,7 @@ body {
 .numlist__text strong { font-weight: 600; }
 .numlist__text span { color: var(--g-muted); }
 
-/* ===== СХЕМКА 4: АКЦЕНТНАЯ ПОЛОСА ===== */
+/* ===== СХЕМКА 4: АКЦЕНТНАЯ ПОЛОСА СЛЕВА ===== */
 
 .accent-bar__label {
   font-size: 11px; font-weight: 600; color: var(--g-faint);
@@ -211,7 +256,7 @@ body {
 .checklist__mark--do { color: var(--accent); }
 .checklist__mark--dont { color: #ccc; }
 
-/* ===== СХЕМКА 6: МЕТРИКИ ===== */
+/* ===== СХЕМКА 6: ТРИ МЕТРИКИ ===== */
 
 .metrics__heading {
   font-family: 'Libre Baskerville', Georgia, serif;
@@ -235,6 +280,30 @@ body {
   letter-spacing: 1px; margin-bottom: 8px;
 }
 .metrics__desc { font-size: 13px; color: var(--g-muted); line-height: 1.5; }
+
+/* ===== СХЕМКА 7: ВОПРОС-ОТВЕТ ===== */
+
+.qa__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.qa__heading em { font-style: italic; color: var(--accent); }
+.qa__item { margin-bottom: 24px; }
+.qa__question {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: var(--accent);
+  margin-bottom: 8px; padding-left: 32px; position: relative;
+}
+.qa__question::before {
+  content: '?'; position: absolute; left: 0; top: -4px;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 28px; color: var(--accent); opacity: 0.25;
+}
+.qa__answer {
+  font-size: 15px; color: var(--g-muted); line-height: 1.7;
+  padding-left: 32px; border-left: 1px solid var(--g-line);
+}
 
 /* ===== СХЕМКА 8: ФОРМУЛА ===== */
 
@@ -267,14 +336,15 @@ body {
   html, body { width: 1280px; }
   .slide {
     width: 1280px; height: 720px;
-    page-break-after: always;
-    page-break-inside: avoid;
+    page-break-after: always; page-break-inside: avoid;
     break-after: page;
   }
   .slide:last-child { page-break-after: auto; }
   body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
-@media (max-width: 768px) {
+
+/* ВАЖНО: только screen — иначе правило течёт в print/PDF и ломает 60/40 split */
+@media screen and (max-width: 768px) {
   .nav { padding: 16px 20px; width: 100%; }
   .hero h1 { font-size: 26px; }
   .section-heading { font-size: 22px; }
@@ -312,9 +382,9 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   }
 </style>
 <meta property="og:type" content="article">
-<meta property="og:title" content="Формула вирусных разговорных роликов">
-<meta property="og:description" content="Почему один ролик залетает на миллион, а другой уходит в никуда. Разбираю по косточкам, что держит человека в кадре.">
-<meta property="og:url" content="https://maysoulme.ru/guides/formula-razgovornyh-rolikov/">
+<meta property="og:title" content="Как собрать базу знаний для ассистента">
+<meta property="og:description" content="Четыре файла, с которыми Claude пишет как вы, а не как шаблонная нейросеть.">
+<meta property="og:url" content="https://maysoulme.ru/guides/baza-znanij-assistenta/">
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
@@ -322,14 +392,14 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
-  <span class="ms-bar__min">5 мин чтения</span>
+  <span class="ms-bar__min">4 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
 
 
 
-<!-- СЛАЙД 1: Титульный -->
+<!-- ==================== СЛАЙД 1: ТИТУЛЬНЫЙ ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -340,15 +410,15 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <div class="slide__inner">
     <div class="hero">
       <div class="badge">УРОК</div>
-      <h1>Формула вирусных <em>разговорных роликов</em></h1>
-      <p class="hero__desc">Почему одни залетают на миллион, а другие уходят в никуда</p>
-      <p class="hero__meta">РАЗГОВОРНЫЕ REELS &middot; СЦЕНАРИИ &middot; ФОРМУЛА</p>
+      <h1>Как собрать <em>базу знаний</em> для ассистента по контенту</h1>
+      <p class="hero__desc">Четыре файла, с которыми Claude пишет как вы — а не как шаблонная нейросеть.</p>
+      <p class="hero__meta">БАЗА ЗНАНИЙ &middot; АССИСТЕНТЫ &middot; CLAUDE</p>
     </div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 2: Про ассистента — АКЦЕНТНАЯ ПОЛОСА -->
+<!-- ==================== СЛАЙД 2: ЗАЧЕМ ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -357,18 +427,33 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <div class="accent-bar__label">Важно понять</div>
+    <h2 class="section-heading">Нулевой шаг, <em>без которого ничего не работает</em></h2>
+    <p class="text">База знаний — это файлы, которые вы готовите один раз и потом вставляете в каждого ассистента, которого создаёте.</p>
+    <div class="highlight"><strong>Один раз собрали — работает везде.</strong> Потратите время сейчас — сэкономите его в десятки раз потом. База сразу работает во всех ассистентах.</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 3: АССИСТЕНТ-ИСПОЛНИТЕЛЬ (accent-bar) ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="accent-bar__label">КАК ДУМАЕТ АССИСТЕНТ</div>
     <div class="accent-bar__block">
-      <div class="accent-bar__title">Сначала формула — <em>потом ассистент</em></div>
-      <p class="accent-bar__text">Под этим уроком — промт, который превращает Claude в твоего ассистента по разговорным Reels.</p>
-      <p class="accent-bar__text">Но ассистент работает ровно настолько хорошо, насколько хорошо ты его настроила.</p>
-      <div class="accent-bar__footer">Чтобы получать сильные ролики — сначала разберись, как всё устроено изнутри</div>
+      <div class="accent-bar__title">Очень <em>исполнительный</em> работник</div>
+      <p class="accent-bar__text">Claude делает ровно то, что ему говорят, и работает ровно с той информацией, которую вы дали. Чем детальнее опишете, чем вы занимаетесь, кто аудитория и как вы говорите — тем точнее и уникальнее результат.</p>
+      <div class="accent-bar__footer">Нет данных — нет уникальности.</div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 3: Как собрать ассистента — НУМЕРОВАННЫЙ СПИСОК -->
+<!-- ==================== СЛАЙД 4: МАЛО vs ПОДРОБНО (checklist) ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -377,56 +462,26 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <div class="numlist__heading">Проект в Claude + <em>3 файла</em></div>
-    <div class="numlist__item">
-      <div class="numlist__num">1</div>
-      <div class="numlist__text"><strong>Мой промт</strong> <span>— формула, структура, триггеры. Прикреплён под уроком.</span></div>
-    </div>
-    <div class="numlist__item">
-      <div class="numlist__num">2</div>
-      <div class="numlist__text"><strong>30 транскрибаций</strong> <span>— удачные ролики в твоей нише. Через Буквицу.</span></div>
-    </div>
-    <div class="numlist__item">
-      <div class="numlist__num">3</div>
-      <div class="numlist__text"><strong>Твоя база</strong> <span>— экспертные тезисы, инфо о тебе, призывы, ссылки.</span></div>
-    </div>
-    <div class="highlight"><strong>Результат:</strong> ассистент, который знает формулу, знает что залетает в нише, знает тебя.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 4: Разговорный vs текстовый — ЧЕК-ЛИСТ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="checklist__heading">Два разных <em>инструмента</em></div>
+    <div class="checklist__heading">Разница — <em>огромная</em></div>
     <div class="checklist__grid">
       <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--dont">Текстовый ролик</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Нейроописание с подложкой</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Холодная аудитория</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Быстрый набор подписчиков</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2022;</span>Набирает количество</div>
+        <div class="checklist__col-label checklist__col-label--do">Загрузишь подробно</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Тексты звучат как вы</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Уникальные смыслы</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Точное попадание в стиль</div>
       </div>
       <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--do">Разговорный ролик</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Голос, мимика, интонация</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Подписываются на тебя лично</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Дольше в производстве</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2022;</span>Количество &rarr; лояльность</div>
+        <div class="checklist__col-label checklist__col-label--dont">Загрузишь мало</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Шаблонный контент</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Звучит как нейросеть</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Общие фразы ни о чём</div>
       </div>
     </div>
-    <div class="highlight"><strong>Важно:</strong> нужны оба формата.</div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 5: Базовый закон — ЦИТАТА -->
+<!-- ==================== СЛАЙД 5: ЧЕТЫРЕ ФАЙЛА (numlist) ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -435,50 +490,28 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <div class="quote-slide__label">Базовый закон</div>
-    <div class="quote-slide__mark">&ldquo;</div>
-    <div class="quote-slide__text">Сяду и скажу, что придёт в голову — путь к тому, что ты <em>ничего не выложишь.</em></div>
-    <div class="quote-slide__divider"></div>
-    <p class="quote-slide__source">Сильные блогеры не импровизируют. Они читают по суфлёру, глядя в объектив.<br><br>Сценарий &rarr; суфлёр &rarr; первый-второй дубль &rarr; готово.<br>Это снимает 3 страха: «забуду текст», «буду мычать», «получится коряво».</p>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 6: Пять опор — НУМЕРОВАННЫЙ СПИСОК -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="numlist__heading">Анатомия <em>разговорного ролика</em></div>
+    <div class="numlist__heading">Четыре файла, <em>которые нужно собрать</em></div>
     <div class="numlist__item">
       <div class="numlist__num">1</div>
-      <div class="numlist__text"><strong>Хук</strong> <span>— 0–3 сек. Остановить палец.</span></div>
+      <div class="numlist__text"><strong>Распаковка личности</strong> <span>— кто вы и в чём ваша экспертность.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">2</div>
-      <div class="numlist__text"><strong>Завязка</strong> <span>— 3–8 сек. Узнавание: «это про меня».</span></div>
+      <div class="numlist__text"><strong>Анализ аудитории</strong> <span>— для кого вы создаёте контент.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">3</div>
-      <div class="numlist__text"><strong>Тело</strong> <span>— 8–45 сек. Инструктаж, а не лекция.</span></div>
+      <div class="numlist__text"><strong>Tone of voice</strong> <span>— ваш стиль речи и формулировки.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">4</div>
-      <div class="numlist__text"><strong>Личная позиция</strong> <span>— за 5–10 сек до конца. Эмоциональный пик.</span></div>
-    </div>
-    <div class="numlist__item">
-      <div class="numlist__num">5</div>
-      <div class="numlist__text"><strong>CTA</strong> <span>— последние 3–5 сек. Вшит в речь естественно.</span></div>
+      <div class="numlist__text"><strong>База знаний</strong> <span>— ваши экспертные тезисы и смыслы.</span></div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 7: Хук — БАЗОВЫЙ -->
+<!-- ==================== СЛАЙД 6: ФАЙЛ 1 ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -487,15 +520,14 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 class="section-heading">Хук — <em>остановить палец</em></h2>
-    <p class="text">Человек решает смотреть или листать в первые 3 секунды.</p>
-    <p class="text">Хук строится на боли аудитории, а не на твоей идее о том, что интересно.</p>
-    <div class="highlight"><strong>Важно:</strong> попала в боль — удержала. Не попала — листают дальше.</div>
+    <h2 class="section-heading">Файл 1 — <em>распаковка личности</em></h2>
+    <p class="text">Самый важный файл. Из него ассистент понимает, кто вы, чем занимаетесь, о чём говорите в блоге, какие у вас ценности и смыслы.</p>
+    <div class="highlight">Под уроком — файл с вопросами для распаковки. Отвечайте очень подробно. Включайте только то, что хотите отражать в блоге — личное, что светить не хотите, не добавляйте.</div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 8: Завязка — БАЗОВЫЙ -->
+<!-- ==================== СЛАЙД 7: ЛАЙФХАК ГОЛОСОВЫЕ (steps) ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -504,184 +536,34 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 class="section-heading">Завязка — <em>узнавание</em></h2>
-    <p class="text">Сразу после хука зритель должен подумать: «так это же про меня» или «наконец кто-то это сказал».</p>
-    <p class="text">Называй ситуацию словами, которыми её проживает сама аудитория.</p>
-    <div class="highlight"><strong>Не терминами.</strong> Не официальным языком. А так, как люди думают про себя.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 9: Тело — БАЗОВЫЙ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <h2 class="section-heading">Главное правило: <em>инструктируй, а не информируй</em></h2>
-    <p class="text">Информирование: «чтобы поднять самооценку, нужно работать над собой» — вода, слышали тысячу раз.</p>
-    <p class="text">Инструктаж: «вечером бери заметки, пиши три колонки — мысль, которая расстроила; доказательство, что правда; доказательство, что неправда. 3 минуты в день — через 2 недели реагируешь иначе».</p>
-    <div class="highlight"><strong>Лайфхак:</strong> давай конкретику, которую обычно продают — бесплатно.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 10: Парадокс щедрости — ЦИТАТА -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="quote-slide__label">Парадокс щедрости</div>
-    <div class="quote-slide__mark">&ldquo;</div>
-    <div class="quote-slide__text">Если такое даёт бесплатно — что же на <em>платном?</em></div>
-    <div class="quote-slide__divider"></div>
-    <p class="quote-slide__source">Только 1–10 человек из 1000 сделают это сами.<br>Остальные купят — потому что видят, что ты не жадничаешь.</p>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 11: Опоры 4 и 5 — БАЗОВЫЙ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <h2 class="section-heading">Личная позиция <em>и CTA</em></h2>
-    <h3 class="sub-heading">Позиция (за 5–10 сек до конца)</h3>
-    <p class="text">Твоё неотфильтрованное мнение или цифра. Не «у некоторых получается», а «у меня вышло вот так». Это эмоциональный пик.</p>
-    <h3 class="sub-heading">CTA (последние 3–5 сек)</h3>
-    <ul class="guide-list">
-      <li><strong>Цель рост:</strong> «подпишись, чтобы не пропустить»</li>
-      <li><strong>Цель лид-магнит:</strong> «напиши слово в комментариях — пришлю»</li>
-    </ul>
-    <div class="highlight"><strong>Важно:</strong> CTA вшивается в речь естественно, а не приклеивается роботом.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 12: Хуки — что работает — БАЗОВЫЙ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <h2 class="section-heading">Хук — это 80% <em>успеха ролика</em></h2>
-    <ul class="guide-list">
-      <li><strong>«Почему никто не говорит, что…»</strong> — секрет</li>
-      <li><strong>«Не делай это, пока не узнаешь одну вещь»</strong> — страх ошибки</li>
-      <li><strong>Конкретная цифра</strong> — «как я сделала это за 60 дней»</li>
-      <li><strong>«Все думают так. На самом деле наоборот»</strong> — разрыв шаблона</li>
-      <li><strong>«Почему мне раньше никто не сказал…»</strong> — сожаление</li>
-      <li><strong>«Пока ты делаешь это, другие уже…»</strong> — зависть-мотиватор</li>
-    </ul>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 13: Эмоциональная мишень — БАЗОВЫЙ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <h2 class="section-heading">Перед хуком спроси: <em>в какое чувство я целюсь?</em></h2>
-    <ul class="guide-list">
-      <li><strong>Страх упустить</strong></li>
-      <li><strong>Стыд</strong> — «я делаю не так»</li>
-      <li><strong>Облегчение</strong> — «я не одна такая»</li>
-      <li><strong>Амбиция</strong> — «я тоже так хочу»</li>
-      <li><strong>Возмущение</strong> — «наконец кто-то это сказал»</li>
-    </ul>
-    <div class="highlight"><strong>Важно:</strong> хук, попавший в чувство, всегда сильнее хука, который просто сообщает тему.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 14: Боли и желания — ФОРМУЛА -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="formula__heading">Два слоя <em>боли</em></div>
-    <div class="formula__row">
-      <div class="formula__step">
-        <div class="formula__step-title">Озвученные боли</div>
-        <div class="formula__step-text">То, что говорят вслух. Поверхность. Легко найти.</div>
-      </div>
-      <div class="formula__arrow">+</div>
-      <div class="formula__step">
-        <div class="formula__step-title">Тайные желания</div>
-        <div class="formula__step-text">То, что не говорят. Самый мощный слой.</div>
-      </div>
-      <div class="formula__arrow">=</div>
-      <div class="formula__result">
-        <div class="formula__step-title">Подписка</div>
-        <div class="formula__step-text">Именно тайное желание жмёт на «подписаться»</div>
-      </div>
-    </div>
-    <p class="formula__note">Признание, лидерство, доказать ценность, независимость, свобода, короткий путь</p>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 15: Схема под нишу — ШАГИ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="steps__heading">Как это <em>собирается вместе</em></div>
+    <div class="steps__heading">Лайфхак: <em>отвечайте голосом</em></div>
     <div class="steps__list">
       <div class="steps__item steps__item--active">
         <div class="steps__dot"></div>
-        <div class="steps__item-title">Берёшь озвученную боль</div>
-        <div class="steps__item-text">Посмотри вопросы в нише — что говорят вслух.</div>
+        <div class="steps__item-title">Наговорите в «Избранное» в Telegram</div>
+        <div class="steps__item-text">Развёрнуто отвечайте голосовым на каждый вопрос. Не торопитесь — чем больше, тем лучше.</div>
       </div>
       <div class="steps__item steps__item--active">
         <div class="steps__dot"></div>
-        <div class="steps__item-title">Копаешь под ней тайное желание</div>
-        <div class="steps__item-text">Что на самом деле хотят? Признание, свобода, короткий путь.</div>
+        <div class="steps__item-title">Переведите в текст</div>
+        <div class="steps__item-text">Premium в Telegram — кнопка транскрибации под сообщением. Без него — бот Буквица.</div>
       </div>
       <div class="steps__item steps__item--active">
         <div class="steps__dot"></div>
-        <div class="steps__item-title">Целишься хуком в желание</div>
-        <div class="steps__item-text">Хук бьёт в тайное, а не в очевидное.</div>
+        <div class="steps__item-title">Соберите всё в один файл</div>
+        <div class="steps__item-text">Все ответы вместе — и отправляйте в Claude на оформление.</div>
       </div>
-      <div class="steps__item steps__item--active">
+      <div class="steps__item">
         <div class="steps__dot"></div>
-        <div class="steps__item-title">Телом ролика закрываешь боль</div>
-        <div class="steps__item-text">Конкретный инструктаж, который решает озвученную проблему.</div>
+        <div class="steps__item-title">Claude оформляет в документ</div>
+        <div class="steps__item-text">Структурный файл распаковки, готовый к загрузке в ассистента.</div>
       </div>
     </div>
-    <p class="footer-note">Вот почему <em>ролики залетают.</em></p>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 16: Живая речь — НУМЕРОВАННЫЙ СПИСОК -->
+<!-- ==================== СЛАЙД 8: ЗАПРОС К CLAUDE (scenario-card) ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -690,28 +572,173 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <div class="numlist__heading">Что отличает вирусный ролик <em>от лекции</em></div>
+    <div class="scenario-card">
+      <div class="scenario-card__num">ЗАПРОС К CLAUDE</div>
+      <div class="scenario-card__title">«Оформи мою распаковку личности в понятный структурный файл»</div>
+      <div class="scenario-card__point">
+        <span class="scenario-card__point-text">Максимально детально и подробно, не упусти ни одного важного тезиса. После того как сделаешь — перепроверь ещё раз, всё ли включил.</span>
+      </div>
+      <div class="scenario-card__tip"><strong>Совет:</strong> попросите перепроверить 2–3 раза. Лучшие результаты в Claude — с третьей-четвёртой итерации.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 9: ПОПОЛНЯЙ РАСПАКОВКУ (accent-bar) ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="accent-bar__label">НЕ ЗАБЫВАЙТЕ</div>
+    <div class="accent-bar__block">
+      <div class="accent-bar__title">Распаковку нужно <em>регулярно пополнять</em></div>
+      <p class="accent-bar__text">Каждый день новые мысли, результаты, смыслы. Минимум раз в месяц, а лучше раз в неделю добавляйте новую информацию — и обновляйте файл во всех ассистентах, где он используется.</p>
+      <div class="accent-bar__footer">Только так Claude работает с актуальными данными о вас.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 10: ФАЙЛ 2 — ЦА ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Файл 2 — <em>анализ аудитории</em></h2>
+    <p class="text">Для кого вы создаёте контент. Под уроком — файл с вопросами, принцип тот же: подробно отвечаете и просите Claude оформить.</p>
+    <ul class="guide-list">
+      <li><strong>Боли</strong> — что мучает вашего человека прямо сейчас.</li>
+      <li><strong>Желания</strong> — к чему он стремится.</li>
+      <li><strong>Страхи и возражения</strong> — что его останавливает.</li>
+    </ul>
+    <div class="highlight">Важно <strong>даже если продукта пока нет</strong>: весь контент создаётся для конкретного человека. Точнее портрет — точнее попадает текст.</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 11: ФАЙЛ 3 — TONE OF VOICE ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Файл 3 — <em>tone of voice</em></h2>
+    <p class="text">Стиль вашей речи. Нужен, чтобы всё, что пишет ассистент — посты, тексты для суфлёра, сторис — звучало по-человечески и в вашем стиле.</p>
+    <div class="highlight"><strong>А не как шаблонная нейросеть.</strong> Tone of voice превращает «текст от ИИ» в «текст от вас».</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 12: ГДЕ БРАТЬ ПРИМЕРЫ (steps) ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="steps__heading">Откуда взять <em>примеры стиля</em></div>
+    <div class="steps__list">
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Ваши посты</div>
+        <div class="steps__item-text">Тексты из Telegram или Instagram в вашем стиле.</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Транскрибации ваших Reels</div>
+        <div class="steps__item-text">Ссылку на Reels вставляете в бот Буквица — получаете текст.</div>
+      </div>
+      <div class="steps__item">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Близкий по стилю блогер</div>
+        <div class="steps__item-text">Если своих текстов мало — берёте того, чей стиль вам нравится.</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 13: ЗАПРОС TONE OF VOICE (scenario-card) ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="scenario-card">
+      <div class="scenario-card__num">ЗАПРОС К CLAUDE</div>
+      <div class="scenario-card__title">«Составь ультрадетальный файл с tone of voice этого человека»</div>
+      <div class="scenario-card__point">
+        <span class="scenario-card__point-text">Нужно, чтобы все ассистенты по контенту писали в таком же стиле, такими же формулировками и языком. Пропиши подробно все фишки, правила, что можно и что нельзя.</span>
+      </div>
+      <div class="scenario-card__tip"><strong>Совет:</strong> готовый файл закидываете во все проекты, где создаёте контент.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 14: ФАЙЛ 4 — БАЗА ЗНАНИЙ ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Файл 4 — <em>экспертная база</em></h2>
+    <p class="text">Ваши ключевые смыслы, тезисы и позиция по темам ниши. Отсюда ассистент берёт фактуру — о чём вы говорите и как об этом думаете. Особенно важна для прогревов, Reels и экспертного контента.</p>
+    <div class="highlight">Соберите весь прошлый контент — посты, транскрибации роликов — в один файл. <strong>Шаблон я прикрепляю под уроком:</strong> попросите Claude собрать такой же, но в вашей нише и про вас.</div>
+  </div>
+</div>
+</div>
+
+<!-- ==================== СЛАЙД 15: ИТОГ 4 ФАЙЛА (numlist) ==================== -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Итого — <em>ваша база знаний</em></div>
     <div class="numlist__item">
       <div class="numlist__num">1</div>
-      <div class="numlist__text"><strong>Текучая речь</strong> <span>— никакого стаккато. Как будто рассказываешь подруге.</span></div>
+      <div class="numlist__text"><strong>Распаковка личности.</strong> <span>Кто вы, чем занимаетесь, какие смыслы несёте.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">2</div>
-      <div class="numlist__text"><strong>Анафора и ритм</strong> <span>— «Это не про деньги. Это не про удачу. Это про то, что ты перестала ждать разрешения».</span></div>
+      <div class="numlist__text"><strong>Анализ аудитории.</strong> <span>Для кого, что болит, чего хотят.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">3</div>
-      <div class="numlist__text"><strong>Тонкий юмор</strong> <span>— ирония, гипербола с деталью, обманутое ожидание.</span></div>
+      <div class="numlist__text"><strong>Tone of voice.</strong> <span>Ваш стиль речи, ваши фразы, ваш язык.</span></div>
     </div>
     <div class="numlist__item">
       <div class="numlist__num">4</div>
-      <div class="numlist__text"><strong>Сильное закрытие</strong> <span>— эмоциональный климакс, не «ну вот как-то так».</span></div>
+      <div class="numlist__text"><strong>База знаний.</strong> <span>Ваши экспертные тезисы и смыслы.</span></div>
     </div>
   </div>
 </div>
 </div>
 
-<!-- СЛАЙД 17: Триггеры — МЕТРИКИ -->
+<!-- ==================== СЛАЙД 16: ЗАКЛЮЧЕНИЕ (quote) ==================== -->
 <div class="slide">
 <div class="divider"></div>
 <nav class="nav">
@@ -720,152 +747,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <div class="metrics__heading">5 рычагов репоста, <em>сохранения, подписки</em></div>
-    <div class="metrics__row">
-      <div class="metrics__item">
-        <div class="metrics__number">1</div>
-        <div class="metrics__label">Узнавание</div>
-        <div class="metrics__desc">«Это про меня»</div>
-      </div>
-      <div class="metrics__item">
-        <div class="metrics__number">2</div>
-        <div class="metrics__label">Артикуляция</div>
-        <div class="metrics__desc">«Наконец кто-то это сказал»</div>
-      </div>
-      <div class="metrics__item">
-        <div class="metrics__number">3</div>
-        <div class="metrics__label">Аспирация</div>
-        <div class="metrics__desc">«Я тоже так хочу»</div>
-      </div>
-    </div>
-    <div class="metrics__row" style="margin-top: 0;">
-      <div class="metrics__item">
-        <div class="metrics__number">4</div>
-        <div class="metrics__label">Репост</div>
-        <div class="metrics__desc">«Я знаю таких людей»</div>
-      </div>
-      <div class="metrics__item">
-        <div class="metrics__number">5</div>
-        <div class="metrics__label">Ценность</div>
-        <div class="metrics__desc">«Надо сохранить»</div>
-      </div>
-      <div class="metrics__item" style="border-right: none;">
-        <div class="metrics__number" style="opacity: 0.5;">2+</div>
-        <div class="metrics__label">Минимум</div>
-        <div class="metrics__desc">Должны сработать в сильном ролике</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 18: Форматы съёмки — НУМЕРОВАННЫЙ СПИСОК -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="numlist__heading">Тренд 2026 — <em>простота и домашность</em></div>
-    <div class="numlist__item">
-      <div class="numlist__num">1</div>
-      <div class="numlist__text"><strong>Говоришь и делаешь</strong> <span>— красишь губы, готовишь. На каждое действие — строка сценария. Движение = досмотр выше.</span></div>
-    </div>
-    <div class="numlist__item">
-      <div class="numlist__num">2</div>
-      <div class="numlist__text"><strong>Суфлёр в объектив</strong> <span>— самый простой. Выглядит как уверенный разговор.</span></div>
-    </div>
-    <div class="numlist__item">
-      <div class="numlist__num">3</div>
-      <div class="numlist__text"><strong>Говорящая голова на фоне</strong> <span>— голова внизу, сверху фото/видео. CapCut &rarr; «Наложение» &rarr; «Убрать фон».</span></div>
-    </div>
-    <div class="highlight"><strong>Важно:</strong> достойный свет, одежда, фон — это условие, а не опция.</div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 19: Чек-лист перед съёмкой — ЧЕК-ЛИСТ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="checklist__heading">Пробегись <em>перед каждой записью</em></div>
-    <div class="checklist__grid">
-      <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--do">Сценарий и хук</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Сценарий написан до съёмки</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Хук бьёт в конкретное чувство</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>В первые 3 сек слышна боль</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Тело инструктирует</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Минимум 2 триггера</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>CTA вшит в речь</div>
-      </div>
-      <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--do">Голос и картинка</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Речь течёт — нет стаккато</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Есть ритм или анафора</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Юмор тонкий</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Закрытие — эмоц. пик</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Звучит как ты, не нейросеть</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Картинка достойная</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 20: Ошибки — ЧЕК-ЛИСТ -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="checklist__heading">10 ошибок, которые <em>убивают ролики</em></div>
-    <div class="checklist__grid">
-      <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--dont">Убивает контент</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Фритолк без сценария</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Информирование вместо инструктажа</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Слабый хук</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Лекторский тон</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>CTA приклеен роботом</div>
-      </div>
-      <div class="checklist__col">
-        <div class="checklist__col-label checklist__col-label--dont">Убивает подачу</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Стаккато-речь</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Плоская шутка</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Затухающий финал</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Чужой голос</div>
-        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Плохая картинка</div>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- СЛАЙД 21: Итоги — ЦИТАТА -->
-<div class="slide">
-<div class="divider"></div>
-<nav class="nav">
-  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
-  <span class="nav__logo-name">maysoulme</span>
-</nav>
-<div class="slide__body">
-  <div class="slide__inner">
-    <div class="quote-slide__label">Формула целиком</div>
+    <div class="quote-slide__label">ГЛАВНОЕ</div>
     <div class="quote-slide__mark">&ldquo;</div>
-    <div class="quote-slide__text">Сильный хук в чувство &rarr; узнавание &rarr; ритмичные тезисы &rarr; неотфильтрованная позиция &rarr; <em>тёплое закрытие.</em></div>
+    <div class="quote-slide__text">Это инвестиция, которая окупается с первого же ассистента. Контент будет звучать <em>как вы</em> — не как нейросеть.</div>
     <div class="quote-slide__divider"></div>
-    <p class="quote-slide__source">И всё это — живой текучей речью, своим голосом, по суфлёру.<br><br>Под уроком — промт. Собираешь проект в Claude по схеме из начала — и ассистент пишет ролики за тебя.</p>
+    <p class="quote-slide__source">Все шаблоны и файлы с вопросами — прикреплены прямо под уроком. Увидимся в следующем!</p>
   </div>
 </div>
 </div>
@@ -873,7 +759,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 
 <section class="ms-sell">
   <div class="ms-sell__in">
-    <p class="ms-sell__bridge">Теперь понятно, почему один ролик залетает, а другой нет. Остаётся вопрос, который гайд не закрывает: что делать с людьми, которые после этого ролика пришли.</p>
+    <p class="ms-sell__bridge">База знаний — это фундамент. На интенсиве мы ставим на него всю систему контента, чтобы ассистенты работали на продукт, а не просто писали тексты.</p>
 
     <div class="ms-sell__rule"></div>
 

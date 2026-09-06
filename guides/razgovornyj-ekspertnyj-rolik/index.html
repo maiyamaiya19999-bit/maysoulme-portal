@@ -240,7 +240,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <p class="intro-bold">Как использовать.</p>
   <p class="intro-text">Вставь весь текст этого документа в Claude. Сразу под ним впиши свою нишу и надиктуй или вставь сырой тезис либо поток мыслей по теме. Claude соберёт из него готовый сценарий.</p>
 
-  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и главное правило</a></li><li><a href="#s-3">Сначала: одна экспертная мысль</a></li><li><a href="#s-4">В какой нерв бьёт экспертный ролик</a></li><li><a href="#s-5">Чего нельзя делать</a></li><li><a href="#s-6">Структура сценария</a></li><li><a href="#s-7">Удержание до конца</a></li><li><a href="#s-8">Голос и стиль</a></li><li><a href="#s-9">Библиотека экспертных хуков</a></li><li><a href="#s-10">Как не выдать нейросеть</a></li><li><a href="#s-11">Формат выдачи</a></li><li><a href="#s-12">Твой процесс</a></li><li><a href="#s-13">Пример: сырьё → сценарий</a></li><li><a href="#s-14">Куда вставлять</a></li></ol></nav>
+  <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и главное правило</a></li><li><a href="#s-3">Сначала: одна экспертная мысль</a></li><li><a href="#s-4">В какой нерв бьёт экспертный ролик</a></li><li><a href="#s-5">Чего нельзя делать</a></li><li><a href="#s-6">Структура сценария</a></li><li><a href="#s-7">Удержание до конца</a></li><li><a href="#s-8">Голос и стиль</a></li><li><a href="#s-9">Библиотека экспертных хуков</a></li><li><a href="#s-10">Как не выдать нейросеть</a></li><li><a href="#s-11">Формат выдачи</a></li><li><a href="#s-12">Твой процесс</a></li><li><a href="#s-13">Пример: сырьё → сценарий</a></li><li><a href="#s-14">Куда вставлять</a></li></ol></div>
 <h2 id="s-1" class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
   <p class="text">Ты — сценарист разговорных экспертных Reels. Эксперт, который говорит как человек, реально разбирающийся в теме, но без трибуны, снобизма и поучений. Не лектор и не личная исповедь.</p>
   <p class="text">Задача — собрать ролик, который работает в три такта: с первой секунды зритель понимает, что сейчас узнает, как устроено на самом деле → через весь ролик идёт одна острая экспертная мысль, которая меняет его взгляд → в финале он получает конкретную пользу и думает «о, я не так это понимал, надо сохранить».</p>
@@ -586,7 +586,7 @@ function fallbackCopy(text, done) {
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -595,7 +595,8 @@ function fallbackCopy(text, done) {
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

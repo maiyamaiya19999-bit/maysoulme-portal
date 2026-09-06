@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="UTF-8">
+<title>Claude для контента — maysoulme</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: var(--g-accent); }
+
+@page { size: 1920px 1080px; margin: 0; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--g-bg);
+  color: var(--g-fg);
+  font-size: 24px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  position: relative;
+}
+
+/* Навбар на всю ширину */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 64px;
+  border-bottom: 1px solid var(--g-line);
+  background: var(--g-bg);
+  flex-shrink: 0;
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 38px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px; font-weight: 400; font-style: italic;
+  color: var(--g-faint); letter-spacing: 0.5px;
+}
+
+/* Тело слайда — центр по обеим осям */
+.slide__body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 80px;
+}
+.slide__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+/* Деликатный номер слайда */
+.slide__number {
+  position: absolute; bottom: 32px; right: 64px;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 18px; color: #ccc;
+}
+
+/* ===== ТИТУЛЬНЫЙ (HERO) ===== */
+.hero { text-align: center; }
+.badge {
+  display: inline-block; font-size: 14px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 7px 20px; margin-bottom: 40px;
+  letter-spacing: 2.5px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 64px; font-weight: 700; line-height: 1.3;
+  max-width: 1200px; margin: 0 auto 32px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 26px; color: var(--g-muted); line-height: 1.7; max-width: 900px; margin: 0 auto; }
+.hero__meta { font-size: 18px; color: var(--g-faint); margin-top: 24px; letter-spacing: 1px; }
+
+/* ===== ТРИ КАРТОЧКИ ===== */
+.cards {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 40px; max-width: 1280px; width: 100%; margin: 48px auto 0;
+}
+.card { background: var(--g-surface); border: 1px solid var(--g-line); padding: 40px; }
+.card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 19px; color: var(--accent); margin-bottom: 16px;
+}
+.card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 27px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;
+}
+.card__text { font-size: 19px; color: var(--g-muted); line-height: 1.7; }
+
+/* ===== БАЗОВЫЕ ЭЛЕМЕНТЫ ===== */
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 36px;
+}
+.section-heading em { font-style: italic; color: var(--accent); }
+
+.text { font-size: 24px; color: var(--g-muted); line-height: 1.75; margin-bottom: 20px; }
+
+.sub-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-weight: 700; margin: 32px 0 14px;
+}
+
+.highlight {
+  background: var(--g-surface); padding: 28px 32px; margin: 28px 0;
+  font-size: 22px; line-height: 1.7; color: var(--g-muted);
+}
+
+.guide-list { list-style: none; margin: 16px 0; }
+.guide-list li {
+  font-size: 22px; line-height: 1.7; color: var(--g-muted);
+  padding: 14px 0 14px 28px; position: relative;
+  border-bottom: 1px solid var(--g-line);
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 24px;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: var(--g-fg); }
+
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 32px; font-style: italic; color: var(--g-muted);
+  text-align: center;
+}
+.footer-note em { color: var(--accent); }
+
+/* ===== СХЕМКА 1: ЦИТАТА ===== */
+.quote { max-width: 1000px; margin: 0 auto; text-align: center; }
+.quote__label {
+  font-size: 14px; font-weight: 600; color: var(--g-faint);
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 32px;
+}
+.quote__mark {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 120px; color: var(--accent); line-height: 0.5;
+  margin-bottom: 24px; opacity: 0.3;
+}
+.quote__text {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 40px; font-style: italic; line-height: 1.5;
+  color: var(--g-fg); margin-bottom: 32px;
+}
+.quote__text em { color: var(--accent); }
+.quote__divider { width: 56px; height: 2px; background: var(--accent); margin: 0 auto 24px; }
+.quote__source { font-size: 20px; color: var(--g-faint); line-height: 1.6; }
+
+/* ===== СХЕМКА 2: ШАГИ ===== */
+.steps { max-width: 1000px; margin: 0 auto; }
+.steps__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 44px;
+}
+.steps__heading em { font-style: italic; color: var(--accent); }
+.steps__list { position: relative; padding-left: 44px; }
+.steps__list::before {
+  content: ''; position: absolute; left: 10px; top: 12px; bottom: 12px;
+  width: 1px; background: var(--g-line);
+}
+.steps__item { position: relative; padding-bottom: 32px; }
+.steps__item:last-child { padding-bottom: 0; }
+.steps__dot {
+  position: absolute; left: -44px; top: 4px;
+  width: 21px; height: 21px; border: 2px solid var(--accent);
+  background: var(--g-bg); border-radius: 50%;
+}
+.steps__item--active .steps__dot { background: var(--accent); }
+.steps__item-title { font-weight: 600; font-size: 24px; color: var(--g-fg); margin-bottom: 6px; }
+.steps__item-text { font-size: 20px; color: var(--g-muted); line-height: 1.6; }
+
+/* ===== СХЕМКА 3: НУМЕРОВАННЫЙ СПИСОК ===== */
+.numlist { max-width: 1000px; margin: 0 auto; }
+.numlist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 44px;
+}
+.numlist__heading em { font-style: italic; color: var(--accent); }
+.numlist__item {
+  display: flex; gap: 32px; align-items: baseline;
+  padding: 22px 0; border-bottom: 1px solid var(--g-line);
+}
+.numlist__item:last-child { border-bottom: none; }
+.numlist__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 56px; color: var(--accent); opacity: 0.25;
+  min-width: 72px; text-align: right; line-height: 1; flex-shrink: 0;
+}
+.numlist__text { font-size: 23px; color: var(--g-fg); line-height: 1.6; }
+.numlist__text strong { font-weight: 600; }
+.numlist__text span { color: var(--g-muted); }
+
+/* ===== СХЕМКА 4: АКЦЕНТНАЯ ПОЛОСА ===== */
+.accent-bar { max-width: 1000px; margin: 0 auto; }
+.accent-bar__label {
+  font-size: 14px; font-weight: 600; color: var(--g-faint);
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 28px;
+}
+.accent-bar__block { border-left: 4px solid var(--accent); padding-left: 40px; }
+.accent-bar__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 40px; font-weight: 700; line-height: 1.35; margin-bottom: 20px;
+}
+.accent-bar__title em { font-style: italic; color: var(--accent); }
+.accent-bar__text { font-size: 22px; color: var(--g-muted); line-height: 1.75; margin-bottom: 24px; }
+.accent-bar__footer {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-style: italic; color: var(--g-faint);
+  padding-top: 20px; border-top: 1px solid var(--g-line);
+}
+
+/* ===== СХЕМКА 5: ЧЕК-ЛИСТ ===== */
+.checklist { max-width: 1100px; margin: 0 auto; }
+.checklist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 40px;
+}
+.checklist__heading em { font-style: italic; color: var(--accent); }
+.checklist__grid { display: grid; grid-template-columns: 1fr 1fr; }
+.checklist__col-label {
+  font-size: 14px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; padding-bottom: 18px; margin-bottom: 14px;
+  border-bottom: 1px solid var(--g-line);
+}
+.checklist__col-label--do { color: var(--accent); }
+.checklist__col-label--dont { color: var(--g-faint); }
+.checklist__col:first-child { padding-right: 32px; border-right: 1px solid var(--g-line); }
+.checklist__col:last-child { padding-left: 32px; }
+.checklist__item {
+  display: flex; gap: 14px; padding: 12px 0;
+  font-size: 21px; color: var(--g-muted); line-height: 1.6; align-items: baseline;
+}
+.checklist__mark { flex-shrink: 0; font-size: 20px; font-weight: 700; width: 22px; }
+.checklist__mark--do { color: var(--accent); }
+.checklist__mark--dont { color: #ccc; }
+
+/* ===== СХЕМКА 6: МЕТРИКИ ===== */
+.metrics { max-width: 1200px; margin: 0 auto; }
+.metrics__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 44px;
+}
+.metrics__heading em { font-style: italic; color: var(--accent); }
+.metrics__row { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.metrics__item { text-align: center; padding: 32px 20px; border-right: 1px solid var(--g-line); }
+.metrics__item:last-child { border-right: none; }
+.metrics__number {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 72px; color: var(--accent); opacity: 0.25;
+  line-height: 1; margin-bottom: 12px;
+}
+.metrics__label { font-size: 16px; color: var(--g-faint); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+.metrics__desc { font-size: 19px; color: var(--g-muted); line-height: 1.5; }
+
+/* ===== СХЕМКА 7: ВОПРОС-ОТВЕТ ===== */
+.qa { max-width: 1000px; margin: 0 auto; }
+.qa__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 40px;
+}
+.qa__heading em { font-style: italic; color: var(--accent); }
+.qa__item { margin-bottom: 32px; }
+.qa__question {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 26px; font-style: italic; color: var(--accent);
+  margin-bottom: 12px; padding-left: 48px; position: relative;
+}
+.qa__question::before {
+  content: '?'; position: absolute; left: 0; top: -6px;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 40px; color: var(--accent); opacity: 0.25;
+}
+.qa__answer { font-size: 22px; color: var(--g-muted); line-height: 1.7; padding-left: 48px; border-left: 1px solid var(--g-line); }
+
+/* ===== СХЕМКА 8: ФОРМУЛА ===== */
+.formula { max-width: 1200px; margin: 0 auto; }
+.formula__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 46px; font-weight: 700; line-height: 1.3;
+  text-align: center; margin-bottom: 40px;
+}
+.formula__heading em { font-style: italic; color: var(--accent); }
+.formula__row { display: flex; align-items: center; gap: 24px; margin-bottom: 28px; }
+.formula__step { flex: 1; background: var(--g-surface); padding: 28px 22px; text-align: center; }
+.formula__step-title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 22px; font-weight: 700; margin-bottom: 6px;
+}
+.formula__step-text { font-size: 17px; color: var(--g-muted); line-height: 1.5; }
+.formula__arrow { color: var(--accent); font-size: 26px; flex-shrink: 0; opacity: 0.4; }
+.formula__result { border: 1px solid var(--accent); padding: 28px 22px; text-align: center; flex: 1; }
+.formula__result .formula__step-title { color: var(--accent); }
+.formula__note { font-size: 19px; color: var(--g-faint); font-style: italic; text-align: center; margin-top: 12px; }
+
+/* ===== PRINT / PDF ===== */
+@media print {
+  html, body { width: 1920px; }
+  .slide { width: 1920px; height: 1080px; page-break-after: always; page-break-inside: avoid; }
+  .slide:last-child { page-break-after: auto; }
+  .nav { position: relative; }
+  .slide__number { position: absolute; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+/* ВАЖНО: мобильные правила только в screen — иначе текут в print и ломают слайды */
+@media screen and (max-width: 900px) {
+  .nav { padding: 16px 24px; }
+  .hero h1 { font-size: 36px; }
+  .section-heading, .steps__heading, .numlist__heading,
+  .checklist__heading, .metrics__heading, .qa__heading, .formula__heading { font-size: 28px; }
+  .cards { grid-template-columns: 1fr; }
+  .slide__body { padding: 40px 24px; }
+}
+
+
+/* ===== KICKER (надзаголовок) ===== */
+.kicker {
+  text-align: center;
+  font-size: 14px; font-weight: 600; color: var(--accent);
+  letter-spacing: 2.5px; text-transform: uppercase; margin-bottom: 18px;
+}
+
+/* ===== ДВЕ КОЛОНКИ ===== */
+.cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; max-width: 1180px; width: 100%; margin: 0 auto; }
+.col__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-weight: 700; color: var(--accent);
+  margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--g-line);
+}
+.col__text { font-size: 22px; color: var(--g-muted); line-height: 1.75; }
+
+/* список без верхней границы для колонок */
+.cols2 .guide-list { margin: 0; }
+.cols2 .guide-list li { font-size: 21px; padding: 12px 0 12px 26px; }
+.cols2 .guide-list li::before { top: 22px; }
+
+/* нумерованный мини-список внутри колонки */
+.ol { list-style: none; counter-reset: ol; margin: 0; }
+.ol li {
+  counter-increment: ol; position: relative; padding: 12px 0 12px 44px;
+  font-size: 21px; line-height: 1.6; color: var(--g-muted); border-bottom: 1px solid var(--g-line);
+}
+.ol li:last-child { border-bottom: none; }
+.ol li::before {
+  content: counter(ol); position: absolute; left: 0; top: 12px;
+  font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+  font-size: 22px; color: var(--accent); opacity: 0.4;
+}
+
+/* ===== КОД / ПРОМТ-БЛОК ===== */
+.codeblock {
+  background: var(--g-surface); padding: 32px 36px; max-width: 1180px; margin: 0 auto;
+  font-family: 'SF Mono', ui-monospace, Menlo, Monaco, monospace;
+  font-size: 20px; line-height: 1.85; color: var(--g-fg); white-space: pre-wrap;
+}
+.codeblock--col { font-size: 18px; line-height: 1.8; padding: 28px 30px; }
+.code-label {
+  font-size: 13px; font-weight: 600; color: var(--g-faint); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.mono { font-family: 'SF Mono', ui-monospace, Menlo, monospace; font-size: 0.92em; background: var(--g-line); padding: 1px 8px; }
+
+/* ===== ЗАПИСЬ ЭКРАНА (демо-слайды) ===== */
+.rec { background: var(--g-surface); padding: 40px 48px; max-width: 1120px; width: 100%; margin: 0 auto; }
+.rec__label {
+  font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 24px;
+}
+.rec__list { list-style: none; counter-reset: rec; }
+.rec__list li {
+  counter-increment: rec; position: relative; padding: 14px 0 14px 52px;
+  font-size: 22px; line-height: 1.6; color: var(--g-fg); border-bottom: 1px solid var(--g-line);
+}
+.rec__list li:last-child { border-bottom: none; }
+.rec__list li::before {
+  content: counter(rec); position: absolute; left: 0; top: 13px;
+  font-family: 'Libre Baskerville', Georgia, serif; font-style: italic;
+  font-size: 24px; color: var(--accent); opacity: 0.4; width: 36px;
+}
+
+/* ===== ЧИПЫ ===== */
+.chips { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 36px; }
+.chip {
+  border: 1px solid var(--accent); color: var(--accent);
+  font-size: 16px; padding: 8px 18px; letter-spacing: 0.3px;
+}
+.chips--small .chip { font-size: 15px; padding: 6px 14px; }
+
+/* чек-лист: нейтральная правая колонка (не «не делай», а «не нужен») */
+.checklist__mark--neutral { color: #ccc; }
+
+/* финал */
+.final-text {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px; font-style: italic; color: var(--g-muted); line-height: 1.5;
+  text-align: center; max-width: 1000px; margin: 0 auto;
+}
+.final-text em { color: var(--accent); font-style: italic; }
+.final-rule { width: 56px; height: 2px; background: var(--accent); margin: 0 auto 36px; }
+</style><style id="ms-slides">
+  /* презентация 60/40 под видеоурок → обычная читаемая статья */
+  .slide { height: auto !important; min-height: 0 !important; width: 100% !important; display: block !important;
+    padding: 56px 0 !important; border-bottom: 1px solid var(--g-line, var(--g-line)); }
+  .slide:first-of-type { padding-top: 40px !important; }
+  .slide__body { width: 100% !important; max-width: 780px; margin: 0 auto; padding: 0 24px !important; display: block !important; }
+  .slide__inner { max-width: none !important; }
+  .divider, .slide .nav { display: none !important; }
+  .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
+</style>
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
+<style id="ms-theme-vars">
+  :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
+          --g-line:#e6e4e1; --g-muted:#555555; --g-faint:#8f8a84; }
+  [data-theme="dark"] { --g-bg:#100f0e; --g-surface:#191715; --g-fg:#ece7e1; --g-accent:#d8ac83;
+          --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
+  html, body { background: var(--g-bg); color: var(--g-fg); }
+  [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Claude для контента: регистрация, настройки, проекты">
+<meta property="og:description" content="Без айтишной магии: как начать работать в Claude, где обычно спотыкаются и как собрать себе ИИ-помощника под блог.">
+<meta property="og:url" content="https://maysoulme.ru/guides/claude-dlya-kontenta/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+<div class="ms-progress"><i></i></div>
+<div class="ms-bar">
+  <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">5 мин чтения</span>
+  <span class="ms-bar__name">maysoulme</span>
+  <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
+</div>
+
+
+<div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="hero"><div class="badge">Урок для новичков</div><h1>Claude для контента: <em>регистрация, настройки, проекты</em></h1><p class="hero__desc">Без айтишной магии. Разбираем, как начать работать в Claude, где могут быть сложности и как собрать себе AI-помощника под сценарии, прогревы и лидмагниты.</p><p class="hero__meta">20–30 минут</p><div class="chips"><span class="chip">для новичков</span><span class="chip">контент</span><span class="chip">Projects</span><span class="chip">доступ и оплата без обещаний</span></div></div></div></div><span class="slide__number">01</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">План</div><h2 class="section-heading">Что сегодня <em>разберём</em></h2><div class="cols2"><div><div class="col__heading">Старт</div><ul class="guide-list"><li>что такое Claude простыми словами;</li><li>доступ из РФ и ограничения;</li><li>регистрация и номер телефона;</li><li>оплата и типовые ошибки.</li></ul></div><div><div class="col__heading">Работа</div><ul class="guide-list"><li>интерфейс Claude;</li><li>как писать нормальный запрос;</li><li>настройки и стиль;</li><li>Projects для контента;</li><li>коротко про Claude Code.</li></ul></div></div></div></div><span class="slide__number">02</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Смысл</div><h2 class="section-heading">Claude — это не <em>«кнопка сделать красиво»</em></h2><div class="cards"><div class="card"><div class="card__num">01.</div><h3 class="card__title">Черновик</h3><p class="card__text">Claude быстро собирает структуру, идеи, варианты текста и сценарии.</p></div><div class="card"><div class="card__num">02.</div><h3 class="card__title">Контекст</h3><p class="card__text">Чем понятнее вы объясняете аудиторию, продукт и стиль, тем сильнее результат.</p></div><div class="card"><div class="card__num">03.</div><h3 class="card__title">Редактура</h3><p class="card__text">Ответ нельзя копировать вслепую. Его нужно доводить под ваш голос.</p></div></div></div></div><span class="slide__number">03</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Важно</div><h2 class="section-heading">Доступ из РФ: <em>без иллюзий</em></h2><div style="max-width:1000px;margin:0 auto;"><ul class="guide-list"><li>Claude работает не во всех странах.</li><li>РФ официально не указана в списке supported locations.</li><li>Казахстан указан.</li><li>Для регистрации может понадобиться номер из поддерживаемой страны.</li><li>Оплата зависит от карты, страны, billing address и банка.</li><li><strong style="color:var(--g-accent)">Гарантий «вечной рабочей схемы» нет.</strong></li></ul></div></div></div><span class="slide__number">04</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Перед стартом</div><h2 class="section-heading">Что подготовить <em>заранее</em></h2><div class="numlist"><div class="numlist__item"><div class="numlist__num">1</div><div class="numlist__text"><strong>Отдельный рабочий email</strong></div></div><div class="numlist__item"><div class="numlist__num">2</div><div class="numlist__text"><strong>Номер телефона</strong> <span>из supported location</span></div></div><div class="numlist__item"><div class="numlist__num">3</div><div class="numlist__text"><strong>Понимание,</strong> <span>чем будете оплачивать</span></div></div><div class="numlist__item"><div class="numlist__num">4</div><div class="numlist__text"><strong>15–20 минут</strong> <span>без спешки</span></div></div><div class="numlist__item"><div class="numlist__num">5</div><div class="numlist__text"><strong>Не показывать</strong> <span>карту, CVV, SMS и адрес</span></div></div></div></div></div><span class="slide__number">05</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Демо 1 · Регистрация</div><h2 class="section-heading">Что показать <em>на экране</em></h2><div class="rec"><div class="rec__label">Запись экрана</div><ol class="rec__list"><li>Открыть <span class="mono">claude.ai</span>.</li><li>Показать вход через email / Google.</li><li>Показать, где появляется SMS verification, но не вводить личные данные в кадре.</li><li>После входа показать главный экран Claude.</li><li>Отправить простой тестовый запрос.</li></ol></div></div></div><span class="slide__number">06</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Оплата</div><h2 class="section-heading">Почему карта <em>может не пройти</em></h2><div class="cols2"><div><div class="col__heading">Частые причины</div><ul class="guide-list"><li>страна карты не поддерживается;</li><li>billing address не совпадает;</li><li>не прошёл 3DS;</li><li>банк отклонил международный платёж;</li><li>слишком много попыток подряд.</li></ul></div><div><div class="col__heading">Что сказать</div><p class="col__text">Если платёж не прошёл, не надо сразу пробовать двадцать вариантов. Остановитесь, проверьте карту, адрес, страну, 3DS и лимиты банка.</p></div></div></div></div><span class="slide__number">07</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Демо 2 · Интерфейс</div><h2 class="section-heading">Первый экран Claude: <em>куда смотреть</em></h2><div class="cols2"><div><div class="col__heading">Что есть в интерфейсе</div><ul class="guide-list"><li>поле ввода;</li><li>новый чат;</li><li>история;</li><li>выбор модели, если доступен;</li><li>прикрепление файлов;</li><li>настройки;</li><li>Projects.</li></ul></div><div><div class="col__heading">На экране</div><ul class="ol"><li>Показать главный экран Claude.</li><li>Показать поле ввода и историю.</li><li>Показать кнопку/раздел Projects.</li><li>Показать attachment, но без загрузки личных файлов.</li></ul></div></div></div></div><span class="slide__number">08</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Промпты</div><h2 class="section-heading">Формула запроса, <em>который не выдаёт кашу</em></h2><div class="cols2"><div><ul class="ol"><li>Роль</li><li>Задача</li><li>Контекст</li><li>Ограничения</li><li>Формат ответа</li></ul></div><div><div class="code-label">Пример</div><div class="codeblock codeblock--col">Ты — сценарист Reels для эксперта.
+Моя ниша — нутрициология.
+Аудитория — женщины 30–45, которые устали от диет.
+Цель — привести людей на бесплатный чеклист.
+Сделай 5 сценариев: хук, основная мысль, пример, CTA.
+Тон — спокойный, без запугивания.</div></div></div></div></div><span class="slide__number">09</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Демо 3 · Первый запрос</div><h2 class="section-heading">Что показать <em>на экране</em></h2><div class="rec"><div class="rec__label">Запись экрана</div><ol class="rec__list"><li>Вставить пример промпта со слайда.</li><li>Получить ответ Claude.</li><li>Показать, что первый ответ — черновик.</li><li>Дать уточнение: <span class="mono">сделай проще, короче и живее, как для сторис</span>.</li><li>Показать разницу между первым и вторым ответом.</li></ol></div></div></div><span class="slide__number">10</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Настройки</div><h2 class="section-heading">Чтобы Claude <em>писал ближе к вам</em></h2><div class="cols2"><div><div class="col__heading">Что настроить</div><ul class="guide-list"><li>Instructions for Claude;</li><li>Memory, если доступна;</li><li>стиль ответа;</li><li>что не использовать;</li><li>примеры ваших текстов.</li></ul></div><div><div class="code-label">Пример инструкции</div><div class="codeblock codeblock--col">Я веду экспертный блог. Мне нужны короткие, живые тексты без канцелярита. Пиши простым языком. Не используй фразы вроде «в современном мире» и «важно отметить». Сначала давай структуру, потом текст. Если данных мало, задай 2–3 вопроса.</div></div></div></div></div><span class="slide__number">11</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Главный блок</div><h2 class="section-heading">Projects — <em>самая полезная функция</em> для контента</h2><div class="cols2"><div><div class="col__heading">Обычный чат</div><p class="col__text">Хорош для разовой задачи. Но каждый раз приходится заново объяснять аудиторию, продукт и стиль.</p></div><div><div class="col__heading">Project</div><p class="col__text">Отдельное рабочее пространство: файлы, инструкции, примеры текстов, оффер и контекст для всех задач.</p></div></div><div class="chips chips--small"><span class="chip">описание продукта</span><span class="chip">аудитория</span><span class="chip">примеры постов</span><span class="chip">правила стиля</span><span class="chip">промпты Майи</span></div></div></div><span class="slide__number">12</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Демо 4 · Projects</div><h2 class="section-heading">Что показать <em>на экране</em></h2><div class="rec"><div class="rec__label">Запись экрана</div><ol class="rec__list"><li>Открыть раздел Projects.</li><li>Создать проект: <span class="mono">Контент для моего блога</span>.</li><li>Показать поле Project Instructions.</li><li>Вставить короткий шаблон инструкций.</li><li>Показать, где добавляются файлы/knowledge.</li><li>Создать чат внутри проекта и попросить прогрев на 7 дней.</li></ol></div></div></div><span class="slide__number">13</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Шаблон</div><h2 class="section-heading">Мини-шаблон <em>Project Instructions</em></h2><div class="codeblock">Ты помогаешь мне создавать контент для моего проекта.
+
+Моя ниша: [ниша]
+Мой продукт: [продукт]
+Моя аудитория: [кто эти люди, чего хотят, чего боятся]
+Цель контента: [доверие / заявки / продажи / прогрев]
+Тон: живой, простой, без давления
+Чего избегать: канцелярит, пафос, обещания без доказательств
+
+Когда я прошу текст, сначала дай структуру. Потом предложи 2–3 варианта. Пиши короткими абзацами. В конце добавляй CTA.</div></div></div><span class="slide__number">14</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Практика</div><h2 class="section-heading">Три быстрых кейса <em>для контента</em></h2><div class="cards"><div class="card"><div class="card__num">01.</div><h3 class="card__title">Сценарии</h3><p class="card__text">10 сценариев Reels: хук, мысль, пример, CTA.</p></div><div class="card"><div class="card__num">02.</div><h3 class="card__title">Прогрев</h3><p class="card__text">7 дней: цель дня, тема, пост, сторис, главный тезис.</p></div><div class="card"><div class="card__num">03.</div><h3 class="card__title">Лидмагнит</h3><p class="card__text">5 идей, выбор лучшей, структура PDF или чеклиста.</p></div></div></div></div><span class="slide__number">15</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Ошибки</div><h2 class="section-heading">Что чаще всего <em>ломает результат</em></h2><div class="cols2"><div><ul class="guide-list"><li>ждать идеальный ответ с первого раза;</li><li>начинать новый чат на каждую правку;</li><li>не давать контекст;</li><li>копировать без редактуры.</li></ul></div><div><ul class="guide-list"><li>хранить всё в одном хаотичном чате;</li><li>показывать личные данные на экране;</li><li>путать Claude.ai и Claude Code.</li></ul></div></div></div></div><span class="slide__number">16</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Коротко</div><h2 class="section-heading">Claude Code: <em>кому он нужен</em></h2><div class="checklist"><div class="checklist__grid"><div class="checklist__col"><div class="checklist__col-label checklist__col-label--do">Нужен, если вы</div><div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>делаете сайты</div><div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>пишете код</div><div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>работаете с файлами проекта</div><div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>хотите, чтобы AI запускал команды</div></div><div class="checklist__col"><div class="checklist__col-label checklist__col-label--dont">Не нужен на старте, если вы</div><div class="checklist__item"><span class="checklist__mark checklist__mark--neutral">&#x2717;</span>пишете контент</div><div class="checklist__item"><span class="checklist__mark checklist__mark--neutral">&#x2717;</span>делаете прогревы</div><div class="checklist__item"><span class="checklist__mark checklist__mark--neutral">&#x2717;</span>собираете лидмагниты</div><div class="checklist__item"><span class="checklist__mark checklist__mark--neutral">&#x2717;</span>не понимаете, что такое терминал</div></div></div></div></div></div><span class="slide__number">17</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Чеклист</div><h2 class="section-heading">Что сделать <em>после урока</em></h2><div class="numlist"><div class="numlist__item"><div class="numlist__num">1</div><div class="numlist__text"><strong>Проверить доступ</strong> <span>— страна, номер, способ оплаты</span></div></div><div class="numlist__item"><div class="numlist__num">2</div><div class="numlist__text"><strong>Создать рабочий email</strong></div></div><div class="numlist__item"><div class="numlist__num">3</div><div class="numlist__text"><strong>Протестировать Free</strong></div></div><div class="numlist__item"><div class="numlist__num">4</div><div class="numlist__text"><strong>Заполнить инструкции</strong></div></div><div class="numlist__item"><div class="numlist__num">5</div><div class="numlist__text"><strong>Создать Project и 3 чата</strong> <span>— сценарии, прогрев, лидмагнит</span></div></div></div></div></div><span class="slide__number">18</span></div><div class="slide"><nav class="nav"><a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a><span class="nav__logo-name">maysoulme</span></nav><div class="slide__body"><div class="slide__inner"><div class="kicker">Финал</div><h2 class="section-heading">Не ищите <em>волшебный промпт</em></h2><div class="final-rule"></div><p class="final-text">Claude полезен, когда вы даёте ему <em>контекст</em> и используете как рабочего помощника.</p></div></div><span class="slide__number">19</span></div>
+
+<section class="ms-sell">
+  <div class="ms-sell__in">
+    <p class="ms-sell__bridge">Помощник собран. На интенсиве из одного помощника вырастает команда: сценарист, редактор, парсер идей и агент с памятью вашего канала.</p>
+
+    <div class="ms-sell__rule"></div>
+
+    <span class="ms-sell__label">Интенсив</span>
+    <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
+    <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
+
+    <div class="ms-sell__proof">
+      <div class="ms-sell__proof-item">
+        <span class="ms-sell__num">600 000</span>
+        <span class="ms-sell__cap">просмотров — и 8 подписчиков</span>
+      </div>
+      <div class="ms-sell__proof-vs">против</div>
+      <div class="ms-sell__proof-item ms-sell__proof-item--win">
+        <span class="ms-sell__num">19 000</span>
+        <span class="ms-sell__cap">просмотров — 240 подписчиков и 30 000 ₽</span>
+      </div>
+    </div>
+    <p class="ms-sell__proof-note">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
+
+    <ul class="ms-sell__list">
+      <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
+      <li><b>Текстовые и разговорные ролики</b> — один формат набирает холодную аудиторию, второй превращает её в свою</li>
+      <li><b>ИИ-агент с памятью канала</b> — помнит все ваши посты и предлагает продолжение начатых тем, чтобы блог звучал как одна история</li>
+      <li><b>Парсер идей</b> — собирает залетающие ролики вашей ниши, пока вы завтракаете, и выдаёт готовые темы</li>
+      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираете и пользуетесь</li>
+    </ul>
+
+    <p class="ms-sell__author">Всё это я собрала в Claude Code без единого программиста — просто объясняла задачи обычными словами. На интенсиве показываю ровно то, что делаю сама каждый день.</p>
+    <span class="ms-sell__sign">Майя</span>
+
+    <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
+    <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
+  </div>
+</section>
+
+<footer class="ms-foot">
+  <a class="ms-foot__back" href="../../">← Все гайды maysoulme</a>
+  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новое сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
+</footer>
+
+<style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
+
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
+  .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
+    padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
+  .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
+  .ms-bar__back:hover { text-decoration: underline; }
+  .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
+    line-height: 1; margin-left: auto; }
+  .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
+    width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
+    justify-content: center; }
+  .ms-bar__theme:hover { border-color: var(--g-accent, #710C04); color: var(--g-accent, #710C04); }
+
+  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 78px 22px 72px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
+    color: #f0ece7; font-style: italic; margin: 0; }
+  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 42px 0 38px; }
+  .ms-sell__label { display: inline-block; border: 1px solid #c9a07a; color: #c9a07a; font-size: 10.5px;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 22px; }
+  .ms-sell__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700; line-height: 1.24; margin: 0 0 16px; color: #fff; }
+  .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
+  .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
+
+  .ms-sell__proof { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    border-top: 1px solid #2e2e2e; border-bottom: 1px solid #2e2e2e; padding: 26px 0; }
+  .ms-sell__proof-item { flex: 1; min-width: 190px; }
+  .ms-sell__num { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px;
+    color: #6f6f6f; line-height: 1.2; }
+  .ms-sell__proof-item--win .ms-sell__num { color: #c9a07a; }
+  .ms-sell__cap { display: block; font-size: 13.5px; color: #9a9a9a; margin-top: 6px; line-height: 1.5; }
+  .ms-sell__proof-vs { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6f6f6f; }
+  .ms-sell__proof-note { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 22px 0 40px; }
+
+  .ms-sell__list { list-style: none; margin: 0 0 38px; padding: 0; }
+  .ms-sell__list li { padding: 15px 0; border-bottom: 1px solid #2a2a2a; font-size: 15.5px;
+    line-height: 1.62; color: #cfcfcf; }
+  .ms-sell__list li b { color: #fff; font-weight: 600; }
+  .ms-sell__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
+
+  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 6px;
+    padding-left: 18px; border-left: 2px solid #c9a07a; }
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 52px;
+    line-height: 1; margin: 4px 0 30px 18px; }
+
+  .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
+    padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
+  .ms-sell__cta:hover { opacity: .86; }
+  .ms-sell__note { font-size: 13.5px; color: #8a8a8a; margin: 16px 0 0; }
+
+  .ms-foot { max-width: 660px; margin: 0 auto; padding: 44px 22px 64px; text-align: center;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: var(--g-muted, #777); }
+  .ms-foot a { color: var(--g-accent, #710C04); }
+  .ms-foot__back { display: inline-block; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
+  .ms-foot__back:hover { text-decoration: underline; }
+  .ms-foot p { margin: 0; }
+  @media (max-width: 560px) {
+    .ms-sell { padding: 56px 20px 52px; }
+    .ms-sell__bridge { font-size: 18px; }
+    .ms-sell__proof-vs { display: none; }
+    .ms-bar__name { display: none; }
+  }
+</style>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
+</body></html>

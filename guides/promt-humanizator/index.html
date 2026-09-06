@@ -240,7 +240,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <p class="intro-bold">Нейросеть выдаёт себя не словами, а ритмом. И пока ты правишь отдельные фразы, читатель уже почувствовал: с ним говорит машина.</p>
   <p class="intro-text">Этот гайд собран на базе исследования Википедии «Signs of AI writing» — команда AI Cleanup несколько лет документировала признаки машинного текста на тысячах реальных примеров. Внутри: как детекторы и живые люди вычисляют ИИ-текст, готовый промт-хуманизатор и инструкция, как выжать из него максимум.</p>
 
-  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Как вычисляют ИИ-текст</a></li><li><a href="#s-2">Как устроен промт</a></li><li><a href="#s-3">Сам промт</a></li><li><a href="#s-4">Как выжать из промта максимум</a></li></ol></nav>
+  <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Как вычисляют ИИ-текст</a></li><li><a href="#s-2">Как устроен промт</a></li><li><a href="#s-3">Сам промт</a></li><li><a href="#s-4">Как выжать из промта максимум</a></li></ol></div>
 <h2 id="s-1" class="section-heading"><span>01.</span> Как вычисляют <em>ИИ-текст</em></h2>
   <p class="text">Детекторы опираются на две метрики. Perplexity — предсказуемость слов: нейросеть по своей природе выбирает самое вероятное следующее слово, поэтому её текст «гладкий» и ожидаемый. Человек выбирает слова из памяти, юмора и личного контекста — и его выбор постоянно «удивляет» модель. Burstiness — вариативность: человек пишет неровно, у него предложения дышат и меняют длину, а машинный текст держит один монотонный ритм от начала до конца.</p>
   <div class="highlight"><strong>Суть:</strong> человеческий текст статистически «неровный» и непредсказуемый. Машинный — гладкий, ритмичный и ожидаемый. Именно поэтому косметическая правка отдельных слов не спасает: паттерн виден на уровне структуры.</div>
@@ -447,7 +447,7 @@ function fallbackCopy(text, done) {
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -456,7 +456,8 @@ function fallbackCopy(text, done) {
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

@@ -152,7 +152,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__tip"><strong>Правильная стратегия:</strong> не покупай номер для ChatGPT, не выпускай карту до проверки бесплатного доступа и не начинай с годовой подписки.</div>
     </div>
 
-    <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Выбери одну страну</a></li><li><a href="#s-2">Подготовь VPN, браузер и email</a></li><li><a href="#s-3">Подготовь номер для Claude</a></li><li><a href="#s-4">Зарегистрируй Claude</a></li><li><a href="#s-5">Зарегистрируй ChatGPT</a></li><li><a href="#s-6">Установи приложения</a></li><li><a href="#s-7">Проверь бесплатный доступ</a></li><li><a href="#s-8">Выбери стратегию оплаты</a></li><li><a href="#s-9">Выпусти карту и пополни баланс</a></li><li><a href="#s-10">Оплати первый месяц</a></li><li><a href="#s-11">Настрой продление</a></li><li><a href="#s-12">Реши типовые ошибки</a></li><li><a href="#s-13">Настрой сервисы под себя</a></li><li><a href="#s-14">Финальный чек-лист</a></li></ol></nav>
+    <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Выбери одну страну</a></li><li><a href="#s-2">Подготовь VPN, браузер и email</a></li><li><a href="#s-3">Подготовь номер для Claude</a></li><li><a href="#s-4">Зарегистрируй Claude</a></li><li><a href="#s-5">Зарегистрируй ChatGPT</a></li><li><a href="#s-6">Установи приложения</a></li><li><a href="#s-7">Проверь бесплатный доступ</a></li><li><a href="#s-8">Выбери стратегию оплаты</a></li><li><a href="#s-9">Выпусти карту и пополни баланс</a></li><li><a href="#s-10">Оплати первый месяц</a></li><li><a href="#s-11">Настрой продление</a></li><li><a href="#s-12">Реши типовые ошибки</a></li><li><a href="#s-13">Настрой сервисы под себя</a></li><li><a href="#s-14">Финальный чек-лист</a></li></ol></div>
 <h2 id="s-1" class="section-heading"><span>01.</span> Выбери одну <em>страну</em></h2>
     <p class="text">Страна нужна, чтобы не было противоречий между VPN, номером, картой и billing address. Лучше выбрать одну поддерживаемую локацию и использовать её во всех действиях.</p>
     <ol class="headline-list">
@@ -509,7 +509,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -518,7 +518,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

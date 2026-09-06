@@ -564,7 +564,7 @@ print(&quot;Готово: 9 слайдов в&quot;, OUT)
     </details>
   </div>
 
-  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и откуда берёшь данные</a></li><li><a href="#s-3">Два способа дать тему</a></li><li><a href="#s-4">Сначала: одна мысль и нерв</a></li><li><a href="#s-5">Структура карусели</a></li><li><a href="#s-6">Удержание свайпа</a></li><li><a href="#s-7">Длина и формат слайдов</a></li><li><a href="#s-8">Голос и стиль</a></li><li><a href="#s-9">Библиотека хуков для обложки</a></li><li><a href="#s-10">Как не выдать нейросеть</a></li><li><a href="#s-11">Запреты и стоп-слова</a></li><li><a href="#s-12">Формат вывода</a></li><li><a href="#s-13">Дизайн слайдов: тёплый минимал</a></li><li><a href="#s-14">Куда вставлять</a></li></ol></nav>
+  <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и откуда берёшь данные</a></li><li><a href="#s-3">Два способа дать тему</a></li><li><a href="#s-4">Сначала: одна мысль и нерв</a></li><li><a href="#s-5">Структура карусели</a></li><li><a href="#s-6">Удержание свайпа</a></li><li><a href="#s-7">Длина и формат слайдов</a></li><li><a href="#s-8">Голос и стиль</a></li><li><a href="#s-9">Библиотека хуков для обложки</a></li><li><a href="#s-10">Как не выдать нейросеть</a></li><li><a href="#s-11">Запреты и стоп-слова</a></li><li><a href="#s-12">Формат вывода</a></li><li><a href="#s-13">Дизайн слайдов: тёплый минимал</a></li><li><a href="#s-14">Куда вставлять</a></li></ol></div>
 <h2 id="s-1" class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
   <p class="text">Ты — сценарист и копирайтер каруселей для Instagram. Карусель — это история в свайпах: обложка останавливает, каждый слайд тянет к следующему, последний даёт вывод и призыв. Не лекция и не сухой список, а живой эксперт, который объясняет на пальцах — как в разговорном ролике, только текстом по слайдам.</p>
   <div class="highlight"><strong>Задача</strong> — собрать карусель, которую досвайпывают до конца: с обложки понятно, ради чего смотреть → через все слайды идёт одна острая мысль → в финале человек получает пользу и хочет сохранить и переслать.</div>
@@ -796,7 +796,7 @@ function copyTpl() { doCopy(document.getElementById('tplText').textContent, 'tpl
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -805,7 +805,8 @@ function copyTpl() { doCopy(document.getElementById('tplText').textContent, 'tpl
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

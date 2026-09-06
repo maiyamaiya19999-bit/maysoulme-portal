@@ -251,7 +251,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 
   <p class="text">Разбери по блокам ниже. Каждый блок — максимально подробно, с конкретными примерами, фразами из реальной жизни и внутренними монологами людей.</p>
 
-  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Портрет аудитории — кто эти люди</a></li><li><a href="#s-2">Боли — уровни глубины</a></li><li><a href="#s-3">Желания — уровни глубины</a></li><li><a href="#s-4">Барьеры и возражения</a></li><li><a href="#s-5">Конкурентный ландшафт и контекст</a></li><li><a href="#s-6">Триггеры немедленной покупки</a></li><li><a href="#s-7">Язык и психографика</a></li><li><a href="#s-8">Идеи трипваеров — гипотезы для сверки</a></li><li><a href="#s-9">Как выполнять</a></li></ol></nav>
+  <div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Портрет аудитории — кто эти люди</a></li><li><a href="#s-2">Боли — уровни глубины</a></li><li><a href="#s-3">Желания — уровни глубины</a></li><li><a href="#s-4">Барьеры и возражения</a></li><li><a href="#s-5">Конкурентный ландшафт и контекст</a></li><li><a href="#s-6">Триггеры немедленной покупки</a></li><li><a href="#s-7">Язык и психографика</a></li><li><a href="#s-8">Идеи трипваеров — гипотезы для сверки</a></li><li><a href="#s-9">Как выполнять</a></li></ol></div>
 <h2 id="s-1" class="section-heading"><span>01.</span> Портрет аудитории — <em>кто эти люди</em></h2>
 
   <h3 class="sub-heading">Демография и психография</h3>
@@ -488,7 +488,7 @@ function fallbackCopy(text, done) {
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
 
-  body > nav.nav { display: none !important; }
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
@@ -497,7 +497,8 @@ function fallbackCopy(text, done) {
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
 
-  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
     color: var(--g-faint, #8f8a84); margin-bottom: 14px; }

@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280">
+<title>Как создать продающий материал — принципы и суть</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: var(--g-accent); --split: 60%; }
+
+@page {
+  size: 1280px 720px;
+  margin: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--g-bg);
+  color: var(--g-fg);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  page-break-after: always;
+  position: relative;
+}
+
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--split);
+  width: 1px;
+  background: var(--g-line);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid var(--g-line);
+  background: var(--g-bg);
+  z-index: 10;
+  flex-shrink: 0;
+  width: var(--split);
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: var(--g-faint); letter-spacing: 0.5px;
+  margin-right: 8px;
+}
+
+.slide__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  width: var(--split);
+  padding: 0 48px;
+}
+
+.slide__inner {
+  width: 100%;
+  max-width: 580px;
+}
+
+.hero { padding: 0; }
+.badge {
+  display: inline-block; font-size: 11px; font-weight: 600;
+  color: var(--accent); border: 1px solid var(--accent);
+  padding: 5px 16px; margin-bottom: 20px;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 36px; font-weight: 700; line-height: 1.25; margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 17px; color: var(--g-muted); line-height: 1.7; }
+.hero__meta { font-size: 13px; color: var(--g-faint); margin-top: 16px; letter-spacing: 1px; }
+
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3;
+  padding: 0 0 20px;
+}
+.section-heading em { font-style: italic; color: var(--accent); }
+
+.highlight { background: var(--g-surface); padding: 18px 22px; margin: 20px 0; font-size: 15px; line-height: 1.75; color: var(--g-muted); }
+
+.sub-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; padding: 24px 0 10px;
+}
+
+.text { font-size: 16px; color: var(--g-muted); line-height: 1.75; margin-bottom: 14px; }
+
+.guide-list { list-style: none; margin: 12px 0 20px; }
+.guide-list li {
+  font-size: 15px; line-height: 1.7; color: var(--g-muted);
+  padding: 6px 0 6px 18px; position: relative;
+  border-bottom: 1px solid var(--g-line);
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 14px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: var(--g-fg); }
+
+.scenario-card { border: 1px solid var(--g-line); padding: 24px; margin: 18px 0; background: var(--g-surface); }
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 13px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 6px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px;
+}
+.scenario-card__point { margin-bottom: 12px; }
+.scenario-card__point-label { font-weight: 600; font-size: 15px; color: var(--g-fg); }
+.scenario-card__point-text { font-size: 14px; color: var(--g-muted); line-height: 1.7; }
+.scenario-card__tip {
+  background: var(--g-line); padding: 12px 16px; margin-top: 14px;
+  font-size: 13px; color: var(--g-muted); line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: var(--g-muted);
+  padding: 28px 0 0;
+}
+.footer-note em { color: var(--accent); }
+
+/* ===== СХЕМКА 1: ЦИТАТА-АКЦЕНТ ===== */
+
+.quote-slide__label {
+  font-size: 11px; font-weight: 600; color: var(--g-faint);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px;
+}
+.quote-slide__mark {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 80px; color: var(--accent); line-height: 0.5;
+  margin-bottom: 16px; opacity: 0.3;
+}
+.quote-slide__text {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 24px; font-weight: 400; font-style: italic;
+  line-height: 1.5; color: var(--g-fg); max-width: 480px; margin-bottom: 28px;
+}
+.quote-slide__text em { color: var(--accent); }
+.quote-slide__divider { width: 40px; height: 2px; background: var(--accent); margin-bottom: 20px; }
+.quote-slide__source { font-size: 14px; color: var(--g-faint); line-height: 1.6; }
+
+/* ===== СХЕМКА 2: ШАГИ С ЛИНИЕЙ ===== */
+
+.steps__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.steps__heading em { font-style: italic; color: var(--accent); }
+.steps__list { position: relative; padding-left: 32px; }
+.steps__list::before {
+  content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px;
+  width: 1px; background: var(--g-line);
+}
+.steps__item { position: relative; padding-bottom: 24px; }
+.steps__item:last-child { padding-bottom: 0; }
+.steps__dot {
+  position: absolute; left: -32px; top: 4px;
+  width: 15px; height: 15px; border: 2px solid var(--accent);
+  background: var(--g-bg); border-radius: 50%;
+}
+.steps__item--active .steps__dot { background: var(--accent); }
+.steps__item-title { font-weight: 600; font-size: 16px; color: var(--g-fg); margin-bottom: 4px; }
+.steps__item-text { font-size: 14px; color: var(--g-muted); line-height: 1.6; }
+
+/* ===== СХЕМКА 3: НУМЕРОВАННЫЙ СПИСОК ===== */
+
+.numlist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.numlist__heading em { font-style: italic; color: var(--accent); }
+.numlist__item {
+  display: flex; gap: 24px; align-items: baseline;
+  padding: 16px 0; border-bottom: 1px solid var(--g-line);
+}
+.numlist__item:last-child { border-bottom: none; }
+.numlist__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 36px; color: var(--accent); opacity: 0.25;
+  min-width: 48px; text-align: right; line-height: 1; flex-shrink: 0;
+}
+.numlist__text { font-size: 15px; color: var(--g-fg); line-height: 1.6; }
+.numlist__text strong { font-weight: 600; }
+.numlist__text span { color: var(--g-muted); }
+
+/* ===== СХЕМКА 4: АКЦЕНТНАЯ ПОЛОСА СЛЕВА ===== */
+
+.accent-bar__label {
+  font-size: 11px; font-weight: 600; color: var(--g-faint);
+  letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px;
+}
+.accent-bar__block { border-left: 3px solid var(--accent); padding-left: 28px; }
+.accent-bar__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 26px; font-weight: 700; line-height: 1.35; margin-bottom: 16px;
+}
+.accent-bar__title em { font-style: italic; color: var(--accent); }
+.accent-bar__text { font-size: 15px; color: var(--g-muted); line-height: 1.75; margin-bottom: 20px; }
+.accent-bar__footer {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 15px; font-style: italic; color: var(--g-faint);
+  padding-top: 16px; border-top: 1px solid var(--g-line);
+}
+
+/* ===== СХЕМКА 5: ЧЕК-ЛИСТ ===== */
+
+.checklist__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.checklist__heading em { font-style: italic; color: var(--accent); }
+.checklist__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.checklist__col-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; padding-bottom: 14px; margin-bottom: 10px;
+  border-bottom: 1px solid var(--g-line);
+}
+.checklist__col-label--do { color: var(--accent); }
+.checklist__col-label--dont { color: var(--g-faint); }
+.checklist__col:first-child { padding-right: 20px; border-right: 1px solid var(--g-line); }
+.checklist__col:last-child { padding-left: 20px; }
+.checklist__item {
+  display: flex; gap: 10px; padding: 8px 0;
+  font-size: 14px; color: var(--g-muted); line-height: 1.6; align-items: baseline;
+}
+.checklist__mark { flex-shrink: 0; font-size: 14px; font-weight: 700; width: 16px; }
+.checklist__mark--do { color: var(--accent); }
+.checklist__mark--dont { color: #ccc; }
+
+/* ===== СХЕМКА 6: ТРИ МЕТРИКИ ===== */
+
+.metrics__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 32px;
+}
+.metrics__heading em { font-style: italic; color: var(--accent); }
+.metrics__row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+.metrics__item {
+  text-align: center; padding: 24px 12px;
+  border-right: 1px solid var(--g-line);
+}
+.metrics__item:last-child { border-right: none; }
+.metrics__number {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 48px; color: var(--accent); opacity: 0.25;
+  line-height: 1; margin-bottom: 8px;
+}
+.metrics__label {
+  font-size: 12px; color: var(--g-faint); text-transform: uppercase;
+  letter-spacing: 1px; margin-bottom: 8px;
+}
+.metrics__desc { font-size: 13px; color: var(--g-muted); line-height: 1.5; }
+
+/* ===== СХЕМКА 7: ВОПРОС-ОТВЕТ ===== */
+
+.qa__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.qa__heading em { font-style: italic; color: var(--accent); }
+.qa__item { margin-bottom: 24px; }
+.qa__question {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px; font-style: italic; color: var(--accent);
+  margin-bottom: 8px; padding-left: 32px; position: relative;
+}
+.qa__question::before {
+  content: '?'; position: absolute; left: 0; top: -4px;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: 28px; color: var(--accent); opacity: 0.25;
+}
+.qa__answer {
+  font-size: 15px; color: var(--g-muted); line-height: 1.7;
+  padding-left: 32px; border-left: 1px solid var(--g-line);
+}
+
+/* ===== СХЕМКА 8: ФОРМУЛА ===== */
+
+.formula__heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 28px; font-weight: 700; line-height: 1.3; margin-bottom: 28px;
+}
+.formula__heading em { font-style: italic; color: var(--accent); }
+.formula__row {
+  display: flex; align-items: center; gap: 16px; margin-bottom: 32px;
+}
+.formula__step {
+  flex: 1; background: var(--g-surface); padding: 18px 16px; text-align: center;
+}
+.formula__step-title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 15px; font-weight: 700; margin-bottom: 4px;
+}
+.formula__step-text { font-size: 12px; color: var(--g-muted); line-height: 1.5; }
+.formula__arrow { color: var(--accent); font-size: 18px; flex-shrink: 0; opacity: 0.4; }
+.formula__result {
+  border: 1px solid var(--accent); padding: 18px 16px; text-align: center; flex: 1;
+}
+.formula__result .formula__step-title { color: var(--accent); }
+.formula__note { font-size: 14px; color: var(--g-faint); font-style: italic; margin-top: 8px; }
+
+/* ===== АДАПТИВ ===== */
+
+@media print {
+  html, body { width: 1280px; }
+  .slide {
+    width: 1280px; height: 720px;
+    page-break-after: always; page-break-inside: avoid;
+  }
+  .slide:last-child { page-break-after: auto; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media screen and (max-width: 768px) {
+  .nav { padding: 16px 20px; width: 100%; }
+  .hero h1 { font-size: 26px; }
+  .section-heading { font-size: 22px; }
+  .slide__body { width: 100%; padding: 0 20px; }
+  .divider { display: none; }
+}
+</style>
+<style id="ms-slides">
+  /* презентация 60/40 под видеоурок → обычная читаемая статья */
+  .slide { height: auto !important; min-height: 0 !important; width: 100% !important; display: block !important;
+    padding: 56px 0 !important; border-bottom: 1px solid var(--g-line, var(--g-line)); }
+  .slide:first-of-type { padding-top: 40px !important; }
+  .slide__body { width: 100% !important; max-width: 780px; margin: 0 auto; padding: 0 24px !important; display: block !important; }
+  .slide__inner { max-width: none !important; }
+  .divider, .slide .nav { display: none !important; }
+  .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
+</style>
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
+<style id="ms-theme-vars">
+  :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
+          --g-line:#e6e4e1; --g-muted:#555555; --g-faint:#8f8a84; }
+  [data-theme="dark"] { --g-bg:#100f0e; --g-surface:#191715; --g-fg:#ece7e1; --g-accent:#d8ac83;
+          --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
+  html, body { background: var(--g-bg); color: var(--g-fg); }
+  [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как создать продающий материал">
+<meta property="og:description" content="Принципы, которые работают в любом формате — от лид-магнита до лендинга.">
+<meta property="og:url" content="https://maysoulme.ru/guides/prodayushchij-material/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+<div class="ms-progress"><i></i></div>
+<div class="ms-bar">
+  <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">3 мин чтения</span>
+  <span class="ms-bar__name">maysoulme</span>
+  <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
+</div>
+
+
+
+<!-- Слайд 1: Титульный -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="hero">
+      <div class="badge">УРОК</div>
+      <h1>Как создать <em>продающий материал</em></h1>
+      <p class="hero__desc">Принципы и логика, которые работают в любом формате — от лид-магнита до лендинга</p>
+      <p class="hero__meta">ПРОДАЖИ &middot; КОПИРАЙТИНГ &middot; ВОРОНКИ</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 2: Цитата-акцент — главная мысль -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="quote-slide__label">КЛЮЧЕВАЯ МЫСЛЬ</div>
+    <div class="quote-slide__mark">&ldquo;</div>
+    <div class="quote-slide__text">Люди не покупают продукты. Люди покупают <em>трансформацию</em></div>
+    <div class="quote-slide__divider"></div>
+    <p class="quote-slide__source">Человек платит не за то, что внутри продукта. Он платит за то, кем он станет после.</p>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 3: Нумерованный список — примеры трансформации -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Что на самом деле <em>покупают</em> люди</div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Не курс по SMM</strong> <span>— а возможность зарабатывать на блоге</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>Не консультацию психолога</strong> <span>— а выход из тяжёлого состояния</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Не фитнес-программу</strong> <span>— а красивое тело и уверенность в себе</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">4</div>
+      <div class="numlist__text"><strong>Не автоматизацию</strong> <span>— а свободное время</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 4: Акцентная полоса — задача продающего материала -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="accent-bar__label">ВАША ЗАДАЧА</div>
+    <div class="accent-bar__block">
+      <div class="accent-bar__title">Провести человека от <em>боли</em> к результату</div>
+      <p class="accent-bar__text">Не рассказать про себя, не перечислить модули — а показать человеку его собственную трансформацию. Путь из точки, где ему плохо, в точку, где ему хорошо.</p>
+      <div class="accent-bar__footer">Понимаешь логику — соберёшь продающий материал в любом формате и нише</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 5: Базовый — воронка психологии -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Продающий материал — это <em>воронка психологии</em></h2>
+    <p class="text">В голове человека по очереди возникают вопросы. Сильный продающий материал отвечает на каждый из них в правильном порядке.</p>
+    <div class="highlight"><strong>9 вопросов</strong> — это скелет любого продающего материала. Каждый блок структуры отвечает ровно на один вопрос, последовательно снимая все сомнения.</div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 6: Вопрос-ответ — 9 вопросов (первые 5) -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="qa__heading">Вопросы в голове <em>покупателя</em></div>
+    <div class="qa__item">
+      <div class="qa__question">Что это вообще, стоит ли смотреть дальше?</div>
+      <div class="qa__answer">Останавливаем внимание — заголовок и первый экран</div>
+    </div>
+    <div class="qa__item">
+      <div class="qa__question">А это правда работает?</div>
+      <div class="qa__answer">Доказываем результат — кейсы и цифры</div>
+    </div>
+    <div class="qa__item">
+      <div class="qa__question">А ты понимаешь меня?</div>
+      <div class="qa__answer">Создаём эмоциональную связь — история и эмпатия</div>
+    </div>
+    <div class="qa__item">
+      <div class="qa__question">Почему у меня не получалось?</div>
+      <div class="qa__answer">Объясняем причину — показываем корень проблемы</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 7: Шаги — продолжение вопросов (6-9) -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="steps__heading">От сомнений — к <em>действию</em></div>
+    <div class="steps__list">
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Как это исправить?</div>
+        <div class="steps__item-text">Даём решение — показываем путь</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Что конкретно я получу?</div>
+        <div class="steps__item-text">Описываем продукт через выгоды</div>
+      </div>
+      <div class="steps__item steps__item--active">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">А это стоит своих денег?</div>
+        <div class="steps__item-text">Показываем ценность — сравниваем с альтернативами</div>
+      </div>
+      <div class="steps__item">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">А вдруг я не смогу?</div>
+        <div class="steps__item-text">Снимаем возражения — гарантии и поддержка</div>
+      </div>
+      <div class="steps__item">
+        <div class="steps__dot"></div>
+        <div class="steps__item-title">Может, куплю потом?</div>
+        <div class="steps__item-text">Создаём честную срочность — цена промедления</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 8: Формула — структура как разговор -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="formula__heading">Формула <em>продающего материала</em></div>
+    <div class="formula__row">
+      <div class="formula__step">
+        <div class="formula__step-title">9 вопросов</div>
+        <div class="formula__step-text">В голове покупателя</div>
+      </div>
+      <div class="formula__arrow">+</div>
+      <div class="formula__step">
+        <div class="formula__step-title">9 блоков</div>
+        <div class="formula__step-text">Ответы по порядку</div>
+      </div>
+      <div class="formula__arrow">=</div>
+      <div class="formula__result">
+        <div class="formula__step-title">Продажа</div>
+        <div class="formula__step-text">Все сомнения сняты</div>
+      </div>
+    </div>
+    <p class="formula__note">Структура — это не набор правил, а логичный разговор, где вы последовательно снимаете все сомнения.</p>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 9: Нумерованный список — 6 принципов (первые 3) -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="numlist__heading">Ключевые <em>принципы</em></div>
+    <div class="numlist__item">
+      <div class="numlist__num">1</div>
+      <div class="numlist__text"><strong>Конкретика</strong> <span>— не «улучшишь результаты», а «10 000 подписчиков за 2 месяца». Цифры, сроки, факты.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">2</div>
+      <div class="numlist__text"><strong>Эмоции + логика</strong> <span>— эмоции заставляют захотеть, логика даёт разрешение купить. Нужны обе опоры.</span></div>
+    </div>
+    <div class="numlist__item">
+      <div class="numlist__num">3</div>
+      <div class="numlist__text"><strong>Доказательства</strong> <span>— не говорите, показывайте. Кейсы, цифры, истории таких же людей.</span></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 10: Метрики — принципы в числах -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="metrics__heading">Ещё три <em>принципа</em></div>
+    <div class="metrics__row">
+      <div class="metrics__item">
+        <div class="metrics__number">12</div>
+        <div class="metrics__label">ЛЕТ</div>
+        <div class="metrics__desc">Простота: пиши так, чтобы понял 12-летний ребёнок</div>
+      </div>
+      <div class="metrics__item">
+        <div class="metrics__number">1</div>
+        <div class="metrics__label">ФОКУС</div>
+        <div class="metrics__desc">Честность: люди чувствуют фальшь за километр</div>
+      </div>
+      <div class="metrics__item">
+        <div class="metrics__number">&rarr;</div>
+        <div class="metrics__label">ИТОГ</div>
+        <div class="metrics__desc">Трансформация: не продукт, а результат. Не функции, а выгоды</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 11: Чек-лист — эмоции vs логика -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="checklist__heading">Баланс — <em>эмоции и логика</em></div>
+    <div class="checklist__grid">
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--do">Эмоции</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Ваша личная история</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Боль и мечта человека</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Визуализация результата</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Заставляют захотеть</div>
+      </div>
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--dont">Логика</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Цифры и расчёты</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Система и структура</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Сравнение с альтернативами</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Дают разрешение купить</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 12: Базовый список — ошибки -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <h2 class="section-heading">Ошибки, которые <em>убивают</em> продажи</h2>
+    <ul class="guide-list">
+      <li><strong>Слишком много о себе.</strong> Ваша история — мост к человеку, а не самоцель.</li>
+      <li><strong>Перегруз информацией.</strong> Ясность важнее объёма. Лучше меньше, но понятно.</li>
+      <li><strong>Сложный язык.</strong> Термины не делают экспертнее — они отдаляют.</li>
+      <li><strong>Обещания без доказательств.</strong> Сказали цифру — покажите кейс.</li>
+      <li><strong>Давление и манипуляции.</strong> Срочность нужна, но только честная.</li>
+      <li><strong>Фокус на продукте.</strong> Не «что у меня внутри», а «кем станет человек».</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 13: Чек-лист — делай / не делай -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="checklist__heading">Продающий текст — <em>правила</em></div>
+    <div class="checklist__grid">
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--do">Делай</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Показывай трансформацию</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Давай конкретные цифры</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Подкрепляй кейсами</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--do">&#x2713;</span>Пиши просто и честно</div>
+      </div>
+      <div class="checklist__col">
+        <div class="checklist__col-label checklist__col-label--dont">Не делай</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Не хвастайся собой</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Не перегружай инфой</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Не манипулируй</div>
+        <div class="checklist__item"><span class="checklist__mark checklist__mark--dont">&#x2717;</span>Не описывай модули</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Слайд 14: Цитата-акцент — финальная мысль -->
+<div class="slide">
+<div class="divider"></div>
+<nav class="nav">
+  <a class="nav__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+<div class="slide__body">
+  <div class="slide__inner">
+    <div class="quote-slide__label">ГЛАВНЫЙ ВЫВОД</div>
+    <div class="quote-slide__mark">&ldquo;</div>
+    <div class="quote-slide__text">Люди покупают <em>трансформацию</em>, а не продукт</div>
+    <div class="quote-slide__divider"></div>
+    <p class="quote-slide__source">Понимаешь логику — соберёшь продающий материал в любом формате и в любой нише. Структура из 9 блоков — в файле под уроком.</p>
+  </div>
+</div>
+</div>
+
+
+<section class="ms-sell">
+  <div class="ms-sell__in">
+    <p class="ms-sell__bridge">Принципы понятны. Осталось собрать по ним свой путь клиента: от ролика до покупки — именно это мы и делаем на интенсиве, руками и под вашу нишу.</p>
+
+    <div class="ms-sell__rule"></div>
+
+    <span class="ms-sell__label">Интенсив</span>
+    <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
+    <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
+
+    <div class="ms-sell__proof">
+      <div class="ms-sell__proof-item">
+        <span class="ms-sell__num">600 000</span>
+        <span class="ms-sell__cap">просмотров — и 8 подписчиков</span>
+      </div>
+      <div class="ms-sell__proof-vs">против</div>
+      <div class="ms-sell__proof-item ms-sell__proof-item--win">
+        <span class="ms-sell__num">19 000</span>
+        <span class="ms-sell__cap">просмотров — 240 подписчиков и 30 000 ₽</span>
+      </div>
+    </div>
+    <p class="ms-sell__proof-note">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
+
+    <ul class="ms-sell__list">
+      <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
+      <li><b>Текстовые и разговорные ролики</b> — один формат набирает холодную аудиторию, второй превращает её в свою</li>
+      <li><b>ИИ-агент с памятью канала</b> — помнит все ваши посты и предлагает продолжение начатых тем, чтобы блог звучал как одна история</li>
+      <li><b>Парсер идей</b> — собирает залетающие ролики вашей ниши, пока вы завтракаете, и выдаёт готовые темы</li>
+      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираете и пользуетесь</li>
+    </ul>
+
+    <p class="ms-sell__author">Всё это я собрала в Claude Code без единого программиста — просто объясняла задачи обычными словами. На интенсиве показываю ровно то, что делаю сама каждый день.</p>
+    <span class="ms-sell__sign">Майя</span>
+
+    <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
+    <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
+  </div>
+</section>
+
+<footer class="ms-foot">
+  <a class="ms-foot__back" href="../../">← Все гайды maysoulme</a>
+  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новое сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
+</footer>
+
+<style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
+
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
+  .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
+    padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
+  .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
+  .ms-bar__back:hover { text-decoration: underline; }
+  .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
+    line-height: 1; margin-left: auto; }
+  .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
+    width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
+    justify-content: center; }
+  .ms-bar__theme:hover { border-color: var(--g-accent, #710C04); color: var(--g-accent, #710C04); }
+
+  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 78px 22px 72px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
+    color: #f0ece7; font-style: italic; margin: 0; }
+  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 42px 0 38px; }
+  .ms-sell__label { display: inline-block; border: 1px solid #c9a07a; color: #c9a07a; font-size: 10.5px;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 22px; }
+  .ms-sell__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700; line-height: 1.24; margin: 0 0 16px; color: #fff; }
+  .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
+  .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
+
+  .ms-sell__proof { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    border-top: 1px solid #2e2e2e; border-bottom: 1px solid #2e2e2e; padding: 26px 0; }
+  .ms-sell__proof-item { flex: 1; min-width: 190px; }
+  .ms-sell__num { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px;
+    color: #6f6f6f; line-height: 1.2; }
+  .ms-sell__proof-item--win .ms-sell__num { color: #c9a07a; }
+  .ms-sell__cap { display: block; font-size: 13.5px; color: #9a9a9a; margin-top: 6px; line-height: 1.5; }
+  .ms-sell__proof-vs { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6f6f6f; }
+  .ms-sell__proof-note { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 22px 0 40px; }
+
+  .ms-sell__list { list-style: none; margin: 0 0 38px; padding: 0; }
+  .ms-sell__list li { padding: 15px 0; border-bottom: 1px solid #2a2a2a; font-size: 15.5px;
+    line-height: 1.62; color: #cfcfcf; }
+  .ms-sell__list li b { color: #fff; font-weight: 600; }
+  .ms-sell__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
+
+  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 6px;
+    padding-left: 18px; border-left: 2px solid #c9a07a; }
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 52px;
+    line-height: 1; margin: 4px 0 30px 18px; }
+
+  .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
+    padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
+  .ms-sell__cta:hover { opacity: .86; }
+  .ms-sell__note { font-size: 13.5px; color: #8a8a8a; margin: 16px 0 0; }
+
+  .ms-foot { max-width: 660px; margin: 0 auto; padding: 44px 22px 64px; text-align: center;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: var(--g-muted, #777); }
+  .ms-foot a { color: var(--g-accent, #710C04); }
+  .ms-foot__back { display: inline-block; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
+  .ms-foot__back:hover { text-decoration: underline; }
+  .ms-foot p { margin: 0; }
+  @media (max-width: 560px) {
+    .ms-sell { padding: 56px 20px 52px; }
+    .ms-sell__bridge { font-size: 18px; }
+    .ms-sell__proof-vs { display: none; }
+    .ms-bar__name { display: none; }
+  }
+</style>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
+</body>
+</html>
