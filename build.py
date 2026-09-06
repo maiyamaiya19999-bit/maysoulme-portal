@@ -535,7 +535,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card__new { position: absolute; top: 18px; right: 24px; font-family: 'Denistina', cursive; font-style: normal; font-size: 27px;
     color: var(--accent); letter-spacing: 0; text-transform: none; line-height: 1; transform: rotate(-5deg); white-space: nowrap; }
   .card__tag { white-space: nowrap; }
-  .card__new--note { font-size: 24px; }
+  .card__new--note { font-size: 23px; top: 20px; }
   .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 14.5px; font-weight: 700; line-height: 1.58;
     margin-bottom: 12px; text-transform: uppercase; letter-spacing: .09em; }
   .card__title i { font-style: italic; }
