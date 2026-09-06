@@ -265,18 +265,8 @@ document.querySelector('[data-copy-all]').addEventListener('click', (event) => {
     <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
     <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
 
-    <div class="ms-sell__proof">
-      <div class="ms-sell__proof-item">
-        <span class="ms-sell__num">600 000</span>
-        <span class="ms-sell__cap">просмотров — и 8 подписчиков</span>
-      </div>
-      <div class="ms-sell__proof-vs">против</div>
-      <div class="ms-sell__proof-item ms-sell__proof-item--win">
-        <span class="ms-sell__num">19 000</span>
-        <span class="ms-sell__cap">просмотров — 240 подписчиков и 30 000 ₽</span>
-      </div>
     </div>
-    <p class="ms-sell__proof-note">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
+    <p class="ms-sell__note-top">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
 
     <ul class="ms-sell__list">
       <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
@@ -345,16 +335,11 @@ document.querySelector('[data-copy-all]').addEventListener('click', (event) => {
   .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
   .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
 
-  .ms-sell__proof { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
-    border-top: 1px solid #2e2e2e; border-bottom: 1px solid #2e2e2e; padding: 26px 0; }
-  .ms-sell__proof-item { flex: 1; min-width: 190px; }
   .ms-sell__num { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px;
     color: #6f6f6f; line-height: 1.2; }
-  .ms-sell__proof-item--win .ms-sell__num { color: #c9a07a; }
   .ms-sell__cap { display: block; font-size: 13.5px; color: #9a9a9a; margin-top: 6px; line-height: 1.5; }
-  .ms-sell__proof-vs { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #6f6f6f; }
-  .ms-sell__proof-note { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 22px 0 40px; }
 
+  .ms-sell__note-top { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 0 0 34px; padding-top: 26px; border-top: 1px solid #2e2e2e; }
   .ms-sell__list { list-style: none; margin: 0 0 38px; padding: 0; }
   .ms-sell__list li { padding: 15px 0; border-bottom: 1px solid #2a2a2a; font-size: 15.5px;
     line-height: 1.62; color: #cfcfcf; }
@@ -380,9 +365,7 @@ document.querySelector('[data-copy-all]').addEventListener('click', (event) => {
   @media (max-width: 560px) {
     .ms-sell { padding: 56px 20px 52px; }
     .ms-sell__bridge { font-size: 18px; }
-    .ms-sell__proof-vs { display: none; }
-    .ms-bar__name { display: none; }
-  }
+    }
 </style>
 
 <script>
