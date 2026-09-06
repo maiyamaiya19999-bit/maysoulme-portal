@@ -348,12 +348,13 @@ def build_index(data):
     sections = []
     for k, c in enumerate(data["categories"], 1):
         cards = []
-        cells = len(c["guides"]) + 1
+        use_lead = not (len(c["guides"]) >= 6 and len(c["guides"]) % 3 == 0)   # 6, 9… — ровные ряды без растяжек
+        cells = len(c["guides"]) + (1 if use_lead else 0)
         rem = cells % 3
         last_span = (4 - rem) if rem else 0
         for i, g in enumerate(c["guides"]):
             n += 1
-            cls = " card--lead" if i == 0 else ""
+            cls = " card--lead" if (i == 0 and use_lead) else ""
             if last_span and i == len(c["guides"]) - 1:
                 cls += f" card--w{last_span}"
             cards.append(f"""        <a class="card{cls}" href="guides/{g['slug']}/">
