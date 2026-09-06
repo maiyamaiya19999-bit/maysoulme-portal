@@ -383,7 +383,7 @@ def build_index(data):
     for k, text in pulls.items():
         sections[k-1] += f"""
 
-    <aside class="pull"><p>{text}</p><span>из канала @maysoulme</span></aside>"""
+    <aside class="pull"><p>{text}</p></aside>"""
     return (TEMPLATE.replace("%%NAV%%", nav)
                     .replace("%%INDEX%%", index)
                     .replace("%%SECTIONS%%", "\n\n".join(sections))
@@ -452,8 +452,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 
   /* ---------- первый экран ---------- */
   .hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; padding: 72px 0 64px; }
-  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(23px, 3.3vw, 34px); font-weight: 400;
-    line-height: 1.38; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 24px; }
+  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(24px, 3.4vw, 35px); font-weight: 400;
+    line-height: 1.36; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 24px; }
   h1 b { font-weight: 700; }
   h1 .hand { display: block; text-transform: none; letter-spacing: 0; line-height: .95;
     font-size: clamp(48px, 7vw, 78px); margin-top: 10px; }
@@ -480,8 +480,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   /* ---------- маршрут ---------- */
   .route { margin-top: 64px; padding: 44px 44px 40px; background: var(--cream); }
   .route__head { max-width: 560px; margin-bottom: 30px; }
-  .route__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 21px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .13em; line-height: 1.32; margin-bottom: 8px; }
+  .route__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; line-height: 1.3; margin-bottom: 8px; }
   .route__title i { font-style: italic; color: var(--accent); }
   .route__lead { color: var(--muted); font-size: 15.5px; line-height: 1.65; }
   .route__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
@@ -514,8 +514,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     margin-bottom: 30px; }
   .cat__num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 46px; line-height: 1;
     color: var(--accent); flex: none; margin-top: -4px; }
-  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 21px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .13em; line-height: 1.32; }
+  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; line-height: 1.3; }
   .cat__title i { font-style: italic; color: var(--accent); }
   .cat__lead { color: var(--faint); font-size: 15px; margin-top: 6px; }
 
@@ -536,15 +536,15 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     color: var(--accent); letter-spacing: 0; text-transform: none; line-height: 1; transform: rotate(-5deg); white-space: nowrap; }
   .card__tag { white-space: nowrap; }
   .card__new--note { font-size: 23px; top: 20px; }
-  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 14.5px; font-weight: 700; line-height: 1.58;
-    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .09em; }
+  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15.5px; font-weight: 700; line-height: 1.5;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .03em; }
   .card__title i { font-style: italic; }
   .card__desc { font-size: 14.5px; line-height: 1.66; color: var(--muted); flex: 1; }
   .card__go { margin-top: 22px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--accent); }
   .card__go i { font-style: normal; display: inline-block; margin-left: 7px; transition: transform .22s; }
   .card:hover .card__go i { transform: translateX(5px); }
   .card--lead { grid-column: span 2; background: var(--cream); border-color: transparent; padding: 30px 30px 24px; }
-  .card--lead .card__title { font-size: 17px; line-height: 1.5; letter-spacing: .1em; }
+  .card--lead .card__title { font-size: 19px; line-height: 1.42; letter-spacing: .03em; }
   .card--lead .card__desc { font-size: 15.5px; max-width: 90%; }
   .card--w2 { grid-column: span 2; } .card--w3 { grid-column: span 3; }
   .card--w2 .card__desc, .card--w3 .card__desc { max-width: 640px; }
@@ -588,8 +588,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .tg { background: var(--cream); padding: 78px 0; }
   .tg__in { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center; justify-content: space-between;
     gap: 30px; flex-wrap: wrap; }
-  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 19px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: .13em; margin-bottom: 10px; }
+  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .05em; margin-bottom: 10px; }
   .tg h2 i { font-style: italic; color: var(--accent); }
   .tg p { color: var(--muted); font-size: 16px; max-width: 500px; }
   .tg a { display: inline-block; background: var(--accent); color: var(--bg) !important; padding: 15px 32px; font-weight: 600;
