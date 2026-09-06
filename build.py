@@ -621,7 +621,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <header class="hero">
     <div class="hero__text">
       <h1>Гайды и промпты для <b>блога</b><span class="hand">с нейросетями</span></h1>
-      <p class="hero__lead">Здесь всё, чем пользуюсь сама каждый день: сценарии роликов, тексты своим голосом, распаковка, свои ИИ-ассистенты. Забирайте и пробуйте.</p>
+      <p class="hero__lead">Здесь то, чем пользуюсь сама каждый день: сценарии роликов, тексты своим голосом, распаковка, свои ИИ-ассистенты. Забирайте и пробуйте.</p>
     </div>
     <figure class="hero__art">
       <img src="img/hero.jpg" alt="Ноутбук, кофе и работа над блогом" loading="eager">
