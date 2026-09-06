@@ -117,8 +117,7 @@ SELL = """
   @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
-  .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
-    line-height: 1; margin-left: auto; }
+  .ms-bar__name { font-style: italic; color: var(--g-faint, #8f8a84); font-size: 14px; letter-spacing: .02em; margin-left: auto; }
   .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
     width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
     justify-content: center; }
@@ -295,7 +294,8 @@ def process_guide(src_html: str, g: dict) -> str:
     s = s.replace("https://maiyamaiya19999-bit.github.io/maysoulme-assets/logo-ms.png", "../../logo-ms.png")
     s = re.sub(r'(<img[^>]+src=")(?:\./)?logo(?:-ms)?\.(png|svg)(")', r'\1../../logo-ms.png\3', s)
     s = re.sub(r'(<a[^>]*class="[^"]*nav__logo[^"]*"[^>]*href=")#(")', r'\1../../\2', s)
-    s = s.replace('href="start.html"', 'href="../claude-s-nulya/"').replace('href="index.html"', 'href="../claude-montazher/"')
+    s = s.replace('href="start.html"', 'href="https://maiyamaiya19999-bit.github.io/claude-montage-skill/start.html"')
+    s = s.replace('href="index.html"', 'href="../claude-montazher/"')
     s = s.replace('href="team.html"', 'href="https://maiyamaiya19999-bit.github.io/claude-montage-skill/team.html"')
     s = s.replace("&family=DM+Sans:ital@1", "").replace("family=DM+Sans:ital@1&", "")
     if "ms-theme-vars" not in s:
@@ -427,7 +427,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .nav__in { max-width: 1080px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
   .nav__logo img { height: 26px; display: block; }
   [data-theme="dark"] .nav__logo img { filter: invert(1) brightness(1.6); }
-  .nav__name { font-family: 'Denistina', cursive; color: var(--accent); font-size: 25px; line-height: 1; margin-top: 2px; }
+  .nav__name { font-style: italic; color: var(--faint); font-size: 14.5px; letter-spacing: .02em; margin-top: 1px; }
   .nav__links { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 14px; white-space: nowrap; }
   .nav__links a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .nav__links a:hover { color: var(--accent); }
@@ -451,12 +451,9 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .hero__art { position: relative; margin: 0; padding: 0 0 20px 20px; }
   .hero__art::before { content: ""; position: absolute; left: 0; top: 20px; right: 20px; bottom: 0; background: var(--cream); }
   .hero__art img { position: relative; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-  .hero__cap { position: absolute; right: 20px; bottom: -18px; font-family: 'Denistina', cursive; color: var(--accent);
-    font-size: 30px; line-height: 1; }
   @media (max-width: 880px) {
     .hero { grid-template-columns: 1fr; gap: 34px; padding: 40px 0 40px; }
     .hero__art { order: -1; padding: 0 0 14px 14px; } .hero__art::before { top: 14px; right: 14px; }
-    .hero__cap { font-size: 25px; right: 14px; bottom: -14px; }
   }
 
   /* ---------- оглавление ---------- */
@@ -524,7 +521,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card__go i { font-style: normal; display: inline-block; margin-left: 7px; transition: transform .22s; }
   .card:hover .card__go i { transform: translateX(5px); }
   .card--lead { grid-column: span 2; background: var(--cream); border-color: transparent; padding: 30px 30px 24px; }
-  .card--lead .card__title { font-size: 21px; line-height: 1.38; }
+  .card--lead .card__title { font-size: 19px; line-height: 1.42; }
   .card--lead .card__desc { font-size: 15.5px; max-width: 90%; }
   .card--w2 { grid-column: span 2; } .card--w3 { grid-column: span 3; }
   .card--w2 .card__desc, .card--w3 .card__desc { max-width: 640px; }
@@ -596,7 +593,6 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </div>
     <figure class="hero__art">
       <img src="img/hero.jpg" alt="Ноутбук, кофе и работа над блогом" loading="eager">
-      <figcaption class="hero__cap">забирайте</figcaption>
     </figure>
   </header>
 
@@ -611,10 +607,10 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <p class="route__lead">Не нужно читать всё подряд. Три шага по порядку — и у вас уже есть доступ, свой голос и первый ролик.</p>
     </div>
     <div class="route__steps">
-      <a class="step" href="guides/claude-s-nulya/">
+      <a class="step" href="guides/claude-i-chatgpt-v-rossii/">
         <span class="step__n">01</span>
-        <span class="step__title">Подключить Claude как у меня</span>
-        <span class="step__desc">Аккаунт, подписка, Claude Code и первые правила общения</span>
+        <span class="step__title">Поставить Claude</span>
+        <span class="step__desc">Полчаса — и доступ есть, без бана и нервов</span>
       </a>
       <a class="step" href="guides/raspakovka-lichnosti/">
         <span class="step__n">02</span>
@@ -698,6 +694,35 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </html>
 """
 
+# ---------------------------------------------------------------- автодобавление
+
+DEFAULT_BRIDGE = ("Этот гайд — одна деталь. На интенсиве мы собираем из таких деталей систему: "
+                  "стратегию, контент и своих ИИ-ассистентов под ваш блог.")
+
+def discover(data):
+    """Гайд, положенный в guides/<slug>/index.html с meta-тегами ms-section (и по желанию
+    ms-title, ms-desc, ms-tag, ms-bridge), попадает на главную без правки guides.json."""
+    known = {g["slug"] for c in data["categories"] for g in c["guides"]}
+    cats = {c["id"]: c for c in data["categories"]}
+    added = []
+    for d in sorted((ROOT / "guides").iterdir()):
+        f = d / "index.html"
+        if d.name in known or not f.exists():
+            continue
+        page = f.read_text(encoding="utf-8", errors="ignore")
+        meta = dict(re.findall(r'<meta name="ms-(\w+)" content="([^"]*)"', page))
+        if meta.get("section") not in cats:
+            continue
+        h1 = re.search(r"<h1[^>]*>(.*?)</h1>", page, flags=re.S)
+        title = meta.get("title") or (strip_tags(h1.group(1)).strip() if h1 else d.name)
+        dm = re.search(r'<meta name="description" content="([^"]*)"', page)
+        desc = meta.get("desc") or (dm.group(1) if dm else "")
+        g = dict(slug=d.name, title=title, desc=html.unescape(desc), tag=meta.get("tag", "Гайд"),
+                 src=None, bridge=meta.get("bridge", DEFAULT_BRIDGE))
+        cats[meta["section"]]["guides"].append(g)
+        added.append(g)
+    return added
+
 # ---------------------------------------------------------------- main
 
 def main():
@@ -720,8 +745,14 @@ def main():
                 print(f"  ~ источник недоступен, оставлен собранный: {g['slug']}")
             else:
                 print(f"  ! НЕТ НИ ИСТОЧНИКА, НИ СБОРКИ: {g['slug']} ({g['src']})")
+    auto = discover(data)
+    for g in auto:
+        f = ROOT / "guides" / g["slug"] / "index.html"
+        page = process_guide(f.read_text(encoding="utf-8", errors="ignore"), g)
+        f.write_text(page, encoding="utf-8")
+        print(f"  + добавлен по meta-тегам: {g['slug']} → {g['title']}")
     (ROOT / "index.html").write_text(build_index(data), encoding="utf-8")
-    print(f"Готово: {copied} гайдов пересобрано, {skipped} оставлено, главная обновлена.")
+    print(f"Готово: {copied} гайдов пересобрано, {skipped} оставлено, {len(auto)} добавлено автоматически, главная обновлена.")
 
 if __name__ == "__main__":
     main()

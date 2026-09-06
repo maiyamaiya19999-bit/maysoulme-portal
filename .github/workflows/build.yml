@@ -1,0 +1,24 @@
+name: build portal
+on:
+  push:
+    branches: [main]
+    paths: ["guides/**", "guides.json", "build.py"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 build.py
+      - name: commit result
+        run: |
+          git config user.name "maysoulme-bot"
+          git config user.email "bot@maysoulme.ru"
+          git add -A
+          git diff --cached --quiet || git commit -m "Пересборка портала [skip ci]"
+          git push
