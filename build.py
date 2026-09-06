@@ -274,8 +274,22 @@ def add_toc(s: str) -> str:
     first = re.search(r'<h2', s)
     return s[:first.start()] + toc + s[first.start():]
 
+SLIDES_TO_ARTICLE = """<style id="ms-slides">
+  /* презентация 60/40 под видеоурок → обычная читаемая статья */
+  .slide { height: auto !important; min-height: 0 !important; width: 100% !important; display: block !important;
+    padding: 56px 0 !important; border-bottom: 1px solid var(--g-line, #e6e4e1); }
+  .slide:first-of-type { padding-top: 40px !important; }
+  .slide__body { width: 100% !important; max-width: 780px; margin: 0 auto; padding: 0 24px !important; display: block !important; }
+  .slide__inner { max-width: none !important; }
+  .divider, .slide .nav { display: none !important; }
+  .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
+</style>
+"""
+
 def process_guide(src_html: str, g: dict) -> str:
     s = src_html
+    if "slide__body" in s and "--split" in s and "ms-slides" not in s:
+        s = s.replace("</head>", SLIDES_TO_ARTICLE + "</head>", 1)
     s = s.replace("https://maiyamaiya19999-bit.github.io/maysoulme-assets/logo-ms.png", "../../logo-ms.png")
     s = re.sub(r'(<img[^>]+src=")(?:\./)?logo-ms\.(png|svg)(")', r'\1../../logo-ms.png\3', s)
     s = re.sub(r'(<a[^>]*class="[^"]*nav__logo[^"]*"[^>]*href=")#(")', r'\1../../\2', s)

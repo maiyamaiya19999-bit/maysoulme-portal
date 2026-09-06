@@ -282,6 +282,16 @@ body {
   .divider { display: none; }
 }
 </style>
+<style id="ms-slides">
+  /* презентация 60/40 под видеоурок → обычная читаемая статья */
+  .slide { height: auto !important; min-height: 0 !important; width: 100% !important; display: block !important;
+    padding: 56px 0 !important; border-bottom: 1px solid var(--g-line, var(--g-line)); }
+  .slide:first-of-type { padding-top: 40px !important; }
+  .slide__body { width: 100% !important; max-width: 780px; margin: 0 auto; padding: 0 24px !important; display: block !important; }
+  .slide__inner { max-width: none !important; }
+  .divider, .slide .nav { display: none !important; }
+  .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
+</style>
 <script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
 if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
 document.documentElement.setAttribute('data-theme',t)})();</script>
@@ -477,8 +487,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Хук — остановить палец</a></li><li><a href="#s-2">Завязка — узнавание</a></li><li><a href="#s-3">Главное правило: инструктируй, а не информируй</a></li><li><a href="#s-4">Личная позиция и CTA</a></li><li><a href="#s-5">Хук — это 80% успеха ролика</a></li><li><a href="#s-6">Перед хуком спроси: в какое чувство я целюсь?</a></li></ol></nav>
-<h2 id="s-1" class="section-heading">Хук — <em>остановить палец</em></h2>
+    <h2 class="section-heading">Хук — <em>остановить палец</em></h2>
     <p class="text">Человек решает смотреть или листать в первые 3 секунды.</p>
     <p class="text">Хук строится на боли аудитории, а не на твоей идее о том, что интересно.</p>
     <div class="highlight"><strong>Важно:</strong> попала в боль — удержала. Не попала — листают дальше.</div>
@@ -495,7 +504,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 id="s-2" class="section-heading">Завязка — <em>узнавание</em></h2>
+    <h2 class="section-heading">Завязка — <em>узнавание</em></h2>
     <p class="text">Сразу после хука зритель должен подумать: «так это же про меня» или «наконец кто-то это сказал».</p>
     <p class="text">Называй ситуацию словами, которыми её проживает сама аудитория.</p>
     <div class="highlight"><strong>Не терминами.</strong> Не официальным языком. А так, как люди думают про себя.</div>
@@ -512,7 +521,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 id="s-3" class="section-heading">Главное правило: <em>инструктируй, а не информируй</em></h2>
+    <h2 class="section-heading">Главное правило: <em>инструктируй, а не информируй</em></h2>
     <p class="text">Информирование: «чтобы поднять самооценку, нужно работать над собой» — вода, слышали тысячу раз.</p>
     <p class="text">Инструктаж: «вечером бери заметки, пиши три колонки — мысль, которая расстроила; доказательство, что правда; доказательство, что неправда. 3 минуты в день — через 2 недели реагируешь иначе».</p>
     <div class="highlight"><strong>Лайфхак:</strong> давай конкретику, которую обычно продают — бесплатно.</div>
@@ -547,7 +556,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 id="s-4" class="section-heading">Личная позиция <em>и CTA</em></h2>
+    <h2 class="section-heading">Личная позиция <em>и CTA</em></h2>
     <h3 class="sub-heading">Позиция (за 5–10 сек до конца)</h3>
     <p class="text">Твоё неотфильтрованное мнение или цифра. Не «у некоторых получается», а «у меня вышло вот так». Это эмоциональный пик.</p>
     <h3 class="sub-heading">CTA (последние 3–5 сек)</h3>
@@ -569,7 +578,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 id="s-5" class="section-heading">Хук — это 80% <em>успеха ролика</em></h2>
+    <h2 class="section-heading">Хук — это 80% <em>успеха ролика</em></h2>
     <ul class="guide-list">
       <li><strong>«Почему никто не говорит, что…»</strong> — секрет</li>
       <li><strong>«Не делай это, пока не узнаешь одну вещь»</strong> — страх ошибки</li>
@@ -591,7 +600,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 <div class="slide__body">
   <div class="slide__inner">
-    <h2 id="s-6" class="section-heading">Перед хуком спроси: <em>в какое чувство я целюсь?</em></h2>
+    <h2 class="section-heading">Перед хуком спроси: <em>в какое чувство я целюсь?</em></h2>
     <ul class="guide-list">
       <li><strong>Страх упустить</strong></li>
       <li><strong>Стыд</strong> — «я делаю не так»</li>
