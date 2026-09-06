@@ -33,6 +33,14 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
           --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
   html, body { background: var(--g-bg); color: var(--g-fg); }
   [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
 </style>
 <meta property="og:type" content="article">
 <meta property="og:title" content="Генеалогическое древо с ChatGPT">

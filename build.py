@@ -199,6 +199,14 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
           --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
   html, body { background: var(--g-bg); color: var(--g-fg); }
   [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
 </style>
 """
 
@@ -348,8 +356,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   @media (max-width: 430px) { .nav__cta { padding: 9px 13px; font-size: 12.5px; } .nav__name { display: none; } }
 
   /* герой */
-  .hero { display: grid; grid-template-columns: 1.12fr .88fr; gap: 44px; align-items: center;
-    padding: 66px 0 46px; }
+  .hero { display: grid; grid-template-columns: 1.02fr .98fr; gap: 52px; align-items: center;
+    padding: 62px 0 52px; }
   h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(24px, 3.5vw, 36px);
     font-weight: 400; line-height: 1.34; letter-spacing: .05em; text-transform: uppercase;
     margin-bottom: 22px; }
@@ -358,12 +366,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     text-transform: none; letter-spacing: 0; line-height: .95;
     font-size: clamp(46px, 7vw, 76px); margin-top: 8px; }
   .hero__lead { color: var(--muted); font-size: 18.5px; line-height: 1.72; max-width: 540px; }
-  .hero__art { position: relative; text-align: center; }
-  .hero__art img { width: 78%; max-width: 340px; display: inline-block; }
-  .hero__cap { position: absolute; left: 0; bottom: -6px; font-family: 'Denistina', cursive;
-    color: var(--accent); font-size: 34px; line-height: 1; }
-  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 20px; padding: 46px 0 34px; }
-    .hero__art img { width: 52%; } .hero__cap { left: 4%; bottom: -4px; font-size: 27px; } }
+  .hero__art { position: relative; }
+  .hero__art img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .hero__cap { display: block; text-align: right; margin: 14px 6px 0 0; font-family: 'Denistina', cursive;
+    color: var(--accent); font-size: 30px; line-height: 1; }
+  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 34px; }
+    .hero__art { order: -1; } .hero__cap { font-size: 24px; margin: 10px 8px 0 0; } }
 
   /* чипсы */
   .chips { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 8px; }
@@ -477,7 +485,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <p class="hero__lead">Здесь всё, чем пользуюсь сама каждый день: сценарии роликов, тексты своим голосом, распаковка, свои ИИ-ассистенты. Забирайте и пробуйте.</p>
     </div>
     <div class="hero__art">
-      <img src="img/books.png" alt="" loading="lazy">
+      <img src="img/hero.jpg" alt="Ноутбук, кофе и работа над блогом" loading="eager">
       <span class="hero__cap">забирайте</span>
     </div>
   </header>
