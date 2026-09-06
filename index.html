@@ -3,92 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>maysoulme — блог, ИИ и система контента</title>
-<meta name="description" content="Бесплатная библиотека гайдов и промптов про блогинг с нейросетями: reels, тексты, распаковка личности, ИИ-ассистенты. И интенсив «ИИ-стратегия на миллион».">
+<title>maysoulme — библиотека гайдов и промптов</title>
+<meta name="description" content="Библиотека maysoulme: 17 гайдов и промптов про блог с нейросетями — разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Бесплатно.">
 <meta property="og:type" content="website">
-<meta property="og:title" content="maysoulme — блог, ИИ и система контента">
-<meta property="og:description" content="17 бесплатных гайдов и промптов про блогинг с нейросетями. И интенсив «ИИ-стратегия на миллион».">
+<meta property="og:title" content="Библиотека maysoulme">
+<meta property="og:description" content="17 гайдов и промптов про блог с нейросетями. Бесплатно, без регистрации.">
 <meta property="og:url" content="https://maysoulme.ru/">
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 <link rel="icon" href="logo-ms.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
 <style>
-  :root { --accent: #710C04; --ink: #1a1a1a; --grey: #f5f5f5; --line: #e8e8e8; }
+  :root { --accent: #710C04; --gold: #c9a07a; --ink: #1a1a1a; --line: #e6e4e1; --mute: #8a8a8a; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: var(--ink);
     font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 22px; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 30px; }
 
   /* навбар */
-  .nav { position: sticky; top: 0; z-index: 100; background: #fff; border-bottom: 1px solid #f0f0f0; }
-  .nav__in { max-width: 1000px; margin: 0 auto; padding: 13px 22px; display: flex; align-items: center; gap: 12px; }
-  .nav__logo img { height: 28px; display: block; }
-  .nav__name { font-family: 'DM Sans', sans-serif; font-style: italic; color: #888; font-size: 15px; }
-  .nav__links { margin-left: auto; display: flex; gap: 22px; font-size: 14.5px; }
-  .nav__links a { text-decoration: none; color: #555; }
+  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.94);
+    backdrop-filter: saturate(160%) blur(10px); border-bottom: 1px solid var(--line); }
+  .nav__in { max-width: 940px; margin: 0 auto; padding: 15px 30px; display: flex; align-items: center; gap: 12px; }
+  .nav__logo img { height: 26px; display: block; }
+  .nav__name { font-family: 'DM Sans', sans-serif; font-style: italic; color: var(--mute); font-size: 14.5px; }
+  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 14px; }
+  .nav__links a { text-decoration: none; color: #5a5a5a; transition: color .15s; }
   .nav__links a:hover { color: var(--accent); }
-  .nav__cta { background: var(--accent); color: #fff !important; padding: 8px 16px; font-weight: 600; }
-  @media (max-width: 720px) { .nav__links a:not(.nav__cta) { display: none; } }
+  .nav__cta { border: 1px solid var(--accent); color: var(--accent) !important; padding: 8px 17px;
+    font-weight: 600; letter-spacing: .02em; transition: background .18s, color .18s; }
+  .nav__cta:hover { background: var(--accent); color: #fff !important; }
+  @media (max-width: 780px) { .nav__links a:not(.nav__cta) { display: none; } }
 
   /* герой */
-  .hero { padding: 74px 0 52px; max-width: 720px; }
-  .badge { display: inline-block; border: 1px solid var(--accent); color: var(--accent); font-size: 11px;
-    font-weight: 600; letter-spacing: .18em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 26px; }
-  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(30px, 5.4vw, 46px);
-    font-weight: 700; line-height: 1.25; margin-bottom: 20px; }
+  .hero { padding: 112px 0 88px; max-width: 700px; }
+  .hero__label { font-size: 10.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--accent); display: block; margin-bottom: 30px; }
+  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(36px, 6.2vw, 58px);
+    font-weight: 400; line-height: 1.18; letter-spacing: -.01em; margin-bottom: 26px; }
   h1 em { font-style: italic; color: var(--accent); }
-  .hero__lead { color: #444; font-size: 18.5px; }
-  .hero__meta { margin-top: 26px; display: flex; gap: 22px; flex-wrap: wrap; color: #666; font-size: 14.5px; }
-  .hero__meta span::before { content: ""; display: inline-block; width: 5px; height: 5px; background: var(--accent);
-    margin-right: 8px; vertical-align: 3px; }
+  .hero__lead { color: #4a4a4a; font-size: 19px; line-height: 1.72; max-width: 580px; }
+  .hero__meta { margin-top: 40px; padding-top: 22px; border-top: 1px solid var(--line);
+    display: flex; gap: 40px; flex-wrap: wrap; color: var(--mute); font-size: 13.5px;
+    letter-spacing: .04em; }
 
-  /* категории и карточки */
-  .cat { padding: 46px 0 8px; scroll-margin-top: 70px; }
-  .cat__head { border-top: 1px solid var(--line); padding-top: 26px; margin-bottom: 26px; }
-  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 25px; font-weight: 700; }
-  .cat__lead { color: #666; font-size: 16px; margin-top: 6px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 16px; }
-  .card { display: flex; flex-direction: column; background: #f9f9f9; border: 1px solid var(--line);
-    padding: 22px 22px 20px; text-decoration: none; transition: border-color .18s, background .18s, transform .18s; }
-  .card:hover { border-color: var(--accent); background: #fff; transform: translateY(-2px); }
-  .card__tag { font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 12px; }
-  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 18.5px; font-weight: 700;
-    line-height: 1.35; margin-bottom: 10px; }
-  .card__desc { font-size: 15px; line-height: 1.62; color: #555; flex: 1; }
-  .card__go { margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--accent); }
+  /* разделы */
+  .cat { padding: 18px 0 62px; scroll-margin-top: 72px; }
+  .cat__head { margin-bottom: 8px; }
+  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px; font-weight: 400;
+    letter-spacing: -.005em; }
+  .cat__lead { color: var(--mute); font-size: 15.5px; margin-top: 8px; }
+
+  /* строки-гайды */
+  .rows { margin-top: 26px; border-top: 1px solid var(--line); }
+  .row { display: flex; align-items: flex-start; gap: 26px; padding: 26px 14px 26px 0;
+    border-bottom: 1px solid var(--line); text-decoration: none; transition: padding .22s, background .22s; }
+  .row:hover { background: #faf9f8; padding-left: 14px; padding-right: 0; }
+  .row__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 15px;
+    color: var(--accent); padding-top: 3px; min-width: 26px; opacity: .8; }
+  .row__body { flex: 1; }
+  .row__tag { display: block; font-size: 10px; font-weight: 600; letter-spacing: .2em;
+    text-transform: uppercase; color: var(--mute); margin-bottom: 8px; }
+  .row__title { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px;
+    line-height: 1.36; margin-bottom: 8px; transition: color .18s; }
+  .row:hover .row__title { color: var(--accent); }
+  .row__desc { display: block; font-size: 15.5px; line-height: 1.66; color: #6a6a6a; max-width: 620px; }
+  .row__arrow { color: var(--line); font-size: 19px; padding-top: 24px; transition: color .18s, transform .22s; }
+  .row:hover .row__arrow { color: var(--accent); transform: translateX(4px); }
+  @media (max-width: 560px) {
+    .row { gap: 16px; padding: 22px 0; }
+    .row__arrow { display: none; }
+    .row__title { font-size: 18px; }
+  }
 
   /* интенсив */
-  .intensiv { background: var(--ink); color: #fff; margin-top: 66px; padding: 62px 0; scroll-margin-top: 60px; }
-  .intensiv__in { max-width: 1000px; margin: 0 auto; padding: 0 22px; display: grid;
-    grid-template-columns: 1.15fr .85fr; gap: 46px; align-items: start; }
-  @media (max-width: 820px) { .intensiv__in { grid-template-columns: 1fr; gap: 30px; } }
-  .intensiv .badge { border-color: #c9a07a; color: #c9a07a; }
-  .intensiv h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(26px, 4vw, 35px);
-    line-height: 1.28; margin-bottom: 18px; }
-  .intensiv h2 em { font-style: italic; color: #c9a07a; }
-  .intensiv p { color: #cfcfcf; font-size: 17px; }
-  .intensiv__list { list-style: none; margin: 24px 0 0; }
-  .intensiv__list li { padding: 11px 0; border-bottom: 1px solid #333; font-size: 15.5px; color: #e4e4e4; }
-  .intensiv__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
-  .intensiv__cta { display: inline-block; background: #fff; color: var(--ink) !important; text-decoration: none;
-    padding: 15px 32px; font-weight: 700; font-size: 16px; margin-top: 26px; }
-  .intensiv__note { font-size: 13.5px; color: #999; margin-top: 14px; }
+  .intensiv { background: #121212; color: #fff; margin-top: 40px; padding: 104px 0 96px; scroll-margin-top: 60px; }
+  .intensiv__in { max-width: 940px; margin: 0 auto; padding: 0 30px; }
+  .intensiv__label { display: inline-block; border: 1px solid var(--gold); color: var(--gold); font-size: 10.5px;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 26px; }
+  .intensiv h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(32px, 5.4vw, 50px);
+    font-weight: 400; line-height: 1.2; margin-bottom: 22px; }
+  .intensiv h2 em { font-style: italic; color: var(--gold); }
+  .intensiv__lead { color: #bdbdbd; font-size: 18px; line-height: 1.72; max-width: 600px; }
+  .intensiv__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 56px; margin-top: 56px;
+    border-top: 1px solid #2a2a2a; }
+  @media (max-width: 820px) { .intensiv__grid { grid-template-columns: 1fr; gap: 0; } }
+  .intensiv__item { padding: 22px 0; border-bottom: 1px solid #2a2a2a; }
+  .intensiv__item b { display: block; font-size: 15.5px; font-weight: 600; margin-bottom: 5px; }
+  .intensiv__item span { font-size: 14.5px; color: #9c9c9c; line-height: 1.6; }
+  .intensiv__proof { display: flex; gap: 46px; flex-wrap: wrap; margin: 52px 0 44px; }
+  .intensiv__stat b { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 34px;
+    font-weight: 400; color: var(--gold); line-height: 1.2; }
+  .intensiv__stat span { font-size: 13.5px; color: #9c9c9c; letter-spacing: .03em; }
+  .intensiv__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
+    padding: 17px 38px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
+  .intensiv__cta:hover { opacity: .86; }
+  .intensiv__note { font-size: 13.5px; color: #7d7d7d; margin-top: 16px; }
 
   /* телеграм */
-  .tg { background: var(--grey); padding: 52px 0; text-align: center; }
-  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 26px; margin-bottom: 12px; }
-  .tg p { color: #555; max-width: 520px; margin: 0 auto 24px; }
-  .tg a { display: inline-block; background: var(--accent); color: #fff !important; text-decoration: none;
-    padding: 14px 30px; font-weight: 600; }
+  .tg { padding: 90px 0; border-bottom: 1px solid var(--line); }
+  .tg__in { max-width: 940px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center;
+    justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px; font-weight: 400; margin-bottom: 8px; }
+  .tg p { color: var(--mute); font-size: 16px; max-width: 460px; }
+  .tg a { display: inline-block; border: 1px solid var(--ink); padding: 15px 32px; font-weight: 600;
+    font-size: 15.5px; text-decoration: none; transition: background .18s, color .18s; white-space: nowrap; }
+  .tg a:hover { background: var(--ink); color: #fff; }
 
   /* подвал */
-  .foot { padding: 34px 0 54px; font-size: 14px; color: #888; display: flex; gap: 20px;
+  .foot { padding: 34px 0 60px; font-size: 13.5px; color: var(--mute); display: flex; gap: 20px;
     flex-wrap: wrap; justify-content: space-between; }
-  .foot a { color: #888; }
+  .foot a { color: var(--mute); }
 </style>
 </head>
 <body>
@@ -109,13 +136,13 @@
 
 <div class="wrap">
   <header class="hero">
-    <span class="badge">Блог · ИИ · система контента</span>
-    <h1>Всё, что я знаю про блог <em>с нейросетями</em> — в одном месте</h1>
-    <p class="hero__lead">Бесплатные гайды и промпты, которыми я пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Плюс интенсив, если хочешь собрать из этого систему.</p>
+    <span class="hero__label">Библиотека maysoulme</span>
+    <h1>Гайды и промпты для блога <em>с нейросетями</em></h1>
+    <p class="hero__lead">Собрано то, чем пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Забирай и применяй.</p>
     <div class="hero__meta">
-      <span>17 гайдов и промптов</span>
+      <span>17 материалов</span>
       <span>Бесплатно, без регистрации</span>
-      <span>Обновляется</span>
+      <span>Библиотека пополняется</span>
     </div>
   </header>
 
@@ -124,30 +151,42 @@
         <h2 class="cat__title">Reels и разговорные ролики</h2>
         <p class="cat__lead">От сырой мысли до готового сценария под суфлёр.</p>
       </div>
-      <div class="cards">
-        <a class="card" href="guides/formula-razgovornyh-rolikov/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Формула вирусных разговорных роликов</h3>
-          <p class="card__desc">Почему одни залетают на миллион, а другие уходят в никуда. Разбор структуры: хук в чувство, узнавание, инструктаж вместо информирования.</p>
-          <span class="card__go">Открыть →</span>
+      <div class="rows">
+        <a class="row" href="guides/formula-razgovornyh-rolikov/">
+          <span class="row__n">01</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Формула вирусных разговорных роликов</span>
+            <span class="row__desc">Почему одни залетают на миллион, а другие уходят в никуда. Разбор структуры: хук в чувство, узнавание, инструктаж вместо информирования.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/razgovornyj-ekspertnyj-rolik/">
-          <span class="card__tag">Промпт</span>
-          <h3 class="card__title">Разговорный экспертный ролик</h3>
-          <p class="card__desc">Промпт превращает сырой тезис в сценарий, где ты звучишь как человек, который реально разбирается в теме.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/razgovornyj-ekspertnyj-rolik/">
+          <span class="row__n">02</span>
+          <span class="row__body">
+            <span class="row__tag">Промпт</span>
+            <span class="row__title">Разговорный экспертный ролик</span>
+            <span class="row__desc">Промпт превращает сырой тезис в сценарий, где ты звучишь как человек, который реально разбирается в теме.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/40-scenariev/">
-          <span class="card__tag">Подборка</span>
-          <h3 class="card__title">40 сценариев для вирусных Reels</h3>
-          <p class="card__desc">Готовые каркасы роликов под разные ниши — берёшь, подставляешь свою тему, снимаешь.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/40-scenariev/">
+          <span class="row__n">03</span>
+          <span class="row__body">
+            <span class="row__tag">Подборка</span>
+            <span class="row__title">40 сценариев для вирусных Reels</span>
+            <span class="row__desc">Готовые каркасы роликов под разные ниши — берёшь, подставляешь свою тему, снимаешь.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/lichnaya-istoriya/">
-          <span class="card__tag">Промпт</span>
-          <h3 class="card__title">Хаотичный голос → личная история</h3>
-          <p class="card__desc">Наговариваешь поток мыслей — на выходе готовая личная история под суфлёр, без воды и без пафоса.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/lichnaya-istoriya/">
+          <span class="row__n">04</span>
+          <span class="row__body">
+            <span class="row__tag">Промпт</span>
+            <span class="row__title">Хаотичный голос → личная история</span>
+            <span class="row__desc">Наговариваешь поток мыслей — на выходе готовая личная история под суфлёр, без воды и без пафоса.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
       </div>
     </section>
@@ -157,36 +196,51 @@
         <h2 class="cat__title">Контент, тексты и смыслы</h2>
         <p class="cat__lead">Чтобы блог звучал твоим голосом, а не голосом нейросети.</p>
       </div>
-      <div class="cards">
-        <a class="card" href="guides/post-karusel/">
-          <span class="card__tag">Промпт</span>
-          <h3 class="card__title">Пост-карусель, которую досвайпывают</h3>
-          <p class="card__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний даёт вывод и призыв.</p>
-          <span class="card__go">Открыть →</span>
+      <div class="rows">
+        <a class="row" href="guides/post-karusel/">
+          <span class="row__n">05</span>
+          <span class="row__body">
+            <span class="row__tag">Промпт</span>
+            <span class="row__title">Пост-карусель, которую досвайпывают</span>
+            <span class="row__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний даёт вывод и призыв.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/promt-humanizator/">
-          <span class="card__tag">Промпт</span>
-          <h3 class="card__title">Промт-хуманизатор</h3>
-          <p class="card__desc">Как превратить гладкий ИИ-текст в живую речь, которую не стыдно опубликовать от своего лица.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/promt-humanizator/">
+          <span class="row__n">06</span>
+          <span class="row__body">
+            <span class="row__tag">Промпт</span>
+            <span class="row__title">Промт-хуманизатор</span>
+            <span class="row__desc">Как превратить гладкий ИИ-текст в живую речь, которую не стыдно опубликовать от своего лица.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/raspakovka-lichnosti/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Распаковка личности для блога</h3>
-          <p class="card__desc">Вопросы, которые вытаскивают из тебя смыслы, истории и голос — всё, чтобы вести блог и научить ассистентов говорить как ты.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/raspakovka-lichnosti/">
+          <span class="row__n">07</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Распаковка личности для блога</span>
+            <span class="row__desc">Вопросы, которые вытаскивают из тебя смыслы, истории и голос — всё, чтобы вести блог и научить ассистентов говорить как ты.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/analiz-ca-tripwire/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Анализ ЦА для трипваера</h3>
-          <p class="card__desc">Как понять, за что твоя аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/analiz-ca-tripwire/">
+          <span class="row__n">08</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Анализ ЦА для трипваера</span>
+            <span class="row__desc">Как понять, за что твоя аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/promt-pravdy/">
-          <span class="card__tag">Промпт</span>
-          <h3 class="card__title">Промпт правды</h3>
-          <p class="card__desc">Как отучить ИИ выдумывать и заставить его признаваться, когда он не знает ответа.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/promt-pravdy/">
+          <span class="row__n">09</span>
+          <span class="row__body">
+            <span class="row__tag">Промпт</span>
+            <span class="row__title">Промпт правды</span>
+            <span class="row__desc">Как отучить ИИ выдумывать и заставить его признаваться, когда он не знает ответа.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
       </div>
     </section>
@@ -196,36 +250,51 @@
         <h2 class="cat__title">ИИ с нуля</h2>
         <p class="cat__lead">Если ещё не подступалась к нейросетям — начни отсюда.</p>
       </div>
-      <div class="cards">
-        <a class="card" href="guides/claude-i-chatgpt-v-rossii/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Как установить Claude и ChatGPT в России</h3>
-          <p class="card__desc">Понятный маршрут: подготовка, регистрация, номер для Claude, установка приложений, карта, пополнение и первая безопасная оплата.</p>
-          <span class="card__go">Открыть →</span>
+      <div class="rows">
+        <a class="row" href="guides/claude-i-chatgpt-v-rossii/">
+          <span class="row__n">10</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Как установить Claude и ChatGPT в России</span>
+            <span class="row__desc">Понятный маршрут: подготовка, регистрация, номер для Claude, установка приложений, карта, пополнение и первая безопасная оплата.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/podgotovka-akkaunta/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Как технически подготовить аккаунт</h3>
-          <p class="card__desc">Пошагово и с картинками: что настроить до регистрации, чтобы аккаунт не улетел в бан.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/podgotovka-akkaunta/">
+          <span class="row__n">11</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Как технически подготовить аккаунт</span>
+            <span class="row__desc">Пошагово и с картинками: что настроить до регистрации, чтобы аккаунт не улетел в бан.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/luchshie-skilly-claude/">
-          <span class="card__tag">Подборка</span>
-          <h3 class="card__title">Лучшие скиллы для Claude в 2026</h3>
-          <p class="card__desc">Что такое скиллы, какие ставить первыми и как они экономят часы работы над контентом.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/luchshie-skilly-claude/">
+          <span class="row__n">12</span>
+          <span class="row__body">
+            <span class="row__tag">Подборка</span>
+            <span class="row__title">Лучшие скиллы для Claude в 2026</span>
+            <span class="row__desc">Что такое скиллы, какие ставить первыми и как они экономят часы работы над контентом.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/svoj-skill-dlya-codex/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Как создать свой первый скилл</h3>
-          <p class="card__desc">Собираем собственный скилл под свою задачу — обычными словами, без единой строчки кода.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/svoj-skill-dlya-codex/">
+          <span class="row__n">13</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Как создать свой первый скилл</span>
+            <span class="row__desc">Собираем собственный скилл под свою задачу — обычными словами, без единой строчки кода.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/kimi-dlya-bloginga/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Kimi для блогинга: система из 7 шагов</h3>
-          <p class="card__desc">Бесплатная альтернатива для тех, кому пока не до оплат: полная система работы с контентом.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/kimi-dlya-bloginga/">
+          <span class="row__n">14</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Kimi для блогинга: система из 7 шагов</span>
+            <span class="row__desc">Бесплатная альтернатива для тех, кому пока не до оплат: полная система работы с контентом.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
       </div>
     </section>
@@ -235,24 +304,33 @@
         <h2 class="cat__title">ИИ для жизни</h2>
         <p class="cat__lead">Не про блог — про всё остальное.</p>
       </div>
-      <div class="cards">
-        <a class="card" href="guides/gde-moi-foto/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Где в интернете есть мои фото</h3>
-          <p class="card__desc">Аудит цифрового следа: находим свои фотографии и данные, которые давно пора убрать.</p>
-          <span class="card__go">Открыть →</span>
+      <div class="rows">
+        <a class="row" href="guides/gde-moi-foto/">
+          <span class="row__n">15</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Где в интернете есть мои фото</span>
+            <span class="row__desc">Аудит цифрового следа: находим свои фотографии и данные, которые давно пора убрать.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/genealogicheskoe-drevo/">
-          <span class="card__tag">Гайд</span>
-          <h3 class="card__title">Генеалогическое древо с ChatGPT</h3>
-          <p class="card__desc">Как собрать историю семьи по обрывкам документов и рассказов родственников.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/genealogicheskoe-drevo/">
+          <span class="row__n">16</span>
+          <span class="row__body">
+            <span class="row__tag">Гайд</span>
+            <span class="row__title">Генеалогическое древо с ChatGPT</span>
+            <span class="row__desc">Как собрать историю семьи по обрывкам документов и рассказов родственников.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
-        <a class="card" href="guides/anglijskij-za-16-chasov/">
-          <span class="card__tag">Курс</span>
-          <h3 class="card__title">Английский за 16 часов</h3>
-          <p class="card__desc">Система, по которой язык подтягивается за счёт нейросети, а не за счёт репетитора.</p>
-          <span class="card__go">Открыть →</span>
+        <a class="row" href="guides/anglijskij-za-16-chasov/">
+          <span class="row__n">17</span>
+          <span class="row__body">
+            <span class="row__tag">Курс</span>
+            <span class="row__title">Английский за 16 часов</span>
+            <span class="row__desc">Система, по которой язык подтягивается за счёт нейросети, а не за счёт репетитора.</span>
+          </span>
+          <span class="row__arrow">→</span>
         </a>
       </div>
     </section>
@@ -260,28 +338,36 @@
 
 <section class="intensiv" id="intensiv">
   <div class="intensiv__in">
-    <div>
-      <span class="badge">Платный интенсив</span>
-      <h2>ИИ-стратегия <em>на миллион</em></h2>
-      <p>Гайды выше — это отдельные детали. На интенсиве мы собираем из них систему: стратегия, контент, свои ИИ-ассистенты и парсер идей, который приносит темы, пока ты завтракаешь.</p>
-      <a class="intensiv__cta" href="https://mayasoul.ru">Смотреть программу и цены →</a>
-      <p class="intensiv__note">Вечный доступ · чат поддержки · есть формат VIP с личным сопровождением</p>
+    <span class="intensiv__label">Платный интенсив</span>
+    <h2>ИИ-стратегия <em>на миллион</em></h2>
+    <p class="intensiv__lead">Гайды выше — это отдельные детали. На интенсиве из них собирается система: блог растёт не от удачного ролика, а от того, что стоит за ним.</p>
+
+    <div class="intensiv__proof">
+      <div class="intensiv__stat"><b>+10 000</b><span>в Telegram</span></div>
+      <div class="intensiv__stat"><b>+22 000</b><span>в Instagram</span></div>
+      <div class="intensiv__stat"><b>19 000</b><span>просмотров → 240 подписчиков и 30 000 ₽</span></div>
     </div>
-    <ul class="intensiv__list">
-      <li>Стратегия блога и позиционирование</li>
-      <li>Текстовые и разговорные reels</li>
-      <li>ИИ-агент с памятью твоего канала</li>
-      <li>Парсер залетающих идей ниши</li>
-      <li>Готовые ассистенты и шаблоны</li>
-      <li>Собрано без единого программиста</li>
-    </ul>
+
+    <div class="intensiv__grid">
+      <div class="intensiv__item"><b>Стратегия и позиционирование</b><span>За что тебе платят и чем ты отличаешься от сотни похожих экспертов</span></div>
+      <div class="intensiv__item"><b>Текстовые и разговорные ролики</b><span>Два формата: один набирает холодную аудиторию, другой превращает её в свою</span></div>
+      <div class="intensiv__item"><b>ИИ-агент с памятью канала</b><span>Помнит все твои посты и предлагает продолжение начатых тем</span></div>
+      <div class="intensiv__item"><b>Парсер идей</b><span>Собирает залетающие ролики ниши, пока ты завтракаешь</span></div>
+      <div class="intensiv__item"><b>Готовые ассистенты и шаблоны</b><span>Сценарист, редактор, распаковка, прогревы — забираешь и пользуешься</span></div>
+      <div class="intensiv__item"><b>Без единого программиста</b><span>Всё собрано в Claude Code — задачи объясняются обычными словами</span></div>
+    </div>
+
+    <p style="margin-top:48px"><a class="intensiv__cta" href="https://mayasoul.ru">Смотреть программу и цены →</a></p>
+    <p class="intensiv__note">Вечный доступ · чат поддержки · формат VIP с личным сопровождением</p>
   </div>
 </section>
 
 <section class="tg">
-  <div class="wrap">
-    <h2>Новые гайды — сначала в канале</h2>
-    <p>Пишу про блогинг и нейросети без магии и мотивации: что работает, что нет и почему.</p>
+  <div class="tg__in">
+    <div>
+      <h2>Новые гайды — сначала в канале</h2>
+      <p>Пишу про блогинг и нейросети без магии и мотивации: что работает, что нет и почему.</p>
+    </div>
     <a href="https://t.me/maysoulme">Читать @maysoulme</a>
   </div>
 </section>
