@@ -363,7 +363,7 @@ body {
   .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
 </style>
 <script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
-if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+if(t!=='dark'&&t!=='light')t='light';
 document.documentElement.setAttribute('data-theme',t)})();</script>
 <style id="ms-theme-vars">
   :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
@@ -797,7 +797,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
-  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__logo { flex: none; display: block; }
+  .ms-bar__logo img { height: 24px; width: auto; display: block; }
   .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }

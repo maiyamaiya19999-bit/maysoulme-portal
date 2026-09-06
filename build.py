@@ -86,7 +86,8 @@ SELL = """
   .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
-  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__logo { flex: none; display: block; }
+  .ms-bar__logo img { height: 24px; width: auto; display: block; }
   .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
   .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
   .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
@@ -197,7 +198,7 @@ COLOR_MAP = [
 ]
 
 THEME_VARS = """<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
-if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+if(t!=='dark'&&t!=='light')t='light';
 document.documentElement.setAttribute('data-theme',t)})();</script>
 <style id="ms-theme-vars">
   :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
@@ -386,7 +387,7 @@ TEMPLATE = """<!DOCTYPE html>
 <meta property="og:url" content="%%SITE%%/">
 <meta property="og:image" content="%%SITE%%/img/hero.jpg">
 <script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
-if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+if(t!=='dark'&&t!=='light')t='light';
 document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="icon" href="logo-ms.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -417,10 +418,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   /* ---------- шапка ---------- */
   .nav { position: sticky; top: 0; z-index: 100; background: var(--bg); border-bottom: 1px solid var(--line); }
   .nav__in { max-width: 1080px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 16px; }
-  .nav__logo img { height: 26px; display: block; }
+  .nav__logo { flex: none; display: block; }
+  .nav__logo img { height: 26px; width: auto; display: block; }
   [data-theme="dark"] .nav__logo img { filter: invert(1) brightness(1.6); }
   .nav__name { font-style: italic; color: var(--faint); font-size: 14.5px; letter-spacing: .02em; margin-top: 1px; }
-  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 14px; white-space: nowrap; }
+  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 26px; font-size: 14px; white-space: nowrap; min-width: 0; }
+  @media (max-width: 430px) { .nav__links { gap: 10px; } }
   .nav__links a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .nav__links a:hover { color: var(--accent); }
   .nav__cta { background: var(--accent); color: var(--bg) !important; padding: 10px 20px; font-weight: 600; transition: opacity .18s; }
