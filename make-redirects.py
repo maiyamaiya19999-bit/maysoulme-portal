@@ -37,7 +37,7 @@ REDIRECTS = [
     ("reels-guide",        "index.html", "40-scenariev",                "40 сценариев для Reels"),
     ("razgovornye-roliki", "index.html", "formula-razgovornyh-rolikov", "Формула разговорных роликов"),
     ("carousel-prompt",    "index.html", "post-karusel",                "Пост-карусель"),
-    ("english-course",     "index.html", "anglijskij-za-16-chasov",     "Английский за 16 часов"),
+    # английский из библиотеки убран — ведём на главную
 ]
 
 PAGE = """<!DOCTYPE html>
@@ -79,7 +79,7 @@ def main():
             if not f.exists():
                 print(f"   ! нет файла {path}, пропускаю")
                 continue
-            f.write_text(PAGE.format(title=html.escape(title), url=f"{SITE}/guides/{slug}/"), encoding="utf-8")
+            f.write_text(PAGE.format(title=html.escape(title), url=(f"{SITE}/guides/{slug}/" if slug else f"{SITE}/")), encoding="utf-8")
         subprocess.run(["git", "-C", str(work), "add", "-A"], check=True)
         r = subprocess.run(["git", "-C", str(work), "commit", "-q", "-m",
                             "Редиректы на портал maysoulme.ru"], capture_output=True)

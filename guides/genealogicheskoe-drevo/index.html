@@ -10,18 +10,29 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0} :root{--accent:#710c04;--text:#1a1a1a;--muted:#666;--line:#e8e8e8;--soft:#f5f5f5}
-html{scroll-behavior:smooth} body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:#fff;font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
-.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid #f0f0f0;background:rgba(255,255,255,.96);backdrop-filter:blur(10px)}
-.nav__logo{display:flex;align-items:center}.nav__logo img{display:block;width:auto;height:30px}.nav__name{font-family:'DM Sans',sans-serif;font-size:14px;font-style:italic;color:#888;letter-spacing:.5px}
+*{box-sizing:border-box;margin:0;padding:0} :root{--accent:var(--g-accent);--text:var(--g-fg);--muted:var(--g-muted);--line:var(--g-line);--soft:var(--g-surface)}
+html{scroll-behavior:smooth} body{font-family:Inter,-apple-system,BlinkMacSystemFont,sans-serif;color:var(--text);background:var(--g-bg);font-size:17px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.nav{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid var(--g-line);background:rgba(255,255,255,.96);backdrop-filter:blur(10px)}
+.nav__logo{display:flex;align-items:center}.nav__logo img{display:block;width:auto;height:30px}.nav__name{font-family:'DM Sans',sans-serif;font-size:14px;font-style:italic;color:var(--g-faint);letter-spacing:.5px}
 .container{max-width:760px;margin:0 auto;padding:0 24px}.hero{padding:68px 0 54px}.badge{display:inline-block;margin-bottom:22px;padding:5px 16px;border:1px solid var(--accent);color:var(--accent);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase}
-h1,h2,h3{font-family:'Libre Baskerville',Georgia,serif}.hero h1{max-width:720px;margin-bottom:18px;font-size:42px;line-height:1.23}.hero h1 em,.section-title em{color:var(--accent);font-style:italic}.hero__desc{max-width:650px;color:var(--muted);font-size:18px}.hero__meta{margin-top:18px;color:#999;font-size:13px;letter-spacing:1px;text-transform:uppercase}
-.start{padding:30px 0 50px;border-top:1px solid var(--line)}.start strong{color:var(--text)}.highlight{margin:24px 0;padding:22px 24px;background:var(--soft);color:#444;font-size:15px}.section-title{padding:54px 0 12px;border-top:1px solid var(--line);font-size:29px;line-height:1.32}.section-title span{margin-right:8px;color:var(--accent)}.section-lead{margin-bottom:28px;color:var(--muted)}
-.prompt-card{margin:24px 0 34px;border:1px solid var(--line);background:#fff}.prompt-card__head{padding:24px 26px 18px;border-bottom:1px solid var(--line)}.prompt-card__eyebrow{margin-bottom:6px;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.prompt-card h3{font-size:21px;line-height:1.4}.prompt-card__body{padding:24px 26px;background:var(--soft)}.prompt-text{color:#333;font-size:15px;line-height:1.75;white-space:pre-wrap}.copy-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--accent);color:#fff;font:600 14px Inter,sans-serif;letter-spacing:.2px;cursor:pointer;transition:background .18s ease}.copy-btn:hover{background:#570903}.copy-btn:focus-visible{outline:3px solid rgba(113,12,4,.25);outline-offset:3px}.copy-btn.copied{background:#222}.copy-btn[disabled]{cursor:default}
-.steps{list-style:none;margin:14px 0 34px}.steps li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid #f0f0f0}.steps li:first-child{border-top:1px solid #f0f0f0}.steps b{flex:0 0 28px;color:var(--accent);font-family:'Libre Baskerville',serif;font-size:14px;font-style:italic}.steps span{color:#444;font-size:16px}.note{margin:28px 0;padding:24px;border-left:3px solid var(--accent);background:var(--soft);color:#444;font-size:15px}.note strong{color:var(--text)}
-.footer-note{padding:54px 24px 0;text-align:center;color:#444;font-family:'Libre Baskerville',serif;font-size:18px;font-style:italic}.footer-note em{color:var(--accent)}.footer{margin-top:54px;padding:54px 24px;border-top:1px solid var(--line);color:#999;text-align:center;font-size:13px}.footer small{display:block;max-width:580px;margin:12px auto 0;color:#bbb;line-height:1.6}
+h1,h2,h3{font-family:'Libre Baskerville',Georgia,serif}.hero h1{max-width:720px;margin-bottom:18px;font-size:42px;line-height:1.23}.hero h1 em,.section-title em{color:var(--accent);font-style:italic}.hero__desc{max-width:650px;color:var(--muted);font-size:18px}.hero__meta{margin-top:18px;color:var(--g-faint);font-size:13px;letter-spacing:1px;text-transform:uppercase}
+.start{padding:30px 0 50px;border-top:1px solid var(--line)}.start strong{color:var(--text)}.highlight{margin:24px 0;padding:22px 24px;background:var(--soft);color:var(--g-muted);font-size:15px}.section-title{padding:54px 0 12px;border-top:1px solid var(--line);font-size:29px;line-height:1.32}.section-title span{margin-right:8px;color:var(--accent)}.section-lead{margin-bottom:28px;color:var(--muted)}
+.prompt-card{margin:24px 0 34px;border:1px solid var(--line);background:var(--g-bg)}.prompt-card__head{padding:24px 26px 18px;border-bottom:1px solid var(--line)}.prompt-card__eyebrow{margin-bottom:6px;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}.prompt-card h3{font-size:21px;line-height:1.4}.prompt-card__body{padding:24px 26px;background:var(--soft)}.prompt-text{color:var(--g-muted);font-size:15px;line-height:1.75;white-space:pre-wrap}.copy-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:48px;border:0;border-top:1px solid var(--line);border-radius:0;background:var(--accent);color:var(--g-bg);font:600 14px Inter,sans-serif;letter-spacing:.2px;cursor:pointer;transition:background .18s ease}.copy-btn:hover{background:#570903}.copy-btn:focus-visible{outline:3px solid rgba(113,12,4,.25);outline-offset:3px}.copy-btn.copied{background:var(--g-fg)}.copy-btn[disabled]{cursor:default}
+.steps{list-style:none;margin:14px 0 34px}.steps li{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--g-line)}.steps li:first-child{border-top:1px solid var(--g-line)}.steps b{flex:0 0 28px;color:var(--accent);font-family:'Libre Baskerville',serif;font-size:14px;font-style:italic}.steps span{color:var(--g-muted);font-size:16px}.note{margin:28px 0;padding:24px;border-left:3px solid var(--accent);background:var(--soft);color:var(--g-muted);font-size:15px}.note strong{color:var(--text)}
+.footer-note{padding:54px 24px 0;text-align:center;color:var(--g-muted);font-family:'Libre Baskerville',serif;font-size:18px;font-style:italic}.footer-note em{color:var(--accent)}.footer{margin-top:54px;padding:54px 24px;border-top:1px solid var(--line);color:var(--g-faint);text-align:center;font-size:13px}.footer small{display:block;max-width:580px;margin:12px auto 0;color:#bbb;line-height:1.6}
 @media(max-width:768px){.nav{padding:15px 20px}.container{padding:0 20px}.hero{padding:48px 0 40px}.hero h1{font-size:30px}.hero__desc{font-size:16px}.section-title{padding-top:42px;font-size:24px}.prompt-card__head,.prompt-card__body{padding:20px}.prompt-card h3{font-size:19px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.copy-btn{transition:none}}
+</style>
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
+<style id="ms-theme-vars">
+  :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
+          --g-line:#e6e4e1; --g-muted:#555555; --g-faint:#8f8a84; }
+  [data-theme="dark"] { --g-bg:#100f0e; --g-surface:#191715; --g-fg:#ece7e1; --g-accent:#d8ac83;
+          --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
+  html, body { background: var(--g-bg); color: var(--g-fg); }
+  [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
 </style>
 <meta property="og:type" content="article">
 <meta property="og:title" content="Генеалогическое древо с ChatGPT">
@@ -30,6 +41,14 @@ h1,h2,h3{font-family:'Libre Baskerville',Georgia,serif}.hero h1{max-width:720px;
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-bar">
+  <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__name">maysoulme</span>
+  <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
+</div>
+
+
 <nav class="nav">
   <a class="nav__logo" href="#top" aria-label="В начало страницы"><img src="../../logo-ms.png" alt="MS"></a>
   <span class="nav__name">maysoulme</span>
@@ -139,14 +158,13 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
 
 <section class="ms-sell">
   <div class="ms-sell__in">
-    <div class="ms-sell__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></div>
-    <p class="ms-sell__bridge">Если ИИ вытаскивает историю семьи из обрывков документов, представь, что он сделает с историей твоего блога, когда получит доступ ко всем твоим постам.</p>
+    <p class="ms-sell__bridge">Если нейросеть вытаскивает историю семьи из обрывков документов, представьте, что она сделает с историей вашего блога, получив все ваши посты.</p>
 
     <div class="ms-sell__rule"></div>
 
     <span class="ms-sell__label">Интенсив</span>
-    <h2 class="ms-sell__title">ИИ-стратегия <em>на миллион</em></h2>
-    <p class="ms-sell__lead">Гайды дают детали. Интенсив собирает из них систему: блог, который растёт не от удачного ролика, а от того, что за ним стоит.</p>
+    <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
+    <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
 
     <div class="ms-sell__proof">
       <div class="ms-sell__proof-item">
@@ -159,18 +177,17 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
         <span class="ms-sell__cap">просмотров — 240 подписчиков и 30 000 ₽</span>
       </div>
     </div>
-    <p class="ms-sell__proof-note">Разница не в удаче и не в количестве роликов. Разница в стратегии — в том, кому ты говоришь, что именно и куда ведёшь человека дальше.</p>
+    <p class="ms-sell__proof-note">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
 
     <ul class="ms-sell__list">
-      <li><b>Стратегия и позиционирование</b> — за что тебе платят и чем ты отличаешься от сотни таких же экспертов</li>
-      <li><b>Текстовые и разговорные ролики</b> — два формата, которые набирают холодную аудиторию и превращают её в свою</li>
-      <li><b>ИИ-агент с памятью канала</b> — помнит все твои посты и предлагает продолжение уже начатых тем, чтобы блог звучал как одна история</li>
-      <li><b>Парсер идей</b> — собирает залетающие ролики твоей ниши, пока ты завтракаешь, и выдаёт готовые темы</li>
-      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираешь и пользуешься</li>
+      <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
+      <li><b>Текстовые и разговорные ролики</b> — один формат набирает холодную аудиторию, второй превращает её в свою</li>
+      <li><b>ИИ-агент с памятью канала</b> — помнит все ваши посты и предлагает продолжение начатых тем, чтобы блог звучал как одна история</li>
+      <li><b>Парсер идей</b> — собирает залетающие ролики вашей ниши, пока вы завтракаете, и выдаёт готовые темы</li>
+      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираете и пользуетесь</li>
     </ul>
 
-    <p class="ms-sell__author">Я собрала всё это в Claude Code без единого программиста — объясняя задачи обычными словами. За последнее время это дало мне +10 000 в Telegram и +22 000 в Instagram на узком экспертном контенте. На интенсиве я показываю ровно то, что делаю сама.</p>
-
+    <p class="ms-sell__author">Всё это я собрала в Claude Code без единого программиста — просто объясняла задачи обычными словами. На интенсиве показываю ровно то, что делаю сама каждый день.</p>
     <span class="ms-sell__sign">Майя</span>
 
     <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
@@ -180,24 +197,37 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
 
 <footer class="ms-foot">
   <a class="ms-foot__back" href="../../">← Все гайды maysoulme</a>
-  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новые гайды сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
+  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новое сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
 </footer>
 
 <style>
   @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
-  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 84px 22px 78px;
+
+  body > nav.nav { display: none !important; }
+  .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
+    padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
+  .ms-bar__back:hover { text-decoration: underline; }
+  .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
+    line-height: 1; margin-left: auto; }
+  .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
+    width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
+    justify-content: center; }
+  .ms-bar__theme:hover { border-color: var(--g-accent, #710C04); color: var(--g-accent, #710C04); }
+
+  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 78px 22px 72px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-sell__in { max-width: 660px; margin: 0 auto; }
-  .ms-sell__star { width: 24px; height: 24px; color: #c9a07a; margin-bottom: 24px; }
-  .ms-sell__star svg { width: 100%; height: 100%; display: block; }
   .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
     color: #f0ece7; font-style: italic; margin: 0; }
-  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 44px 0 40px; }
+  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 42px 0 38px; }
   .ms-sell__label { display: inline-block; border: 1px solid #c9a07a; color: #c9a07a; font-size: 10.5px;
     font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 22px; }
   .ms-sell__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 5vw, 40px);
     font-weight: 700; line-height: 1.24; margin: 0 0 16px; color: #fff; }
-  .ms-sell__title em { font-style: italic; color: #c9a07a; }
+  .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
   .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
 
   .ms-sell__proof { display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
@@ -216,27 +246,42 @@ document.querySelectorAll('[data-copy]').forEach(function(button){
   .ms-sell__list li b { color: #fff; font-weight: 600; }
   .ms-sell__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
 
-  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 36px;
+  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 6px;
     padding-left: 18px; border-left: 2px solid #c9a07a; }
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 52px;
+    line-height: 1; margin: 4px 0 30px 18px; }
 
-  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 54px;
-    line-height: 1; margin: -16px 0 30px 18px; }
   .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
     padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
   .ms-sell__cta:hover { opacity: .86; }
   .ms-sell__note { font-size: 13.5px; color: #8a8a8a; margin: 16px 0 0; }
 
   .ms-foot { max-width: 660px; margin: 0 auto; padding: 44px 22px 64px; text-align: center;
-    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: #777; }
-  .ms-foot a { color: #710C04; }
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: var(--g-muted, #777); }
+  .ms-foot a { color: var(--g-accent, #710C04); }
   .ms-foot__back { display: inline-block; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
   .ms-foot__back:hover { text-decoration: underline; }
   .ms-foot p { margin: 0; }
   @media (max-width: 560px) {
-    .ms-sell { padding: 60px 20px 56px; }
+    .ms-sell { padding: 56px 20px 52px; }
     .ms-sell__bridge { font-size: 18px; }
     .ms-sell__proof-vs { display: none; }
+    .ms-bar__name { display: none; }
   }
 </style>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
 </body>
 </html>

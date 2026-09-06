@@ -4,155 +4,152 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>maysoulme — библиотека гайдов и промптов</title>
-<meta name="description" content="Библиотека maysoulme: 17 гайдов и промптов про блог с нейросетями — разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Бесплатно.">
+<meta name="description" content="Гайды и промпты про блог с нейросетями: разговорные reels, тексты своим голосом, распаковка личности, свои ИИ-ассистенты. Бесплатно.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Библиотека maysoulme">
-<meta property="og:description" content="17 гайдов и промптов про блог с нейросетями. Бесплатно, без регистрации.">
+<meta property="og:description" content="Гайды и промпты про блог с нейросетями. Бесплатно, без регистрации.">
 <meta property="og:url" content="https://maysoulme.ru/">
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(!t)t=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
 <link rel="icon" href="logo-ms.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  @font-face { font-family: 'Denistina'; src: url('denistina.ttf') format('truetype');
-    font-display: swap; }
-  :root { --accent: #710C04; --gold: #c9a07a; --ink: #1a1a1a; --line: #e6e4e1;
-          --mute: #8a8a8a; --cream: #f7f5f2; }
+  @font-face { font-family: 'Denistina'; src: url('denistina.ttf') format('truetype'); font-display: swap; }
+
+  :root {
+    --accent: #710C04; --ink: #1a1a1a; --bg: #ffffff; --fg: #1a1a1a;
+    --muted: #6c6c6c; --faint: #8f8a84; --line: #e6e4e1; --cream: #f7f5f2;
+    --card: #ffffff; --shadow: rgba(26,20,18,.09); --dark-bg: #1a1a1a; --gold: #c9a07a;
+  }
+  [data-theme="dark"] {
+    --accent: #d8ac83; --bg: #100f0e; --fg: #ece7e1;
+    --muted: #a49d95; --faint: #8b847c; --line: #2a2724; --cream: #171614;
+    --card: #161513; --shadow: rgba(0,0,0,.5); --dark-bg: #171614;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', -apple-system, sans-serif; background: #fff; color: var(--ink);
-    font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--fg);
+    font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased;
+    transition: background .25s, color .25s; }
   a { color: inherit; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  .hand { font-family: 'Denistina', 'Segoe Script', cursive; color: var(--accent);
-    font-weight: 400; letter-spacing: 0; }
-  .star { display: inline-block; width: 15px; height: 15px; color: var(--accent);
-    vertical-align: -1px; }
-  .star svg, .star img { width: 100%; height: 100%; display: block; }
 
   /* навбар */
-  .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.93);
-    backdrop-filter: saturate(160%) blur(12px); border-bottom: 1px solid var(--line); }
-  .nav__in { max-width: 1080px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 12px; }
+  .nav { position: sticky; top: 0; z-index: 100; background: var(--bg);
+    border-bottom: 1px solid var(--line); }
+  .nav__in { max-width: 1080px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 14px; }
   .nav__logo img { height: 26px; display: block; }
-  .nav__name { font-family: 'DM Sans', sans-serif; font-style: italic; color: var(--mute); font-size: 14.5px; }
-  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 24px; font-size: 14px; }
-  .nav__links a { text-decoration: none; color: #5a5a5a; transition: color .15s; }
+  [data-theme="dark"] .nav__logo img { filter: invert(1) brightness(1.6); }
+  .nav__name { font-family: 'Denistina', cursive; color: var(--accent); font-size: 25px; line-height: 1; }
+  .nav__links { margin-left: auto; display: flex; align-items: center; gap: 24px; font-size: 14px;
+    white-space: nowrap; }
+  .nav__links a { text-decoration: none; color: var(--muted); transition: color .15s; }
   .nav__links a:hover { color: var(--accent); }
-  .nav__cta { background: var(--accent); color: #fff !important; padding: 10px 20px; font-weight: 600;
-    letter-spacing: .01em; transition: opacity .18s; }
+  .nav__cta { background: var(--accent); color: var(--bg) !important; padding: 10px 20px; font-weight: 600;
+    transition: opacity .18s; }
   .nav__cta:hover { opacity: .88; }
+  .theme { background: none; border: 1px solid var(--line); color: var(--muted); width: 34px; height: 34px;
+    cursor: pointer; font-size: 15px; line-height: 1; display: flex; align-items: center;
+    justify-content: center; transition: border-color .18s, color .18s; flex: none; }
+  .theme:hover { border-color: var(--accent); color: var(--accent); }
   @media (max-width: 900px) { .nav__links a:not(.nav__cta) { display: none; } }
-  @media (max-width: 420px) { .nav__cta { padding: 9px 14px; font-size: 13px; } }
+  @media (max-width: 430px) { .nav__cta { padding: 9px 13px; font-size: 12.5px; } .nav__name { display: none; } }
 
   /* герой */
-  .hero { display: grid; grid-template-columns: 1.06fr .94fr; gap: 40px; align-items: center;
-    padding: 72px 0 46px; }
-  .hero__label { font-size: 10.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
-    color: var(--accent); display: block; margin-bottom: 26px; }
-  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(25px, 3.6vw, 37px);
-    font-weight: 400; line-height: 1.32; letter-spacing: .05em; text-transform: uppercase;
-    margin-bottom: 24px; }
-  h1 .hand { display: block; text-transform: none; letter-spacing: 0; line-height: .95;
-    font-size: clamp(46px, 7vw, 76px); margin-top: 6px; }
-  .hero__lead { color: #4a4a4a; font-size: 18.5px; line-height: 1.72; max-width: 560px; }
-  .hero__art { position: relative; }
-  .hero__art img { width: 100%; height: 430px; object-fit: cover; display: block; }
-  .hero__cap { position: absolute; left: -30px; bottom: 30px; background: #fff; padding: 12px 22px;
-    font-family: 'Denistina', cursive; color: var(--accent); font-size: 31px; line-height: 1; }
-  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 26px; padding: 52px 0 40px; }
-    .hero__art img { height: 300px; } .hero__cap { left: 0; font-size: 23px; } }
+  .hero { display: grid; grid-template-columns: 1.12fr .88fr; gap: 44px; align-items: center;
+    padding: 66px 0 46px; }
+  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(24px, 3.5vw, 36px);
+    font-weight: 400; line-height: 1.34; letter-spacing: .05em; text-transform: uppercase;
+    margin-bottom: 22px; }
+  h1 b { font-weight: 700; }
+  h1 .hand { display: block; font-family: 'Denistina', cursive; color: var(--accent);
+    text-transform: none; letter-spacing: 0; line-height: .95;
+    font-size: clamp(46px, 7vw, 76px); margin-top: 8px; }
+  .hero__lead { color: var(--muted); font-size: 18.5px; line-height: 1.72; max-width: 540px; }
+  .hero__art { position: relative; text-align: center; }
+  .hero__art img { width: 78%; max-width: 340px; display: inline-block; }
+  .hero__cap { position: absolute; left: 0; bottom: -6px; font-family: 'Denistina', cursive;
+    color: var(--accent); font-size: 34px; line-height: 1; }
+  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 20px; padding: 46px 0 34px; }
+    .hero__art img { width: 52%; } .hero__cap { left: 4%; bottom: -4px; font-size: 27px; } }
 
-  /* чипсы-навигация */
+  /* чипсы */
   .chips { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 8px; }
-  .chips a { border: 1px solid var(--line); padding: 9px 18px; font-size: 13.5px; color: #5a5a5a;
+  .chips a { border: 1px solid var(--line); padding: 9px 18px; font-size: 13.5px; color: var(--muted);
     text-decoration: none; transition: all .18s; white-space: nowrap; }
-  .chips a:hover { border-color: var(--accent); color: var(--accent); background: #fdfaf9; }
+  .chips a:hover { border-color: var(--accent); color: var(--accent); background: var(--cream); }
 
   /* разделы */
-  .cat { padding: 62px 0 12px; scroll-margin-top: 74px; }
-  .cat__head { display: flex; align-items: baseline; gap: 18px; padding-bottom: 22px;
-    border-bottom: 1px solid var(--line); margin-bottom: 30px; flex-wrap: wrap; }
+  .cat { padding: 58px 0 12px; scroll-margin-top: 74px; }
+  .cat__head { display: flex; align-items: baseline; gap: 18px; padding-bottom: 20px;
+    border-bottom: 1px solid var(--line); margin-bottom: 28px; flex-wrap: wrap; }
   .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 21px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: .09em; display: flex; align-items: center; gap: 12px; }
-  .cat__lead { color: var(--mute); font-size: 15px; }
-  .cat__count { margin-left: auto; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
-    color: #b3aca3; }
+    text-transform: uppercase; letter-spacing: .09em; }
+  .cat__title i { font-style: italic; color: var(--accent); }
+  .cat__lead { color: var(--faint); font-size: 15px; }
 
   /* карточки */
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
-  .card { position: relative; display: flex; flex-direction: column; background: #fff;
+  .card { position: relative; display: flex; flex-direction: column; background: var(--card);
     border: 1px solid var(--line); padding: 26px 24px 22px; text-decoration: none;
     transition: border-color .2s, box-shadow .25s, transform .25s; }
-  .card:hover { border-color: var(--accent); box-shadow: 0 14px 36px rgba(26,20,18,.09);
-    transform: translateY(-4px); }
+  .card:hover { border-color: var(--accent); box-shadow: 0 14px 36px var(--shadow); transform: translateY(-4px); }
   .card__n { position: absolute; top: 22px; right: 22px; font-family: 'Libre Baskerville', Georgia, serif;
-    font-style: italic; font-size: 14px; color: #ccc5bb; transition: color .2s; }
-  .card:hover .card__n { color: var(--accent); }
+    font-style: italic; font-size: 14px; color: var(--faint); opacity: .6; }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 14px; }
   .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 700;
     line-height: 1.44; margin-bottom: 11px; text-transform: uppercase; letter-spacing: .045em; }
-  .card__desc { font-size: 14.5px; line-height: 1.65; color: #6a6a6a; flex: 1; }
-  .card__go { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0ede9; font-size: 13.5px;
-    font-weight: 600; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
-  .card__go i { font-style: normal; transition: transform .22s; }
+  .card__title i { font-style: italic; }
+  .card__desc { font-size: 14.5px; line-height: 1.65; color: var(--muted); flex: 1; }
+  .card__go { margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 13.5px;
+    font-weight: 600; color: var(--accent); }
+  .card__go i { font-style: normal; display: inline-block; margin-left: 7px; transition: transform .22s; }
   .card:hover .card__go i { transform: translateX(5px); }
-
-  /* карточка-акцент — первая в разделе */
-  .card--lead { grid-column: span 2; background: var(--cream); border-color: #e6ded3; }
+  .card--lead { grid-column: span 2; background: var(--cream); }
   @media (max-width: 620px) { .card--lead { grid-column: span 1; } }
   .card--lead .card__title { font-size: 20px; line-height: 1.36; }
-  .card__star { position: absolute; bottom: 20px; right: 22px; width: 22px; height: 22px;
-    color: #e0d6c9; transition: color .2s, transform .35s; }
-  .card:hover .card__star { color: var(--accent); transform: rotate(45deg); }
   .card--lead .card__desc { font-size: 15.5px; max-width: 92%; }
-  .card--lead .card__go { border-top-color: #e6ded3; }
   .card--w2 { grid-column: span 2; }
   .card--w3 { grid-column: span 3; }
   .card--w2 .card__desc, .card--w3 .card__desc { max-width: 640px; }
   @media (max-width: 900px) { .card--w3 { grid-column: span 2; } }
   @media (max-width: 620px) { .card--w2, .card--w3 { grid-column: span 1; } }
 
-  /* полоса-цитата */
-  .quote { margin: 78px 0 0; padding: 54px 0; border-top: 1px solid var(--line);
+  /* цитата */
+  .quote { margin: 74px 0 0; padding: 58px 0; border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line); text-align: center; }
-  .quote p { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 24px;
-    line-height: 1.55; max-width: 720px; margin: 0 auto; }
-  .quote p em { font-style: italic; color: var(--accent); }
-  .quote span { display: block; margin-top: 18px; font-size: 12.5px; letter-spacing: .18em;
-    text-transform: uppercase; color: var(--mute); }
-  .quote__star { width: 26px; height: 26px; color: var(--accent); margin: 0 auto 26px; }
-  .quote .quote__sign { font-family: 'Denistina', cursive; color: var(--accent); font-size: 42px;
-    margin-top: 22px; display: block; text-transform: none; letter-spacing: 0; line-height: 1; }
+  .quote p { font-family: 'Libre Baskerville', Georgia, serif; font-size: 25px; line-height: 1.56;
+    max-width: 700px; margin: 0 auto; }
+  .quote p i { font-style: italic; color: var(--accent); }
+  .quote .sign { font-family: 'Denistina', cursive; color: var(--accent); font-size: 42px;
+    display: block; margin-top: 26px; line-height: 1; }
 
   /* интенсив */
-  .intensiv { background: var(--ink); color: #fff; margin-top: 82px; padding: 76px 0; scroll-margin-top: 60px; }
+  .intensiv { background: var(--dark-bg); color: #fff; margin-top: 78px; padding: 76px 0; scroll-margin-top: 60px; }
+  [data-theme="dark"] .intensiv { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   .intensiv__in { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: grid;
     grid-template-columns: 1.15fr .85fr; gap: 54px; align-items: start; }
   @media (max-width: 880px) { .intensiv__in { grid-template-columns: 1fr; gap: 34px; } }
   .intensiv__label { display: inline-block; border: 1px solid var(--gold); color: var(--gold); font-size: 10.5px;
     font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
   .intensiv h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 4.4vw, 40px);
-    font-weight: 400; line-height: 1.24; margin-bottom: 18px; }
-  .intensiv h2 em { font-style: italic; color: var(--gold); }
+    font-weight: 400; line-height: 1.24; margin-bottom: 18px; color: #fff; }
+  .intensiv h2 i { font-style: italic; color: var(--gold); }
   .intensiv p { color: #c4c4c4; font-size: 17px; line-height: 1.72; }
-  .intensiv__stats { display: flex; gap: 34px; flex-wrap: wrap; margin: 30px 0 6px; }
-  .intensiv__stats div b { display: block; font-family: 'Libre Baskerville', Georgia, serif;
-    font-size: 26px; font-weight: 400; color: var(--gold); }
-  .intensiv__stats div span { font-size: 12.5px; color: #9c9c9c; letter-spacing: .04em; }
-  .intensiv__art { width: 100%; height: 190px; object-fit: cover; object-position: center 46%;
-    mix-blend-mode: screen; margin-bottom: 22px; }
   .intensiv__list { list-style: none; margin: 6px 0 0; }
-  .intensiv__list li { padding: 13px 0; border-bottom: 1px solid #333; font-size: 15.5px; color: #e0e0e0; }
+  .intensiv__list li { padding: 13px 0; border-bottom: 1px solid #332f2b; font-size: 15.5px; color: #e0dcd7; }
   .intensiv__list li::before { content: "—"; color: var(--gold); margin-right: 10px; }
-  .intensiv__cta { display: inline-block; background: #fff; color: var(--ink) !important; text-decoration: none;
+  .intensiv__cta { display: inline-block; background: #fff; color: #1a1a1a !important; text-decoration: none;
     padding: 16px 34px; font-weight: 700; font-size: 16px; margin-top: 30px; transition: opacity .18s; }
   .intensiv__cta:hover { opacity: .87; }
-  .intensiv__note { font-size: 13.5px; color: #8f8f8f; margin-top: 14px; }
+  .intensiv__note { font-size: 13.5px; color: #8f8a84; margin-top: 14px; }
 
   /* телеграм */
   .tg { background: var(--cream); padding: 74px 0; }
@@ -160,19 +157,15 @@
     justify-content: space-between; gap: 30px; flex-wrap: wrap; }
   .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700;
     text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
-  .tg__in { position: relative; }
-  .tg__flower { position: absolute; right: -10px; bottom: -74px; width: 190px; opacity: .5;
-    pointer-events: none; }
-  @media (max-width: 900px) { .tg__flower { display: none; } }
-  .tg p { color: #6f6a63; font-size: 16px; max-width: 470px; }
-  .tg a { display: inline-block; background: var(--accent); color: #fff !important; padding: 15px 32px;
+  .tg p { color: var(--muted); font-size: 16px; max-width: 490px; }
+  .tg a { display: inline-block; background: var(--accent); color: var(--bg) !important; padding: 15px 32px;
     font-weight: 600; font-size: 15.5px; text-decoration: none; transition: opacity .18s; white-space: nowrap; }
   .tg a:hover { opacity: .88; }
 
   /* подвал */
-  .foot { padding: 32px 0 58px; font-size: 13.5px; color: var(--mute); display: flex; gap: 20px;
+  .foot { padding: 32px 0 58px; font-size: 13.5px; color: var(--faint); display: flex; gap: 20px;
     flex-wrap: wrap; justify-content: space-between; }
-  .foot a { color: var(--mute); }
+  .foot a { color: var(--faint); }
 </style>
 </head>
 <body>
@@ -182,11 +175,12 @@
     <a class="nav__logo" href="./"><img src="logo-ms.png" alt="MS"></a>
     <span class="nav__name">maysoulme</span>
     <div class="nav__links">
-      <a href="#reels">Reels и разговорные ролики</a>
-      <a href="#content">Контент, тексты и смыслы</a>
+      <a href="#reels">Reels</a>
+      <a href="#content">Контент</a>
       <a href="#start">ИИ с нуля</a>
-      <a href="#life">ИИ для жизни</a>
+      <a href="#life">Для жизни</a>
       <a class="nav__cta" href="#intensiv">Вступить на интенсив</a>
+      <button class="theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
     </div>
   </div>
 </nav>
@@ -194,204 +188,173 @@
 <div class="wrap">
   <header class="hero">
     <div>
-      <span class="hero__label"><span class="star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span> Библиотека maysoulme</span>
-      <h1>Гайды и промпты для блога <span class="hand">с нейросетями</span></h1>
-      <p class="hero__lead">Собрано то, чем пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Забирай и применяй.</p>
+      <h1>Гайды и промпты для <b>блога</b><span class="hand">с нейросетями</span></h1>
+      <p class="hero__lead">Здесь всё, чем пользуюсь сама каждый день: сценарии роликов, тексты своим голосом, распаковка, свои ИИ-ассистенты. Забирайте и пробуйте.</p>
     </div>
     <div class="hero__art">
-      <img src="img/flower.jpg" alt="" loading="lazy">
-      <span class="hero__cap">забирай</span>
+      <img src="img/books.png" alt="" loading="lazy">
+      <span class="hero__cap">забирайте</span>
     </div>
   </header>
 
   <div class="chips">
-    <a href="#reels">Reels и разговорные ролики <b style="font-weight:600;color:#b3aca3">4</b></a>
-    <a href="#content">Контент, тексты и смыслы <b style="font-weight:600;color:#b3aca3">5</b></a>
-    <a href="#start">ИИ с нуля <b style="font-weight:600;color:#b3aca3">5</b></a>
-    <a href="#life">ИИ для жизни <b style="font-weight:600;color:#b3aca3">3</b></a>
+    <a href="#reels">Reels и разговорные ролики</a>
+    <a href="#content">Контент, тексты и смыслы</a>
+    <a href="#start">ИИ с нуля</a>
+    <a href="#life">ИИ для жизни</a>
   </div>
 
     <section class="cat" id="reels">
       <div class="cat__head">
-        <h2 class="cat__title"><span class="star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>Reels и разговорные ролики</h2>
-        <p class="cat__lead">От сырой мысли до готового сценария под суфлёр.</p>
-        <span class="cat__count">4 материала</span>
+        <h2 class="cat__title">Reels и разговорные ролики</h2>
+        <p class="cat__lead">Как из мысли в голове получается ролик, который смотрят до конца.</p>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/formula-razgovornyh-rolikov/">
           <span class="card__n">01</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Формула вирусных разговорных роликов</span>
-          <span class="card__desc">Почему одни залетают на миллион, а другие уходят в никуда. Разбор структуры: хук в чувство, узнавание, инструктаж вместо информирования.</span>
+          <span class="card__title">Формула <i>вирусных</i> разговорных роликов</span>
+          <span class="card__desc">Почему один ролик залетает на миллион, а другой уходит в никуда. Разбираю по косточкам, что держит человека в кадре.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/razgovornyj-ekspertnyj-rolik/">
           <span class="card__n">02</span>
           <span class="card__tag">Промпт</span>
-          <span class="card__title">Разговорный экспертный ролик</span>
-          <span class="card__desc">Промпт превращает сырой тезис в сценарий, где ты звучишь как человек, который реально разбирается в теме.</span>
+          <span class="card__title">Разговорный <b>экспертный</b> ролик</span>
+          <span class="card__desc">Кидаете сырую мысль — получаете сценарий, где вы звучите как человек, который правда разбирается в теме.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/40-scenariev/">
           <span class="card__n">03</span>
           <span class="card__tag">Подборка</span>
-          <span class="card__title">40 сценариев для вирусных Reels</span>
-          <span class="card__desc">Готовые каркасы роликов под разные ниши — берёшь, подставляешь свою тему, снимаешь.</span>
+          <span class="card__title">40 сценариев для <i>вирусных</i> Reels</span>
+          <span class="card__desc">Сорок готовых каркасов под разные ниши. Берёте, подставляете свою тему, снимаете.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card card--w2" href="guides/lichnaya-istoriya/">
           <span class="card__n">04</span>
           <span class="card__tag">Промпт</span>
-          <span class="card__title">Хаотичный голос → личная история</span>
-          <span class="card__desc">Наговариваешь поток мыслей — на выходе готовая личная история под суфлёр, без воды и без пафоса.</span>
+          <span class="card__title">Хаотичный голос → <i>личная история</i></span>
+          <span class="card__desc">Наговариваете поток мыслей — на выходе история под суфлёр, которую не стыдно рассказать.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
       </div>
     </section>
 
     <section class="cat" id="content">
       <div class="cat__head">
-        <h2 class="cat__title"><span class="star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>Контент, тексты и смыслы</h2>
-        <p class="cat__lead">Чтобы блог звучал твоим голосом, а не голосом нейросети.</p>
-        <span class="cat__count">5 материалов</span>
+        <h2 class="cat__title">Контент, тексты и смыслы</h2>
+        <p class="cat__lead">Чтобы блог звучал вами, а не нейросетью.</p>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/post-karusel/">
           <span class="card__n">05</span>
           <span class="card__tag">Промпт</span>
-          <span class="card__title">Пост-карусель, которую досвайпывают</span>
-          <span class="card__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний даёт вывод и призыв.</span>
+          <span class="card__title">Пост-карусель, которую <i>досвайпывают</i></span>
+          <span class="card__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний закрывает мысль.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/promt-humanizator/">
           <span class="card__n">06</span>
           <span class="card__tag">Промпт</span>
-          <span class="card__title">Промт-хуманизатор</span>
-          <span class="card__desc">Как превратить гладкий ИИ-текст в живую речь, которую не стыдно опубликовать от своего лица.</span>
+          <span class="card__title">Промт-<b>хуманизатор</b></span>
+          <span class="card__desc">Как из гладкого текста нейросети сделать живую речь, которую не стыдно опубликовать от своего имени.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/raspakovka-lichnosti/">
           <span class="card__n">07</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Распаковка личности для блога</span>
-          <span class="card__desc">Вопросы, которые вытаскивают из тебя смыслы, истории и голос — всё, чтобы вести блог и научить ассистентов говорить как ты.</span>
+          <span class="card__title"><i>Распаковка</i> личности для блога</span>
+          <span class="card__desc">Вопросы, которые вытаскивают из вас смыслы и истории. После них и блог вести легче, и ассистенты говорят вашими словами.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/analiz-ca-tripwire/">
           <span class="card__n">08</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Анализ ЦА для трипваера</span>
-          <span class="card__desc">Как понять, за что твоя аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</span>
+          <span class="card__title">Анализ ЦА для <b>трипваера</b></span>
+          <span class="card__desc">Как понять, за что ваша аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/promt-pravdy/">
           <span class="card__n">09</span>
           <span class="card__tag">Промпт</span>
-          <span class="card__title">Промпт правды</span>
-          <span class="card__desc">Как отучить ИИ выдумывать и заставить его признаваться, когда он не знает ответа.</span>
+          <span class="card__title">Промпт <i>правды</i></span>
+          <span class="card__desc">Как отучить нейросеть выдумывать и научить признаваться, когда она чего-то не знает.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
       </div>
     </section>
 
     <section class="cat" id="start">
       <div class="cat__head">
-        <h2 class="cat__title"><span class="star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>ИИ с нуля</h2>
-        <p class="cat__lead">Если ещё не подступалась к нейросетям — начни отсюда.</p>
-        <span class="cat__count">5 материалов</span>
+        <h2 class="cat__title">ИИ с нуля</h2>
+        <p class="cat__lead">Если ещё не подступались к нейросетям — начинайте отсюда.</p>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/claude-i-chatgpt-v-rossii/">
           <span class="card__n">10</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Как установить Claude и ChatGPT в России</span>
-          <span class="card__desc">Понятный маршрут: подготовка, регистрация, номер для Claude, установка приложений, карта, пополнение и первая безопасная оплата.</span>
+          <span class="card__title">Как установить <b>Claude</b> и ChatGPT в России</span>
+          <span class="card__desc">Понятный маршрут: регистрация, номер, приложения, карта и первая безопасная оплата.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/podgotovka-akkaunta/">
           <span class="card__n">11</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Как технически подготовить аккаунт</span>
+          <span class="card__title">Как <i>технически</i> подготовить аккаунт</span>
           <span class="card__desc">Пошагово и с картинками: что настроить до регистрации, чтобы аккаунт не улетел в бан.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/luchshie-skilly-claude/">
           <span class="card__n">12</span>
           <span class="card__tag">Подборка</span>
-          <span class="card__title">Лучшие скиллы для Claude в 2026</span>
-          <span class="card__desc">Что такое скиллы, какие ставить первыми и как они экономят часы работы над контентом.</span>
+          <span class="card__title">Лучшие <b>скиллы</b> для Claude в 2026</span>
+          <span class="card__desc">Что такое скиллы, какие ставить первыми и сколько часов они реально экономят.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/svoj-skill-dlya-codex/">
           <span class="card__n">13</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Как создать свой первый скилл</span>
-          <span class="card__desc">Собираем собственный скилл под свою задачу — обычными словами, без единой строчки кода.</span>
+          <span class="card__title">Как собрать <i>свой первый</i> скилл</span>
+          <span class="card__desc">Делаем скилл под вашу задачу обычными словами, без единой строчки кода.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/kimi-dlya-bloginga/">
           <span class="card__n">14</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Kimi для блогинга: система из 7 шагов</span>
-          <span class="card__desc">Бесплатная альтернатива для тех, кому пока не до оплат: полная система работы с контентом.</span>
+          <span class="card__title"><b>Kimi</b> для блогинга: система из 7 шагов</span>
+          <span class="card__desc">Бесплатная альтернатива, если пока не до оплат: вся система работы с контентом на ней.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
       </div>
     </section>
 
     <section class="cat" id="life">
       <div class="cat__head">
-        <h2 class="cat__title"><span class="star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>ИИ для жизни</h2>
+        <h2 class="cat__title">ИИ для жизни</h2>
         <p class="cat__lead">Не про блог — про всё остальное.</p>
-        <span class="cat__count">3 материала</span>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/gde-moi-foto/">
           <span class="card__n">15</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Где в интернете есть мои фото</span>
-          <span class="card__desc">Аудит цифрового следа: находим свои фотографии и данные, которые давно пора убрать.</span>
+          <span class="card__title">Где в интернете есть <i>мои фото</i></span>
+          <span class="card__desc">Находим ваши фотографии и данные, которые давно пора убрать из сети.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
         <a class="card" href="guides/genealogicheskoe-drevo/">
           <span class="card__n">16</span>
           <span class="card__tag">Гайд</span>
-          <span class="card__title">Генеалогическое древо с ChatGPT</span>
+          <span class="card__title"><i>Генеалогическое древо</i> с ChatGPT</span>
           <span class="card__desc">Как собрать историю семьи по обрывкам документов и рассказов родственников.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
-        </a>
-        <a class="card card--w3" href="guides/anglijskij-za-16-chasov/">
-          <span class="card__n">17</span>
-          <span class="card__tag">Курс</span>
-          <span class="card__title">Английский за 16 часов</span>
-          <span class="card__desc">Система, по которой язык подтягивается за счёт нейросети, а не за счёт репетитора.</span>
-          <span class="card__go">Открыть <i>&rarr;</i></span>
-          <span class="star card__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></span>
         </a>
       </div>
     </section>
 
   <section class="quote">
-    <div class="star quote__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></div>
-    <p>Разница не в удаче и не в количестве роликов. Разница в том, <em>кому ты говоришь, что именно и куда ведёшь человека дальше</em>.</p>
-    <span>600 000 просмотров и 8 подписчиков · против · 19 000 просмотров и 30 000 ₽</span>
-    <span class="quote__sign">Майя</span>
+    <p>Люди остаются не ради пользы. Они остаются там, где <i>узнали себя</i>.</p>
+    <span class="sign">Майя</span>
   </section>
 </div>
 
@@ -399,34 +362,27 @@
   <div class="intensiv__in">
     <div>
       <span class="intensiv__label">Платный интенсив</span>
-      <h2>ИИ-стратегия <em>на миллион</em></h2>
-      <p>Гайды выше — это отдельные детали. На интенсиве мы собираем из них систему: стратегия, контент, свои ИИ-ассистенты и парсер идей, который приносит темы, пока ты завтракаешь.</p>
-      <div class="intensiv__stats">
-        <div><b>+10 000</b><span>в Telegram</span></div>
-        <div><b>+22 000</b><span>в Instagram</span></div>
-      </div>
+      <h2>ИИ-стратегия <i>на миллион</i></h2>
+      <p>Гайды выше — это отдельные детали. На интенсиве мы собираем из них систему: стратегия, контент, свои ИИ-ассистенты и парсер идей, который приносит темы, пока вы завтракаете.</p>
       <a class="intensiv__cta" href="https://mayasoul.ru">Смотреть программу и цены →</a>
       <p class="intensiv__note">Вечный доступ · чат поддержки · есть формат VIP с личным сопровождением</p>
     </div>
-    <div>
-    <img class="intensiv__art" src="img/hands.jpg" alt="" loading="lazy">
     <ul class="intensiv__list">
       <li>Стратегия блога и позиционирование</li>
       <li>Текстовые и разговорные reels</li>
-      <li>ИИ-агент с памятью твоего канала</li>
+      <li>ИИ-агент с памятью вашего канала</li>
       <li>Парсер залетающих идей ниши</li>
       <li>Готовые ассистенты и шаблоны</li>
       <li>Собрано без единого программиста</li>
     </ul>
-    </div>
   </div>
 </section>
 
 <section class="tg">
   <div class="tg__in">
     <div>
-      <h2>Новые гайды — сначала в канале</h2>
-      <p>Пишу про блогинг и нейросети без магии и мотивации: что работает, что нет и почему.</p>
+      <h2>Новое сначала в канале</h2>
+      <p>Там я показываю всё то же самое по горячим следам: что затестила, что сработало, а что оказалось полной ерундой.</p>
     </div>
     <a href="https://t.me/maysoulme">Читать @maysoulme</a>
   </div>
@@ -438,6 +394,20 @@
     <span><a href="https://t.me/maysoulme">Telegram</a> · <a href="politika.html">Политика конфиденциальности</a></span>
   </footer>
 </div>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
 
 </body>
 </html>

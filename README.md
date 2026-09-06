@@ -22,7 +22,7 @@ CNAME                 домен (появится после покупки may
 {"slug": "kak-nazvat-v-adrese", "title": "Название", "desc": "Описание для карточки", "tag": "Гайд", "src": "assets/файл.html"}
 ```
 
-`src` — путь от одного из корней: `assets/` = `~/Desktop/клод/maysoulme-assets`, `repos/` = `~/Desktop/клод/архив/portal-sources`.
+`src` — путь от одного из корней: `assets/` = `~/Desktop/клод/maysoulme-assets`, `repos/` = `~/Desktop/клод/архив/portal-sources`. В `title` можно ставить `<i>` и `<b>` — курсив и жир в заголовке карточки. `bridge` — личный мостик к интенсиву в конце гайда.
 
 3. `python3 build.py`
 4. `git add -A && git commit -m "Новый гайд: ..." && git push`
