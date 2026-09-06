@@ -23,6 +23,8 @@ SOURCE_ROOTS = {
 }
 
 SITE = "https://maysoulme.ru"
+
+STAR = '<svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg>'
 TG = "https://t.me/maysoulme"
 INTENSIV = "https://mayasoul.ru"
 
@@ -31,6 +33,7 @@ INTENSIV = "https://mayasoul.ru"
 SELL = """
 <section class="ms-sell">
   <div class="ms-sell__in">
+    <div class="ms-sell__star">%%STAR%%</div>
     <p class="ms-sell__bridge">%%BRIDGE%%</p>
 
     <div class="ms-sell__rule"></div>
@@ -62,6 +65,8 @@ SELL = """
 
     <p class="ms-sell__author">Я собрала всё это в Claude Code без единого программиста — объясняя задачи обычными словами. За последнее время это дало мне +10 000 в Telegram и +22 000 в Instagram на узком экспертном контенте. На интенсиве я показываю ровно то, что делаю сама.</p>
 
+    <span class="ms-sell__sign">Майя</span>
+
     <a class="ms-sell__cta" href="%%INTENSIV%%">Смотреть программу интенсива →</a>
     <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
   </div>
@@ -73,9 +78,12 @@ SELL = """
 </footer>
 
 <style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
   .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 84px 22px 78px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__star { width: 24px; height: 24px; color: #c9a07a; margin-bottom: 24px; }
+  .ms-sell__star svg { width: 100%; height: 100%; display: block; }
   .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
     color: #f0ece7; font-style: italic; margin: 0; }
   .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 44px 0 40px; }
@@ -105,6 +113,8 @@ SELL = """
   .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 36px;
     padding-left: 18px; border-left: 2px solid #c9a07a; }
 
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 54px;
+    line-height: 1; margin: -16px 0 30px 18px; }
   .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
     padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
   .ms-sell__cta:hover { opacity: .86; }
@@ -127,7 +137,8 @@ SELL = """
 def sell_block(g):
     return (SELL.replace("%%BRIDGE%%", html.escape(g["bridge"]))
                 .replace("%%INTENSIV%%", INTENSIV)
-                .replace("%%TG%%", TG))
+                .replace("%%TG%%", TG)
+                .replace("%%STAR%%", STAR))
 
 # ---------------------------------------------------------------- обработка гайда
 
@@ -179,11 +190,12 @@ def build_index(data):
           <span class="card__title">{html.escape(g['title'])}</span>
           <span class="card__desc">{html.escape(g['desc'])}</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
+          <span class="star card__star">%%STAR%%</span>
         </a>""")
         word = "материал" if len(c["guides"]) == 1 else ("материала" if len(c["guides"]) < 5 else "материалов")
         sections.append(f"""    <section class="cat" id="{c['id']}">
       <div class="cat__head">
-        <h2 class="cat__title">{html.escape(c['title'])}</h2>
+        <h2 class="cat__title"><span class="star">%%STAR%%</span>{html.escape(c['title'])}</h2>
         <p class="cat__lead">{html.escape(c['lead'])}</p>
         <span class="cat__count">{len(c['guides'])} {word}</span>
       </div>
@@ -197,7 +209,8 @@ def build_index(data):
                     .replace("%%SECTIONS%%", "\n\n".join(sections))
                     .replace("%%TG%%", TG)
                     .replace("%%INTENSIV%%", INTENSIV)
-                    .replace("%%SITE%%", SITE))
+                    .replace("%%SITE%%", SITE)
+                    .replace("%%STAR%%", STAR))
 
 TEMPLATE = """<!DOCTYPE html>
 <html lang="ru">
@@ -216,6 +229,8 @@ TEMPLATE = """<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
 <style>
+  @font-face { font-family: 'Denistina'; src: url('denistina.ttf') format('truetype');
+    font-display: swap; }
   :root { --accent: #710C04; --gold: #c9a07a; --ink: #1a1a1a; --line: #e6e4e1;
           --mute: #8a8a8a; --cream: #f7f5f2; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -224,6 +239,11 @@ TEMPLATE = """<!DOCTYPE html>
     font-size: 17px; line-height: 1.7; -webkit-font-smoothing: antialiased; }
   a { color: inherit; }
   .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  .hand { font-family: 'Denistina', 'Segoe Script', cursive; color: var(--accent);
+    font-weight: 400; letter-spacing: 0; }
+  .star { display: inline-block; width: 15px; height: 15px; color: var(--accent);
+    vertical-align: -1px; }
+  .star svg, .star img { width: 100%; height: 100%; display: block; }
 
   /* навбар */
   .nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.93);
@@ -241,25 +261,22 @@ TEMPLATE = """<!DOCTYPE html>
   @media (max-width: 420px) { .nav__cta { padding: 9px 14px; font-size: 13px; } }
 
   /* герой */
-  .hero { display: grid; grid-template-columns: 1.35fr .65fr; gap: 56px; align-items: center;
-    padding: 84px 0 54px; }
+  .hero { display: grid; grid-template-columns: 1.06fr .94fr; gap: 40px; align-items: center;
+    padding: 72px 0 46px; }
   .hero__label { font-size: 10.5px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase;
     color: var(--accent); display: block; margin-bottom: 26px; }
-  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(34px, 5.2vw, 54px);
-    font-weight: 400; line-height: 1.18; letter-spacing: -.01em; margin-bottom: 24px; }
-  h1 em { font-style: italic; color: var(--accent); }
+  h1 { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(25px, 3.6vw, 37px);
+    font-weight: 400; line-height: 1.32; letter-spacing: .05em; text-transform: uppercase;
+    margin-bottom: 24px; }
+  h1 .hand { display: block; text-transform: none; letter-spacing: 0; line-height: .95;
+    font-size: clamp(46px, 7vw, 76px); margin-top: 6px; }
   .hero__lead { color: #4a4a4a; font-size: 18.5px; line-height: 1.72; max-width: 560px; }
-  .hero__card { background: var(--cream); padding: 40px 34px; text-align: center; }
-  .hero__mono { height: 46px; margin-bottom: 26px; opacity: .9; }
-  .hero__stat { padding: 14px 0; border-top: 1px solid #e3ded7; }
-  .hero__stat:first-of-type { border-top: none; }
-  .hero__stat b { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 27px;
-    font-weight: 400; color: var(--accent); line-height: 1.25; }
-  .hero__stat span { font-size: 12.5px; color: #7d7669; letter-spacing: .06em; text-transform: uppercase; }
-  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 40px; padding: 60px 0 52px; }
-    .hero__card { display: flex; align-items: center; justify-content: space-around; gap: 20px;
-      padding: 26px 24px; text-align: left; }
-    .hero__mono { display: none; } .hero__stat { border-top: none; padding: 0; } }
+  .hero__art { position: relative; }
+  .hero__art img { width: 100%; height: 430px; object-fit: cover; display: block; }
+  .hero__cap { position: absolute; left: -30px; bottom: 30px; background: #fff; padding: 12px 22px;
+    font-family: 'Denistina', cursive; color: var(--accent); font-size: 31px; line-height: 1; }
+  @media (max-width: 880px) { .hero { grid-template-columns: 1fr; gap: 26px; padding: 52px 0 40px; }
+    .hero__art img { height: 300px; } .hero__cap { left: 0; font-size: 23px; } }
 
   /* чипсы-навигация */
   .chips { display: flex; gap: 10px; flex-wrap: wrap; padding-bottom: 8px; }
@@ -271,7 +288,8 @@ TEMPLATE = """<!DOCTYPE html>
   .cat { padding: 62px 0 12px; scroll-margin-top: 74px; }
   .cat__head { display: flex; align-items: baseline; gap: 18px; padding-bottom: 22px;
     border-bottom: 1px solid var(--line); margin-bottom: 30px; flex-wrap: wrap; }
-  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 28px; font-weight: 400; }
+  .cat__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 21px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .09em; display: flex; align-items: center; gap: 12px; }
   .cat__lead { color: var(--mute); font-size: 15px; }
   .cat__count { margin-left: auto; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
     color: #b3aca3; }
@@ -290,8 +308,8 @@ TEMPLATE = """<!DOCTYPE html>
   .card:hover .card__n { color: var(--accent); }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
     color: var(--accent); margin-bottom: 14px; }
-  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 19px; font-weight: 400;
-    line-height: 1.38; margin-bottom: 11px; }
+  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 700;
+    line-height: 1.44; margin-bottom: 11px; text-transform: uppercase; letter-spacing: .045em; }
   .card__desc { font-size: 14.5px; line-height: 1.65; color: #6a6a6a; flex: 1; }
   .card__go { margin-top: 20px; padding-top: 15px; border-top: 1px solid #f0ede9; font-size: 13.5px;
     font-weight: 600; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
@@ -301,7 +319,10 @@ TEMPLATE = """<!DOCTYPE html>
   /* карточка-акцент — первая в разделе */
   .card--lead { grid-column: span 2; background: var(--cream); border-color: #e6ded3; }
   @media (max-width: 620px) { .card--lead { grid-column: span 1; } }
-  .card--lead .card__title { font-size: 25px; line-height: 1.3; }
+  .card--lead .card__title { font-size: 20px; line-height: 1.36; }
+  .card__star { position: absolute; bottom: 20px; right: 22px; width: 22px; height: 22px;
+    color: #e0d6c9; transition: color .2s, transform .35s; }
+  .card:hover .card__star { color: var(--accent); transform: rotate(45deg); }
   .card--lead .card__desc { font-size: 15.5px; max-width: 92%; }
   .card--lead .card__go { border-top-color: #e6ded3; }
   .card--w2 { grid-column: span 2; }
@@ -318,6 +339,9 @@ TEMPLATE = """<!DOCTYPE html>
   .quote p em { font-style: italic; color: var(--accent); }
   .quote span { display: block; margin-top: 18px; font-size: 12.5px; letter-spacing: .18em;
     text-transform: uppercase; color: var(--mute); }
+  .quote__star { width: 26px; height: 26px; color: var(--accent); margin: 0 auto 26px; }
+  .quote .quote__sign { font-family: 'Denistina', cursive; color: var(--accent); font-size: 42px;
+    margin-top: 22px; display: block; text-transform: none; letter-spacing: 0; line-height: 1; }
 
   /* интенсив */
   .intensiv { background: var(--ink); color: #fff; margin-top: 82px; padding: 76px 0; scroll-margin-top: 60px; }
@@ -334,6 +358,8 @@ TEMPLATE = """<!DOCTYPE html>
   .intensiv__stats div b { display: block; font-family: 'Libre Baskerville', Georgia, serif;
     font-size: 26px; font-weight: 400; color: var(--gold); }
   .intensiv__stats div span { font-size: 12.5px; color: #9c9c9c; letter-spacing: .04em; }
+  .intensiv__art { width: 100%; height: 190px; object-fit: cover; object-position: center 46%;
+    mix-blend-mode: screen; margin-bottom: 22px; }
   .intensiv__list { list-style: none; margin: 6px 0 0; }
   .intensiv__list li { padding: 13px 0; border-bottom: 1px solid #333; font-size: 15.5px; color: #e0e0e0; }
   .intensiv__list li::before { content: "—"; color: var(--gold); margin-right: 10px; }
@@ -346,7 +372,12 @@ TEMPLATE = """<!DOCTYPE html>
   .tg { background: var(--cream); padding: 74px 0; }
   .tg__in { max-width: 1080px; margin: 0 auto; padding: 0 32px; display: flex; align-items: center;
     justify-content: space-between; gap: 30px; flex-wrap: wrap; }
-  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 26px; font-weight: 400; margin-bottom: 8px; }
+  .tg h2 { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+  .tg__in { position: relative; }
+  .tg__flower { position: absolute; right: -10px; bottom: -74px; width: 190px; opacity: .5;
+    pointer-events: none; }
+  @media (max-width: 900px) { .tg__flower { display: none; } }
   .tg p { color: #6f6a63; font-size: 16px; max-width: 470px; }
   .tg a { display: inline-block; background: var(--accent); color: #fff !important; padding: 15px 32px;
     font-weight: 600; font-size: 15.5px; text-decoration: none; transition: opacity .18s; white-space: nowrap; }
@@ -374,16 +405,14 @@ TEMPLATE = """<!DOCTYPE html>
 <div class="wrap">
   <header class="hero">
     <div>
-      <span class="hero__label">Библиотека maysoulme</span>
-      <h1>Гайды и промпты для блога <em>с нейросетями</em></h1>
+      <span class="hero__label"><span class="star">%%STAR%%</span> Библиотека maysoulme</span>
+      <h1>Гайды и промпты для блога <span class="hand">с нейросетями</span></h1>
       <p class="hero__lead">Собрано то, чем пользуюсь сама каждый день: разговорные reels, тексты своим голосом, распаковка личности, ИИ-ассистенты. Забирай и применяй.</p>
     </div>
-    <aside class="hero__card">
-      <img class="hero__mono" src="logo-ms.png" alt="">
-      <div class="hero__stat"><b>%%TOTAL%%</b><span>материалов</span></div>
-      <div class="hero__stat"><b>0 ₽</b><span>без регистрации</span></div>
-      <div class="hero__stat"><b>4</b><span>раздела</span></div>
-    </aside>
+    <div class="hero__art">
+      <img src="img/flower.jpg" alt="" loading="lazy">
+      <span class="hero__cap">забирай</span>
+    </div>
   </header>
 
   <div class="chips">
@@ -393,8 +422,10 @@ TEMPLATE = """<!DOCTYPE html>
 %%SECTIONS%%
 
   <section class="quote">
+    <div class="star quote__star">%%STAR%%</div>
     <p>Разница не в удаче и не в количестве роликов. Разница в том, <em>кому ты говоришь, что именно и куда ведёшь человека дальше</em>.</p>
     <span>600 000 просмотров и 8 подписчиков · против · 19 000 просмотров и 30 000 ₽</span>
+    <span class="quote__sign">Майя</span>
   </section>
 </div>
 
@@ -411,6 +442,8 @@ TEMPLATE = """<!DOCTYPE html>
       <a class="intensiv__cta" href="%%INTENSIV%%">Смотреть программу и цены →</a>
       <p class="intensiv__note">Вечный доступ · чат поддержки · есть формат VIP с личным сопровождением</p>
     </div>
+    <div>
+    <img class="intensiv__art" src="img/hands.jpg" alt="" loading="lazy">
     <ul class="intensiv__list">
       <li>Стратегия блога и позиционирование</li>
       <li>Текстовые и разговорные reels</li>
@@ -419,6 +452,7 @@ TEMPLATE = """<!DOCTYPE html>
       <li>Готовые ассистенты и шаблоны</li>
       <li>Собрано без единого программиста</li>
     </ul>
+    </div>
   </div>
 </section>
 

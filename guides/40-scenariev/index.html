@@ -493,6 +493,7 @@
 
 <section class="ms-sell">
   <div class="ms-sell__in">
+    <div class="ms-sell__star"><svg viewBox="0 0 100 100" fill="currentColor"><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(0.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(30.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(60.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(90.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(120.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(150.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(180.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(210.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(240.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(270.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(300.0 50 50)"/><rect x="47" y="6" width="6" height="44" rx="3" transform="rotate(330.0 50 50)"/></svg></div>
     <p class="ms-sell__bridge">Сорок сценариев закончатся примерно через полтора месяца съёмок. Дальше нужна не подборка, а система, которая приносит темы сама — каждый день, из твоей ниши.</p>
 
     <div class="ms-sell__rule"></div>
@@ -524,6 +525,8 @@
 
     <p class="ms-sell__author">Я собрала всё это в Claude Code без единого программиста — объясняя задачи обычными словами. За последнее время это дало мне +10 000 в Telegram и +22 000 в Instagram на узком экспертном контенте. На интенсиве я показываю ровно то, что делаю сама.</p>
 
+    <span class="ms-sell__sign">Майя</span>
+
     <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
     <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
   </div>
@@ -535,9 +538,12 @@
 </footer>
 
 <style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
   .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 84px 22px 78px;
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__star { width: 24px; height: 24px; color: #c9a07a; margin-bottom: 24px; }
+  .ms-sell__star svg { width: 100%; height: 100%; display: block; }
   .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
     color: #f0ece7; font-style: italic; margin: 0; }
   .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 44px 0 40px; }
@@ -567,6 +573,8 @@
   .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 36px;
     padding-left: 18px; border-left: 2px solid #c9a07a; }
 
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 54px;
+    line-height: 1; margin: -16px 0 30px 18px; }
   .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
     padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
   .ms-sell__cta:hover { opacity: .86; }
