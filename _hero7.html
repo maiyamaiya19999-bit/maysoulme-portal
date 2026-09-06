@@ -139,9 +139,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; gap: 10px; }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .card__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--faint); }
-  .card__new { position: absolute; top: 18px; right: 24px; font-family: 'Denistina', cursive; font-style: normal; font-size: 27px;
-    color: var(--accent); letter-spacing: 0; text-transform: none; line-height: 1; transform: rotate(-5deg); white-space: nowrap; }
-  .card__tag { white-space: nowrap; }
+  .card__new { font-family: 'Denistina', cursive; font-style: normal; font-size: 27px; color: var(--accent); letter-spacing: 0;
+    text-transform: none; line-height: 1; display: inline-block; transform: rotate(-5deg); white-space: nowrap; margin-top: -6px; }
   .card__new--note { font-size: 24px; }
   .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 14.5px; font-weight: 700; line-height: 1.58;
     margin-bottom: 12px; text-transform: uppercase; letter-spacing: .09em; }
@@ -215,7 +214,15 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .foot { padding: 32px 0 58px; font-size: 13.5px; color: var(--faint); display: flex; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
   .foot a { color: var(--faint); }
 </style>
-</head>
+
+<style>
+  .hero { display: block; padding: 40px 0 0; position: relative; }
+  .hero__art { padding: 0; }
+  .hero__art::before { display: none; }
+  .hero__art img { aspect-ratio: 21 / 9; height: auto; }
+  .hero__text { position: relative; margin: -120px 0 0 0; width: min(640px, 92%); background: var(--bg); padding: 40px 44px 0 0; }
+  h1 { font-size: clamp(24px, 3.4vw, 36px); }
+</style></head>
 <body>
 
 <nav class="nav">
@@ -235,12 +242,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 </nav>
 
 <div class="wrap">
-  <header class="hero">
+  <header class="hero" style="display:flex;flex-direction:column">
     <div class="hero__text">
       <h1>Гайды и промпты для <b>блога</b><span class="hand">с нейросетями</span></h1>
       <p class="hero__lead">Здесь всё, чем пользуюсь сама каждый день: сценарии роликов, тексты своим голосом, распаковка, свои ИИ-ассистенты. Забирайте и пробуйте.</p>
     </div>
-    <figure class="hero__art">
+    <figure class="hero__art" style="order:-1">
       <img src="img/hero.jpg" alt="Ноутбук, кофе и работа над блогом" loading="eager">
     </figure>
   </header>

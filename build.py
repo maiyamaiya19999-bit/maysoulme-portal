@@ -357,13 +357,14 @@ def build_index(data):
             cls = " card--lead" if (i == 0 and use_lead) else ""
             if last_span and i == len(c["guides"]) - 1:
                 cls += f" card--w{last_span}"
-            cards.append(f"""        <a class="card{cls}" href="guides/{g['slug']}/">
-          <span class="card__top"><span class="card__tag">{html.escape(g['tag'])} · {g.get('minutes', 5)} мин{'<i class="card__new">новое</i>' if g.get('new') else ''}</span><span class="card__n">{n:02d}</span></span>
+            cards.append(f"""        <a class="card{cls}" href="guides/{g['slug']}/" data-n="{n:02d}">
+          <span class="card__top"><span class="card__tag">{html.escape(g['tag'])} · {g.get('minutes', 5)} мин</span>{'<i class="card__new">новое</i>' if g.get('new') else ('<i class="card__new card__new--note">' + html.escape(g['note']) + '</i>' if g.get('note') else '')}</span>
           <span class="card__title">{g['title']}</span>
           <span class="card__desc">{html.escape(g['desc'])}</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>""")
-        sections.append(f"""    <section class="cat" id="{c['id']}">
+        alt = " cat--alt" if k % 2 == 0 else ""
+        sections.append(f"""    <section class="cat{alt}" id="{c['id']}">
       <div class="cat__head">
         <span class="cat__num">{k:02d}</span>
         <div class="cat__text">
@@ -375,6 +376,14 @@ def build_index(data):
 {chr(10).join(cards)}
       </div>
     </section>""")
+    pulls = {
+        1: "Копировать чужое целиком не надо — это отправная точка. Узнавать вас всё равно будут <i>по вашему стилю</i>.",
+        3: "Нейросети кажутся чем-то сложным, пока один раз не увидишь, <i>как это работает вживую</i>.",
+    }
+    for k, text in pulls.items():
+        sections[k-1] += f"""
+
+    <aside class="pull"><p>{text}</p><span>из канала @maysoulme</span></aside>"""
     return (TEMPLATE.replace("%%NAV%%", nav)
                     .replace("%%INDEX%%", index)
                     .replace("%%SECTIONS%%", "\n\n".join(sections))
@@ -494,7 +503,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   }
 
   /* ---------- разделы ---------- */
-  .cat { padding: 78px 0 6px; scroll-margin-top: 70px; }
+  body { overflow-x: hidden; }
+  .cat { padding: 78px 0 6px; scroll-margin-top: 70px; position: relative; }
+  .cat--alt { padding: 78px 0 74px; margin-top: 40px; }
+  .cat--alt::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%);
+    background: var(--cream); z-index: -1; }
+  .cat--alt .card--lead { background: var(--card); border-color: var(--line); }
+  .cat--alt + .cat { padding-top: 40px; }
   .cat__head { display: flex; align-items: flex-start; gap: 26px; padding-bottom: 26px; border-bottom: 1px solid var(--line);
     margin-bottom: 30px; }
   .cat__num { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 46px; line-height: 1;
@@ -508,14 +523,19 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
   @media (max-width: 900px) { .cards { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 620px) { .cards { grid-template-columns: 1fr; } }
-  .card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line);
+  .card { position: relative; overflow: hidden; display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line);
     padding: 26px 26px 22px; text-decoration: none; transition: border-color .2s, box-shadow .25s, transform .25s; }
+  .card::after { content: attr(data-n); position: absolute; right: 10px; bottom: -22px; font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; font-size: 118px; line-height: 1; color: var(--fg); opacity: .045; pointer-events: none; transition: opacity .25s; }
+  .card:hover::after { opacity: .08; }
   .card:hover { border-color: var(--accent); box-shadow: 0 16px 40px var(--shadow); transform: translateY(-4px); }
-  .card__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+  .card__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; gap: 10px; }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .card__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--faint); }
-  .card__new { font-family: 'Denistina', cursive; font-style: normal; font-size: 27px; color: var(--accent); letter-spacing: 0;
-    text-transform: none; margin-left: 14px; vertical-align: -5px; line-height: 1; display: inline-block; transform: rotate(-5deg); }
+  .card__new { position: absolute; top: 18px; right: 24px; font-family: 'Denistina', cursive; font-style: normal; font-size: 27px;
+    color: var(--accent); letter-spacing: 0; text-transform: none; line-height: 1; transform: rotate(-5deg); white-space: nowrap; }
+  .card__tag { white-space: nowrap; }
+  .card__new--note { font-size: 24px; }
   .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 14.5px; font-weight: 700; line-height: 1.58;
     margin-bottom: 12px; text-transform: uppercase; letter-spacing: .09em; }
   .card__title i { font-style: italic; }
@@ -530,6 +550,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card--w2 .card__desc, .card--w3 .card__desc { max-width: 640px; }
   @media (max-width: 900px) { .card--w3 { grid-column: span 2; } }
   @media (max-width: 620px) { .card--lead, .card--w2, .card--w3 { grid-column: span 1; } }
+
+  /* ---------- цитаты из канала ---------- */
+  .pull { max-width: 720px; margin: 86px auto 8px; text-align: center; }
+  .pull p { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 24px; line-height: 1.58; }
+  .pull p i { color: var(--accent); }
+  .pull span { display: block; margin-top: 14px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+  .cat--alt + .pull, .pull + .cat--alt { margin-top: 70px; }
 
   /* ---------- цитата ---------- */
   .quote { margin: 86px 0 0; padding: 64px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
@@ -571,9 +598,9 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 
   /* ---------- появление при прокрутке ---------- */
   @media (prefers-reduced-motion: no-preference) {
-    html.js .card, html.js .cat__head, html.js .route, html.js .quote { opacity: 0; transform: translateY(16px);
+    html.js .card, html.js .cat__head, html.js .route, html.js .quote, html.js .pull { opacity: 0; transform: translateY(16px);
       transition: opacity .55s ease, transform .55s ease; }
-    html.js .card.in, html.js .cat__head.in, html.js .route.in, html.js .quote.in { opacity: 1; transform: none; }
+    html.js .card.in, html.js .cat__head.in, html.js .route.in, html.js .quote.in, html.js .pull.in { opacity: 1; transform: none; }
     html.js .card:hover { transform: translateY(-4px); }
   }
 
@@ -702,7 +729,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   document.documentElement.classList.add('js');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
-    document.querySelectorAll('.card, .cat__head, .route, .quote').forEach(function(el, i){ el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el); });
+    document.querySelectorAll('.card, .cat__head, .route, .quote, .pull').forEach(function(el, i){ el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el); });
   } else { document.documentElement.classList.remove('js'); }
 </script>
 
