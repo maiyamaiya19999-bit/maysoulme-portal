@@ -210,9 +210,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-progress"><i></i></div>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">6 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -249,7 +251,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 
   <p class="text">Разбери по блокам ниже. Каждый блок — максимально подробно, с конкретными примерами, фразами из реальной жизни и внутренними монологами людей.</p>
 
-  <h2 class="section-heading"><span>01.</span> Портрет аудитории — <em>кто эти люди</em></h2>
+  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Портрет аудитории — кто эти люди</a></li><li><a href="#s-2">Боли — уровни глубины</a></li><li><a href="#s-3">Желания — уровни глубины</a></li><li><a href="#s-4">Барьеры и возражения</a></li><li><a href="#s-5">Конкурентный ландшафт и контекст</a></li><li><a href="#s-6">Триггеры немедленной покупки</a></li><li><a href="#s-7">Язык и психографика</a></li><li><a href="#s-8">Идеи трипваеров — гипотезы для сверки</a></li><li><a href="#s-9">Как выполнять</a></li></ol></nav>
+<h2 id="s-1" class="section-heading"><span>01.</span> Портрет аудитории — <em>кто эти люди</em></h2>
 
   <h3 class="sub-heading">Демография и психография</h3>
   <ul class="guide-list">
@@ -266,7 +269,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Что для них значит</strong> «успешный человек в этой нише»?</li>
   </ul>
 
-  <h2 class="section-heading"><span>02.</span> Боли — <em>уровни глубины</em></h2>
+  <h2 id="s-2" class="section-heading"><span>02.</span> Боли — <em>уровни глубины</em></h2>
 
   <div class="scenario-card">
     <div class="scenario-card__num">УРОВЕНЬ 1</div>
@@ -305,7 +308,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <div class="scenario-card__tip"><strong>Пример:</strong> «Понедельник, 7 утра, она открывает Instagram и видит…» — что именно?</div>
   </div>
 
-  <h2 class="section-heading"><span>03.</span> Желания — <em>уровни глубины</em></h2>
+  <h2 id="s-3" class="section-heading"><span>03.</span> Желания — <em>уровни глубины</em></h2>
 
   <div class="scenario-card">
     <div class="scenario-card__num">УРОВЕНЬ 1</div>
@@ -331,7 +334,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <div class="scenario-card__point"><span class="scenario-card__point-text">Какой социальный статус или признание связаны с результатом?</span></div>
   </div>
 
-  <h2 class="section-heading"><span>04.</span> Барьеры и <em>возражения</em></h2>
+  <h2 id="s-4" class="section-heading"><span>04.</span> Барьеры и <em>возражения</em></h2>
   <ul class="guide-list">
     <li><strong>Почему они откладывают решение</strong> снова и снова?</li>
     <li><strong>Какие убеждения блокируют действие?</strong> («это не для меня», «я уже пробовала», «дорого»)</li>
@@ -340,7 +343,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Что им нужно увидеть или почувствовать,</strong> чтобы довериться?</li>
   </ul>
 
-  <h2 class="section-heading"><span>05.</span> Конкурентный <em>ландшафт</em> и контекст</h2>
+  <h2 id="s-5" class="section-heading"><span>05.</span> Конкурентный <em>ландшафт</em> и контекст</h2>
   <ul class="guide-list">
     <li><strong>Какие решения они уже пробовали?</strong> Почему не сработало?</li>
     <li><strong>Что предлагают конкуренты</strong> — и чего им не хватает?</li>
@@ -349,7 +352,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Что в этой нише никто не говорит вслух,</strong> но все думают?</li>
   </ul>
 
-  <h2 class="section-heading"><span>06.</span> Триггеры <em>немедленной покупки</em></h2>
+  <h2 id="s-6" class="section-heading"><span>06.</span> Триггеры <em>немедленной покупки</em></h2>
   <ul class="guide-list">
     <li><strong>Какое событие становится точкой невозврата</strong> — «всё, хватит, я должна это изменить»?</li>
     <li><strong>Что должно случиться,</strong> чтобы они заплатили 1 000 – 5 000 ₽ прямо сейчас, не думая?</li>
@@ -358,7 +361,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Что должно быть в названии продукта,</strong> чтобы человек сразу сказал: «Это про меня»?</li>
   </ul>
 
-  <h2 class="section-heading"><span>07.</span> Язык и <em>психографика</em></h2>
+  <h2 id="s-7" class="section-heading"><span>07.</span> Язык и <em>психографика</em></h2>
   <ul class="guide-list">
     <li><strong>Приведи 20 реальных фраз,</strong> которые они пишут в поиске Google / Яндекс.</li>
     <li><strong>Приведи 15 фраз</strong> из комментариев в соцсетях по этой теме.</li>
@@ -367,7 +370,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Какой тон заходит лучше всего:</strong> строгий эксперт, подруга, наставник, провокатор?</li>
   </ul>
 
-  <h2 class="section-heading"><span>08.</span> Идеи трипваеров — <em>гипотезы для сверки</em></h2>
+  <h2 id="s-8" class="section-heading"><span>08.</span> Идеи трипваеров — <em>гипотезы для сверки</em></h2>
   <div class="highlight"><strong>Важно:</strong> это не готовый план, а гипотезы. Предложи 5–7 идей-направлений, которые я затем сопоставлю с собственным анализом рынка инфопродуктов в нише. Не привязывайся к одной идее — дай спектр под разные сегменты боли.</div>
   <ul class="guide-list">
     <li><strong>По каждой идее:</strong> рабочее название, формат (чек-лист, мини-курс, шаблон, гайд, скрипт, таблица и т.д.), главное обещание одной фразой.</li>
@@ -377,7 +380,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Цену не фиксируй как факт</strong> — дай вилку и логику; финальную цену я определю сама после сверки.</li>
   </ul>
 
-  <h2 class="section-heading"><span>09.</span> Как <em>выполнять</em></h2>
+  <h2 id="s-9" class="section-heading"><span>09.</span> Как <em>выполнять</em></h2>
   <ul class="guide-list">
     <li><strong>Сначала — боль и язык аудитории.</strong> Продукт — потом.</li>
     <li><strong>Опирайся на реальные данные</strong> — форумы, отзывы, комментарии, обсуждения, исследования. Находи живые примеры.</li>
@@ -490,6 +493,22 @@ function fallbackCopy(text, done) {
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -559,6 +578,12 @@ function fallbackCopy(text, done) {
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });

@@ -33,9 +33,11 @@ INTENSIV = "https://mayasoul.ru"
 
 # ---------------------------------------------------------------- продающий блок в гайде
 
-BAR = """<div class="ms-bar">
+BAR = """<div class="ms-progress"><i></i></div>
+<div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">%%MIN%% мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -95,6 +97,22 @@ SELL = """
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -164,6 +182,12 @@ SELL = """
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
@@ -222,6 +246,34 @@ def themeify(s: str) -> str:
     s = re.sub(r'style="([^"]*)"', lambda m: 'style="' + _swap_colors(m.group(1)) + '"', s)
     return s
 
+def reading_minutes(page_html: str) -> int:
+    body = page_html.split('<section class="ms-sell">')[0]
+    text = re.sub(r'<(script|style)[^>]*>.*?</\1>', '', body, flags=re.S)
+    text = html.unescape(re.sub(r'<[^>]+>', ' ', text))
+    return max(1, round(len(re.findall(r'\w+', text)) / 180))
+
+def add_toc(s: str) -> str:
+    """Оглавление по h2 — чтобы структура гайда читалась с первого экрана."""
+    heads = list(re.finditer(r'<h2([^>]*)>(.*?)</h2>', s, flags=re.S))
+    if len(heads) < 4:
+        return s
+    items, out, pos = [], [], 0
+    for i, m in enumerate(heads, 1):
+        attrs, inner = m.group(1), m.group(2)
+        title = html.unescape(re.sub(r'<[^>]+>', '', inner)).strip()
+        title = re.sub(r'^\d{1,2}[.)]\s*', '', title)
+        idm = re.search(r'id="([^"]+)"', attrs)
+        hid = idm.group(1) if idm else f"s-{i}"
+        new_tag = m.group(0) if idm else f'<h2 id="{hid}"{attrs}>{inner}</h2>'
+        items.append(f'<li><a href="#{hid}">{html.escape(title)}</a></li>')
+        out.append(s[pos:m.start()]); out.append(new_tag); pos = m.end()
+    out.append(s[pos:])
+    s = "".join(out)
+    toc = ('<nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol>'
+           + "".join(items) + '</ol></nav>\n')
+    first = re.search(r'<h2', s)
+    return s[:first.start()] + toc + s[first.start():]
+
 def process_guide(src_html: str, g: dict) -> str:
     s = src_html
     s = s.replace("https://maiyamaiya19999-bit.github.io/maysoulme-assets/logo-ms.png", "../../logo-ms.png")
@@ -238,9 +290,13 @@ def process_guide(src_html: str, g: dict) -> str:
               f'<meta property="og:url" content="{SITE}/guides/{g["slug"]}/">\n'
               f'<meta property="og:image" content="{SITE}/logo-ms.png">\n')
         s = s.replace("</head>", og + "</head>", 1)
+    if "ms-toc" not in s:
+        s = add_toc(s)
+    g["minutes"] = reading_minutes(s)
     if "ms-bar" not in s:
+        bar = BAR.replace("%%MIN%%", str(g["minutes"]))
         m = re.search(r'<body[^>]*>', s)
-        s = (s[:m.end()] + "\n" + BAR + s[m.end():]) if m else BAR + s
+        s = (s[:m.end()] + "\n" + bar + s[m.end():]) if m else bar + s
     block = sell_block(g)
     s = s.replace("</body>", block + "</body>", 1) if "</body>" in s else s + block
     return s
@@ -272,7 +328,7 @@ def build_index(data):
             if last_span and i == len(c["guides"]) - 1:
                 cls += f" card--w{last_span}"
             cards.append(f"""        <a class="card{cls}" href="guides/{g['slug']}/">
-          <span class="card__top"><span class="card__tag">{html.escape(g['tag'])}</span><span class="card__n">{n:02d}</span></span>
+          <span class="card__top"><span class="card__tag">{html.escape(g['tag'])} · {g.get('minutes', 5)} мин</span><span class="card__n">{n:02d}</span></span>
           <span class="card__title">{g['title']}</span>
           <span class="card__desc">{html.escape(g['desc'])}</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -385,6 +441,31 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .index a:hover { color: var(--accent); }
   .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 8px; }
 
+  /* ---------- маршрут ---------- */
+  .route { margin-top: 64px; padding: 44px 44px 40px; background: var(--cream); }
+  .route__head { max-width: 560px; margin-bottom: 30px; }
+  .route__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; line-height: 1.3; margin-bottom: 8px; }
+  .route__title i { font-style: italic; color: var(--accent); }
+  .route__lead { color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+  .route__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+  .step { position: relative; padding: 22px 34px 8px 0; text-decoration: none; border-top: 1px solid var(--line); }
+  .step + .step { padding-left: 34px; }
+  .step + .step::before { content: "→"; position: absolute; left: -9px; top: 22px; font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; color: var(--accent); background: var(--cream); padding: 0 4px; }
+  .step__n { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 30px;
+    color: var(--accent); line-height: 1; margin-bottom: 12px; }
+  .step__title { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 17.5px; font-weight: 700;
+    line-height: 1.35; margin-bottom: 6px; transition: color .18s; }
+  .step:hover .step__title { color: var(--accent); }
+  .step__desc { display: block; font-size: 14px; line-height: 1.6; color: var(--muted); }
+  @media (max-width: 760px) {
+    .route { padding: 30px 24px 26px; margin-top: 40px; }
+    .route__steps { grid-template-columns: 1fr; }
+    .step, .step + .step { padding: 18px 0 14px; }
+    .step + .step::before { content: "↓"; left: auto; right: 0; top: 18px; }
+  }
+
   /* ---------- разделы ---------- */
   .cat { padding: 78px 0 6px; scroll-margin-top: 70px; }
   .cat__head { display: flex; align-items: flex-start; gap: 26px; padding-bottom: 26px; border-bottom: 1px solid var(--line);
@@ -406,8 +487,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .card__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--faint); }
-  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15.5px; font-weight: 700; line-height: 1.48;
-    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .045em; }
+  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 700; line-height: 1.5;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .035em; }
   .card__title i { font-style: italic; }
   .card__desc { font-size: 14.5px; line-height: 1.66; color: var(--muted); flex: 1; }
   .card__go { margin-top: 22px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--accent); }
@@ -495,6 +576,30 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 %%INDEX%%
   </nav>
 
+  <section class="route">
+    <div class="route__head">
+      <h2 class="route__title">Если вы здесь <i>впервые</i></h2>
+      <p class="route__lead">Не нужно читать всё подряд. Три шага по порядку — и у вас уже есть доступ, свой голос и первый ролик.</p>
+    </div>
+    <div class="route__steps">
+      <a class="step" href="guides/claude-i-chatgpt-v-rossii/">
+        <span class="step__n">01</span>
+        <span class="step__title">Поставить Claude</span>
+        <span class="step__desc">Полчаса — и доступ есть, без бана и нервов</span>
+      </a>
+      <a class="step" href="guides/raspakovka-lichnosti/">
+        <span class="step__n">02</span>
+        <span class="step__title">Распаковать себя</span>
+        <span class="step__desc">Чтобы нейросеть говорила вашими словами, а не своими</span>
+      </a>
+      <a class="step" href="guides/formula-razgovornyh-rolikov/">
+        <span class="step__n">03</span>
+        <span class="step__title">Снять первый ролик</span>
+        <span class="step__desc">По формуле, которая держит человека в кадре до конца</span>
+      </a>
+    </div>
+  </section>
+
 %%SECTIONS%%
 
   <section class="quote">
@@ -547,6 +652,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
@@ -574,6 +685,7 @@ def main():
                                 encoding="utf-8")
                 copied += 1
             elif dest.exists():
+                g["minutes"] = reading_minutes(dest.read_text(encoding="utf-8", errors="ignore"))
                 skipped += 1
                 print(f"  ~ источник недоступен, оставлен собранный: {g['slug']}")
             else:

@@ -210,9 +210,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-progress"><i></i></div>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">12 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -238,12 +240,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <p class="intro-bold">Как использовать.</p>
   <p class="intro-text">Вставь весь текст этого документа в Claude. Сразу под ним впиши свою нишу и надиктуй или вставь сырой тезис либо поток мыслей по теме. Claude соберёт из него готовый сценарий.</p>
 
-  <h2 class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
+  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и главное правило</a></li><li><a href="#s-3">Сначала: одна экспертная мысль</a></li><li><a href="#s-4">В какой нерв бьёт экспертный ролик</a></li><li><a href="#s-5">Чего нельзя делать</a></li><li><a href="#s-6">Структура сценария</a></li><li><a href="#s-7">Удержание до конца</a></li><li><a href="#s-8">Голос и стиль</a></li><li><a href="#s-9">Библиотека экспертных хуков</a></li><li><a href="#s-10">Как не выдать нейросеть</a></li><li><a href="#s-11">Формат выдачи</a></li><li><a href="#s-12">Твой процесс</a></li><li><a href="#s-13">Пример: сырьё → сценарий</a></li><li><a href="#s-14">Куда вставлять</a></li></ol></nav>
+<h2 id="s-1" class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
   <p class="text">Ты — сценарист разговорных экспертных Reels. Эксперт, который говорит как человек, реально разбирающийся в теме, но без трибуны, снобизма и поучений. Не лектор и не личная исповедь.</p>
   <p class="text">Задача — собрать ролик, который работает в три такта: с первой секунды зритель понимает, что сейчас узнает, как устроено на самом деле → через весь ролик идёт одна острая экспертная мысль, которая меняет его взгляд → в финале он получает конкретную пользу и думает «о, я не так это понимал, надо сохранить».</p>
   <div class="highlight"><strong>Важно:</strong> сценарий ставится на суфлёр и читается с первого дубля.</div>
 
-  <h2 class="section-heading"><span>02.</span> Что я даю — и <em>главное правило</em></h2>
+  <h2 id="s-2" class="section-heading"><span>02.</span> Что я даю — и <em>главное правило</em></h2>
   <p class="text">Я даю нишу и сырьё: тезис, наблюдение или неструктурированный поток мыслей по теме. Местами это будет хаотично — это нормально, хаос это сырьё.</p>
   <div class="highlight"><strong>Ничего от себя.</strong> Строй ролик только из моего материала и моей экспертности. Не добавляй фактов, исследований и цифр, которых я не дала. Не хватает детали — не выдумывай, поставь [нужна деталь: какая].</div>
 
@@ -276,7 +279,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <div class="scenario-card__tip"><strong>Как понять режим:</strong> если в материале есть чужой транскрибированный ролик с пометкой «Залётный ролик» — это Режим 1. Если только мои мысли или тезис — Режим 2. Если непонятно — задай один уточняющий вопрос, прежде чем писать.</div>
   </div>
 
-  <h2 class="section-heading"><span>03.</span> Сначала: одна <em>экспертная мысль</em></h2>
+  <h2 id="s-3" class="section-heading"><span>03.</span> Сначала: одна <em>экспертная мысль</em></h2>
   <p class="text">Без стержня ролик рассыпается на советы. До единого слова сценария сделай это:</p>
   <ul class="guide-list">
     <li><strong>В Режиме 1</strong> найди, что именно в оригинале держит внимание, и усиль это под мою тему. В конце пометь, какой приём оригинала ты использовал.</li>
@@ -286,7 +289,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Весь ролик доказывает эту одну мысль.</strong> Любой кусок, который на неё не работает, лишний.</li>
   </ul>
 
-  <h2 class="section-heading"><span>04.</span> В какой <em>нерв</em> бьёт экспертный ролик</h2>
+  <h2 id="s-4" class="section-heading"><span>04.</span> В какой <em>нерв</em> бьёт экспертный ролик</h2>
   <p class="text">В отличие от личной истории, экспертный ролик цепляет через знание. Определи угол:</p>
   <ul class="guide-list">
     <li><strong>Проблему, которую зритель решает не так</strong> — делает, но не работает.</li>
@@ -296,7 +299,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </ul>
   <div class="highlight"><strong>Вдобавок к нерву</strong> ролик должен оставлять ощущение «этот человек реально в теме». Авторитет создаётся не словами «я эксперт», а точностью и механикой.</div>
 
-  <h2 class="section-heading"><span>05.</span> Чего <em>нельзя</em> делать</h2>
+  <h2 id="s-5" class="section-heading"><span>05.</span> Чего <em>нельзя</em> делать</h2>
   <ul class="guide-list">
     <li><strong>Не читать лекцию с трибуны</strong> и не сыпать терминами. Объясняй на пальцах, как знающая подруга.</li>
     <li><strong>Не давать банальностей</strong> уровня «пейте воду», «будьте дисциплинированы». Только неочевидное.</li>
@@ -305,7 +308,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Не рубить речь на роботские обрубки</strong> — но и не лить воду. Речь живая, неровная: где-то длиннее, где-то короткий акцент.</li>
   </ul>
 
-  <h2 class="section-heading"><span>06.</span> Структура <em>сценария</em></h2>
+  <h2 id="s-6" class="section-heading"><span>06.</span> Структура <em>сценария</em></h2>
   <p class="text">Собери материал в эту арку. Ярлыки блоков внутри текста не пиши — только чистую речь. Каждое предложение работает: двигает мысль или усиливает.</p>
   <ol class="headline-list">
     <li><span class="headline-num">01.</span><span class="headline-text">Хук + заявка ценности (0–3 сек). Острое утверждение или разрыв шаблона, после которого зритель чувствует: тут я узнаю, как на самом деле. Бьёт в боль, ошибку или любопытство.</span></li>
@@ -319,7 +322,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><span class="headline-num">09.</span><span class="headline-text">CTA — только если уместен. Нативный, через пользу: сохрани, подпишись за разбор, напиши кодовое слово за материал.</span></li>
   </ol>
 
-  <h2 class="section-heading"><span>07.</span> Удержание <em>до конца</em></h2>
+  <h2 id="s-7" class="section-heading"><span>07.</span> Удержание <em>до конца</em></h2>
   <ul class="guide-list">
     <li><strong>Открытая петля:</strong> вопрос или интрига из начала закрывается только выводом в финале.</li>
     <li><strong>Микро-крючки на переходах:</strong> перед новым блоком короткая дразнилка («и вот тут многие ошибаются», «а дальше — самое неочевидное»).</li>
@@ -328,7 +331,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Точки инсайта:</strong> 2–3 раза по ходу зритель думает «о, я не знал(а)» или «а ведь логично».</li>
   </ul>
 
-  <h2 class="section-heading"><span>08.</span> Голос и <em>стиль</em></h2>
+  <h2 id="s-8" class="section-heading"><span>08.</span> Голос и <em>стиль</em></h2>
   <ul class="guide-list">
     <li><strong>Разговорный эксперт:</strong> как подруга, которая в теме шарит и объясняет на пальцах. Авторитет без снобизма.</li>
     <li><strong>Уверенные формулировки:</strong> «это работает так», а не «возможно, наверное, мне кажется».</li>
@@ -338,7 +341,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </ul>
   <div class="highlight"><strong>Словарь простоты (сложное → простое):</strong> оптимизировать → настроить, улучшить; имплементировать → внедрить; коммуницировать → общаться; в связи с тем что → потому что; осуществлять → делать; является → это; данный → этот. Принцип, а не список: любое умное слово переведи на язык живого разговора.</div>
 
-  <h2 class="section-heading"><span>09.</span> Библиотека <em>экспертных хуков</em></h2>
+  <h2 id="s-9" class="section-heading"><span>09.</span> Библиотека <em>экспертных хуков</em></h2>
   <p class="text">12 типов — выбери под тему и адаптируй под нишу. Хук связан со сдвигом из блока 03, а не случайный. Юмор только слоёный: ирония, преувеличение с конкретикой, обманутое ожидание. Плоские шутки — нет.</p>
 
   <div class="scenario-card">
@@ -425,7 +428,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <div class="scenario-card__tip"><strong>Отношения:</strong> «Если в паре постоянные ссоры из-за мелочей — дело не в мелочах».</div>
   </div>
 
-  <h2 class="section-heading"><span>10.</span> Как не выдать <em>нейросеть</em></h2>
+  <h2 id="s-10" class="section-heading"><span>10.</span> Как не выдать <em>нейросеть</em></h2>
   <ul class="guide-list">
     <li><strong>Не лепи цепочки длинных тире</strong> вроде «и тогда — впервые за долго — я понял». Пиши проще, через запятые и точки.</li>
     <li><strong>Не злоупотребляй конструкцией «не X, а Y»</strong> как механическим приёмом — она нужна для одного сдвига, а не в каждой фразе. Меняй формулировку.</li>
@@ -437,7 +440,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Читай вслух:</strong> если звучит как доклад — перепиши как объяснение подруге.</li>
   </ul>
 
-  <h2 class="section-heading"><span>11.</span> Формат <em>выдачи</em></h2>
+  <h2 id="s-11" class="section-heading"><span>11.</span> Формат <em>выдачи</em></h2>
   <p class="text">Перед сценарием — две строки, чтобы я видела стержень ролика:</p>
   <ul class="guide-list">
     <li><strong>Экспертная мысль:</strong> одно предложение.</li>
@@ -445,7 +448,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </ul>
   <p class="text">Дальше: готовый сценарий сплошным текстом под суфлёр (40–60 сек, 130–170 слов), затем 3 варианта хука (контр-тезис / миф / цифра), строка «Что усилит ролик» (какой пример или цифру стоит добавить) и «Подсказка по съёмке» (где сделать паузу, где усилить).</p>
 
-  <h2 class="section-heading"><span>12.</span> Твой <em>процесс</em></h2>
+  <h2 id="s-12" class="section-heading"><span>12.</span> Твой <em>процесс</em></h2>
   <ol class="headline-list">
     <li><span class="headline-num">01.</span><span class="headline-text">Найди одну экспертную мысль и нерв — это делается первым.</span></li>
     <li><span class="headline-num">02.</span><span class="headline-text">Разбери материал: расхожее мнение, сдвиг, механика, доказательство-конкретика, вывод.</span></li>
@@ -455,7 +458,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </ol>
   <div class="highlight"><strong>Чек-лист перед выдачей.</strong> Понятно ли в первые 3 секунды, что тут узнаешь, как на самом деле? Это сдвиг взгляда, а не банальный совет? Есть механика — объяснено, почему так? Есть конкретное доказательство (пример, цифра)? Есть польза на вынос? Звучит как живой эксперт, а не лектор и не нейросеть? Читается с суфлёра без спотыканий? Если хоть один пункт не выполнен — перепиши, черновик не показывай.</div>
 
-  <h2 class="section-heading"><span>13.</span> Пример: сырьё → <em>сценарий</em></h2>
+  <h2 id="s-13" class="section-heading"><span>13.</span> Пример: сырьё → <em>сценарий</em></h2>
 
   <div class="prompt-box">
     <div class="prompt-box__title">Сырьё</div>
@@ -469,7 +472,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <p class="prompt-box__text">Твой план на день — главная причина, по которой ты ничего не успеваешь. Звучит странно, я сама так жила. Расписывала всё по часам, с утра, как учат. И каждый вечер злилась, потому что половина не сделана. А потом поняла одну вещь. Я каждый день впихивала в план двадцать задач и все помечала как «важные». Мозг видит такой список и саботирует, потому что не понимает, за что хвататься вообще. Я перестала планировать всё подряд. Выбираю три задачи, которые реально двигают день. А остальное — если останется время. И впервые стала успевать то, что правда важно, а не двадцать мелочей. Дело не в том, сколько ты впихнула в день. Дело в том, что ты выбрала не делать. Сохрани, если у тебя вечно «не успела ничего важного».</p>
   </div>
 
-  <h2 class="section-heading"><span>14.</span> Куда <em>вставлять</em></h2>
+  <h2 id="s-14" class="section-heading"><span>14.</span> Куда <em>вставлять</em></h2>
   <p class="text">Допиши в самом конце, перед отправкой:</p>
 
   <div class="prompt-box">
@@ -588,6 +591,22 @@ function fallbackCopy(text, done) {
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -657,6 +676,12 @@ function fallbackCopy(text, done) {
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });

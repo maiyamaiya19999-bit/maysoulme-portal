@@ -210,9 +210,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-progress"><i></i></div>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">10 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -238,7 +240,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <p class="intro-bold">Нейросеть выдаёт себя не словами, а ритмом. И пока ты правишь отдельные фразы, читатель уже почувствовал: с ним говорит машина.</p>
   <p class="intro-text">Этот гайд собран на базе исследования Википедии «Signs of AI writing» — команда AI Cleanup несколько лет документировала признаки машинного текста на тысячах реальных примеров. Внутри: как детекторы и живые люди вычисляют ИИ-текст, готовый промт-хуманизатор и инструкция, как выжать из него максимум.</p>
 
-  <h2 class="section-heading"><span>01.</span> Как вычисляют <em>ИИ-текст</em></h2>
+  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Как вычисляют ИИ-текст</a></li><li><a href="#s-2">Как устроен промт</a></li><li><a href="#s-3">Сам промт</a></li><li><a href="#s-4">Как выжать из промта максимум</a></li></ol></nav>
+<h2 id="s-1" class="section-heading"><span>01.</span> Как вычисляют <em>ИИ-текст</em></h2>
   <p class="text">Детекторы опираются на две метрики. Perplexity — предсказуемость слов: нейросеть по своей природе выбирает самое вероятное следующее слово, поэтому её текст «гладкий» и ожидаемый. Человек выбирает слова из памяти, юмора и личного контекста — и его выбор постоянно «удивляет» модель. Burstiness — вариативность: человек пишет неровно, у него предложения дышат и меняют длину, а машинный текст держит один монотонный ритм от начала до конца.</p>
   <div class="highlight"><strong>Суть:</strong> человеческий текст статистически «неровный» и непредсказуемый. Машинный — гладкий, ритмичный и ожидаемый. Именно поэтому косметическая правка отдельных слов не спасает: паттерн виден на уровне структуры.</div>
   <p class="text">А вот стилистические признаки, по которым ИИ-текст вычисляют уже не детекторы, а живые читатели:</p>
@@ -254,7 +257,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Итоговые резюме.</strong> Пересказ уже сказанного в конце, будто читатель не удержал мысль на три абзаца.</li>
   </ul>
 
-  <h2 class="section-heading"><span>02.</span> Как устроен <em>промт</em></h2>
+  <h2 id="s-2" class="section-heading"><span>02.</span> Как устроен <em>промт</em></h2>
   <p class="text">Промт бьёт не по списку запрещённых слов, а по структуре — потому что новые модели научились маскировать очевидные признаки, но глубинные паттерны остаются. Внутри четыре блока:</p>
 
   <div class="scenario-card">
@@ -289,7 +292,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </div>
   </div>
 
-  <h2 class="section-heading"><span>03.</span> Сам <em>промт</em></h2>
+  <h2 id="s-3" class="section-heading"><span>03.</span> Сам <em>промт</em></h2>
 
   <div class="prompt-box">
     <div class="prompt-box__title">Промт-хуманизатор</div>
@@ -320,7 +323,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </p>
   </div>
 
-  <h2 class="section-heading"><span>04.</span> Как выжать из промта <em>максимум</em></h2>
+  <h2 id="s-4" class="section-heading"><span>04.</span> Как выжать из промта <em>максимум</em></h2>
 
   <div class="scenario-card">
     <div class="scenario-card__num">СОВЕТ 01</div>
@@ -449,6 +452,22 @@ function fallbackCopy(text, done) {
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -518,6 +537,12 @@ function fallbackCopy(text, done) {
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });

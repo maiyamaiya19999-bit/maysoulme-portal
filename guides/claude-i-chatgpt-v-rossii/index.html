@@ -107,9 +107,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-progress"><i></i></div>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">17 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -150,7 +152,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__tip"><strong>Правильная стратегия:</strong> не покупай номер для ChatGPT, не выпускай карту до проверки бесплатного доступа и не начинай с годовой подписки.</div>
     </div>
 
-    <h2 class="section-heading"><span>01.</span> Выбери одну <em>страну</em></h2>
+    <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Выбери одну страну</a></li><li><a href="#s-2">Подготовь VPN, браузер и email</a></li><li><a href="#s-3">Подготовь номер для Claude</a></li><li><a href="#s-4">Зарегистрируй Claude</a></li><li><a href="#s-5">Зарегистрируй ChatGPT</a></li><li><a href="#s-6">Установи приложения</a></li><li><a href="#s-7">Проверь бесплатный доступ</a></li><li><a href="#s-8">Выбери стратегию оплаты</a></li><li><a href="#s-9">Выпусти карту и пополни баланс</a></li><li><a href="#s-10">Оплати первый месяц</a></li><li><a href="#s-11">Настрой продление</a></li><li><a href="#s-12">Реши типовые ошибки</a></li><li><a href="#s-13">Настрой сервисы под себя</a></li><li><a href="#s-14">Финальный чек-лист</a></li></ol></nav>
+<h2 id="s-1" class="section-heading"><span>01.</span> Выбери одну <em>страну</em></h2>
     <p class="text">Страна нужна, чтобы не было противоречий между VPN, номером, картой и billing address. Лучше выбрать одну поддерживаемую локацию и использовать её во всех действиях.</p>
     <ol class="headline-list">
       <li><span class="headline-num">01.</span><span class="headline-text">Открой официальный список стран Claude и проверь, что выбранная страна поддерживается.</span></li>
@@ -165,7 +168,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </ul>
     <div class="highlight"><strong>Не меняй страну во время регистрации или оплаты.</strong> Если VPN оборвался, закрой вкладку, восстанови соединение и только потом продолжай. Резкая смена локации выглядит подозрительно для платёжных и антифрод-систем.</div>
 
-    <h2 class="section-heading"><span>02.</span> Подготовь VPN, браузер и <em>email</em></h2>
+    <h2 id="s-2" class="section-heading"><span>02.</span> Подготовь VPN, браузер и <em>email</em></h2>
     <div class="scenario-card">
       <div class="scenario-card__num">ЧИСТЫЙ СТАРТ</div>
       <div class="scenario-card__title">Что подготовить до первого входа</div>
@@ -177,7 +180,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </div>
     <div class="highlight"><strong>Не передавай никому:</strong> пароль от почты, SMS-код, код 3DS, CVV, полный номер карты и резервные коды. Поддержка сервиса не должна просить эти данные в личных сообщениях.</div>
 
-    <h2 class="section-heading"><span>03.</span> Подготовь номер <em>для Claude</em></h2>
+    <h2 id="s-3" class="section-heading"><span>03.</span> Подготовь номер <em>для Claude</em></h2>
     <p class="text">Номер нужен только для Claude. Лучший вариант - номер, к которому у тебя останется доступ после регистрации. Одноразовый номер может пройти сейчас, но не поможет, если позже понадобится повторное подтверждение.</p>
     <h3 class="sub-heading">Приоритет вариантов</h3>
     <ol class="headline-list">
@@ -202,7 +205,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__tip"><strong>Важно:</strong> успешный SMS-код не делает номер идеальным. Это просто позволяет завершить регистрацию, если Claude его принял.</div>
     </div>
 
-    <h2 class="section-heading"><span>04.</span> Зарегистрируй <em>Claude</em></h2>
+    <h2 id="s-4" class="section-heading"><span>04.</span> Зарегистрируй <em>Claude</em></h2>
     <div class="scenario-card">
       <div class="scenario-card__num">CLAUDE · РЕГИСТРАЦИЯ</div>
       <div class="scenario-card__title">Порядок действий</div>
@@ -215,7 +218,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__ending">Платить можно только после того, как бесплатный Claude открылся и ответил.</div>
     </div>
 
-    <h2 class="section-heading"><span>05.</span> Зарегистрируй <em>ChatGPT</em></h2>
+    <h2 id="s-5" class="section-heading"><span>05.</span> Зарегистрируй <em>ChatGPT</em></h2>
     <div class="highlight"><strong>Номер не покупаем.</strong> Для обычного ChatGPT телефон сейчас не нужен. Если видишь запрос номера, проверь, что ты на chatgpt.com, а не на platform.openai.com для API.</div>
     <div class="scenario-card">
       <div class="scenario-card__num">CHATGPT · РЕГИСТРАЦИЯ</div>
@@ -237,7 +240,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__tip"><strong>Проверка перед оплатой:</strong> зайди именно в тот ChatGPT-аккаунт, где хочешь Plus, и только потом открывай экран подписки.</div>
     </div>
 
-    <h2 class="section-heading"><span>06.</span> Установи <em>приложения</em></h2>
+    <h2 id="s-6" class="section-heading"><span>06.</span> Установи <em>приложения</em></h2>
     <p class="text">Приложения ставь после проверки входа в браузере. Так ты точно знаешь, что проблема не в установщике и не в магазине приложений.</p>
     <ul class="guide-list">
       <li><strong>Claude.</strong> Скачивай только с <a href="https://claude.ai/download" target="_blank" rel="noopener noreferrer">claude.ai/download</a> или из App Store/Google Play с разработчиком Anthropic.</li>
@@ -247,7 +250,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </ul>
     <div class="highlight"><strong>После установки:</strong> входи в тот же аккаунт, который уже работает в браузере. Новый аккаунт в приложении создавать не нужно.</div>
 
-    <h2 class="section-heading"><span>07.</span> Проверь бесплатный <em>доступ</em></h2>
+    <h2 id="s-7" class="section-heading"><span>07.</span> Проверь бесплатный <em>доступ</em></h2>
     <p class="text">Это короткий, но важный этап. Он показывает, что аккаунт создан, страна не конфликтует, сайт открывается, вход сохраняется и можно переходить к оплате.</p>
     <ol class="headline-list">
       <li><span class="headline-num">01.</span><span class="headline-text">Открой Claude, отправь тестовый запрос и дождись ответа.</span></li>
@@ -257,7 +260,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </ol>
     <div class="highlight"><strong>Карта нужна только после этого.</strong> Если бесплатный доступ не работает, платная подписка проблему не исправит.</div>
 
-    <h2 class="section-heading"><span>08.</span> Выбери стратегию <em>оплаты</em></h2>
+    <h2 id="s-8" class="section-heading"><span>08.</span> Выбери стратегию <em>оплаты</em></h2>
     <p class="text">Сильная стратегия не в том, чтобы найти одну «вечную» карту, а в том, чтобы выбрать способ под свою ситуацию и проверить его до выпуска. Самый стабильный вариант - своя иностранная карта. Если её нет, можно использовать виртуальную карту, но только с понятными условиями.</p>
     <div class="schema-grid">
       <div class="schema-card">
@@ -298,7 +301,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__ending">Для новичка удобнее способ с пополнением рублями через СБП, если выбранный сервис его поддерживает.</div>
     </div>
 
-    <h2 class="section-heading"><span>09.</span> Выпусти карту и <em>пополни баланс</em></h2>
+    <h2 id="s-9" class="section-heading"><span>09.</span> Выпусти карту и <em>пополни баланс</em></h2>
     <p class="text">Перед оплатой важно разделить три суммы: цена выпуска карты, баланс карты и комиссии. Деньги за выпуск - это не деньги на карте. Чтобы оплатить подписку, на самой карте должен быть отдельный баланс.</p>
     <div class="equation" aria-label="Формула бюджета карты">
       <div class="equation__item"><div class="equation__mark">выпуск</div><div class="equation__text">плата за создание карты</div></div>
@@ -336,7 +339,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </ol>
     <div class="highlight"><strong>Не ориентируйся на старые цены из чужих скриншотов.</strong> Перед выпуском смотри текущие условия внутри сервиса: тарифы, комиссии и доступность оплаты Claude/ChatGPT могут меняться.</div>
 
-    <h2 class="section-heading"><span>10.</span> Оплати первый <em>месяц</em></h2>
+    <h2 id="s-10" class="section-heading"><span>10.</span> Оплати первый <em>месяц</em></h2>
     <div class="highlight"><strong>Начинай с месячного тарифа.</strong> Годовую подписку имеет смысл покупать только после того, как прошёл первый платёж, тариф активировался и ты понимаешь, как будет работать продление.</div>
     <h3 class="sub-heading">Claude</h3>
     <ol class="headline-list">
@@ -377,7 +380,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <div class="scenario-card__tip"><strong>Если деньги списались, а тариф не появился:</strong> не плати второй раз. Проверь аккаунт, подожди обновления статуса, сохрани чек и обратись в поддержку.</div>
     </div>
 
-    <h2 class="section-heading"><span>11.</span> Настрой <em>продление</em></h2>
+    <h2 id="s-11" class="section-heading"><span>11.</span> Настрой <em>продление</em></h2>
     <p class="text">Подписка - это не разовый файл, а регулярное списание. Поэтому после первого платежа нужно понять, как карта поведёт себя через месяц.</p>
     <ol class="headline-list">
       <li><span class="headline-num">01.</span><span class="headline-text">Уточни, поддерживает ли карта автосписания. Если нет, заранее готовься обновить карту или оплатить вручную.</span></li>
@@ -388,7 +391,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     </ol>
     <div class="highlight"><strong>Отдельно про App Store и Google Play:</strong> если подписка куплена внутри мобильного приложения, управление оплатой может быть в Apple ID или Google Play, а не в настройках сайта.</div>
 
-    <h2 class="section-heading"><span>12.</span> Реши типовые <em>ошибки</em></h2>
+    <h2 id="s-12" class="section-heading"><span>12.</span> Реши типовые <em>ошибки</em></h2>
     <div class="scenario-card">
       <div class="scenario-card__num">САЙТ НЕ ОТКРЫВАЕТСЯ</div>
       <div class="scenario-card__title">Проверь доступ по порядку</div>
@@ -413,7 +416,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <li><strong>Аккаунт заблокирован.</strong> Не создавай серию новых аккаунтов. Обратись в официальную поддержку и приложи скриншот без секретных данных.</li>
     </ul>
 
-    <h2 class="section-heading"><span>13.</span> Настрой сервисы <em>под себя</em></h2>
+    <h2 id="s-13" class="section-heading"><span>13.</span> Настрой сервисы <em>под себя</em></h2>
     <h3 class="sub-heading">Claude</h3>
     <ul class="guide-list">
       <li><strong>Settings.</strong> Проверь безопасность, активные сессии, тариф и дату продления.</li>
@@ -434,7 +437,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       <p class="prompt-box__text">Я веду экспертный блог. Мне нужны короткие, живые тексты без канцелярита. Пиши простым языком. Не используй фразы «в современном мире» и «важно отметить». Сначала давай структуру, потом текст. Если данных недостаточно, задай 2-3 уточняющих вопроса. Не выдумывай факты и отмечай, что требует проверки.</p>
     </div>
 
-    <h2 class="section-heading"><span>14.</span> Финальный <em>чек-лист</em></h2>
+    <h2 id="s-14" class="section-heading"><span>14.</span> Финальный <em>чек-лист</em></h2>
     <ol class="headline-list">
       <li><span class="headline-num">01.</span><span class="headline-text">Ты понимаешь официальный статус доступа и риск блокировки из неподдерживаемой страны.</span></li>
       <li><span class="headline-num">02.</span><span class="headline-text">Выбрана одна поддерживаемая страна, стабильный VPN и отдельный профиль браузера.</span></li>
@@ -511,6 +514,22 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -580,6 +599,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });

@@ -210,9 +210,11 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
 </head>
 <body>
+<div class="ms-progress"><i></i></div>
 <div class="ms-bar">
   <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
   <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">4 мин чтения</span>
   <span class="ms-bar__name">maysoulme</span>
   <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
 </div>
@@ -238,15 +240,16 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   <p class="intro-bold">Как использовать.</p>
   <p class="intro-text">Вставь весь текст этого документа в Claude. Сразу под ним надиктуй или вставь свой сырой поток мыслей — обрывки, эмоции, детали вперемешку. Claude соберёт из этого готовый сценарий.</p>
 
-  <h2 class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
+  <nav class="ms-toc" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Твоя роль</a></li><li><a href="#s-2">Что я даю — и главное правило</a></li><li><a href="#s-3">Чего нельзя делать</a></li><li><a href="#s-4">Структура сценария</a></li><li><a href="#s-5">Голос и стиль</a></li><li><a href="#s-6">Формат выдачи</a></li><li><a href="#s-7">Твой процесс</a></li><li><a href="#s-8">Куда вставлять поток</a></li></ol></nav>
+<h2 id="s-1" class="section-heading"><span>01.</span> Твоя <em>роль</em></h2>
   <p class="text">Ты — сценарист вирусных разговорных Reels, который специализируется только на личных историях. Ты не коуч, не эксперт, не учитель. Ты не даёшь пользу и не учишь — ты рассказываешь историю так, чтобы человек залип и досмотрел до конца.</p>
   <div class="highlight"><strong>Твоя единственная задача:</strong> взять мой хаотичный поток мыслей и собрать из него готовый сценарий личной истории, который я поставлю на суфлёр и зачитаю с первого дубля.</div>
 
-  <h2 class="section-heading"><span>02.</span> Что я даю — и <em>главное правило</em></h2>
+  <h2 id="s-2" class="section-heading"><span>02.</span> Что я даю — и <em>главное правило</em></h2>
   <p class="text">Я даю сырой, неструктурированный поток: обрывки, перескоки, эмоции, детали не по порядку. Хаос — это сырьё, а не проблема.</p>
   <div class="highlight"><strong>Ничего от себя.</strong> Ты строишь историю только из моего материала. Не добавляй событий, чувств и фактов, которых я не сказала. Если для сильного момента не хватает детали — не выдумывай, а вставь прямо в текст пометку [нужна деталь: какая]. Я дополню.</div>
 
-  <h2 class="section-heading"><span>03.</span> Чего <em>нельзя</em> делать</h2>
+  <h2 id="s-3" class="section-heading"><span>03.</span> Чего <em>нельзя</em> делать</h2>
   <ul class="guide-list">
     <li><strong>Никакой воды.</strong> Ни одного предложения «ни о чём». Можно убрать без потери смысла и эмоции — убирай.</li>
     <li><strong>Никакой тавтологии.</strong> Одна мысль звучит один раз. Не пересказывай уже сказанное другими словами.</li>
@@ -256,7 +259,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Каждое предложение работает.</strong> Двигает историю вперёд либо усиливает эмоцию. Третьего нет.</li>
   </ul>
 
-  <h2 class="section-heading"><span>04.</span> Структура <em>сценария</em></h2>
+  <h2 id="s-4" class="section-heading"><span>04.</span> Структура <em>сценария</em></h2>
   <p class="text">Собери мой поток ровно в эту арку. Внутри текста ярлыки блоков не пиши — только чистую речь.</p>
   <ol class="headline-list">
     <li><span class="headline-num">01.</span><span class="headline-text">Хук (0–3 сек). Одна фраза, что останавливает листание. Бьёт в эмоцию, любопытство или обещает откровение — не пользу.</span></li>
@@ -270,7 +273,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><span class="headline-num">09.</span><span class="headline-text">CTA — только если уместен. Нативный, как продолжение мысли, неотличимый от органики. Не идёт — не лепи.</span></li>
   </ol>
 
-  <h2 class="section-heading"><span>05.</span> Голос и <em>стиль</em></h2>
+  <h2 id="s-5" class="section-heading"><span>05.</span> Голос и <em>стиль</em></h2>
   <ul class="guide-list">
     <li><strong>Живая разговорная речь</strong> — будто говорю вживую, а не читаю по бумажке.</li>
     <li><strong>Ритм:</strong> чередуй текучие длинные фразы с короткими акцентами, чтобы нарастало напряжение. Речь течёт, не разваливается.</li>
@@ -280,12 +283,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <li><strong>Юмор только слоёный:</strong> ирония, преувеличение с конкретикой, обманутое ожидание. Плоские шутки — нет.</li>
   </ul>
 
-  <h2 class="section-heading"><span>06.</span> Формат <em>выдачи</em></h2>
+  <h2 id="s-6" class="section-heading"><span>06.</span> Формат <em>выдачи</em></h2>
   <p class="text">Готовый сценарий — сплошным текстом, без ярлыков блоков, сразу под суфлёр. Читаю не спотыкаясь.</p>
   <p class="text">Длина по умолчанию — 40–60 секунд (120–160 слов), если не указала другую.</p>
   <p class="text">Дальше отдельно: 3 варианта хука на выбор (интрига / боль / провокация) и строка «Что усилит историю» — какой одной детали не хватает.</p>
 
-  <h2 class="section-heading"><span>07.</span> Твой <em>процесс</em></h2>
+  <h2 id="s-7" class="section-heading"><span>07.</span> Твой <em>процесс</em></h2>
   <p class="text">Сделай молча, прежде чем писать:</p>
   <ol class="headline-list">
     <li><span class="headline-num">01.</span><span class="headline-text">Разбери поток: вычлени главное событие, ключевую эмоцию, поворот и деталь-крючок.</span></li>
@@ -295,7 +298,7 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   </ol>
   <div class="highlight"><strong>Если хоть один пункт чек-листа не выполнен</strong> — перепиши, не показывай мне черновик.</div>
 
-  <h2 class="section-heading"><span>08.</span> Куда <em>вставлять поток</em></h2>
+  <h2 id="s-8" class="section-heading"><span>08.</span> Куда <em>вставлять поток</em></h2>
   <p class="text">Допиши в самом конце, перед отправкой:</p>
 
   <div class="prompt-box">
@@ -408,6 +411,22 @@ function fallbackCopy(text, done) {
     padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
     font-family: 'Inter', -apple-system, sans-serif; }
   .ms-bar__logo img { height: 24px; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
   .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
   .ms-bar__back:hover { text-decoration: underline; }
   .ms-bar__name { font-family: 'Denistina', cursive; color: var(--g-accent, #710C04); font-size: 23px;
@@ -477,6 +496,12 @@ function fallbackCopy(text, done) {
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });

@@ -87,6 +87,31 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .index a:hover { color: var(--accent); }
   .index a i { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; color: var(--accent); margin-right: 8px; }
 
+  /* ---------- маршрут ---------- */
+  .route { margin-top: 64px; padding: 44px 44px 40px; background: var(--cream); }
+  .route__head { max-width: 560px; margin-bottom: 30px; }
+  .route__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 22px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .08em; line-height: 1.3; margin-bottom: 8px; }
+  .route__title i { font-style: italic; color: var(--accent); }
+  .route__lead { color: var(--muted); font-size: 15.5px; line-height: 1.65; }
+  .route__steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; position: relative; }
+  .step { position: relative; padding: 22px 34px 8px 0; text-decoration: none; border-top: 1px solid var(--line); }
+  .step + .step { padding-left: 34px; }
+  .step + .step::before { content: "→"; position: absolute; left: -9px; top: 22px; font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 18px; color: var(--accent); background: var(--cream); padding: 0 4px; }
+  .step__n { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 30px;
+    color: var(--accent); line-height: 1; margin-bottom: 12px; }
+  .step__title { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 17.5px; font-weight: 700;
+    line-height: 1.35; margin-bottom: 6px; transition: color .18s; }
+  .step:hover .step__title { color: var(--accent); }
+  .step__desc { display: block; font-size: 14px; line-height: 1.6; color: var(--muted); }
+  @media (max-width: 760px) {
+    .route { padding: 30px 24px 26px; margin-top: 40px; }
+    .route__steps { grid-template-columns: 1fr; }
+    .step, .step + .step { padding: 18px 0 14px; }
+    .step + .step::before { content: "↓"; left: auto; right: 0; top: 18px; }
+  }
+
   /* ---------- разделы ---------- */
   .cat { padding: 78px 0 6px; scroll-margin-top: 70px; }
   .cat__head { display: flex; align-items: flex-start; gap: 26px; padding-bottom: 26px; border-bottom: 1px solid var(--line);
@@ -108,8 +133,8 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
   .card__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
   .card__tag { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
   .card__n { font-family: 'Libre Baskerville', Georgia, serif; font-style: italic; font-size: 14px; color: var(--faint); }
-  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 15.5px; font-weight: 700; line-height: 1.48;
-    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .045em; }
+  .card__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: 16px; font-weight: 700; line-height: 1.5;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: .035em; }
   .card__title i { font-style: italic; }
   .card__desc { font-size: 14.5px; line-height: 1.66; color: var(--muted); flex: 1; }
   .card__go { margin-top: 22px; padding-top: 15px; border-top: 1px solid var(--line); font-size: 13.5px; font-weight: 600; color: var(--accent); }
@@ -203,6 +228,30 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     <a href="#life"><i>04</i>ИИ для жизни</a>
   </nav>
 
+  <section class="route">
+    <div class="route__head">
+      <h2 class="route__title">Если вы здесь <i>впервые</i></h2>
+      <p class="route__lead">Не нужно читать всё подряд. Три шага по порядку — и у вас уже есть доступ, свой голос и первый ролик.</p>
+    </div>
+    <div class="route__steps">
+      <a class="step" href="guides/claude-i-chatgpt-v-rossii/">
+        <span class="step__n">01</span>
+        <span class="step__title">Поставить Claude</span>
+        <span class="step__desc">Полчаса — и доступ есть, без бана и нервов</span>
+      </a>
+      <a class="step" href="guides/raspakovka-lichnosti/">
+        <span class="step__n">02</span>
+        <span class="step__title">Распаковать себя</span>
+        <span class="step__desc">Чтобы нейросеть говорила вашими словами, а не своими</span>
+      </a>
+      <a class="step" href="guides/formula-razgovornyh-rolikov/">
+        <span class="step__n">03</span>
+        <span class="step__title">Снять первый ролик</span>
+        <span class="step__desc">По формуле, которая держит человека в кадре до конца</span>
+      </a>
+    </div>
+  </section>
+
     <section class="cat" id="reels">
       <div class="cat__head">
         <span class="cat__num">01</span>
@@ -213,25 +262,25 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/formula-razgovornyh-rolikov/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">01</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 5 мин</span><span class="card__n">01</span></span>
           <span class="card__title">Формула <i>вирусных</i> разговорных роликов</span>
           <span class="card__desc">Почему один ролик залетает на миллион, а другой уходит в никуда. Разбираю по косточкам, что держит человека в кадре.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/razgovornyj-ekspertnyj-rolik/">
-          <span class="card__top"><span class="card__tag">Промпт</span><span class="card__n">02</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 12 мин</span><span class="card__n">02</span></span>
           <span class="card__title">Разговорный <b>экспертный</b> ролик</span>
           <span class="card__desc">Кидаете сырую мысль — получаете сценарий, где вы звучите как человек, который правда разбирается в теме.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/40-scenariev/">
-          <span class="card__top"><span class="card__tag">Подборка</span><span class="card__n">03</span></span>
+          <span class="card__top"><span class="card__tag">Подборка · 13 мин</span><span class="card__n">03</span></span>
           <span class="card__title">40 сценариев для <i>вирусных</i> Reels</span>
           <span class="card__desc">Сорок готовых каркасов под разные ниши. Берёте, подставляете свою тему, снимаете.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card card--w2" href="guides/lichnaya-istoriya/">
-          <span class="card__top"><span class="card__tag">Промпт</span><span class="card__n">04</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 4 мин</span><span class="card__n">04</span></span>
           <span class="card__title">Хаотичный голос → <i>личная история</i></span>
           <span class="card__desc">Наговариваете поток мыслей — на выходе история под суфлёр, которую не стыдно рассказать.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -249,31 +298,31 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/post-karusel/">
-          <span class="card__top"><span class="card__tag">Промпт</span><span class="card__n">05</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 27 мин</span><span class="card__n">05</span></span>
           <span class="card__title">Пост-карусель, которую <i>досвайпывают</i></span>
           <span class="card__desc">Обложка останавливает скролл, каждый слайд тянет к следующему, последний закрывает мысль.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/promt-humanizator/">
-          <span class="card__top"><span class="card__tag">Промпт</span><span class="card__n">06</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 10 мин</span><span class="card__n">06</span></span>
           <span class="card__title">Промт-<b>хуманизатор</b></span>
           <span class="card__desc">Как из гладкого текста нейросети сделать живую речь, которую не стыдно опубликовать от своего имени.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/raspakovka-lichnosti/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">07</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 10 мин</span><span class="card__n">07</span></span>
           <span class="card__title"><i>Распаковка</i> личности для блога</span>
           <span class="card__desc">Вопросы, которые вытаскивают из вас смыслы и истории. После них и блог вести легче, и ассистенты говорят вашими словами.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/analiz-ca-tripwire/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">08</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">08</span></span>
           <span class="card__title">Анализ ЦА для <b>трипваера</b></span>
           <span class="card__desc">Как понять, за что ваша аудитория готова заплатить первые деньги, и собрать под это недорогой продукт.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/promt-pravdy/">
-          <span class="card__top"><span class="card__tag">Промпт</span><span class="card__n">09</span></span>
+          <span class="card__top"><span class="card__tag">Промпт · 4 мин</span><span class="card__n">09</span></span>
           <span class="card__title">Промпт <i>правды</i></span>
           <span class="card__desc">Как отучить нейросеть выдумывать и научить признаваться, когда она чего-то не знает.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -291,31 +340,31 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/claude-i-chatgpt-v-rossii/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">10</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 17 мин</span><span class="card__n">10</span></span>
           <span class="card__title">Как установить <b>Claude</b> и ChatGPT в России</span>
           <span class="card__desc">Понятный маршрут: регистрация, номер, приложения, карта и первая безопасная оплата.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/podgotovka-akkaunta/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">11</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 8 мин</span><span class="card__n">11</span></span>
           <span class="card__title">Как <i>технически</i> подготовить аккаунт</span>
           <span class="card__desc">Пошагово и с картинками: что настроить до регистрации, чтобы аккаунт не улетел в бан.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/luchshie-skilly-claude/">
-          <span class="card__top"><span class="card__tag">Подборка</span><span class="card__n">12</span></span>
+          <span class="card__top"><span class="card__tag">Подборка · 7 мин</span><span class="card__n">12</span></span>
           <span class="card__title">Лучшие <b>скиллы</b> для Claude в 2026</span>
           <span class="card__desc">Что такое скиллы, какие ставить первыми и сколько часов они реально экономят.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/svoj-skill-dlya-codex/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">13</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 3 мин</span><span class="card__n">13</span></span>
           <span class="card__title">Как собрать <i>свой первый</i> скилл</span>
           <span class="card__desc">Делаем скилл под вашу задачу обычными словами, без единой строчки кода.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/kimi-dlya-bloginga/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">14</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 11 мин</span><span class="card__n">14</span></span>
           <span class="card__title"><b>Kimi</b> для блогинга: система из 7 шагов</span>
           <span class="card__desc">Бесплатная альтернатива, если пока не до оплат: вся система работы с контентом на ней.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -333,13 +382,13 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
       </div>
       <div class="cards">
         <a class="card card--lead" href="guides/gde-moi-foto/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">15</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 6 мин</span><span class="card__n">15</span></span>
           <span class="card__title">Где в интернете есть <i>мои фото</i></span>
           <span class="card__desc">Находим ваши фотографии и данные, которые давно пора убрать из сети.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
         </a>
         <a class="card" href="guides/genealogicheskoe-drevo/">
-          <span class="card__top"><span class="card__tag">Гайд</span><span class="card__n">16</span></span>
+          <span class="card__top"><span class="card__tag">Гайд · 4 мин</span><span class="card__n">16</span></span>
           <span class="card__title"><i>Генеалогическое древо</i> с ChatGPT</span>
           <span class="card__desc">Как собрать историю семьи по обрывкам документов и рассказов родственников.</span>
           <span class="card__go">Открыть <i>&rarr;</i></span>
@@ -397,6 +446,12 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
     try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
     msIcon();
   }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
   function msIcon(){
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
