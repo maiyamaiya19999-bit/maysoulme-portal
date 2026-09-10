@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirPods — голосовой пульт от Claude Code | maysoulme</title>
+<meta name="description" content="Связка AirPods → Siri → GitHub → Claude Code в облаке: ставьте задачи голосом с улицы, пока Mac выключен. Готовый скилл и инструкция по установке.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&family=DM+Sans:ital@1&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --accent: #710C04; }
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 48px;
+  border-bottom: 1px solid #f0f0f0;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 100;
+}
+.nav__logo { text-decoration: none; display: flex; align-items: center; }
+.nav__logo img { height: 30px; width: auto; }
+.nav__logo-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: #888;
+  letter-spacing: 0.5px;
+}
+
+.container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+
+.hero { padding: 60px 0 48px; }
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 5px 16px;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 16px;
+}
+.hero h1 em { font-style: italic; color: var(--accent); }
+.hero__desc { font-size: 18px; color: #666; line-height: 1.7; }
+.hero__meta { font-size: 14px; color: #999; margin-top: 16px; letter-spacing: 1px; }
+
+.intro-bold {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.65;
+  color: #1a1a1a;
+  padding: 40px 0 16px;
+}
+.intro-text {
+  font-size: 17px;
+  color: #444;
+  line-height: 1.75;
+  padding-bottom: 48px;
+}
+
+.section-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 56px 0 24px;
+  border-top: 1px solid #e8e8e8;
+}
+.section-heading span { color: var(--accent); margin-right: 8px; }
+.section-heading em { font-style: italic; color: var(--accent); }
+
+.highlight {
+  background: #f5f5f5;
+  padding: 20px 24px;
+  margin: 24px 0;
+  font-size: 16px;
+  line-height: 1.75;
+  color: #444;
+}
+
+.chain {
+  background: #f5f5f5;
+  padding: 28px 24px;
+  margin: 24px 0;
+  text-align: center;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 17px;
+  line-height: 2.1;
+  color: #1a1a1a;
+}
+.chain b { font-weight: 700; }
+.chain .arr { color: var(--accent); font-style: italic; padding: 0 6px; }
+
+.sub-heading {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  padding: 36px 0 16px;
+}
+
+.text { font-size: 17px; color: #444; line-height: 1.75; margin-bottom: 16px; }
+.text a { color: var(--accent); }
+.text code, .headline-text code {
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 0.88em;
+  background: #f5f5f5;
+  padding: 2px 7px;
+}
+
+.guide-list { list-style: none; margin: 16px 0 24px; }
+.guide-list li {
+  font-size: 16px; line-height: 1.75; color: #444;
+  padding: 8px 0 8px 20px; position: relative;
+  border-bottom: 1px solid #f0f0f0;
+}
+.guide-list li:last-child { border-bottom: none; }
+.guide-list li::before {
+  content: ''; position: absolute; left: 0; top: 16px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+.guide-list li strong { color: #1a1a1a; }
+
+.prompt-box {
+  background: #f5f5f5;
+  padding: 36px;
+  margin: 32px 0;
+}
+.prompt-box__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.prompt-box__subtitle { font-size: 13px; color: #888; margin-bottom: 20px; }
+.prompt-box__text {
+  font-size: 15px; line-height: 1.8; color: #444;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  word-break: break-word;
+}
+
+.headline-list { list-style: none; margin: 16px 0 32px; }
+.headline-list li {
+  display: flex; gap: 16px; padding: 16px 0;
+  border-bottom: 1px solid #f0f0f0; align-items: baseline;
+}
+.headline-list li:first-child { border-top: 1px solid #f0f0f0; }
+.headline-num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 15px;
+  color: var(--accent); min-width: 28px; flex-shrink: 0;
+}
+.headline-text { font-size: 17px; line-height: 1.6; color: #1a1a1a; font-weight: 500; }
+.headline-text small { display: block; font-weight: 400; font-size: 15px; color: #666; margin-top: 2px; }
+
+.scenario-card {
+  border: 1px solid #e8e8e8;
+  padding: 32px; margin: 24px 0; background: #f9f9f9;
+}
+.scenario-card__num {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-style: italic; font-size: 14px;
+  color: var(--accent); letter-spacing: 1px; margin-bottom: 8px;
+}
+.scenario-card__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 20px;
+}
+.scenario-card__point { margin-bottom: 14px; }
+.scenario-card__point-label { font-weight: 600; font-size: 16px; color: #1a1a1a; }
+.scenario-card__point-text { font-size: 15px; color: #666; line-height: 1.7; }
+.scenario-card__tip {
+  background: #f0f0f0; padding: 14px 18px; margin-top: 16px;
+  font-size: 14px; color: #555; line-height: 1.65;
+}
+.scenario-card__tip strong { color: var(--accent); }
+
+.btn-repo {
+  display: inline-block;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: #fff; background: var(--accent);
+  padding: 14px 32px; text-decoration: none;
+  margin: 8px 0 24px;
+}
+
+.footer {
+  text-align: center; padding: 64px 24px;
+  border-top: 1px solid #e8e8e8; margin-top: 64px;
+  color: #999; font-size: 14px;
+}
+.footer .tiny {
+  font-size: 12.5px; color: #bbb; max-width: 52ch;
+  margin: 12px auto 0; line-height: 1.6; letter-spacing: 0;
+}
+.footer-note {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 18px; font-style: italic; color: #444;
+  text-align: center; padding: 48px 24px 0;
+}
+.footer-note em { color: var(--accent); }
+
+@media screen and (max-width: 768px) {
+  .nav { padding: 16px 20px; }
+  .hero h1 { font-size: 28px; }
+  .section-heading { font-size: 24px; }
+  .scenario-card { padding: 20px; }
+  .prompt-box { padding: 24px; }
+  .chain { font-size: 15px; padding: 20px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a class="nav__logo" href="#"><img src="logo-ms.png" alt="MS"></a>
+  <span class="nav__logo-name">maysoulme</span>
+</nav>
+
+<div class="container">
+
+  <header class="hero">
+    <span class="badge">Материал интенсива</span>
+    <h1>AirPods — голосовой пульт от <em>Claude Code</em></h1>
+    <p class="hero__desc">Настраиваем связку один раз — и задачи Claude можно ставить голосом откуда угодно: Siri, приватный GitHub и облако. Mac при этом может быть выключен.</p>
+    <p class="hero__meta">УСТАНОВКА ~15 МИНУТ · IPHONE + AIRPODS · РАБОТАЕТ В ОБЛАКЕ</p>
+  </header>
+
+  <p class="intro-bold">Идёте по улице, наговариваете задачу в наушники — и пока доходите до кофейни, Claude в облаке уже всё сделал и прислал уведомление на iPhone.</p>
+  <p class="intro-text">Моя любимая сцена: гуляю, в голове собирается идея для reels. Раньше она умерла бы в заметках. Теперь я вызываю Siri, говорю «Задача для Claude» и проговариваю поток мыслей — а Claude по скиллу сценариев собирает из него сценарий с хуком, вовлечением и призывом. Остаётся только записать. На этой странице — как поставить себе такую же связку с помощью готового скилла.</p>
+
+  <section>
+    <h2 class="section-heading"><span>01.</span>Как работает <em>связка</em></h2>
+    <div class="chain">
+      <b>AirPods</b><span class="arr">→</span><b>Siri</b><span class="arr">→</span>команда iPhone<span class="arr">→</span>приватная задача в GitHub<span class="arr">→</span><b>Claude Code</b> в облаке<span class="arr">→</span>ответ на iPhone
+    </div>
+    <p class="text">Вы диктуете задачу — команда на iPhone превращает её в задачу (issue) в вашем приватном репозитории на GitHub. Там её подхватывает официальный Claude Code Action и выполняет на сервере GitHub: работает с файлами проекта, пишет тексты, правит страницы, отвечает в ту же задачу. GitHub присылает уведомление, и Siri может прочитать его прямо в AirPods.</p>
+    <div class="highlight">
+      Главное: после настройки <strong>Mac можно выключить</strong>. Claude работает в облаке с файлами, которые лежат в репозитории на GitHub. Файлы, которые есть только на Mac и не загружены в репозиторий, из облака не видны.
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-heading"><span>02.</span>Что <em>понадобится</em></h2>
+    <ul class="guide-list">
+      <li><strong>iPhone + AirPods</strong> — с включённой Siri и приложением «Команды» (стоит по умолчанию)</li>
+      <li><strong>Аккаунт GitHub</strong> и отдельный приватный репозиторий под задачи — скилл поможет выбрать или создать</li>
+      <li><strong>Подписка Claude Pro или Max</strong> (или API-ключ Anthropic) — на ней Claude работает в облаке</li>
+      <li><strong>Claude Code на компьютере</strong> — один раз, только для установки</li>
+      <li><strong>Приложение GitHub на iPhone</strong> — чтобы приходили уведомления с результатом</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-heading"><span>03.</span>Установка <em>скилла</em></h2>
+    <p class="text">Всю настройку делает готовый скилл — он сам скопирует рабочий процесс в ваш репозиторий, подскажет, где взять токены, и проведёт по шагам на iPhone. Вам нужно запустить его одним из двух способов.</p>
+
+    <div class="prompt-box">
+      <div class="prompt-box__title">Способ 1 — команда в терминале</div>
+      <div class="prompt-box__subtitle">скопируйте и вставьте в терминал</div>
+      <div class="prompt-box__text">npx skills add maiyamaiya19999-bit/airpods-claude-cloud</div>
+    </div>
+
+    <div class="prompt-box">
+      <div class="prompt-box__title">Способ 2 — просто попросить Claude</div>
+      <div class="prompt-box__subtitle">отправьте в Claude Code это сообщение</div>
+      <div class="prompt-box__text">Установи скилл https://github.com/maiyamaiya19999-bit/airpods-claude-cloud и помоги настроить связку AirPods → Claude в облаке</div>
+    </div>
+
+    <p class="text">Дальше Claude всё сделает сам и по ходу попросит у вас три вещи: выбрать репозиторий, установить <a href="https://github.com/apps/claude" target="_blank" rel="noopener">приложение Claude для GitHub</a> (только на этот репозиторий) и добавить секрет с токеном Claude. Токены нигде не показываются и не публикуются — скилл специально построен так, чтобы они не попали ни в чат, ни в файлы.</p>
+    <a class="btn-repo" href="https://github.com/maiyamaiya19999-bit/airpods-claude-cloud" target="_blank" rel="noopener">Открыть скилл на GitHub</a>
+  </section>
+
+  <section>
+    <h2 class="section-heading"><span>04.</span>Команда <em>на iPhone</em></h2>
+    <p class="text">Последний кусочек — голосовая команда. Скилл даст точную пошаговую инструкцию, здесь — общая картина, чтобы вы понимали, что собираете.</p>
+    <ol class="headline-list">
+      <li><span class="headline-num">1.</span><span class="headline-text">Создайте в «Командах» команду «Задача для Claude»<small>Название и есть фраза для Siri — произносите его, и запускается диктовка.</small></span></li>
+      <li><span class="headline-num">2.</span><span class="headline-text">Действие «Диктовка текста»<small>Останавливается после паузы — наговорили задачу и замолчали.</small></span></li>
+      <li><span class="headline-num">3.</span><span class="headline-text">Текст задачи с обращением <code>@claude</code><small>Шаблон уже включает правило: ничего не публиковать и не удалять без отдельного подтверждения.</small></span></li>
+      <li><span class="headline-num">4.</span><span class="headline-text">Отправка в GitHub<small>Действие «Получить содержимое URL» создаёт задачу в вашем репозитории по токену, который работает только с ним.</small></span></li>
+      <li><span class="headline-num">5.</span><span class="headline-text">Siri подтверждает голосом: «Задачу отправила»<small>Результат придёт уведомлением GitHub — Siri может прочитать его в AirPods.</small></span></li>
+    </ol>
+    <div class="highlight">
+      <strong>Важно:</strong> внутри настроенной команды хранится ваш GitHub-токен. Никогда не делитесь готовой командой и не выкладывайте её скриншоты с открытыми полями — токен как пароль.
+    </div>
+  </section>
+
+  <section>
+    <h2 class="section-heading"><span>05.</span>Первый <em>запуск</em></h2>
+    <p class="text">Начните с безобидной проверки — вызовите Siri, скажите «Задача для Claude» и продиктуйте:</p>
+    <div class="prompt-box">
+      <div class="prompt-box__title">Тестовая задача</div>
+      <div class="prompt-box__subtitle">ничего не меняет — только читает</div>
+      <div class="prompt-box__text">Прочитай README этого репозитория и ответь в задаче четырьмя пунктами, файлы не меняй</div>
+    </div>
+    <ul class="guide-list">
+      <li>Siri подтвердила отправку — команда сработала</li>
+      <li>В репозитории появилась задача, и в ней Claude оставил комментарий с результатом</li>
+      <li>На iPhone пришло уведомление GitHub</li>
+    </ul>
+    <p class="text">Если все три пункта сошлись — связка живая, можно давать настоящие задачи: собрать пост, поправить страницу, проверить ссылки, написать сценарий.</p>
+  </section>
+
+  <section>
+    <h2 class="section-heading"><span>06.</span>Правила <em>безопасности</em></h2>
+    <ul class="guide-list">
+      <li><strong>Один репозиторий.</strong> Токен команды и приложение Claude имеют доступ только к выбранному репозиторию — не расширяйте его</li>
+      <li><strong>Опасное — руками.</strong> Публикации, оплаты, удаление данных и доступ к секретам остаются за ручным подтверждением, голосом такое не делается</li>
+      <li><strong>Токены — никому.</strong> Не вставляйте их в чат, файлы, задачи или скриншоты; если телефон побывал в чужих руках — перевыпустите токен</li>
+      <li><strong>Облако видит только GitHub.</strong> Всё, с чем Claude должен работать, должно быть загружено в репозиторий</li>
+    </ul>
+  </section>
+
+  <p class="footer-note">AirPods становятся голосовым пультом от вашего <em>облачного сотрудника</em>.</p>
+
+  <footer class="footer">
+    © 2026 · maysoulme · Все права защищены
+    <p class="tiny">Материал интенсива. Пожалуйста, не передавайте ссылку тем, кто не участвует — они могут прийти на интенсив и получить её честно 🤍</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
