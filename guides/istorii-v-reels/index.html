@@ -69,6 +69,16 @@ document.documentElement.setAttribute('data-theme',t)})();</script>
 <meta property="og:description" content="Шесть коротких промптов в одном чате: от живой истории до готового Reel, даже если кажется, что рассказывать не о чем.">
 <meta property="og:url" content="https://maysoulme.ru/guides/istorii-v-reels/">
 <meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+<style id="ms-slides">
+  /* презентация 60/40 под видеоурок → обычная читаемая статья */
+  .slide { height: auto !important; min-height: 0 !important; width: 100% !important; display: block !important;
+    padding: 56px 0 !important; border-bottom: 1px solid var(--g-line, #e6e4e1); }
+  .slide:first-of-type { padding-top: 40px !important; }
+  .slide__body { width: 100% !important; max-width: 780px; margin: 0 auto; padding: 0 24px !important; display: block !important; }
+  .slide__inner { max-width: none !important; }
+  .divider, .slide .nav { display: none !important; }
+  .ms-toc { max-width: 732px; margin-left: auto; margin-right: auto; }
+</style>
 </head>
 <body>
 <div class="ms-progress"><i></i></div>
