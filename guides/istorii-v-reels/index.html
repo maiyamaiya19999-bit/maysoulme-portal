@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="ms-section" content="reels">
+<meta name="ms-tag" content="Промпт">
+<meta name="ms-title" content="Истории из жизни → <i>разговорный</i> Reel">
+<meta name="ms-desc" content="Шесть коротких промптов в одном чате: от живой истории до готового Reel, даже если кажется, что рассказывать не о чем.">
+<title>Как вытаскивать истории из своей жизни и превращать их в разговорные Reels</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--accent:var(--g-accent)}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:var(--g-bg);color:var(--g-fg);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 48px;border-bottom:1px solid var(--g-line);position:sticky;top:0;background:var(--g-bg);z-index:100}
+.nav__logo{font-family:'Libre Baskerville',Georgia,serif;font-weight:700;font-size:22px;color:var(--g-fg);letter-spacing:-1px}
+.nav__logo-name{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;font-style:italic;color:var(--g-faint);letter-spacing:.5px}
+.container{max-width:760px;margin:0 auto;padding:0 24px}
+.hero{padding:60px 0 48px}
+.badge{display:inline-block;font-size:11px;font-weight:600;color:var(--accent);border:1px solid var(--accent);padding:5px 16px;margin-bottom:20px;letter-spacing:2px;text-transform:uppercase}
+.hero h1{font-family:'Libre Baskerville',Georgia,serif;font-size:38px;font-weight:700;line-height:1.25;margin-bottom:16px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero__desc{font-size:18px;color:var(--g-muted);line-height:1.7}
+.hero__meta{font-size:14px;color:var(--g-faint);margin-top:16px;letter-spacing:1px}
+.intro-bold{font-size:19px;font-weight:700;line-height:1.65;color:var(--g-fg);padding:40px 0 16px}
+.intro-text{font-size:17px;color:var(--g-muted);line-height:1.75;padding-bottom:22px}
+.section-heading{font-family:'Libre Baskerville',Georgia,serif;font-size:30px;font-weight:700;line-height:1.3;padding:56px 0 24px;border-top:1px solid var(--g-line)}
+.section-heading span{color:var(--accent);margin-right:8px}
+.section-heading em{font-style:italic;color:var(--accent)}
+.sub-heading{font-family:'Libre Baskerville',Georgia,serif;font-size:22px;line-height:1.4;margin:34px 0 16px;color:var(--g-fg)}
+.highlight{background:var(--g-surface);padding:20px 24px;margin:24px 0;font-size:16px;line-height:1.75;color:var(--g-muted)}
+.text{font-size:17px;color:var(--g-muted);line-height:1.75;margin-bottom:16px}
+.prompt-box{background:var(--g-surface);padding:34px;margin:28px 0 40px}
+.prompt-box__title{font-family:'Libre Baskerville',Georgia,serif;font-size:21px;font-weight:700;color:var(--accent);margin-bottom:6px}
+.prompt-box__subtitle{font-size:13px;color:var(--g-faint);margin-bottom:20px}
+.prompt-box__text{font-size:15px;line-height:1.8;color:var(--g-muted);white-space:pre-wrap}
+.quote{border-left:3px solid var(--accent);padding:12px 0 12px 18px;margin:26px 0;font-family:'Libre Baskerville',Georgia,serif;font-size:18px;font-style:italic;color:var(--g-muted)}
+.note{font-size:14px;color:var(--g-muted);margin-top:-22px;margin-bottom:36px}
+.cta{background:var(--g-surface);text-align:center;padding:42px 26px;margin:56px 0 0}
+.cta__text{font-size:17px;color:var(--g-fg);line-height:1.7;margin-bottom:8px}
+.cta__sub{font-size:15px;color:var(--g-muted);margin-bottom:0}
+.cta__link{color:var(--accent);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(113,12,4,.3)}
+.footer{text-align:center;padding:64px 24px;border-top:1px solid var(--g-line);margin-top:64px;color:var(--g-faint);font-size:14px}
+@media screen and (max-width:768px){.nav{padding:16px 20px}.hero h1{font-size:28px}.section-heading{font-size:24px}.prompt-box{padding:22px}.container{padding:0 18px}}
+</style>
+<script>(function(){var t;try{t=localStorage.getItem('ms-theme')}catch(e){}
+if(t!=='dark'&&t!=='light')t='light';
+document.documentElement.setAttribute('data-theme',t)})();</script>
+<style id="ms-theme-vars">
+  :root { --g-bg:#ffffff; --g-surface:#f5f5f5; --g-fg:#1a1a1a; --g-accent:#710C04;
+          --g-line:#e6e4e1; --g-muted:#555555; --g-faint:#8f8a84; }
+  [data-theme="dark"] { --g-bg:#100f0e; --g-surface:#191715; --g-fg:#ece7e1; --g-accent:#d8ac83;
+          --g-line:#2a2724; --g-muted:#a49d95; --g-faint:#8b847c; }
+  html, body { background: var(--g-bg); color: var(--g-fg); }
+  [data-theme="dark"] img[src*="logo-ms"] { filter: invert(1) brightness(1.6); }
+  /* страховка от горизонтального скролла на телефоне */
+  @media (max-width: 640px) {
+    html, body { overflow-x: hidden; }
+    [class*="__row"], [class*="-row"] { flex-wrap: wrap !important; }
+    .slide, .slide__body, .slide__inner, [class*="__inner"] { min-width: 0 !important; }
+    img, video, table, pre { max-width: 100% !important; }
+    pre { overflow-x: auto; }
+  }
+</style>
+<meta property="og:type" content="article">
+<meta property="og:title" content="Истории из жизни → разговорный Reel">
+<meta property="og:description" content="Шесть коротких промптов в одном чате: от живой истории до готового Reel, даже если кажется, что рассказывать не о чем.">
+<meta property="og:url" content="https://maysoulme.ru/guides/istorii-v-reels/">
+<meta property="og:image" content="https://maysoulme.ru/logo-ms.png">
+</head>
+<body>
+<div class="ms-progress"><i></i></div>
+<div class="ms-bar">
+  <a class="ms-bar__logo" href="../../"><img src="../../logo-ms.png" alt="MS"></a>
+  <a class="ms-bar__back" href="../../">&larr; Все гайды</a>
+  <span class="ms-bar__min">14 мин чтения</span>
+  <span class="ms-bar__name">maysoulme</span>
+  <button class="ms-bar__theme theme" type="button" onclick="msTheme()" aria-label="Сменить тему">☾</button>
+</div>
+
+
+<nav class="nav"><div class="nav__logo">MS</div><span class="nav__logo-name">maysoulme</span></nav>
+
+<div class="container">
+<section class="hero">
+<span class="badge">Гайд</span>
+<h1>Как вытащить историю из своей жизни и превратить её в <em>разговорный Reel</em></h1>
+<p class="hero__desc">Даже если сейчас вам кажется, что рассказывать вообще не о чем.</p>
+<p class="hero__meta">6 коротких промптов · один чат · от живой истории до готового Reel</p>
+</section>
+
+<p class="intro-bold">Отрываю от сердца.</p>
+
+<p class="intro-text">Потому что я сама сейчас очень много снимаю разговорных роликов и вижу одну и ту же проблему:</p>
+
+<p class="intro-text"><strong>людям кажется, что им нечего рассказывать.</strong></p>
+
+<p class="intro-text">Типа: ну какая у меня история? Я же не построила миллиардную компанию, не развелась пять раз и не улетела жить на необитаемый остров.</p>
+
+<p class="intro-text">Хотя на самом деле у каждого человека дофига историй.</p>
+
+<p class="intro-text">Просто когда это твоя жизнь, ты половину из них вообще не воспринимаешь как что-то интересное.</p>
+
+<p class="intro-text">Какая-то фраза, которую тебе однажды сказали.</p>
+<p class="intro-text">Странное решение.</p>
+<p class="intro-text">Отношения, из которых ты долго не могла выйти.</p>
+<p class="intro-text">Смешной случай, который ты до сих пор пересказываешь друзьям.</p>
+<p class="intro-text">Момент, когда всё пошло вообще не по плану.</p>
+<p class="intro-text">Человек, которого ты почему-то помнишь спустя десять лет.</p>
+<p class="intro-text">Какая-то абсолютно обычная ситуация, которая в итоге говорит о тебе больше, чем любая «экспертная распаковка».</p>
+
+<div class="quote">Самой это вытащить сложно.</div>
+
+<p class="intro-text">Поэтому здесь мы будем использовать ChatGPT или Claude немного не так, как обычно.</p>
+
+<p class="intro-text">Он не будет сразу писать вам сценарий.</p>
+
+<p class="intro-text">Сначала мы покажем ему, <strong>как вы разговариваете</strong>.</p>
+
+<p class="intro-text">А дальше есть два пути:</p>
+
+<p class="intro-text">если вы уже знаете историю — просто выгружаем её целиком и даём нейросети докопать недостающие детали;</p>
+
+<p class="intro-text">если вообще не знаете, о чём рассказывать — она сама проведёт с вами интервью и начнёт вытаскивать истории из вашей жизни.</p>
+
+<p class="intro-text">И только после этого мы будем собирать готовый Reel.</p>
+
+<div class="highlight"><strong>Самое важное:</strong> вам не нужно заранее уметь красиво рассказывать истории. Для этого всё это и нужно.</div>
+
+<div class="ms-toc" role="navigation" aria-label="Содержание"><span class="ms-toc__label">Содержание</span><ol><li><a href="#s-1">Сначала покажите нейросети, как вы говорите</a></li><li><a href="#s-2">Теперь надо просто добыть одну нормальную историю</a></li><li><a href="#s-3">Теперь находим ключевую идею и нерв</a></li><li><a href="#s-4">Теперь строим арку Reel</a></li><li><a href="#s-5">Проверяем, не отвалится ли зритель</a></li><li><a href="#s-6">И только теперь превращаем всё это в вашу речь</a></li></ol></div>
+<h2 id="s-1" class="section-heading"><span>01.</span>Сначала покажите нейросети, <em>как вы говорите</em></h2>
+
+<p class="text">Вот это я бы реально не пропускала.</p>
+
+<p class="text">Потому что можно собрать хоть идеальную структуру и нормальный хук — а потом открыть текст и понять: я вообще так не разговариваю.</p>
+
+<div class="quote">Если на суфлёре появляется «и именно тогда я осознала…» — всё, приехали.</div>
+
+<p class="text">Поэтому сначала просто даём нейросети 3–5 расшифровок вашей живой речи: Reels, Stories, голосовые, куски подкастов — что угодно, где вы говорите как обычно.</p>
+
+<p class="text">И не выбирайте самые прилизанные. Нам как раз нужна нормальная живая речь — со всеми вашими связками, приколами, повторами и привычными формулировками.</p>
+
+<p class="text">Если своих разговорных роликов пока нет — можно дать примеры человека, чья подача вам нравится. Только не просите копировать его один в один. Нам нужен принцип: как звучит речь, а не чужая личность.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №1 — изучи, как я говорю</div>
+<div class="prompt-box__subtitle">Вставьте его в ChatGPT или Claude, а ниже добавьте 3–5 расшифровок</div>
+<div class="prompt-box__text">Я хочу использовать этот чат для разговорных Reels на основе моих реальных историй.
+
+Ниже я пришлю 3–5 расшифровок моей живой речи.
+
+Изучи, как я реально говорю: ритм, длину фраз, связки, лексику, юмор, эмоциональность, мат, повторы, самоисправления, любимые формулировки и то, как я начинаю и заканчиваю мысли.
+
+Не улучшай мою речь и не делай её литературной. Не копируй слова-паразиты механически — пойми именно мой естественный стиль.
+
+Дальше используй этот стиль во всех сценариях в этом чате.
+
+После анализа напиши только:
+
+КАК ЗВУЧИТ МОЯ РЕЧЬ — 3–5 предложений.
+
+ЧТО ОБЯЗАТЕЛЬНО СОХРАНИТЬ — 5–7 пунктов.
+
+ЧЕГО НЕЛЬЗЯ ДЕЛАТЬ — 5 пунктов.
+
+После этого ничего не предлагай и дождись моего следующего сообщения.
+
+МОИ РАСШИФРОВКИ:
+
+[вставьте сюда 3–5 расшифровок]</div>
+</div>
+
+<p class="note">После этого ничего никуда переносить не надо. Просто оставайтесь в этом же чате — дальше нейросеть уже будет помнить, как вы говорите.</p>
+
+<h2 id="s-2" class="section-heading"><span>02.</span>Теперь надо просто <em>добыть одну нормальную историю</em></h2>
+
+<p class="text">И вот здесь вообще неважно: у вас уже есть конкретная история или вы сидите с ощущением «блин, да мне вообще нечего рассказывать».</p>
+
+<p class="text">Не нужно заранее понимать, что именно у вас за история и «достаточно ли она интересная». С этим как раз поможет следующий промпт.</p>
+
+<div class="quote">Задача простая: докопаться до одной нормальной реальной истории так, чтобы потом нейросети не пришлось ничего за вас придумывать.</div>
+
+<p class="text">Если история уже есть — просто выгружаете её как вспоминается, а нейросеть потом задаст только те вопросы, без которых реально не хватает деталей.</p>
+
+<p class="text">Если истории нет — она сама начнёт вас расспрашивать, зацепится за первую нормальную ситуацию и уже её раскрутит до конца.</p>
+
+<p class="text"><strong>Очень советую проходить этот шаг голосом.</strong> Включаете голосовой ввод и просто отвечаете как есть: что вспомнили, что подумали, кто что сказал, что было до и после. Не пытайтесь красиво рассказывать — чем сырее ответ, тем лучше.</p>
+
+<p class="text">И если вы где-то отвечаете одним словом или вообще «не знаю» — тоже нормально. Нейросеть должна сама сузить вопрос и помочь вам вспомнить, а не заставлять вас придумывать историю за неё.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №2 — найди или раскрой мою историю</div>
+<div class="prompt-box__subtitle">Один промпт и для тех, кто уже знает историю, и для тех, кто вообще не знает, о чём снимать</div>
+<div class="prompt-box__text">Проведи со мной интервью и помоги собрать достаточно материала для одной реальной истории, из которой потом можно сделать разговорный Reel.
+
+Работай как внимательный интервьюер: после КАЖДОГО моего ответа сначала оцени, сколько материала уже есть, и только потом решай, какой ОДИН следующий вопрос действительно нужен.
+
+Сначала задай только:
+
+«У тебя уже есть конкретная история, которую ты хочешь рассказать?»
+
+Дальше адаптируйся к моему ответу.
+
+ЕСЛИ ИСТОРИЯ УЖЕ ЕСТЬ
+
+Скажи:
+
+«Тогда просто расскажи её целиком так, как вспоминается. Не пытайся красиво формулировать или соблюдать хронологию».
+
+Дай мне полностью выгрузить историю. Не перебивай.
+
+После этого оцени, хватает ли материала именно для этой истории.
+
+История достаточно собрана, если в ней есть то, что нужно именно ей:
+— конкретный эпизод или сцена;
+— что реально произошло;
+— хотя бы одна живая конкретная деталь;
+— моя реальная мысль, реакция или причина поступка, если это важно для этой истории;
+— чем ситуация закончилась или к чему пришла;
+— достаточно материала для финального смысла без додумывания.
+
+Не требуй все пункты механически. Смешной или бытовой истории может не понадобиться глубокая эмоция или трансформация.
+
+Если история уже понятна и материала достаточно — не задавай вопросы ради вопросов.
+
+Если не хватает одной конкретной вещи — спроси именно её.
+
+Если я сразу выдала большой подробный рассказ, не заставляй меня проходить интервью заново. Используй всё, что уже есть, и докопай только реальные пробелы.
+
+Если я отвечаю коротко, общо или «не знаю», не повторяй тот же вопрос другими словами. Сделай следующий вопрос проще и уже: помоги вспомнить конкретный момент, человека, место, действие, фразу, что было прямо до или сразу после.
+
+Задавай только ОДИН вопрос за раз.
+
+Не спрашивай то, что я уже рассказала.
+
+Не придумывай за меня события, чувства, мотивы или диалоги.
+
+Не делай историю драматичнее, чем она была.
+
+Как только материала достаточно, скажи:
+
+«История собрана. Материала достаточно».
+
+И остановись.
+
+ЕСЛИ Я НЕ ЗНАЮ, О ЧЁМ РАССКАЗЫВАТЬ
+
+Начни живое поисковое интервью.
+
+Твоя цель — найти ПЕРВУЮ перспективную реальную историю и докопать её до конца, а не собрать список историй ради количества.
+
+Если я отвечаю «не знаю» или очень коротко — сначала помоги мне зацепиться за направление. Предложи 4–6 широких сфер, например: любовь и отношения, работа и деньги, друзья и люди, переезды и поездки, неловкие или смешные ситуации, решения и ошибки.
+
+Если я выбрала сферу одним словом, не проси сразу «рассказать историю». Сужай воронку простыми вопросами:
+
+широкая сфера → человек / период / ситуация → конкретный эпизод → конкретный момент → детали.
+
+Как только появляется конкретная ситуация, перестань давать варианты и иди только за моими ответами.
+
+Каждый следующий вопрос строй из того, что я только что сказала.
+
+Если я отвечаю развёрнуто и сама выдаю сильный кусок истории — сразу используй его. Не возвращай меня назад к общим вопросам.
+
+Если нашлась первая история, в которой уже есть конкретный эпизод и потенциал для развития, перестань искать новые темы и докапывай только её.
+
+Если по ходу я сама упоминаю ещё одну отдельную историю — коротко отметь её как возможную следующую, но не переключайся. Сначала закончи текущую.
+
+Если текущая ветка после нескольких уточнений оказывается пустой и в ней нет конкретного эпизода — спокойно смени направление.
+
+Не ограничивайся последним временем.
+
+Не ищи обязательно травму, перелом или большое изменение. Хорошей историей может быть что-то смешное, странное, неловкое, бытовое или совсем маленькое.
+
+Когда нашлась история, проверь, хватает ли в ней:
+— конкретной сцены;
+— последовательности того, что произошло;
+— хотя бы одной живой детали;
+— моей реальной реакции или причины действия, если она важна;
+— финальной точки;
+— материала для вывода без додумывания.
+
+Не требуй эти элементы механически — спрашивай только то, чего реально не хватает именно этой истории.
+
+Как только материала достаточно для полноценной истории без додумывания, скажи:
+
+«История собрана. Материала достаточно».
+
+И остановись.
+
+ВАЖНО
+
+На этом этапе НЕ пиши сценарий.
+
+НЕ придумывай хук.
+
+НЕ строй драматургию.
+
+НЕ формулируй мораль.
+
+Твоя единственная задача — адаптироваться к любому объёму моих ответов, найти одну реальную историю и довести её до состояния, когда по ней уже хватает живого материала.</div>
+</div>
+
+<p class="note">Как только она напишет «История собрана. Материала достаточно» — всё, идём дальше. Следующий промпт кидаете сюда же.</p>
+
+<h2 id="s-3" class="section-heading"><span>03.</span>Теперь находим <em>ключевую идею и нерв</em></h2>
+
+<p class="text">Теперь из просто набора событий надо вытащить одну мысль, ради которой эту историю вообще хочется дослушать.</p>
+
+<p class="text">Потому что даже нормальная история сама по себе ещё не значит, что её захочется досмотреть.</p>
+
+<p class="text">Нам нужно понять две вещи: <strong>про что эта история на самом деле</strong> и <strong>за что она цепляет человека по ту сторону экрана</strong>.</p>
+
+<p class="text">Иначе получится просто: потом было это, потом вот это, потом ещё вот это — и всё.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №3 — найди ключевую идею и нерв</div>
+<div class="prompt-box__subtitle">Здесь пока вообще ничего не пишем — только находим стержень</div>
+<div class="prompt-box__text">Посмотри только на собранную историю выше.
+
+Найди одну КЛЮЧЕВУЮ ИДЕЮ — честную и неочевидную мысль, которую эта история доказывает моим реальным опытом.
+
+И найди один главный НЕРВ — во что история сильнее всего бьёт у зрителя:
+
+боль;
+
+тайное желание;
+
+страх / тревогу;
+
+запретную правду;
+
+узнавание себя;
+
+или внутреннее противоречие.
+
+Не пиши сценарий и не придумывай хук.
+
+Дай только:
+
+КЛЮЧЕВАЯ ИДЕЯ:
+[одно предложение]
+
+БЬЁТ В:
+[один главный нерв]</div>
+</div>
+
+<h2 id="s-4" class="section-heading"><span>04.</span>Теперь строим <em>арку Reel</em></h2>
+
+<p class="text">Вот теперь уже можно собирать сам Reel.</p>
+
+<p class="text">Но финальный текст пока не пишем. Сначала собираем каркас: откуда зайти, что оставить на потом и в каком порядке вообще рассказывать события.</p>
+
+<p class="text">Здесь нейросеть разложит историю по нормальной арке: найдёт точку входа, оставит интригу на потом, уберёт лишнее и доведёт всё до финала, который закрывает начало.</p>
+
+<p class="text">И если в вашей истории нет никакого великого «перелома» или «новой меня» — слава богу, не надо его туда запихивать.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №4 — построй арку Reel</div>
+<div class="prompt-box__subtitle">Одна задача: собрать сильную структуру, ещё без финального текста</div>
+<div class="prompt-box__text">Построй короткий план Reel из нашей реальной истории.
+
+Используй ключевую идею и нерв, которые мы уже нашли.
+
+Сначала выбери самую сильную точку входа в историю. Не обязательно начинать хронологически.
+
+Дальше собери арку:
+
+1. ХУК 0–3 сек — первая фраза сразу даёт почувствовать «это про меня» или открывает сильный вопрос.
+
+2. ОБЕЩАНИЕ / ОТКРЫТАЯ ПЕТЛЯ 3–8 сек — посей вопрос, интригу или недосказанность, которая закроется только в финале.
+
+3. ТОЧКА «ДО» — дай только тот конкретный контекст, без которого история непонятна.
+
+4. ПАДЕНИЕ / ПЕРЕЛОМ — момент главного напряжения, если он реально был.
+
+5. ВНУТРЕННИЙ ГОЛОС — мои реальные мысли, страх, стыд, сомнение или противоречие, если они есть в материале.
+
+6. РЕШЕНИЕ / ТОЧКА НЕВОЗВРАТА — только если такой момент действительно был.
+
+7. ПУТЬ — только события и конкретные детали, которые двигают историю дальше.
+
+8. ЧТО ИЗМЕНИЛОСЬ — только если в истории реально есть изменение.
+
+9. ФИНАЛЬНЫЙ ВЫВОД — полностью раскрывает ключевую идею и закрывает петлю из начала.
+
+10. CTA — только если он возникает естественно и не ломает финал.
+
+Ничего не придумывай.
+
+Если какого-то блока в реальной истории нет или он не нужен — пропусти его.
+
+Пока не пиши финальный текст.
+
+Дай только короткий план по блокам.</div>
+</div>
+
+<h2 id="s-5" class="section-heading"><span>05.</span>Проверяем, <em>не отвалится ли зритель</em></h2>
+
+<p class="text">Вот этот шаг я бы точно не пропускала и не смешивала с написанием текста.</p>
+
+<p class="text">Пусть сначала посмотрит на историю глазами человека, который вообще не обязан её досматривать: где уже всё понятно, где стало скучно, где мы второй раз говорим одно и то же.</p>
+
+<p class="text">Потому что «история нормальная» и «я реально хочу досмотреть её до конца» — вообще не одно и то же.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №5 — проверь удержание</div>
+<div class="prompt-box__subtitle">Ничего нового не придумываем — только усиливаем готовую структуру</div>
+<div class="prompt-box__text">Проверь нашу арку Reel на удержание внимания.
+
+Смотри только на это:
+
+— открытая петля из начала закрывается только в финале;
+
+— главный вывод не выдан слишком рано;
+
+— каждый следующий блок добавляет новое событие, эмоцию, ставку или понимание;
+
+— нет воды и повторов;
+
+— по ходу есть 2–3 естественные точки узнавания «это про меня»;
+
+— конкретные детали работают сильнее абстрактных формулировок;
+
+— если на переходе реально нужен микро-крючок, добавь его, но не вставляй их механически.
+
+Если где-то интерес падает — исправь саму структуру.
+
+Не добавляй новых фактов.
+
+Не пиши финальный сценарий.
+
+Покажи только улучшенную арку.</div>
+</div>
+
+<h2 id="s-6" class="section-heading"><span>06.</span>И только теперь превращаем всё это <em>в вашу речь</em></h2>
+
+<p class="text">И вот только теперь просим написать сам текст.</p>
+
+<p class="text">К этому моменту у нас уже есть сама история, её смысл и нормальная структура — то есть придумывать ничего не надо.</p>
+
+<p class="text">Остаётся главное: чтобы вы открыли суфлёр и не подумали «господи, я никогда в жизни так не скажу».</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Промпт №6 — напиши финальный Reel моим голосом</div>
+<div class="prompt-box__subtitle">Последняя задача: перевести утверждённую структуру в живую речь</div>
+<div class="prompt-box__text">Теперь напиши готовый сценарий по финальной структуре выше.
+
+Не меняй уже утверждённую логику истории и не придумывай новую структуру.
+
+Используй только мой реальный материал и профиль моей речи из первого шага.
+
+Перед написанием перечитай мои исходные расшифровки из первого шага и профиль речи, который ты по ним составил. Ориентируйся в первую очередь на реальные примеры моей речи, а не только на описание стиля.
+
+Пиши так, будто я рассказываю эту историю подруге вживую: мой ритм, длина фраз, связки, юмор, резкость, мат — только если это реально есть в моей речи.
+
+После черновика сравни текст с моими исходными расшифровками. Если в сценарии появились конструкции, ритм или формулировки, которых у меня в примерах речи нет, перепиши их ближе к тому, как я реально говорю.
+
+Не делай текст литературным.
+
+Не добавляй универсальные красивые фразы, которые можно вставить в историю любого человека.
+
+Не учи зрителя и не превращай финал в нравоучение.
+
+Сценарий должен читаться с суфлёра с первого дубля.
+
+Дай:
+
+СЦЕНАРИЙ — сплошной текст примерно на 40–60 секунд.
+
+После него — 3 варианта хука:
+1. через интригу;
+2. через боль / узнавание;
+3. через более резкую или провокационную формулировку.
+
+Каждый хук должен соответствовать реальной истории и не добавлять новых фактов.
+
+Ничего больше не добавляй.</div>
+</div>
+
+<h3 class="sub-heading">И ещё один бонус, потому что жалко терять всё остальное</h3>
+
+<p class="text">Если интервью получилось большим, там почти наверняка по дороге всплыло ещё несколько историй, которые жалко просто потерять.</p>
+
+<p class="text">Их можно вытащить одной короткой командой, а потом любую из них прогнать по тем же шагам 3–6.</p>
+
+<div class="prompt-box">
+<div class="prompt-box__title">Бонус — достань остальные истории</div>
+<div class="prompt-box__subtitle">Чтобы один разговор дал не один Reel</div>
+<div class="prompt-box__text">Перечитай всё наше интервью.
+
+Не используй историю, которую мы уже разобрали.
+
+Найди остальные реальные эпизоды, из которых можно сделать отдельные разговорные Reels.
+
+Для каждого дай только:
+
+ТЕМА.
+
+ПОЧЕМУ ЭТО МОЖЕТ РАБОТАТЬ.
+
+ОДНА ВОЗМОЖНАЯ ПЕРВАЯ ФРАЗА.
+
+Ничего не придумывай.</div>
+</div>
+
+<div class="quote">Всё. Сначала нейросеть учится слышать, как вы говорите. Потом помогает достать историю. И только после этого собирает из неё Reel вашим голосом.</div>
+
+<p class="text">И вам не нужно самим сидеть и думать, где тут хук, где петля и как всё это собрать. Вы просто идёте по шагам — и нейросеть не пытается сделать всё сразу и выдать вам очередной пластиковый текст от ChatGPT.</p>
+
+<div class="cta">
+<p class="cta__text">Попробуйте и напишите мне, что получилось 🤍</p>
+<p class="cta__text cta__sub">Больше промптов и разборов — в Telegram: <a class="cta__link" href="https://t.me/maysoulme" target="_blank" rel="noopener">@maysoulme</a></p>
+</div>
+
+<div class="footer">© 2026 · maysoulme</div>
+</div>
+
+<section class="ms-sell">
+  <div class="ms-sell__in">
+    <p class="ms-sell__bridge">Этот гайд — одна деталь. На интенсиве мы собираем из таких деталей систему: стратегию, контент и своих ИИ-ассистентов под ваш блог.</p>
+
+    <div class="ms-sell__rule"></div>
+
+    <span class="ms-sell__label">Интенсив</span>
+    <h2 class="ms-sell__title">ИИ-стратегия <i>на миллион</i></h2>
+    <p class="ms-sell__lead">Гайды — это отдельные детали. На интенсиве мы собираем из них систему, чтобы блог рос не от одного удачного ролика, а от того, что за ним стоит.</p>
+
+    <p class="ms-sell__note-top">Дело не в удаче и не в количестве роликов. Дело в том, кому вы говорите, что именно и куда ведёте человека дальше.</p>
+
+    <ul class="ms-sell__list">
+      <li><b>Стратегия и позиционирование</b> — за что вам платят и чем вы отличаетесь от сотни похожих экспертов</li>
+      <li><b>Текстовые и разговорные ролики</b> — один формат набирает холодную аудиторию, второй превращает её в свою</li>
+      <li><b>ИИ-агент с памятью канала</b> — помнит все ваши посты и предлагает продолжение начатых тем, чтобы блог звучал как одна история</li>
+      <li><b>Парсер идей</b> — собирает залетающие ролики вашей ниши, пока вы завтракаете, и выдаёт готовые темы</li>
+      <li><b>Готовые ассистенты и шаблоны</b> — сценарист, редактор, распаковка, прогревы: забираете и пользуетесь</li>
+    </ul>
+
+    <p class="ms-sell__author">Всё это я собрала в Claude Code без единого программиста — просто объясняла задачи обычными словами. На интенсиве показываю ровно то, что делаю сама каждый день.</p>
+    <span class="ms-sell__sign">Майя</span>
+
+    <a class="ms-sell__cta" href="https://mayasoul.ru">Смотреть программу интенсива →</a>
+    <p class="ms-sell__note">Вечный доступ · чат поддержки со мной · формат VIP с личным сопровождением</p>
+  </div>
+</section>
+
+<footer class="ms-foot">
+  <a class="ms-foot__back" href="../../">← Все гайды maysoulme</a>
+  <p>Бесплатная библиотека <a href="../../">maysoulme</a> · новое сначала в <a href="https://t.me/maysoulme">телеграм-канале</a></p>
+</footer>
+
+<style>
+  @font-face { font-family: 'Denistina'; src: url('../../denistina.ttf') format('truetype'); font-display: swap; }
+
+  nav.nav, header.nav, nav:not([class]) { display: none !important; }
+  .ms-bar { position: sticky; top: 0; z-index: 9999; display: flex; align-items: center; gap: 18px;
+    padding: 11px 22px; background: var(--g-bg, #fff); border-bottom: 1px solid var(--g-line, #e6e4e1);
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-bar__logo { flex: none; display: block; }
+  .ms-bar__logo img { height: 24px; width: auto; display: block; }
+  .ms-bar__min { font-size: 13px; color: var(--g-faint, #8f8a84); margin-left: 6px; }
+  .ms-progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 10000; pointer-events: none; }
+  .ms-progress i { display: block; height: 100%; width: 0; background: var(--g-accent, #710C04); transition: width .1s linear; }
+
+  .ms-toc { display: block; width: 100%; grid-column: 1 / -1; flex-basis: 100%;
+    background: var(--g-surface, #f5f5f5); padding: 26px 28px 22px; margin: 0 0 44px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-toc__label { display: block; font-size: 10.5px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--g-faint, #8f8a84); margin-bottom: 14px; }
+  .ms-toc ol { list-style: none; margin: 0; padding: 0; counter-reset: toc; columns: 2; column-gap: 36px; }
+  .ms-toc li { counter-increment: toc; break-inside: avoid; padding: 7px 0; border-top: 1px solid var(--g-line, #e6e4e1); }
+  .ms-toc li:first-child { border-top: none; }
+  .ms-toc a { text-decoration: none; color: var(--g-fg, #1a1a1a); font-size: 15px; line-height: 1.45; display: flex; gap: 12px; }
+  .ms-toc a::before { content: counter(toc, decimal-leading-zero); font-family: 'Libre Baskerville', Georgia, serif;
+    font-style: italic; color: var(--g-accent, #710C04); flex: none; min-width: 22px; }
+  .ms-toc a:hover { color: var(--g-accent, #710C04); }
+  @media (max-width: 620px) { .ms-toc ol { columns: 1; } .ms-toc { padding: 20px 20px 16px; } .ms-bar__min { display: none; } }
+  .ms-bar__back { font-size: 14px; font-weight: 600; color: var(--g-accent, #710C04); text-decoration: none; }
+  .ms-bar__back:hover { text-decoration: underline; }
+  .ms-bar__name { font-style: italic; color: var(--g-faint, #8f8a84); font-size: 14px; letter-spacing: .02em; margin-left: auto; }
+  .ms-bar__theme { background: none; border: 1px solid var(--g-line, #e6e4e1); color: var(--g-muted, #6c6c6c);
+    width: 32px; height: 32px; cursor: pointer; font-size: 14px; display: flex; align-items: center;
+    justify-content: center; }
+  .ms-bar__theme:hover { border-color: var(--g-accent, #710C04); color: var(--g-accent, #710C04); }
+
+  .ms-sell { background: #121212; color: #fff; margin-top: 90px; padding: 78px 22px 72px;
+    font-family: 'Inter', -apple-system, sans-serif; }
+  .ms-sell__in { max-width: 660px; margin: 0 auto; }
+  .ms-sell__bridge { font-family: 'Libre Baskerville', Georgia, serif; font-size: 20px; line-height: 1.62;
+    color: #f0ece7; font-style: italic; margin: 0; }
+  .ms-sell__rule { height: 1px; background: #2e2e2e; margin: 42px 0 38px; }
+  .ms-sell__label { display: inline-block; border: 1px solid #c9a07a; color: #c9a07a; font-size: 10.5px;
+    font-weight: 600; letter-spacing: .2em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 22px; }
+  .ms-sell__title { font-family: 'Libre Baskerville', Georgia, serif; font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700; line-height: 1.24; margin: 0 0 16px; color: #fff; }
+  .ms-sell__title i { font-style: italic; color: #c9a07a; font-weight: 400; }
+  .ms-sell__lead { font-size: 17.5px; line-height: 1.7; color: #c4c4c4; margin: 0 0 40px; }
+
+  .ms-sell__num { display: block; font-family: 'Libre Baskerville', Georgia, serif; font-size: 30px;
+    color: #6f6f6f; line-height: 1.2; }
+  .ms-sell__cap { display: block; font-size: 13.5px; color: #9a9a9a; margin-top: 6px; line-height: 1.5; }
+
+  .ms-sell__note-top { font-size: 15.5px; line-height: 1.7; color: #b5b5b5; margin: 0 0 34px; padding-top: 26px; border-top: 1px solid #2e2e2e; }
+  .ms-sell__list { list-style: none; margin: 0 0 38px; padding: 0; }
+  .ms-sell__list li { padding: 15px 0; border-bottom: 1px solid #2a2a2a; font-size: 15.5px;
+    line-height: 1.62; color: #cfcfcf; }
+  .ms-sell__list li b { color: #fff; font-weight: 600; }
+  .ms-sell__list li::before { content: "—"; color: #c9a07a; margin-right: 10px; }
+
+  .ms-sell__author { font-size: 15.5px; line-height: 1.72; color: #b5b5b5; margin: 0 0 6px;
+    padding-left: 18px; border-left: 2px solid #c9a07a; }
+  .ms-sell__sign { display: block; font-family: 'Denistina', cursive; color: #c9a07a; font-size: 52px;
+    line-height: 1; margin: 4px 0 30px 18px; }
+
+  .ms-sell__cta { display: inline-block; background: #fff; color: #121212 !important; text-decoration: none;
+    padding: 17px 36px; font-weight: 700; font-size: 16.5px; transition: opacity .18s; }
+  .ms-sell__cta:hover { opacity: .86; }
+  .ms-sell__note { font-size: 13.5px; color: #8a8a8a; margin: 16px 0 0; }
+
+  .ms-foot { max-width: 660px; margin: 0 auto; padding: 44px 22px 64px; text-align: center;
+    font-family: 'Inter', -apple-system, sans-serif; font-size: 14.5px; color: var(--g-muted, #777); }
+  .ms-foot a { color: var(--g-accent, #710C04); }
+  .ms-foot__back { display: inline-block; font-weight: 600; text-decoration: none; margin-bottom: 12px; }
+  .ms-foot__back:hover { text-decoration: underline; }
+  .ms-foot p { margin: 0; }
+  @media (max-width: 560px) {
+    .ms-sell { padding: 56px 20px 52px; }
+    .ms-sell__bridge { font-size: 18px; }
+    }
+</style>
+
+<script>
+  function msTheme(){
+    var d = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.documentElement.setAttribute('data-theme', d ? 'light' : 'dark');
+    try { localStorage.setItem('ms-theme', d ? 'light' : 'dark'); } catch(e){}
+    msIcon();
+  }
+  (function(){
+    var bar = document.querySelector('.ms-progress i'); if (!bar) return;
+    function upd(){ var h = document.documentElement; var max = h.scrollHeight - h.clientHeight;
+      bar.style.width = (max > 0 ? Math.min(100, h.scrollTop / max * 100) : 0) + '%'; }
+    window.addEventListener('scroll', upd, {passive: true}); upd();
+  })();
+  function msIcon(){
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+    document.querySelectorAll('.theme').forEach(function(b){ b.textContent = dark ? '☀' : '☾'; });
+  }
+  msIcon();
+</script>
+</body>
+</html>

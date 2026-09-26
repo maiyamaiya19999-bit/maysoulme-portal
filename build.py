@@ -298,8 +298,9 @@ def process_guide(src_html: str, g: dict) -> str:
         bar = BAR.replace("%%MIN%%", str(g["minutes"]))
         m = re.search(r'<body[^>]*>', s)
         s = (s[:m.end()] + "\n" + bar + s[m.end():]) if m else bar + s
-    block = sell_block(g)
-    s = s.replace("</body>", block + "</body>", 1) if "</body>" in s else s + block
+    if 'class="ms-sell"' not in s:
+        block = sell_block(g)
+        s = s.replace("</body>", block + "</body>", 1) if "</body>" in s else s + block
     return s
 
 def copy_assets(src: Path, dest_dir: Path, page: str):
